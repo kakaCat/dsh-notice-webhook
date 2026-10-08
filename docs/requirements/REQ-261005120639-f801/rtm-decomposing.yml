@@ -1,0 +1,638 @@
+metadata:
+  stage: decomposing
+  requirement_id: REQ-261005120639-f801
+  generated_at: 2026-10-05T04:31:31.192Z
+  version: 61
+  generated_by: dsh-pmboard
+  last_updated: 2026-10-05T04:41:47.090Z
+inputs:
+  requirements: []
+  design_sections:
+    - ref: design/architecture.md#目标与总体方案
+      title: 目标与总体方案 <!--
+      serves:
+        - FR-1
+        - FR-2
+      file: design/architecture.md
+      section: 目标与总体方案
+    - ref: design/architecture.md#模块改动地图
+      title: 模块改动地图 <!--
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/architecture.md
+      section: 模块改动地图
+    - ref: design/architecture.md#判定链与插入点
+      title: 判定链与插入点 <!--
+      serves:
+        - FR-1
+        - FR-5
+      file: design/architecture.md
+      section: 判定链与插入点
+    - ref: design/architecture.md#血缘与活体口径
+      title: 血缘与活体口径 <!--
+      serves:
+        - FR-3
+      file: design/architecture.md
+      section: 血缘与活体口径
+    - ref: design/architecture.md#结算与兜底补发时序
+      title: 结算与兜底补发时序 <!--
+      serves:
+        - FR-2
+      file: design/architecture.md
+      section: 结算与兜底补发时序
+    - ref: design/architecture.md#降级开关与回滚
+      title: 降级、开关与回滚 <!--
+      serves:
+        - FR-4
+      file: design/architecture.md
+      section: 降级开关与回滚
+    - ref: design/architecture.md#被否决的备选
+      title: 被否决的备选 <!--
+      serves:
+        - FR-1
+        - FR-3
+      file: design/architecture.md
+      section: 被否决的备选
+    - ref: design/architecture.md#不变量
+      title: 不变量 <!--
+      serves:
+        - FR-5
+      file: design/architecture.md
+      section: 不变量
+    - ref: design/architecture.md#文档口径纠正
+      title: 文档口径纠正 <!--
+      serves:
+        - FR-6
+      file: design/architecture.md
+      section: 文档口径纠正
+    - ref: design/data-model.md#内存状态模型
+      title: 内存状态模型 <!--
+      serves:
+        - FR-1
+        - FR-2
+      file: design/data-model.md
+      section: 内存状态模型
+    - ref: design/data-model.md#PendingRecord-字段
+      title: "`PendingRecord` 字段 <!--"
+      serves:
+        - FR-2
+      file: design/data-model.md
+      section: PendingRecord-字段
+    - ref: design/data-model.md#生命周期与清理
+      title: 生命周期与清理 <!--
+      serves:
+        - FR-2
+        - FR-4
+      file: design/data-model.md
+      section: 生命周期与清理
+    - ref: design/data-model.md#只读事实源形状
+      title: 只读事实源形状 <!--
+      serves:
+        - FR-3
+      file: design/data-model.md
+      section: 只读事实源形状
+    - ref: design/data-model.md#agentslist-条目只读字段
+      title: "`agents.list()` 条目（只读字段） <!--"
+      serves:
+        - FR-3
+      file: design/data-model.md
+      section: agentslist-条目只读字段
+    - ref: design/data-model.md#subagentend-事件只读首参仅作复检时机
+      title: "`subagent/end` 事件（只读首参，仅作复检时机） <!--"
+      serves:
+        - FR-2
+      file: design/data-model.md
+      section: subagentend-事件只读首参仅作复检时机
+    - ref: design/data-model.md#ctxjobs既有不变
+      title: "`ctx.jobs`（既有，不变） <!--"
+      serves:
+        - FR-1
+      file: design/data-model.md
+      section: ctxjobs既有不变
+    - ref: design/data-model.md#无落盘数据
+      title: 无落盘数据 <!--
+      serves:
+        - FR-5
+      file: design/data-model.md
+      section: 无落盘数据
+    - ref: design/interfaces.md#内部模块接口-srcjobsjs
+      title: 内部模块接口 · `src/jobs.js` <!--
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+      file: design/interfaces.md
+      section: 内部模块接口-srcjobsjs
+    - ref: design/interfaces.md#新增纯函数
+      title: 新增纯函数 <!--
+      serves:
+        - FR-1
+        - FR-3
+      file: design/interfaces.md
+      section: 新增纯函数
+    - ref: design/interfaces.md#createJobGateoptions-增量
+      title: "`createJobGate(options)` 增量 <!--"
+      serves:
+        - FR-1
+        - FR-2
+        - FR-4
+      file: design/interfaces.md
+      section: createJobGateoptions-增量
+    - ref: design/interfaces.md#gate-返回契约
+      title: "`gate()` 返回契约 <!--"
+      serves:
+        - FR-1
+        - FR-6
+      file: design/interfaces.md
+      section: gate-返回契约
+    - ref: design/interfaces.md#复检与补发契约内部
+      title: 复检与补发契约（内部） <!--
+      serves:
+        - FR-2
+      file: design/interfaces.md
+      section: 复检与补发契约内部
+    - ref: design/interfaces.md#接线接口-indexjs-applyctx
+      title: 接线接口 · `index.js` / `apply(ctx)` <!--
+      serves:
+        - FR-1
+        - FR-2
+        - FR-4
+      file: design/interfaces.md
+      section: 接线接口-indexjs-applyctx
+    - ref: design/interfaces.md#配置契约
+      title: 配置契约 <!--
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 配置契约
+    - ref: design/interfaces.md#出站契约
+      title: 出站契约 <!--
+      serves:
+        - FR-5
+      file: design/interfaces.md
+      section: 出站契约
+    - ref: design/interfaces.md#观测契约-drop-原因码与日志
+      title: 观测契约 · `drop` 原因码与日志 <!--
+      serves:
+        - FR-6
+      file: design/interfaces.md
+      section: 观测契约-drop-原因码与日志
+    - ref: design/interfaces.md#错误语义表
+      title: 错误语义表 <!--
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 错误语义表
+    - ref: design/use-cases.md#UC-1-主场景派活给-continuable-子代理现状误报修后不报
+      title: UC-1 主场景：派活给 continuable 子代理（现状误报，修后不报） <!--
+      serves:
+        - FR-1
+        - FR-2
+      file: design/use-cases.md
+      section: UC-1-主场景派活给-continuable-子代理现状误报修后不报
+    - ref: design/use-cases.md#UC-2-静默唤醒路径completionDeliveryquiet-唤醒预算耗尽
+      title: UC-2 静默唤醒路径（`completionDelivery:'quiet'` / 唤醒预算耗尽） <!--
+      serves:
+        - FR-2
+      file: design/use-cases.md
+      section: UC-2-静默唤醒路径completionDeliveryquiet-唤醒预算耗尽
+    - ref: design/use-cases.md#UC-3-continuable-的多-epoch唤醒既有子代理
+      title: UC-3 continuable 的多 epoch（唤醒既有子代理） <!--
+      serves:
+        - FR-2
+        - FR-3
+      file: design/use-cases.md
+      section: UC-3-continuable-的多-epoch唤醒既有子代理
+    - ref: design/use-cases.md#UC-4-混合场景后台-job-子代理
+      title: UC-4 混合场景：后台 job + 子代理 <!--
+      serves:
+        - FR-1
+        - FR-2
+        - FR-6
+      file: design/use-cases.md
+      section: UC-4-混合场景后台-job-子代理
+    - ref: design/use-cases.md#UC-5-不该被压住的四种情况
+      title: UC-5 不该被压住的四种情况 <!--
+      serves:
+        - FR-3
+        - FR-4
+      file: design/use-cases.md
+      section: UC-5-不该被压住的四种情况
+    - ref: design/use-cases.md#UC-6-子代理自己结束时的静默边界明确不做
+      title: UC-6 子代理自己结束时的静默（边界，明确不做） <!--
+      serves:
+        - FR-5
+      file: design/use-cases.md
+      section: UC-6-子代理自己结束时的静默边界明确不做
+    - ref: design/use-cases.md#UC-7-插件卸载-会话销毁
+      title: UC-7 插件卸载 / 会话销毁 <!--
+      serves:
+        - FR-2
+        - FR-4
+      file: design/use-cases.md
+      section: UC-7-插件卸载-会话销毁
+outputs:
+  tasks:
+    - id: t-200413
+      title: 判定层：闸门看两路活（job + subagent 后代）
+      implements: src/jobs.js：新增 isAgentRegistryLike(agents)（typeof list === 'function'）与 liveSubagentIds(agents, sessionId)（血统 BFS 沿 session.header.parentSession 下钻、只认 origin==='subagent' ∧ status==='running'、visited 防环、条目形状不符跳过、形状不符/抛错/非数组返回 null）；createJobGate 增 options.subagents、attachSubagents()（形状不符 → 空 detach + 只报一次 warn）、detachSubagents()、observeSubagentEnd()、subagentsAvailable；gate() 同时计算 jobIds 与 subagentIds，两者都空 → {suppressed:false, reason:'no-work'}，两路都不可用 → 'unavailable'（既有语义），有活 → {suppressed:true, reason:'job-running'|'subagent-running'|'work-running', jobIds, subagentIds}（不抑制时不带额外键）；抽出 maybeSettle(sessionId)（watched.size===0 ∧ liveSubagentIds 为空 → 起宽限），observe() 改为调用它；pending 记录增 subagentIds；pendingOf 快照带上。
+      serves:
+        - FR-1
+        - FR-3
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-bde16a
+      title: 接线层：ctx.agents 注入 + subagent/end 复检
+      implements: "index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。"
+      serves:
+        - FR-1
+        - FR-2
+        - FR-4
+      depends_on:
+        - t-200413
+      phase: implement
+      side: backend
+    - id: t-1809aa
+      title: 测试与降级回归（含 2 处既有断言同步）
+      implements: "test/jobs-gate.test.js：增 makeAgents(entries) 假件（{ list: () => entries }，可增删改以模拟结算）与 TC-1..TC-11（判定层两路、血缘口径、降级容错、接线层抑制与补发、开关回滚、报文不回归）；把既有两处 deepEqual(..., {suppressed:false, reason:'no-jobs'}) 改为 'no-work'——这是本需求唯一触碰的既有断言；跑全量核对两条降级路径（不注入 agents / jobAwareComplete:false）与旧行为一致；结果写入 docs/requirements/REQ-261005120639-f801/tests/compat-report.md。"
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-4
+        - FR-5
+      depends_on:
+        - t-bde16a
+      phase: test
+      side: backend
+    - id: t-d94488
+      title: 文档口径：完成闸门 + 两个新原因码
+      implements: docs/guides/operations.md：drop 原因码表补 subagent-running（本会话仍有在跑的 subagent 后代）与 work-running（两者都有）两行，jobAwareComplete 一行改述为「完成闸门（后台 job + subagent 后代）总开关」；docs/architecture/project-manual.md 第三节、docs/architecture/index.md、docs/architecture/notification-plugin.md 三处把「完成通知只读 ctx.jobs」的旧口径改述为两路判定，并补一句「continuable 子代理不注册 job」的事实。
+      serves:
+        - FR-6
+      depends_on:
+        - t-bde16a
+      phase: doc
+      side: doc
+    - id: t-2f8316
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」
+      implements: 仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 串两条完整链路：① turn/start → 派子代理（running）→ turn/end（断言 0 条）→ 子代理转 idle + observeSubagentEnd() + 推进宽限（断言 1 条，字段与基线一致）；② 抑制后宽限内 turn/start（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。报告写入 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md。
+      serves:
+        - FR-2
+        - FR-5
+      depends_on:
+        - t-1809aa
+      phase: test
+      side: backend
+    - id: t-776b2f
+      title: 判定层：闸门看两路活（job + subagent 后代）·研发
+      implements: |-
+        src/jobs.js：新增 isAgentRegistryLike(agents)（typeof list === 'function'）与 liveSubagentIds(agents, sessionId)（血统 BFS 沿 session.header.parentSession 下钻、只认 origin==='subagent' ∧ status==='running'、visited 防环、条目形状不符跳过、形状不符/抛错/非数组返回 null）；createJobGate 增 options.subagents、attachSubagents()（形状不符 → 空 detach + 只报一次 warn）、detachSubagents()、observeSubagentEnd()、subagentsAvailable；gate() 同时计算 jobIds 与 subagentIds，两者都空 → {suppressed:false, reason:'no-work'}，两路都不可用 → 'unavailable'（既有语义），有活 → {suppressed:true, reason:'job-running'|'subagent-running'|'work-running', jobIds, subagentIds}（不抑制时不带额外键）；抽出 maybeSettle(sessionId)（watched.size===0 ∧ liveSubagentIds 为空 → 起宽限），observe() 改为调用它；pending 记录增 subagentIds；pendingOf 快照带上。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-fb44a5
+      title: 判定层：闸门看两路活（job + subagent 后代）·复核
+      implements: |-
+        src/jobs.js：新增 isAgentRegistryLike(agents)（typeof list === 'function'）与 liveSubagentIds(agents, sessionId)（血统 BFS 沿 session.header.parentSession 下钻、只认 origin==='subagent' ∧ status==='running'、visited 防环、条目形状不符跳过、形状不符/抛错/非数组返回 null）；createJobGate 增 options.subagents、attachSubagents()（形状不符 → 空 detach + 只报一次 warn）、detachSubagents()、observeSubagentEnd()、subagentsAvailable；gate() 同时计算 jobIds 与 subagentIds，两者都空 → {suppressed:false, reason:'no-work'}，两路都不可用 → 'unavailable'（既有语义），有活 → {suppressed:true, reason:'job-running'|'subagent-running'|'work-running', jobIds, subagentIds}（不抑制时不带额外键）；抽出 maybeSettle(sessionId)（watched.size===0 ∧ liveSubagentIds 为空 → 起宽限），observe() 改为调用它；pending 记录增 subagentIds；pendingOf 快照带上。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-776b2f
+      phase: implement
+      side: backend
+    - id: t-405c41
+      title: 判定层：闸门看两路活（job + subagent 后代）·测试
+      implements: |-
+        src/jobs.js：新增 isAgentRegistryLike(agents)（typeof list === 'function'）与 liveSubagentIds(agents, sessionId)（血统 BFS 沿 session.header.parentSession 下钻、只认 origin==='subagent' ∧ status==='running'、visited 防环、条目形状不符跳过、形状不符/抛错/非数组返回 null）；createJobGate 增 options.subagents、attachSubagents()（形状不符 → 空 detach + 只报一次 warn）、detachSubagents()、observeSubagentEnd()、subagentsAvailable；gate() 同时计算 jobIds 与 subagentIds，两者都空 → {suppressed:false, reason:'no-work'}，两路都不可用 → 'unavailable'（既有语义），有活 → {suppressed:true, reason:'job-running'|'subagent-running'|'work-running', jobIds, subagentIds}（不抑制时不带额外键）；抽出 maybeSettle(sessionId)（watched.size===0 ∧ liveSubagentIds 为空 → 起宽限），observe() 改为调用它；pending 记录增 subagentIds；pendingOf 快照带上。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-fb44a5
+      phase: implement
+      side: backend
+    - id: t-65d2a4
+      title: 接线层：ctx.agents 注入 + subagent/end 复检·研发
+      implements: |-
+        index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-200413
+      phase: implement
+      side: backend
+    - id: t-99dadb
+      title: 接线层：ctx.agents 注入 + subagent/end 复检·联调
+      implements: |-
+        index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。
+
+        [子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）
+      serves: []
+      depends_on:
+        - t-65d2a4
+      phase: implement
+      side: backend
+    - id: t-f66dc8
+      title: 接线层：ctx.agents 注入 + subagent/end 复检·复核
+      implements: |-
+        index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-99dadb
+      phase: implement
+      side: backend
+    - id: t-33adde
+      title: 接线层：ctx.agents 注入 + subagent/end 复检·测试
+      implements: |-
+        index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-f66dc8
+      phase: implement
+      side: backend
+    - id: t-23a870
+      title: 测试与降级回归（含 2 处既有断言同步）·研发
+      implements: |-
+        test/jobs-gate.test.js：增 makeAgents(entries) 假件（{ list: () => entries }，可增删改以模拟结算）与 TC-1..TC-11（判定层两路、血缘口径、降级容错、接线层抑制与补发、开关回滚、报文不回归）；把既有两处 deepEqual(..., {suppressed:false, reason:'no-jobs'}) 改为 'no-work'——这是本需求唯一触碰的既有断言；跑全量核对两条降级路径（不注入 agents / jobAwareComplete:false）与旧行为一致；结果写入 docs/requirements/REQ-261005120639-f801/tests/compat-report.md。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-bde16a
+      phase: test
+      side: backend
+    - id: t-23d4c6
+      title: 测试与降级回归（含 2 处既有断言同步）·复核
+      implements: |-
+        test/jobs-gate.test.js：增 makeAgents(entries) 假件（{ list: () => entries }，可增删改以模拟结算）与 TC-1..TC-11（判定层两路、血缘口径、降级容错、接线层抑制与补发、开关回滚、报文不回归）；把既有两处 deepEqual(..., {suppressed:false, reason:'no-jobs'}) 改为 'no-work'——这是本需求唯一触碰的既有断言；跑全量核对两条降级路径（不注入 agents / jobAwareComplete:false）与旧行为一致；结果写入 docs/requirements/REQ-261005120639-f801/tests/compat-report.md。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-23a870
+      phase: test
+      side: backend
+    - id: t-30dd89
+      title: 测试与降级回归（含 2 处既有断言同步）·测试
+      implements: |-
+        test/jobs-gate.test.js：增 makeAgents(entries) 假件（{ list: () => entries }，可增删改以模拟结算）与 TC-1..TC-11（判定层两路、血缘口径、降级容错、接线层抑制与补发、开关回滚、报文不回归）；把既有两处 deepEqual(..., {suppressed:false, reason:'no-jobs'}) 改为 'no-work'——这是本需求唯一触碰的既有断言；跑全量核对两条降级路径（不注入 agents / jobAwareComplete:false）与旧行为一致；结果写入 docs/requirements/REQ-261005120639-f801/tests/compat-report.md。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-23d4c6
+      phase: test
+      side: backend
+    - id: t-07352e
+      title: 文档口径：完成闸门 + 两个新原因码·研发
+      implements: |-
+        docs/guides/operations.md：drop 原因码表补 subagent-running（本会话仍有在跑的 subagent 后代）与 work-running（两者都有）两行，jobAwareComplete 一行改述为「完成闸门（后台 job + subagent 后代）总开关」；docs/architecture/project-manual.md 第三节、docs/architecture/index.md、docs/architecture/notification-plugin.md 三处把「完成通知只读 ctx.jobs」的旧口径改述为两路判定，并补一句「continuable 子代理不注册 job」的事实。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-bde16a
+      phase: doc
+      side: doc
+    - id: t-9c31b2
+      title: 文档口径：完成闸门 + 两个新原因码·复核
+      implements: |-
+        docs/guides/operations.md：drop 原因码表补 subagent-running（本会话仍有在跑的 subagent 后代）与 work-running（两者都有）两行，jobAwareComplete 一行改述为「完成闸门（后台 job + subagent 后代）总开关」；docs/architecture/project-manual.md 第三节、docs/architecture/index.md、docs/architecture/notification-plugin.md 三处把「完成通知只读 ctx.jobs」的旧口径改述为两路判定，并补一句「continuable 子代理不注册 job」的事实。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-07352e
+      phase: doc
+      side: doc
+    - id: t-378503
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」·研发
+      implements: |-
+        仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 串两条完整链路：① turn/start → 派子代理（running）→ turn/end（断言 0 条）→ 子代理转 idle + observeSubagentEnd() + 推进宽限（断言 1 条，字段与基线一致）；② 抑制后宽限内 turn/start（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。报告写入 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-1809aa
+      phase: test
+      side: backend
+    - id: t-e65db0
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」·复核
+      implements: |-
+        仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 串两条完整链路：① turn/start → 派子代理（running）→ turn/end（断言 0 条）→ 子代理转 idle + observeSubagentEnd() + 推进宽限（断言 1 条，字段与基线一致）；② 抑制后宽限内 turn/start（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。报告写入 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-378503
+      phase: test
+      side: backend
+    - id: t-35a9ea
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」·测试
+      implements: |-
+        仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 串两条完整链路：① turn/start → 派子代理（running）→ turn/end（断言 0 条）→ 子代理转 idle + observeSubagentEnd() + 推进宽限（断言 1 条，字段与基线一致）；② 抑制后宽限内 turn/start（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。报告写入 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-e65db0
+      phase: test
+      side: backend
+traceability:
+  design_to_tasks:
+    design/architecture.md#目标与总体方案:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/architecture.md#模块改动地图:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-d94488
+      - t-2f8316
+    design/architecture.md#判定链与插入点:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/architecture.md#血缘与活体口径:
+      - t-200413
+      - t-1809aa
+    design/architecture.md#结算与兜底补发时序:
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/architecture.md#降级开关与回滚:
+      - t-bde16a
+      - t-1809aa
+    design/architecture.md#被否决的备选:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+    design/architecture.md#不变量:
+      - t-1809aa
+      - t-2f8316
+    design/architecture.md#文档口径纠正:
+      - t-d94488
+    design/data-model.md#内存状态模型:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/data-model.md#PendingRecord-字段:
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/data-model.md#生命周期与清理:
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/data-model.md#只读事实源形状:
+      - t-200413
+      - t-1809aa
+    design/data-model.md#agentslist-条目只读字段:
+      - t-200413
+      - t-1809aa
+    design/data-model.md#subagentend-事件只读首参仅作复检时机:
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/data-model.md#ctxjobs既有不变:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+    design/data-model.md#无落盘数据:
+      - t-1809aa
+      - t-2f8316
+    design/interfaces.md#内部模块接口-srcjobsjs:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/interfaces.md#新增纯函数:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+    design/interfaces.md#createJobGateoptions-增量:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/interfaces.md#gate-返回契约:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-d94488
+    design/interfaces.md#复检与补发契约内部:
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/interfaces.md#接线接口-indexjs-applyctx:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/interfaces.md#配置契约:
+      - t-bde16a
+      - t-1809aa
+    design/interfaces.md#出站契约:
+      - t-1809aa
+      - t-2f8316
+    design/interfaces.md#观测契约-drop-原因码与日志:
+      - t-d94488
+    design/interfaces.md#错误语义表:
+      - t-bde16a
+      - t-1809aa
+    design/use-cases.md#UC-1-主场景派活给-continuable-子代理现状误报修后不报:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/use-cases.md#UC-2-静默唤醒路径completionDeliveryquiet-唤醒预算耗尽:
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/use-cases.md#UC-3-continuable-的多-epoch唤醒既有子代理:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+    design/use-cases.md#UC-4-混合场景后台-job-子代理:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-d94488
+      - t-2f8316
+    design/use-cases.md#UC-5-不该被压住的四种情况:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+    design/use-cases.md#UC-6-子代理自己结束时的静默边界明确不做:
+      - t-1809aa
+      - t-2f8316
+    design/use-cases.md#UC-7-插件卸载-会话销毁:
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+  fr_to_tasks:
+    FR-1:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+      - t-d94488
+    FR-2:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-2f8316
+      - t-d94488
+    FR-3:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-d94488
+      - t-2f8316
+    FR-4:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-d94488
+      - t-2f8316
+    FR-5:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-d94488
+      - t-2f8316
+    FR-6:
+      - t-200413
+      - t-bde16a
+      - t-1809aa
+      - t-d94488
+      - t-2f8316
+coverage:
+  implementation:
+    total: 34
+    covered: 34
+    uncovered: []
+    rate: 100
+    total_designs: 34
+    covered_designs: 34

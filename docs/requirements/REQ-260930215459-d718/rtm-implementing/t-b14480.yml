@@ -1,0 +1,32 @@
+task:
+  id: t-b14480
+  title: 图标表：dsh-im 品牌 glyph 内联
+  status: done
+  implements: client.js：把现有单色 ICONS 换成品牌 glyph 表（逐字取用 dsh-im plugin-src/client/channel-logos.js 的 WecomLogoGlyph/FeishuLogoGlyph/DingtalkLogoGlyph/SlackLogoGlyph/DiscordLogoGlyph 的 svg 数据与 viewBox/fill），通用渠道保留自有中性图标；ChannelIcon({channel,size}) 保留签名；每个 glyph 上方注释标“取自 dsh-im <GlyphName>”。验证：test/client-service.test.js 增图标用例。
+  serves: []
+  depends_on: []
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-b14480
+    TASK_TITLE: 图标表：dsh-im 品牌 glyph 内联
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:15:34.572Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:04:54.669Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T14:18:41.253Z

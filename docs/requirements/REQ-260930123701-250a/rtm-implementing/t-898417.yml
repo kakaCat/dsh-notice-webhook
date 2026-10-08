@@ -1,0 +1,33 @@
+task:
+  id: t-898417
+  title: 实现 goal 自动轮识别与静默
+  status: done
+  implements: 新增 src/goal.js 的自动轮部分：在 session/event 中记录每条 user/message 的 source.kind 是否为 'goal'，并维护「本 turn 是否出现过人工输入」标记；turn/end 到达时若本轮全部 user message 均为 goal 注入则返回静默（不产出意图），只要出现一条非 goal 的 user/message 就按人工轮放行。
+  serves: []
+  depends_on:
+    - t-245978
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-898417
+    TASK_TITLE: 实现 goal 自动轮识别与静默
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T06:05:08.385Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T05:54:10.518Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T06:05:08.439Z

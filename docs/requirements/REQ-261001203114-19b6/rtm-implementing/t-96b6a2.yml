@@ -1,0 +1,39 @@
+task:
+  id: t-96b6a2
+  title: 分类契约：turn/end 终态决策表（纯函数）·复核
+  status: done
+  implements: |-
+    src/classify.js：新增冻结常量 KNOWN_TURN_KINDS（7 种终态）、INTENT_INTERRUPT='interrupt'、EVENT_TURN_ERROR='turn/error'；新增纯函数 decideTurnEnd(reason, skipReasons)（按 design/architecture.md §1 的 7 行顺序：静默名单→completed→error→interrupted→aborted→未知 kind→其余；reason.kind 非字符串/空 → 'unknown'，长度>40 截断）、silentReasonOf()、errorFacts()（code 缺省 UNKNOWN，message 单行化+slice(0,200)）；Classifier.classify() 的 turn/end 分支改为查表并组装中断意图 {kind:'interrupt', event:'turn/error', message, toolName:null, reason, error}；不得保留任何『默认当完成』兜底分支。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-0a89bd
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001203114-19b6
+    TASK_ID: t-96b6a2
+    TASK_TITLE: 分类契约：turn/end 终态决策表（纯函数）·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      started_at: 2026-10-01T12:49:38.120Z
+      completed_at: 2026-10-01T12:49:41.541Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:49:35.782Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-10-01T12:49:41.543Z

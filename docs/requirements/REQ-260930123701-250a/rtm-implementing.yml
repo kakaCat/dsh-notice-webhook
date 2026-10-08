@@ -1,0 +1,262 @@
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T05:32:58.686Z
+  version: 149
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 49
+  last_updated: 2026-09-30T06:39:19.107Z
+inputs:
+  tasks:
+    - id: t-fd6e82
+      title: 建立插件包骨架与配置层
+      status: done
+    - id: t-20c962
+      title: 实现绑定表与原子持久化
+      status: done
+    - id: t-ae2996
+      title: 暴露 Host Service dshNoticeWebhook
+      status: done
+    - id: t-cbf2e4
+      title: 实现 webhook 投递层
+      status: done
+    - id: t-245978
+      title: 实现事件分类与过滤
+      status: done
+    - id: t-898417
+      title: 实现 goal 自动轮识别与静默
+      status: done
+    - id: t-f94377
+      title: 实现 goal 终态识别与去重
+      status: done
+    - id: t-966bd3
+      title: 实现路由层与总开关旁路
+      status: done
+    - id: t-f25d34
+      title: 接线整合与本地端到端联调
+      status: done
+    - id: t-87cafa
+      title: 装载到 profile 并做真实 Host 验收
+      status: done
+    - id: t-f01c88
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）
+      status: done
+    - id: t-886615
+      title: 写插件使用说明 README
+      status: done
+    - id: t-6eb2b2
+      title: 建立插件包骨架与配置层·研发
+      status: done
+    - id: t-a1f262
+      title: 建立插件包骨架与配置层·复核
+      status: done
+    - id: t-2fc91c
+      title: 建立插件包骨架与配置层·测试
+      status: done
+    - id: t-883faa
+      title: 实现绑定表与原子持久化·研发
+      status: done
+    - id: t-e7dd75
+      title: 实现绑定表与原子持久化·复核
+      status: done
+    - id: t-d8437b
+      title: 实现绑定表与原子持久化·测试
+      status: done
+    - id: t-55b341
+      title: 实现 webhook 投递层·研发
+      status: done
+    - id: t-d3ed02
+      title: 实现 webhook 投递层·复核
+      status: done
+    - id: t-7ae458
+      title: 实现 webhook 投递层·测试
+      status: done
+    - id: t-123825
+      title: 实现事件分类与过滤·研发
+      status: done
+    - id: t-e910b0
+      title: 实现事件分类与过滤·复核
+      status: done
+    - id: t-9e8eb9
+      title: 实现事件分类与过滤·测试
+      status: done
+    - id: t-a05d68
+      title: 暴露 Host Service dshNoticeWebhook·研发
+      status: done
+    - id: t-ef947a
+      title: 暴露 Host Service dshNoticeWebhook·联调
+      status: done
+    - id: t-3da71e
+      title: 暴露 Host Service dshNoticeWebhook·复核
+      status: done
+    - id: t-d54a86
+      title: 暴露 Host Service dshNoticeWebhook·测试
+      status: done
+    - id: t-e96439
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·研发
+      status: done
+    - id: t-b6df77
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·复核
+      status: done
+    - id: t-33a9df
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·测试
+      status: done
+    - id: t-096bbe
+      title: 实现 goal 自动轮识别与静默·研发
+      status: done
+    - id: t-a4ac0a
+      title: 实现 goal 自动轮识别与静默·复核
+      status: done
+    - id: t-527280
+      title: 实现 goal 自动轮识别与静默·测试
+      status: done
+    - id: t-3966e0
+      title: 实现路由层与总开关旁路·研发
+      status: done
+    - id: t-040d34
+      title: 实现路由层与总开关旁路·复核
+      status: done
+    - id: t-399c3a
+      title: 实现路由层与总开关旁路·测试
+      status: done
+    - id: t-9600c2
+      title: 实现 goal 终态识别与去重·研发
+      status: done
+    - id: t-5e3c2c
+      title: 实现 goal 终态识别与去重·复核
+      status: done
+    - id: t-9efd71
+      title: 实现 goal 终态识别与去重·测试
+      status: done
+    - id: t-c9c721
+      title: 接线整合与本地端到端联调·研发
+      status: done
+    - id: t-a0aed4
+      title: 接线整合与本地端到端联调·联调
+      status: done
+    - id: t-030e3c
+      title: 接线整合与本地端到端联调·复核
+      status: done
+    - id: t-ee2412
+      title: 接线整合与本地端到端联调·测试
+      status: done
+    - id: t-c7e70b
+      title: 装载到 profile 并做真实 Host 验收·研发
+      status: done
+    - id: t-168c3a
+      title: 装载到 profile 并做真实 Host 验收·复核
+      status: done
+    - id: t-623dc6
+      title: 装载到 profile 并做真实 Host 验收·测试
+      status: done
+    - id: t-6acade
+      title: 写插件使用说明 README·研发
+      status: done
+    - id: t-896aff
+      title: 写插件使用说明 README·复核
+      status: done
+status:
+  tasks_total: 49
+  tasks_done: 49
+  tasks_in_progress: 0
+  tasks_todo: 0
+tasks:
+  - id: t-fd6e82
+    status: done
+  - id: t-20c962
+    status: done
+  - id: t-ae2996
+    status: done
+  - id: t-cbf2e4
+    status: done
+  - id: t-245978
+    status: done
+  - id: t-898417
+    status: done
+  - id: t-f94377
+    status: done
+  - id: t-966bd3
+    status: done
+  - id: t-f25d34
+    status: done
+  - id: t-87cafa
+    status: done
+  - id: t-f01c88
+    status: done
+  - id: t-886615
+    status: done
+  - id: t-6eb2b2
+    status: done
+  - id: t-a1f262
+    status: done
+  - id: t-2fc91c
+    status: done
+  - id: t-883faa
+    status: done
+  - id: t-e7dd75
+    status: done
+  - id: t-d8437b
+    status: done
+  - id: t-55b341
+    status: done
+  - id: t-d3ed02
+    status: done
+  - id: t-7ae458
+    status: done
+  - id: t-123825
+    status: done
+  - id: t-e910b0
+    status: done
+  - id: t-9e8eb9
+    status: done
+  - id: t-a05d68
+    status: done
+  - id: t-ef947a
+    status: done
+  - id: t-3da71e
+    status: done
+  - id: t-d54a86
+    status: done
+  - id: t-e96439
+    status: done
+  - id: t-b6df77
+    status: done
+  - id: t-33a9df
+    status: done
+  - id: t-096bbe
+    status: done
+  - id: t-a4ac0a
+    status: done
+  - id: t-527280
+    status: done
+  - id: t-3966e0
+    status: done
+  - id: t-040d34
+    status: done
+  - id: t-399c3a
+    status: done
+  - id: t-9600c2
+    status: done
+  - id: t-5e3c2c
+    status: done
+  - id: t-9efd71
+    status: done
+  - id: t-c9c721
+    status: done
+  - id: t-a0aed4
+    status: done
+  - id: t-030e3c
+    status: done
+  - id: t-ee2412
+    status: done
+  - id: t-c7e70b
+    status: done
+  - id: t-168c3a
+    status: done
+  - id: t-623dc6
+    status: done
+  - id: t-6acade
+    status: done
+  - id: t-896aff
+    status: done

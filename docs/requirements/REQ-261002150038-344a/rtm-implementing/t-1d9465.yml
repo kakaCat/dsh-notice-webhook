@@ -1,0 +1,35 @@
+task:
+  id: t-1d9465
+  title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮
+  status: done
+  implements: src/goal.js：import { isHumanSource } from './source.js'；observe() 的 user/message 分支由 `event.data?.source?.kind === 'goal'` 改为 `isHumanSource(event.data?.source)`，轮次标记字段 sawGoal → sawInjected（缺省仍 {sawHuman:false, sawInjected:false}）；isAutoRound(session) 改为 `mark !== undefined && mark.sawInjected === true && mark.sawHuman !== true`；类头注释补「goal / dive / plugin 注入轮一律静默」。index.js 不改（`intent.kind === 'complete' && autoRound → {action:'silent'}` 分支已存在）。test/goal.auto.test.js 增 TC-6…TC-12（dive×3 轮 0 意图、plugin 0 意图、goal 0 意图回归、dive+人插话 1 条且 isAutoRound=false、无 user/message 轮 1 条、dive+error 1 条中断、dive+interrupted 1 条中断）。
+  serves:
+    - FR-1
+    - FR-2
+  depends_on:
+    - t-f48ac7
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261002150038-344a
+    TASK_ID: t-1d9465
+    TASK_TITLE: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮
+    DESIGN_FILES: design/architecture.md
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-02T07:08:52.449Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261002150038-344a
+  generated_at: 2026-10-02T07:07:49.527Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-02T07:10:13.943Z

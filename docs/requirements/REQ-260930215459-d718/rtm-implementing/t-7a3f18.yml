@@ -1,0 +1,38 @@
+task:
+  id: t-7a3f18
+  title: 左栏 rail 三段与徽标·复核
+  status: done
+  implements: |-
+    client.js：ChannelRail 重排为三段（顶部全部目标+总数徽标；按渠道固定六行+数量徽标+「+ 新增目标」；默认组段+不在默认组段），行内用 ChannelIcon(16) 与徽标；选中态左侧 2px accent 竖条。验证：test/client-service.test.js 增 rail 结构断言；并以 prototype.html 帧 1 人工核对。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-c4062a
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-7a3f18
+    TASK_TITLE: 左栏 rail 三段与徽标·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:42:58.963Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:42:58.789Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T14:42:58.963Z

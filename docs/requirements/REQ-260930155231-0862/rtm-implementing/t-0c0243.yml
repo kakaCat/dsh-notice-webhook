@@ -1,0 +1,33 @@
+task:
+  id: t-0c0243
+  title: 可嵌入选择器与客户端服务
+  status: done
+  implements: 在 client.js 实现 TargetPicker（目标复选 + 默认组标记 + 空态引导，不自己开弹框）并以 ctx.provide('dshNoticeWebhookClient',{version:1,renderTargetPicker}) 注册；每次返回新 element，服务失效返回 null。验证：新增 test/client-service.test.js（mock 宿主）。
+  serves: []
+  depends_on:
+    - t-cefe17
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-0c0243
+    TASK_TITLE: 可嵌入选择器与客户端服务
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T11:53:55.621Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T11:53:47.553Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T11:59:07.123Z

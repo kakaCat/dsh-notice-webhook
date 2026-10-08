@@ -1,0 +1,43 @@
+task:
+  id: t-dc6479
+  title: 设置页预览：卡片区不再显示「类型」行
+  status: done
+  implements: client.js：PayloadPreview 的「飞书卡片」区行过滤条件追加「默认渲染的 `**类型**：…` 行不显示」（判据 line.startsWith('**类型**')，仅当未用自定义 template 时存在该行）；纯文本区保留该行；payloadPreviewLines() 不动。给卡片区容器加 data-dnw-region="feishu-card" 供测试取段。test/client-render.test.js 增 TC-21…TC-23：PayloadPreview 卡片区文本无 `**类型**：✅ 对话完成`、纯文本区有、payloadPreviewLines(['event','session','prompt']) 返回值不变。
+  serves:
+    - FR-4
+  depends_on:
+    - t-955eca
+  phase: ui
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-261002150038-344a
+    TASK_ID: t-dc6479
+    TASK_TITLE: 设置页预览：卡片区不再显示「类型」行
+    DESIGN_FILES: design/architecture.md
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: ui
+  workflow_total: 4
+  workflow_done: 4
+  workflow:
+    - phase: ui
+      status: done
+      completed_at: 2026-10-02T07:15:56.250Z
+    - phase: implement
+      status: done
+      completed_at: 2026-10-02T07:13:24.376Z
+    - phase: test
+      status: done
+      completed_at: 2026-10-02T07:15:56.250Z
+    - phase: commit
+      status: done
+      completed_at: 2026-10-02T07:15:56.250Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261002150038-344a
+  generated_at: 2026-10-02T07:11:58.075Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 4
+  last_updated: 2026-10-02T07:15:56.250Z

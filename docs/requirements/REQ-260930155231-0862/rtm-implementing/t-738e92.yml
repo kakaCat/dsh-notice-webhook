@@ -1,0 +1,42 @@
+task:
+  id: t-738e92
+  title: 更新 README（多渠道 / 配置页 / 服务契约）
+  status: done
+  implements: 在 README.md 补：渠道与报文对照表（含加签与业务码）、设置页两页说明、Host Service v2 与客户端服务用法、旧配置兼容与回滚说明。验证：两条 grep 命中且三段齐备。
+  serves: []
+  depends_on:
+    - t-836336
+  phase: doc
+  side: doc
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-738e92
+    TASK_TITLE: 更新 README（多渠道 / 配置页 / 服务契约）
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: doc
+    PHASE: doc
+  workflow_total: 4
+  workflow_done: 4
+  workflow:
+    - phase: doc
+      status: done
+      completed_at: 2026-09-30T12:07:12.618Z
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T12:10:19.412Z
+    - phase: test
+      status: done
+      completed_at: 2026-09-30T12:10:19.412Z
+    - phase: commit
+      status: done
+      completed_at: 2026-09-30T12:10:19.412Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T12:07:04.336Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 4
+  last_updated: 2026-09-30T12:10:19.413Z

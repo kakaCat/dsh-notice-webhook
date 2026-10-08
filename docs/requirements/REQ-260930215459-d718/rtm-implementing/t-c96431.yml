@@ -1,0 +1,38 @@
+task:
+  id: t-c96431
+  title: 会话绑定页对齐原型·复核
+  status: done
+  implements: |-
+    client.js：BindingTable 复用 ChannelIcon 渲染目标 chips；悬空引用（目标已删）标红并加「（目标已删除）」后缀；行尾 hint 与空态文案对齐 frontend.md 第 6 节；解绑二次确认保留。验证：界面人工核对（prototype.html 帧 3）+ client-service 断言。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-3b3c9b
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-c96431
+    TASK_TITLE: 会话绑定页对齐原型·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:59:28.448Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:59:28.258Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T14:59:28.448Z

@@ -1,0 +1,355 @@
+metadata:
+  stage: design
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T05:27:35.586Z
+  version: 3
+  generated_by: dsh-pmboard
+  last_updated: 2026-09-30T05:30:44.659Z
+inputs:
+  requirements: []
+outputs:
+  design_sections:
+    - ref: design/architecture.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-1
+        - FR-4
+      file: design/architecture.md
+      section: TLDR
+    - ref: design/architecture.md#目标与总体方案
+      title: 目标与总体方案 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-11
+      file: design/architecture.md
+      section: 目标与总体方案
+    - ref: design/architecture.md#模块改动地图
+      title: 模块改动地图 `
+      serves:
+        - FR-1
+      file: design/architecture.md
+      section: 模块改动地图
+    - ref: design/architecture.md#关键流程
+      title: 关键流程 `
+      serves:
+        - FR-5
+        - FR-6
+        - FR-7
+        - FR-11
+      file: design/architecture.md
+      section: 关键流程
+    - ref: design/architecture.md#一次-sessionevent-的完整判定
+      title: 一次 `session/event` 的完整判定 `
+      serves:
+        - FR-1
+        - FR-5
+        - FR-11
+      file: design/architecture.md
+      section: 一次-sessionevent-的完整判定
+    - ref: design/architecture.md#事件分类表
+      title: 事件分类表 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+      file: design/architecture.md
+      section: 事件分类表
+    - ref: design/architecture.md#goal-自动轮判定
+      title: goal 自动轮判定 `
+      serves:
+        - FR-11
+      file: design/architecture.md
+      section: goal-自动轮判定
+    - ref: design/architecture.md#终态去重
+      title: 终态去重 `
+      serves:
+        - FR-11
+      file: design/architecture.md
+      section: 终态去重
+    - ref: design/architecture.md#关键决策点
+      title: 关键决策点 `
+      serves:
+        - FR-4
+        - FR-6
+        - FR-11
+      file: design/architecture.md
+      section: 关键决策点
+    - ref: design/architecture.md#依赖关系
+      title: 依赖关系 `
+      serves:
+        - FR-4
+      file: design/architecture.md
+      section: 依赖关系
+    - ref: design/architecture.md#错误处理
+      title: 错误处理 `
+      serves:
+        - FR-4
+        - FR-8
+      file: design/architecture.md
+      section: 错误处理
+    - ref: design/architecture.md#安全与性能
+      title: 安全与性能 `
+      serves:
+        - FR-4
+      file: design/architecture.md
+      section: 安全与性能
+    - ref: design/architecture.md#测试策略
+      title: 测试策略 `
+      serves:
+        - FR-1
+      file: design/architecture.md
+      section: 测试策略
+    - ref: design/architecture.md#遗留问题
+      title: 遗留问题 `
+      serves:
+        - FR-9
+        - FR-11
+      file: design/architecture.md
+      section: 遗留问题
+    - ref: design/data-model.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: TLDR
+    - ref: design/data-model.md#持久化数据结构
+      title: 持久化数据结构 `
+      serves:
+        - FR-6
+        - FR-9
+        - FR-10
+      file: design/data-model.md
+      section: 持久化数据结构
+    - ref: design/data-model.md#BindingEntry
+      title: BindingEntry `
+      serves:
+        - FR-6
+        - FR-10
+      file: design/data-model.md
+      section: BindingEntry
+    - ref: design/data-model.md#BindingsFile
+      title: BindingsFile `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: BindingsFile
+    - ref: design/data-model.md#内存状态
+      title: 内存状态 `
+      serves:
+        - FR-5
+        - FR-11
+      file: design/data-model.md
+      section: 内存状态
+    - ref: design/data-model.md#迁移与兼容
+      title: 迁移与兼容 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 迁移与兼容
+    - ref: design/data-model.md#孤儿绑定
+      title: 孤儿绑定 `
+      serves:
+        - FR-6
+        - FR-9
+      file: design/data-model.md
+      section: 孤儿绑定
+    - ref: design/interfaces.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: TLDR
+    - ref: design/interfaces.md#出站-Webhook-契约
+      title: 出站 Webhook 契约 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-4
+        - FR-11
+      file: design/interfaces.md
+      section: 出站-Webhook-契约
+    - ref: design/interfaces.md#请求
+      title: 请求 `
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 请求
+    - ref: design/interfaces.md#请求体字段
+      title: 请求体字段 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-11
+      file: design/interfaces.md
+      section: 请求体字段
+    - ref: design/interfaces.md#请求体样例
+      title: 请求体样例 `
+      serves:
+        - FR-11
+      file: design/interfaces.md
+      section: 请求体样例
+    - ref: design/interfaces.md#响应与错误语义
+      title: 响应与错误语义 `
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 响应与错误语义
+    - ref: design/interfaces.md#版本兼容
+      title: 版本兼容 `
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 版本兼容
+    - ref: design/interfaces.md#Host-Service-契约
+      title: Host Service 契约 `
+      serves:
+        - FR-6
+        - FR-8
+        - FR-10
+      file: design/interfaces.md
+      section: Host-Service-契约
+    - ref: design/interfaces.md#服务定义
+      title: 服务定义 `
+      serves:
+        - FR-8
+        - FR-10
+      file: design/interfaces.md
+      section: 服务定义
+    - ref: design/interfaces.md#配置项契约
+      title: 配置项契约 `
+      serves:
+        - FR-4
+        - FR-5
+        - FR-6
+        - FR-7
+      file: design/interfaces.md
+      section: 配置项契约
+    - ref: design/use-cases.md#场景总览
+      title: 场景总览 `
+      serves:
+        - FR-1
+        - FR-6
+        - FR-8
+        - FR-11
+      file: design/use-cases.md
+      section: 场景总览
+    - ref: design/use-cases.md#UC-1-离开电脑也不错过阻塞点
+      title: UC-1 离开电脑也不错过阻塞点 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+      file: design/use-cases.md
+      section: UC-1-离开电脑也不错过阻塞点
+    - ref: design/use-cases.md#UC-2-其他插件把会话绑到自己的通道
+      title: UC-2 其他插件把会话绑到自己的通道 `
+      serves:
+        - FR-6
+        - FR-8
+      file: design/use-cases.md
+      section: UC-2-其他插件把会话绑到自己的通道
+    - ref: design/use-cases.md#UC-3-goal-自动跑轮全程安静卡住时叫人
+      title: UC-3 goal 自动跑轮全程安静、卡住时叫人 `
+      serves:
+        - FR-11
+      file: design/use-cases.md
+      section: UC-3-goal-自动跑轮全程安静卡住时叫人
+traceability:
+  fr_to_design:
+    FR-1:
+      - design/architecture.md#TLDR
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#一次-sessionevent-的完整判定
+      - design/architecture.md#事件分类表
+      - design/architecture.md#测试策略
+      - design/interfaces.md#出站-Webhook-契约
+      - design/interfaces.md#请求体字段
+      - design/use-cases.md#场景总览
+      - design/use-cases.md#UC-1-离开电脑也不错过阻塞点
+    FR-4:
+      - design/architecture.md#TLDR
+      - design/architecture.md#关键决策点
+      - design/architecture.md#依赖关系
+      - design/architecture.md#错误处理
+      - design/architecture.md#安全与性能
+      - design/interfaces.md#TLDR
+      - design/interfaces.md#出站-Webhook-契约
+      - design/interfaces.md#请求
+      - design/interfaces.md#响应与错误语义
+      - design/interfaces.md#版本兼容
+      - design/interfaces.md#配置项契约
+    FR-2:
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#事件分类表
+      - design/interfaces.md#出站-Webhook-契约
+      - design/interfaces.md#请求体字段
+      - design/use-cases.md#UC-1-离开电脑也不错过阻塞点
+    FR-3:
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#事件分类表
+      - design/interfaces.md#出站-Webhook-契约
+      - design/interfaces.md#请求体字段
+      - design/use-cases.md#UC-1-离开电脑也不错过阻塞点
+    FR-11:
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#关键流程
+      - design/architecture.md#一次-sessionevent-的完整判定
+      - design/architecture.md#goal-自动轮判定
+      - design/architecture.md#终态去重
+      - design/architecture.md#关键决策点
+      - design/architecture.md#遗留问题
+      - design/data-model.md#内存状态
+      - design/interfaces.md#出站-Webhook-契约
+      - design/interfaces.md#请求体字段
+      - design/interfaces.md#请求体样例
+      - design/use-cases.md#场景总览
+      - design/use-cases.md#UC-3-goal-自动跑轮全程安静卡住时叫人
+    FR-5:
+      - design/architecture.md#关键流程
+      - design/architecture.md#一次-sessionevent-的完整判定
+      - design/data-model.md#内存状态
+      - design/interfaces.md#配置项契约
+    FR-6:
+      - design/architecture.md#关键流程
+      - design/architecture.md#关键决策点
+      - design/data-model.md#持久化数据结构
+      - design/data-model.md#BindingEntry
+      - design/data-model.md#孤儿绑定
+      - design/interfaces.md#Host-Service-契约
+      - design/interfaces.md#配置项契约
+      - design/use-cases.md#场景总览
+      - design/use-cases.md#UC-2-其他插件把会话绑到自己的通道
+    FR-7:
+      - design/architecture.md#关键流程
+      - design/interfaces.md#配置项契约
+    FR-8:
+      - design/architecture.md#错误处理
+      - design/interfaces.md#Host-Service-契约
+      - design/interfaces.md#服务定义
+      - design/use-cases.md#场景总览
+      - design/use-cases.md#UC-2-其他插件把会话绑到自己的通道
+    FR-9:
+      - design/architecture.md#遗留问题
+      - design/data-model.md#TLDR
+      - design/data-model.md#持久化数据结构
+      - design/data-model.md#BindingsFile
+      - design/data-model.md#迁移与兼容
+      - design/data-model.md#孤儿绑定
+    FR-10:
+      - design/data-model.md#持久化数据结构
+      - design/data-model.md#BindingEntry
+      - design/interfaces.md#Host-Service-契约
+      - design/interfaces.md#服务定义
+coverage:
+  design:
+    total: 0
+    covered: 0
+    uncovered: []
+    rate: 100
+    total_frs: 0
+    covered_frs: 0

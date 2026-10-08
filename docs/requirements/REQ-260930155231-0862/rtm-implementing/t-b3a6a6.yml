@@ -1,0 +1,38 @@
+task:
+  id: t-b3a6a6
+  title: 客户端半：目标编辑与动作·复核
+  status: done
+  implements: |-
+    在 client.js 实现表单（渠道切换时字段可见性变化）与动作：保存 POST /targets、删除 /targets/delete、启停开关（乐观更新+失败回滚）、发送测试 /test；错误行内展示，409 提示刷新并保留已填内容。验证：打开设置页操作并看行内错误与徽标变化。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-aec5db
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-b3a6a6
+    TASK_TITLE: 客户端半：目标编辑与动作·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T11:39:04.632Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T11:39:04.414Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T11:39:04.632Z

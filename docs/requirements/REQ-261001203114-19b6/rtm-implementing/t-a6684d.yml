@@ -1,0 +1,37 @@
+task:
+  id: t-a6684d
+  title: 接线：开关、类型过滤与静默留痕·研发
+  status: done
+  implements: |-
+    src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。
+
+    [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+  serves: []
+  depends_on:
+    - t-5e2101
+    - t-a36090
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001203114-19b6
+    TASK_ID: t-a6684d
+    TASK_TITLE: 接线：开关、类型过滤与静默留痕·研发
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-01T12:52:43.383Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:52:43.382Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-01T12:52:49.661Z

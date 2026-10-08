@@ -1,0 +1,38 @@
+task:
+  id: t-e7dd75
+  title: 实现绑定表与原子持久化·复核
+  status: done
+  implements: |-
+    新增 src/bindings.js：BindingStore 以 Map 保存 sessionId→{url,updatedAt}；load() 读 $DSH_HOME/state/dsh-notice-webhook/bindings.json（文件缺失返回空表且不创建；非法 JSON 或未知 version 记 warn 并返回空表且不覆盖原文件；单条字段非法跳过）；persist() 先写 .tmp 再 rename 实现原子写；list() 按 sessionId 升序返回。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-883faa
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-e7dd75
+    TASK_TITLE: 实现绑定表与原子持久化·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T05:39:54.066Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T05:39:53.948Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T05:39:54.066Z

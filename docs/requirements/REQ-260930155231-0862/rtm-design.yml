@@ -1,0 +1,523 @@
+metadata:
+  stage: design
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T08:02:46.966Z
+  version: 5
+  generated_by: dsh-pmboard
+  last_updated: 2026-09-30T08:35:32.524Z
+inputs:
+  requirements: []
+outputs:
+  design_sections:
+    - ref: design/architecture.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+      file: design/architecture.md
+      section: TLDR
+    - ref: design/architecture.md#目标与总体方案
+      title: 目标与总体方案 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-5
+      file: design/architecture.md
+      section: 目标与总体方案
+    - ref: design/architecture.md#模块改动地图
+      title: 模块改动地图 `
+      serves:
+        - FR-1
+        - FR-3
+      file: design/architecture.md
+      section: 模块改动地图
+    - ref: design/architecture.md#关键流程
+      title: 关键流程 `
+      serves:
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/architecture.md
+      section: 关键流程
+    - ref: design/architecture.md#从事件到投递
+      title: 从事件到投递 `
+      serves:
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/architecture.md
+      section: 从事件到投递
+    - ref: design/architecture.md#为什么过滤顺序是这个顺序
+      title: 为什么过滤顺序是这个顺序 `
+      serves:
+        - FR-4
+        - FR-6
+      file: design/architecture.md
+      section: 为什么过滤顺序是这个顺序
+    - ref: design/architecture.md#渠道适配的两段式
+      title: 渠道适配的两段式 `
+      serves:
+        - FR-1
+      file: design/architecture.md
+      section: 渠道适配的两段式
+    - ref: design/architecture.md#依赖关系
+      title: 依赖关系 `
+      serves:
+        - FR-1
+        - FR-7
+      file: design/architecture.md
+      section: 依赖关系
+    - ref: design/architecture.md#错误处理
+      title: 错误处理 `
+      serves:
+        - FR-1
+        - FR-3
+        - FR-7
+        - FR-8
+      file: design/architecture.md
+      section: 错误处理
+    - ref: design/architecture.md#安全与性能
+      title: 安全与性能 `
+      serves:
+        - FR-7
+      file: design/architecture.md
+      section: 安全与性能
+    - ref: design/architecture.md#文件结构
+      title: 文件结构 `
+      serves:
+        - FR-2
+      file: design/architecture.md
+      section: 文件结构
+    - ref: design/architecture.md#测试策略
+      title: 测试策略 `
+      serves:
+        - FR-1
+        - FR-3
+        - FR-4
+        - FR-9
+      file: design/architecture.md
+      section: 测试策略
+    - ref: design/architecture.md#遗留问题
+      title: 遗留问题 `
+      serves:
+        - FR-10
+      file: design/architecture.md
+      section: 遗留问题
+    - ref: design/data-model.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-2
+        - FR-5
+      file: design/data-model.md
+      section: TLDR
+    - ref: design/data-model.md#目标记录
+      title: 目标记录 `
+      serves:
+        - FR-2
+        - FR-4
+        - FR-7
+      file: design/data-model.md
+      section: 目标记录
+    - ref: design/data-model.md#目标清单文件
+      title: 目标清单文件 `
+      serves:
+        - FR-2
+        - FR-9
+      file: design/data-model.md
+      section: 目标清单文件
+    - ref: design/data-model.md#窗口绑定扩展既有文件
+      title: 窗口绑定（扩展既有文件）`
+      serves:
+        - FR-5
+        - FR-9
+      file: design/data-model.md
+      section: 窗口绑定扩展既有文件
+    - ref: design/data-model.md#绑定语义替代而非叠加
+      title: 绑定语义（替代而非叠加）`
+      serves:
+        - FR-5
+        - FR-6
+      file: design/data-model.md
+      section: 绑定语义替代而非叠加
+    - ref: design/data-model.md#投递结果
+      title: 投递结果 `
+      serves:
+        - FR-10
+      file: design/data-model.md
+      section: 投递结果
+    - ref: design/data-model.md#迁移与兼容
+      title: 迁移与兼容 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 迁移与兼容
+    - ref: design/data-model.md#老配置的等价映射
+      title: 老配置的等价映射 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 老配置的等价映射
+    - ref: design/data-model.md#回滚路径
+      title: 回滚路径 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 回滚路径
+    - ref: design/data-model.md#破坏性变更
+      title: 破坏性变更 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 破坏性变更
+    - ref: design/frontend.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: TLDR
+    - ref: design/frontend.md#页面与入口
+      title: 页面与入口 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 页面与入口
+    - ref: design/frontend.md#布局与信息架构
+      title: 布局与信息架构 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 布局与信息架构
+    - ref: design/frontend.md#会话绑定页第二个标签
+      title: 会话绑定页（第二个标签）`
+      serves:
+        - FR-5
+      file: design/frontend.md
+      section: 会话绑定页第二个标签
+    - ref: design/frontend.md#交互流程
+      title: 交互流程 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 交互流程
+    - ref: design/frontend.md#新增目标
+      title: 新增目标 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 新增目标
+    - ref: design/frontend.md#发送测试
+      title: 发送测试 `
+      serves:
+        - FR-2
+        - FR-8
+        - FR-10
+      file: design/frontend.md
+      section: 发送测试
+    - ref: design/frontend.md#编辑-删除-启停
+      title: 编辑 / 删除 / 启停 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 编辑-删除-启停
+    - ref: design/frontend.md#解绑会话绑定页
+      title: 解绑（会话绑定页）`
+      serves:
+        - FR-5
+        - FR-6
+      file: design/frontend.md
+      section: 解绑会话绑定页
+    - ref: design/frontend.md#宿主嵌入选择器其他插件的界面怎么用
+      title: 宿主嵌入选择器（其他插件的界面怎么用）`
+      serves:
+        - FR-5
+        - FR-2
+      file: design/frontend.md
+      section: 宿主嵌入选择器其他插件的界面怎么用
+    - ref: design/frontend.md#状态与边界
+      title: 状态与边界 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 状态与边界
+    - ref: design/frontend.md#凭据展示规则
+      title: 凭据展示规则 `
+      serves:
+        - FR-7
+      file: design/frontend.md
+      section: 凭据展示规则
+    - ref: design/frontend.md#文案与本地化
+      title: 文案与本地化 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 文案与本地化
+    - ref: design/frontend.md#主题与样式约束
+      title: 主题与样式约束 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 主题与样式约束
+    - ref: design/frontend.md#与-RPC-的映射
+      title: 与 RPC 的映射 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 与-RPC-的映射
+    - ref: design/frontend.md#原型锚点
+      title: 原型锚点 `
+      serves:
+        - FR-2
+        - FR-4
+        - FR-5
+      file: design/frontend.md
+      section: 原型锚点
+    - ref: design/frontend.md#验收口径
+      title: 验收口径 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 验收口径
+    - ref: design/interfaces.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-1
+      file: design/interfaces.md
+      section: TLDR
+    - ref: design/interfaces.md#渠道适配器契约
+      title: 渠道适配器契约 `
+      serves:
+        - FR-1
+      file: design/interfaces.md
+      section: 渠道适配器契约
+    - ref: design/interfaces.md#渠道报文契约
+      title: 渠道报文契约 `
+      serves:
+        - FR-1
+      file: design/interfaces.md
+      section: 渠道报文契约
+    - ref: design/interfaces.md#Host-RPC设置页-Host
+      title: Host RPC（设置页 → Host）`
+      serves:
+        - FR-2
+        - FR-8
+        - FR-10
+      file: design/interfaces.md
+      section: Host-RPC设置页-Host
+    - ref: design/interfaces.md#Host-Service其他插件-Host
+      title: Host Service（其他插件 → Host）`
+      serves:
+        - FR-5
+        - FR-9
+      file: design/interfaces.md
+      section: Host-Service其他插件-Host
+    - ref: design/interfaces.md#客户端服务供其他插件的界面复用
+      title: 客户端服务（供其他插件的界面复用）`
+      serves:
+        - FR-5
+        - FR-2
+      file: design/interfaces.md
+      section: 客户端服务供其他插件的界面复用
+    - ref: design/interfaces.md#服务定义
+      title: 服务定义 `
+      serves:
+        - FR-5
+      file: design/interfaces.md
+      section: 服务定义
+    - ref: design/interfaces.md#渲染语义与生命周期
+      title: 渲染语义与生命周期 `
+      serves:
+        - FR-5
+        - FR-8
+      file: design/interfaces.md
+      section: 渲染语义与生命周期
+    - ref: design/interfaces.md#降级与错误语义
+      title: 降级与错误语义 `
+      serves:
+        - FR-5
+      file: design/interfaces.md
+      section: 降级与错误语义
+    - ref: design/interfaces.md#插件-Config
+      title: 插件 Config `
+      serves:
+        - FR-8
+        - FR-9
+      file: design/interfaces.md
+      section: 插件-Config
+    - ref: design/use-cases.md#场景总览
+      title: 场景总览 `
+      serves:
+        - FR-1
+        - FR-5
+        - FR-8
+      file: design/use-cases.md
+      section: 场景总览
+    - ref: design/use-cases.md#UC-1-授权与完成分流到不同群
+      title: UC-1 授权与完成分流到不同群 `
+      serves:
+        - FR-4
+        - FR-5
+      file: design/use-cases.md
+      section: UC-1-授权与完成分流到不同群
+    - ref: design/use-cases.md#UC-2-临时加一条通道不用重启
+      title: UC-2 临时加一条通道，不用重启 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/use-cases.md
+      section: UC-2-临时加一条通道不用重启
+    - ref: design/use-cases.md#UC-3-其他插件把项目会话绑到项目群
+      title: UC-3 其他插件把项目会话绑到项目群 `
+      serves:
+        - FR-3
+        - FR-5
+      file: design/use-cases.md
+      section: UC-3-其他插件把项目会话绑到项目群
+    - ref: design/use-cases.md#UC-4-老用户升级零改动
+      title: UC-4 老用户升级零改动 `
+      serves:
+        - FR-9
+      file: design/use-cases.md
+      section: UC-4-老用户升级零改动
+    - ref: design/use-cases.md#UC-5-按会话查绑定并解绑
+      title: UC-5 按会话查绑定并解绑 `
+      serves:
+        - FR-5
+        - FR-6
+      file: design/use-cases.md
+      section: UC-5-按会话查绑定并解绑
+traceability:
+  fr_to_design:
+    FR-1:
+      - design/architecture.md#TLDR
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#渠道适配的两段式
+      - design/architecture.md#依赖关系
+      - design/architecture.md#错误处理
+      - design/architecture.md#测试策略
+      - design/interfaces.md#TLDR
+      - design/interfaces.md#渠道适配器契约
+      - design/interfaces.md#渠道报文契约
+      - design/use-cases.md#场景总览
+    FR-2:
+      - design/architecture.md#TLDR
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#文件结构
+      - design/data-model.md#TLDR
+      - design/data-model.md#目标记录
+      - design/data-model.md#目标清单文件
+      - design/frontend.md#TLDR
+      - design/frontend.md#页面与入口
+      - design/frontend.md#布局与信息架构
+      - design/frontend.md#交互流程
+      - design/frontend.md#新增目标
+      - design/frontend.md#发送测试
+      - design/frontend.md#编辑-删除-启停
+      - design/frontend.md#宿主嵌入选择器其他插件的界面怎么用
+      - design/frontend.md#状态与边界
+      - design/frontend.md#文案与本地化
+      - design/frontend.md#主题与样式约束
+      - design/frontend.md#与-RPC-的映射
+      - design/frontend.md#原型锚点
+      - design/frontend.md#验收口径
+      - design/interfaces.md#Host-RPC设置页-Host
+      - design/interfaces.md#客户端服务供其他插件的界面复用
+      - design/use-cases.md#UC-2-临时加一条通道不用重启
+    FR-3:
+      - design/architecture.md#TLDR
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#关键流程
+      - design/architecture.md#从事件到投递
+      - design/architecture.md#错误处理
+      - design/architecture.md#测试策略
+      - design/use-cases.md#UC-3-其他插件把项目会话绑到项目群
+    FR-5:
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#关键流程
+      - design/architecture.md#从事件到投递
+      - design/data-model.md#TLDR
+      - design/data-model.md#窗口绑定扩展既有文件
+      - design/data-model.md#绑定语义替代而非叠加
+      - design/frontend.md#会话绑定页第二个标签
+      - design/frontend.md#解绑会话绑定页
+      - design/frontend.md#宿主嵌入选择器其他插件的界面怎么用
+      - design/frontend.md#原型锚点
+      - design/interfaces.md#Host-Service其他插件-Host
+      - design/interfaces.md#客户端服务供其他插件的界面复用
+      - design/interfaces.md#服务定义
+      - design/interfaces.md#渲染语义与生命周期
+      - design/interfaces.md#降级与错误语义
+      - design/use-cases.md#场景总览
+      - design/use-cases.md#UC-1-授权与完成分流到不同群
+      - design/use-cases.md#UC-3-其他插件把项目会话绑到项目群
+      - design/use-cases.md#UC-5-按会话查绑定并解绑
+    FR-4:
+      - design/architecture.md#关键流程
+      - design/architecture.md#从事件到投递
+      - design/architecture.md#为什么过滤顺序是这个顺序
+      - design/architecture.md#测试策略
+      - design/data-model.md#目标记录
+      - design/frontend.md#原型锚点
+      - design/use-cases.md#UC-1-授权与完成分流到不同群
+    FR-6:
+      - design/architecture.md#关键流程
+      - design/architecture.md#从事件到投递
+      - design/architecture.md#为什么过滤顺序是这个顺序
+      - design/data-model.md#绑定语义替代而非叠加
+      - design/frontend.md#解绑会话绑定页
+      - design/use-cases.md#UC-5-按会话查绑定并解绑
+    FR-7:
+      - design/architecture.md#依赖关系
+      - design/architecture.md#错误处理
+      - design/architecture.md#安全与性能
+      - design/data-model.md#目标记录
+      - design/frontend.md#凭据展示规则
+    FR-8:
+      - design/architecture.md#错误处理
+      - design/frontend.md#TLDR
+      - design/frontend.md#交互流程
+      - design/frontend.md#新增目标
+      - design/frontend.md#发送测试
+      - design/frontend.md#状态与边界
+      - design/frontend.md#与-RPC-的映射
+      - design/frontend.md#验收口径
+      - design/interfaces.md#Host-RPC设置页-Host
+      - design/interfaces.md#渲染语义与生命周期
+      - design/interfaces.md#插件-Config
+      - design/use-cases.md#场景总览
+      - design/use-cases.md#UC-2-临时加一条通道不用重启
+    FR-9:
+      - design/architecture.md#测试策略
+      - design/data-model.md#目标清单文件
+      - design/data-model.md#窗口绑定扩展既有文件
+      - design/data-model.md#迁移与兼容
+      - design/data-model.md#老配置的等价映射
+      - design/data-model.md#回滚路径
+      - design/data-model.md#破坏性变更
+      - design/interfaces.md#Host-Service其他插件-Host
+      - design/interfaces.md#插件-Config
+      - design/use-cases.md#UC-4-老用户升级零改动
+    FR-10:
+      - design/architecture.md#遗留问题
+      - design/data-model.md#投递结果
+      - design/frontend.md#发送测试
+      - design/interfaces.md#Host-RPC设置页-Host
+coverage:
+  design:
+    total: 0
+    covered: 0
+    uncovered: []
+    rate: 100
+    total_frs: 0
+    covered_frs: 0

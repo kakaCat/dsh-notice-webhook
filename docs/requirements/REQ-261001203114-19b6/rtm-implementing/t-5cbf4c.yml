@@ -1,0 +1,35 @@
+task:
+  id: t-5cbf4c
+  title: 出站报文：中断意图的 reason / error 与事件元数据
+  status: done
+  implements: "src/channels/custom.js 的 buildPayload() 仅当 intent.kind==='interrupt' 时追加 reason: intent.reason 与 error: intent.error ?? null（非中断事件键集合逐字节不变）；src/payload.js 的 EVENT_META 增 'turn/error': { title:'⚠️ 会话中断', color:'red' }；五个渠道适配器零改动。"
+  serves:
+    - FR-2
+    - FR-3
+  depends_on:
+    - t-5e2101
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001203114-19b6
+    TASK_ID: t-5cbf4c
+    TASK_TITLE: 出站报文：中断意图的 reason / error 与事件元数据
+    DESIGN_FILES: design/architecture.md
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-01T12:51:17.043Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:51:17.042Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-01T12:55:33.121Z

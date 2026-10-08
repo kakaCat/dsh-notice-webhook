@@ -1,0 +1,452 @@
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T08:37:32.622Z
+  version: 263
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 87
+  last_updated: 2026-09-30T12:10:19.423Z
+inputs:
+  tasks:
+    - id: t-3a35f9
+      title: 声明插件 Config schema 与双半包清单
+      status: done
+    - id: t-be124b
+      title: 实现渠道注册表与三国内渠道
+      status: done
+    - id: t-9a8084
+      title: 实现 Slack / Discord / 通用三渠道
+      status: done
+    - id: t-13af87
+      title: 实现目标清单存储与 CRUD
+      status: done
+    - id: t-f65a82
+      title: 实现投递结果存储（内存）
+      status: done
+    - id: t-c9e09a
+      title: 升级绑定存储：targetBindings 段
+      status: done
+    - id: t-3188ad
+      title: 升级 Host Service 到 v2
+      status: done
+    - id: t-792424
+      title: 实现 RPC 只读端点与状态投影
+      status: done
+    - id: t-b7a098
+      title: 实现 RPC 写入端点与 revision 栅栏
+      status: done
+    - id: t-5a7d2f
+      title: 实现目标集合解析与替代默认组
+      status: done
+    - id: t-1146e7
+      title: 实现逐目标过滤与去重
+      status: done
+    - id: t-10a822
+      title: 接线主链路与 legacy 等价映射
+      status: done
+    - id: t-cefe17
+      title: 客户端半：设置页骨架与目标页
+      status: done
+    - id: t-3f89ef
+      title: 客户端半：目标编辑与动作
+      status: done
+    - id: t-6b4417
+      title: 客户端半：事件过滤网格与全局开关
+      status: done
+    - id: t-10999f
+      title: 客户端半：会话绑定页与解绑
+      status: done
+    - id: t-0c0243
+      title: 可嵌入选择器与客户端服务
+      status: done
+    - id: t-3b6f2f
+      title: 兼容与回滚收尾
+      status: done
+    - id: t-836336
+      title: 装载到 profile 并做真实 Host 验收
+      status: done
+    - id: t-738e92
+      title: 更新 README（多渠道 / 配置页 / 服务契约）
+      status: done
+    - id: t-562e53
+      title: 声明插件 Config schema 与双半包清单·研发
+      status: done
+    - id: t-b7ad0c
+      title: 声明插件 Config schema 与双半包清单·复核
+      status: done
+    - id: t-851244
+      title: 声明插件 Config schema 与双半包清单·测试
+      status: done
+    - id: t-e73d91
+      title: 实现渠道注册表与三国内渠道·研发
+      status: done
+    - id: t-2f6225
+      title: 实现渠道注册表与三国内渠道·复核
+      status: done
+    - id: t-c6837b
+      title: 实现渠道注册表与三国内渠道·测试
+      status: done
+    - id: t-db8e0b
+      title: 实现目标清单存储与 CRUD·研发
+      status: done
+    - id: t-9823b3
+      title: 实现目标清单存储与 CRUD·复核
+      status: done
+    - id: t-2b1038
+      title: 实现目标清单存储与 CRUD·测试
+      status: done
+    - id: t-fab413
+      title: 实现投递结果存储（内存）·研发
+      status: done
+    - id: t-33e6a5
+      title: 实现投递结果存储（内存）·复核
+      status: done
+    - id: t-5744a1
+      title: 实现投递结果存储（内存）·测试
+      status: done
+    - id: t-cfb1af
+      title: 实现 Slack / Discord / 通用三渠道·研发
+      status: done
+    - id: t-40cd86
+      title: 实现 Slack / Discord / 通用三渠道·复核
+      status: done
+    - id: t-e5d3cb
+      title: 实现 Slack / Discord / 通用三渠道·测试
+      status: done
+    - id: t-b7dd7a
+      title: 升级绑定存储：targetBindings 段·研发
+      status: done
+    - id: t-7203aa
+      title: 升级绑定存储：targetBindings 段·复核
+      status: done
+    - id: t-521025
+      title: 升级绑定存储：targetBindings 段·测试
+      status: done
+    - id: t-ce5f74
+      title: 升级 Host Service 到 v2·研发
+      status: done
+    - id: t-6d63df
+      title: 升级 Host Service 到 v2·联调
+      status: done
+    - id: t-407b70
+      title: 升级 Host Service 到 v2·复核
+      status: done
+    - id: t-33f976
+      title: 升级 Host Service 到 v2·测试
+      status: done
+    - id: t-52f7a6
+      title: 实现 RPC 只读端点与状态投影·研发
+      status: done
+    - id: t-733d1a
+      title: 实现 RPC 只读端点与状态投影·联调
+      status: done
+    - id: t-53678f
+      title: 实现 RPC 只读端点与状态投影·复核
+      status: done
+    - id: t-4709f0
+      title: 实现 RPC 只读端点与状态投影·测试
+      status: done
+    - id: t-7d67cf
+      title: 实现目标集合解析与替代默认组·研发
+      status: done
+    - id: t-cec0c4
+      title: 实现目标集合解析与替代默认组·复核
+      status: done
+    - id: t-ba2a92
+      title: 实现目标集合解析与替代默认组·测试
+      status: done
+    - id: t-c05999
+      title: 实现 RPC 写入端点与 revision 栅栏·研发
+      status: done
+    - id: t-11f9b8
+      title: 实现 RPC 写入端点与 revision 栅栏·联调
+      status: done
+    - id: t-b34fad
+      title: 实现 RPC 写入端点与 revision 栅栏·复核
+      status: done
+    - id: t-1a96c2
+      title: 实现 RPC 写入端点与 revision 栅栏·测试
+      status: done
+    - id: t-dd80f1
+      title: 实现逐目标过滤与去重·研发
+      status: done
+    - id: t-e7187b
+      title: 实现逐目标过滤与去重·复核
+      status: done
+    - id: t-c915f2
+      title: 实现逐目标过滤与去重·测试
+      status: done
+    - id: t-054a9c
+      title: 接线主链路与 legacy 等价映射·研发
+      status: done
+    - id: t-89ad70
+      title: 接线主链路与 legacy 等价映射·联调
+      status: done
+    - id: t-b20b60
+      title: 接线主链路与 legacy 等价映射·复核
+      status: done
+    - id: t-3f07d3
+      title: 接线主链路与 legacy 等价映射·测试
+      status: done
+    - id: t-f2fe94
+      title: 兼容与回滚收尾·研发
+      status: done
+    - id: t-ddc493
+      title: 兼容与回滚收尾·复核
+      status: done
+    - id: t-805ee8
+      title: 兼容与回滚收尾·测试
+      status: done
+    - id: t-17a21e
+      title: 客户端半：设置页骨架与目标页·研发
+      status: done
+    - id: t-c49715
+      title: 客户端半：设置页骨架与目标页·联调
+      status: done
+    - id: t-c9584c
+      title: 客户端半：设置页骨架与目标页·复核
+      status: done
+    - id: t-eb1fcb
+      title: 客户端半：设置页骨架与目标页·测试
+      status: done
+    - id: t-27ceb6
+      title: 客户端半：目标编辑与动作·研发
+      status: done
+    - id: t-aec5db
+      title: 客户端半：目标编辑与动作·联调
+      status: done
+    - id: t-b3a6a6
+      title: 客户端半：目标编辑与动作·复核
+      status: done
+    - id: t-a02b0a
+      title: 客户端半：目标编辑与动作·测试
+      status: done
+    - id: t-d6ee82
+      title: 客户端半：事件过滤网格与全局开关·研发
+      status: done
+    - id: t-de7f4b
+      title: 客户端半：事件过滤网格与全局开关·复核
+      status: done
+    - id: t-234f89
+      title: 客户端半：事件过滤网格与全局开关·测试
+      status: done
+    - id: t-8b13aa
+      title: 客户端半：会话绑定页与解绑·研发
+      status: done
+    - id: t-a6137d
+      title: 客户端半：会话绑定页与解绑·联调
+      status: done
+    - id: t-6f1114
+      title: 客户端半：会话绑定页与解绑·复核
+      status: done
+    - id: t-0482bd
+      title: 客户端半：会话绑定页与解绑·测试
+      status: done
+    - id: t-8afa35
+      title: 可嵌入选择器与客户端服务·研发
+      status: done
+    - id: t-e2182d
+      title: 可嵌入选择器与客户端服务·联调
+      status: done
+    - id: t-05f9a5
+      title: 可嵌入选择器与客户端服务·复核
+      status: done
+    - id: t-40565e
+      title: 可嵌入选择器与客户端服务·测试
+      status: done
+    - id: t-be5e03
+      title: 装载到 profile 并做真实 Host 验收·研发
+      status: done
+    - id: t-565295
+      title: 装载到 profile 并做真实 Host 验收·复核
+      status: done
+    - id: t-51f9b9
+      title: 装载到 profile 并做真实 Host 验收·测试
+      status: done
+    - id: t-cb4b6f
+      title: 更新 README（多渠道 / 配置页 / 服务契约）·研发
+      status: done
+    - id: t-231afa
+      title: 更新 README（多渠道 / 配置页 / 服务契约）·复核
+      status: done
+status:
+  tasks_total: 87
+  tasks_done: 87
+  tasks_in_progress: 0
+  tasks_todo: 0
+tasks:
+  - id: t-3a35f9
+    status: done
+  - id: t-be124b
+    status: done
+  - id: t-9a8084
+    status: done
+  - id: t-13af87
+    status: done
+  - id: t-f65a82
+    status: done
+  - id: t-c9e09a
+    status: done
+  - id: t-3188ad
+    status: done
+  - id: t-792424
+    status: done
+  - id: t-b7a098
+    status: done
+  - id: t-5a7d2f
+    status: done
+  - id: t-1146e7
+    status: done
+  - id: t-10a822
+    status: done
+  - id: t-cefe17
+    status: done
+  - id: t-3f89ef
+    status: done
+  - id: t-6b4417
+    status: done
+  - id: t-10999f
+    status: done
+  - id: t-0c0243
+    status: done
+  - id: t-3b6f2f
+    status: done
+  - id: t-836336
+    status: done
+  - id: t-738e92
+    status: done
+  - id: t-562e53
+    status: done
+  - id: t-b7ad0c
+    status: done
+  - id: t-851244
+    status: done
+  - id: t-e73d91
+    status: done
+  - id: t-2f6225
+    status: done
+  - id: t-c6837b
+    status: done
+  - id: t-db8e0b
+    status: done
+  - id: t-9823b3
+    status: done
+  - id: t-2b1038
+    status: done
+  - id: t-fab413
+    status: done
+  - id: t-33e6a5
+    status: done
+  - id: t-5744a1
+    status: done
+  - id: t-cfb1af
+    status: done
+  - id: t-40cd86
+    status: done
+  - id: t-e5d3cb
+    status: done
+  - id: t-b7dd7a
+    status: done
+  - id: t-7203aa
+    status: done
+  - id: t-521025
+    status: done
+  - id: t-ce5f74
+    status: done
+  - id: t-6d63df
+    status: done
+  - id: t-407b70
+    status: done
+  - id: t-33f976
+    status: done
+  - id: t-52f7a6
+    status: done
+  - id: t-733d1a
+    status: done
+  - id: t-53678f
+    status: done
+  - id: t-4709f0
+    status: done
+  - id: t-7d67cf
+    status: done
+  - id: t-cec0c4
+    status: done
+  - id: t-ba2a92
+    status: done
+  - id: t-c05999
+    status: done
+  - id: t-11f9b8
+    status: done
+  - id: t-b34fad
+    status: done
+  - id: t-1a96c2
+    status: done
+  - id: t-dd80f1
+    status: done
+  - id: t-e7187b
+    status: done
+  - id: t-c915f2
+    status: done
+  - id: t-054a9c
+    status: done
+  - id: t-89ad70
+    status: done
+  - id: t-b20b60
+    status: done
+  - id: t-3f07d3
+    status: done
+  - id: t-f2fe94
+    status: done
+  - id: t-ddc493
+    status: done
+  - id: t-805ee8
+    status: done
+  - id: t-17a21e
+    status: done
+  - id: t-c49715
+    status: done
+  - id: t-c9584c
+    status: done
+  - id: t-eb1fcb
+    status: done
+  - id: t-27ceb6
+    status: done
+  - id: t-aec5db
+    status: done
+  - id: t-b3a6a6
+    status: done
+  - id: t-a02b0a
+    status: done
+  - id: t-d6ee82
+    status: done
+  - id: t-de7f4b
+    status: done
+  - id: t-234f89
+    status: done
+  - id: t-8b13aa
+    status: done
+  - id: t-a6137d
+    status: done
+  - id: t-6f1114
+    status: done
+  - id: t-0482bd
+    status: done
+  - id: t-8afa35
+    status: done
+  - id: t-e2182d
+    status: done
+  - id: t-05f9a5
+    status: done
+  - id: t-40565e
+    status: done
+  - id: t-be5e03
+    status: done
+  - id: t-565295
+    status: done
+  - id: t-51f9b9
+    status: done
+  - id: t-cb4b6f
+    status: done
+  - id: t-231afa
+    status: done

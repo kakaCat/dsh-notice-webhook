@@ -1,0 +1,38 @@
+task:
+  id: t-521025
+  title: 升级绑定存储：targetBindings 段·测试
+  status: done
+  implements: |-
+    在 src/bindings.js 增加 targetBindings 段（{ targetIds[], updatedAt }）；读时 targetBindings 优先，缺则回落 bindings url 映射；写时两段一起写（保旧版本可用）；提供 bindTargetsTargets/unbindTargets/listBindings 基础方法。验证：新增 test/bindings.v2.test.js（含“旧版本读新文件不报错”断言）。
+
+    [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+  serves: []
+  depends_on:
+    - t-7203aa
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-521025
+    TASK_TITLE: 升级绑定存储：targetBindings 段·测试
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T09:32:07.643Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T09:32:07.505Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T09:32:07.643Z

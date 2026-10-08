@@ -1,0 +1,38 @@
+task:
+  id: t-bf0bf8
+  title: TargetRecord 加 key 与派生 url·复核
+  status: done
+  implements: |-
+    src/targets.js：validateTarget 增 key 校验（按渠道 keyPattern，input:'url' 渠道不要求 key）；save/load 时对 input:'key' 的渠道用 composeUrl 算出派生 url 一并存；TargetRecord 增 key 字段。验证：更新 test/targets.test.js 并补派生断言。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-abaebb
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-bf0bf8
+    TASK_TITLE: TargetRecord 加 key 与派生 url·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:24:23.136Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:24:23.011Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T14:24:23.136Z

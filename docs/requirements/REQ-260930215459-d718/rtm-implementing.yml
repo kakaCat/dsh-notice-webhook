@@ -1,0 +1,322 @@
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:04:41.033Z
+  version: 184
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 61
+  last_updated: 2026-09-30T15:04:52.580Z
+inputs:
+  tasks:
+    - id: t-783472
+      title: 建渠道元数据表与校验
+      status: done
+    - id: t-3d8fb5
+      title: 渠道适配器加 composeUrl / parseKey
+      status: done
+    - id: t-74862d
+      title: TargetRecord 加 key 与派生 url
+      status: done
+    - id: t-c47b93
+      title: targets.json v2 与校验收口
+      status: done
+    - id: t-d57116
+      title: v1→v2 迁移与回滚
+      status: done
+    - id: t-33df5a
+      title: RPC 追加 channelMeta / help / key
+      status: done
+    - id: t-738f23
+      title: 投递前用 composeUrl 组装（报文零变化）
+      status: done
+    - id: t-b14480
+      title: 图标表：dsh-im 品牌 glyph 内联
+      status: done
+    - id: t-71241e
+      title: 左栏 rail 三段与徽标
+      status: done
+    - id: t-4a0d90
+      title: 详情卡骨架：content-head / card-head / 动作区
+      status: done
+    - id: t-a741f2
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递
+      status: done
+    - id: t-3f6aed
+      title: 「怎么拿 key」说明浮层
+      status: done
+    - id: t-683b1f
+      title: 会话绑定页对齐原型
+      status: done
+    - id: t-e296cb
+      title: 装载验收与文档更新
+      status: done
+    - id: t-232d97
+      title: 建渠道元数据表与校验·研发
+      status: done
+    - id: t-dfce13
+      title: 建渠道元数据表与校验·复核
+      status: done
+    - id: t-ebe6b4
+      title: 建渠道元数据表与校验·测试
+      status: done
+    - id: t-259e81
+      title: 图标表：dsh-im 品牌 glyph 内联·研发
+      status: done
+    - id: t-527922
+      title: 图标表：dsh-im 品牌 glyph 内联·复核
+      status: done
+    - id: t-014c50
+      title: 图标表：dsh-im 品牌 glyph 内联·测试
+      status: done
+    - id: t-17937c
+      title: 渠道适配器加 composeUrl / parseKey·研发
+      status: done
+    - id: t-c7c6cb
+      title: 渠道适配器加 composeUrl / parseKey·复核
+      status: done
+    - id: t-1511cf
+      title: 渠道适配器加 composeUrl / parseKey·测试
+      status: done
+    - id: t-abaebb
+      title: TargetRecord 加 key 与派生 url·研发
+      status: done
+    - id: t-bf0bf8
+      title: TargetRecord 加 key 与派生 url·复核
+      status: done
+    - id: t-e0c783
+      title: TargetRecord 加 key 与派生 url·测试
+      status: done
+    - id: t-f92aad
+      title: targets.json v2 与校验收口·研发
+      status: done
+    - id: t-a1fd67
+      title: targets.json v2 与校验收口·复核
+      status: done
+    - id: t-e6fed3
+      title: targets.json v2 与校验收口·测试
+      status: done
+    - id: t-9fbd01
+      title: v1→v2 迁移与回滚·研发
+      status: done
+    - id: t-6ef84d
+      title: v1→v2 迁移与回滚·复核
+      status: done
+    - id: t-85af4c
+      title: v1→v2 迁移与回滚·测试
+      status: done
+    - id: t-a33917
+      title: RPC 追加 channelMeta / help / key·研发
+      status: done
+    - id: t-951c2d
+      title: RPC 追加 channelMeta / help / key·联调
+      status: done
+    - id: t-8522ea
+      title: RPC 追加 channelMeta / help / key·复核
+      status: done
+    - id: t-ee2782
+      title: RPC 追加 channelMeta / help / key·测试
+      status: done
+    - id: t-81d31e
+      title: 投递前用 composeUrl 组装（报文零变化）·研发
+      status: done
+    - id: t-21150f
+      title: 投递前用 composeUrl 组装（报文零变化）·复核
+      status: done
+    - id: t-70d5b5
+      title: 投递前用 composeUrl 组装（报文零变化）·测试
+      status: done
+    - id: t-952b56
+      title: 左栏 rail 三段与徽标·研发
+      status: done
+    - id: t-c4062a
+      title: 左栏 rail 三段与徽标·联调
+      status: done
+    - id: t-7a3f18
+      title: 左栏 rail 三段与徽标·复核
+      status: done
+    - id: t-465278
+      title: 左栏 rail 三段与徽标·测试
+      status: done
+    - id: t-fac6a7
+      title: 详情卡骨架：content-head / card-head / 动作区·研发
+      status: done
+    - id: t-2429c8
+      title: 详情卡骨架：content-head / card-head / 动作区·联调
+      status: done
+    - id: t-168823
+      title: 详情卡骨架：content-head / card-head / 动作区·复核
+      status: done
+    - id: t-b860fe
+      title: 详情卡骨架：content-head / card-head / 动作区·测试
+      status: done
+    - id: t-8e7cc0
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·研发
+      status: done
+    - id: t-12e33a
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·联调
+      status: done
+    - id: t-c87d1e
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·复核
+      status: done
+    - id: t-df899b
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·测试
+      status: done
+    - id: t-4b9572
+      title: 「怎么拿 key」说明浮层·研发
+      status: done
+    - id: t-ebfb8f
+      title: 「怎么拿 key」说明浮层·联调
+      status: done
+    - id: t-15ce3f
+      title: 「怎么拿 key」说明浮层·复核
+      status: done
+    - id: t-5e6463
+      title: 「怎么拿 key」说明浮层·测试
+      status: done
+    - id: t-3b3c9b
+      title: 会话绑定页对齐原型·研发
+      status: done
+    - id: t-c96431
+      title: 会话绑定页对齐原型·复核
+      status: done
+    - id: t-33c0d2
+      title: 会话绑定页对齐原型·测试
+      status: done
+    - id: t-4e1f32
+      title: 装载验收与文档更新·研发
+      status: done
+    - id: t-8e66d6
+      title: 装载验收与文档更新·复核
+      status: done
+    - id: t-c8e75d
+      title: 装载验收与文档更新·测试
+      status: done
+status:
+  tasks_total: 61
+  tasks_done: 61
+  tasks_in_progress: 0
+  tasks_todo: 0
+tasks:
+  - id: t-783472
+    status: done
+  - id: t-3d8fb5
+    status: done
+  - id: t-74862d
+    status: done
+  - id: t-c47b93
+    status: done
+  - id: t-d57116
+    status: done
+  - id: t-33df5a
+    status: done
+  - id: t-738f23
+    status: done
+  - id: t-b14480
+    status: done
+  - id: t-71241e
+    status: done
+  - id: t-4a0d90
+    status: done
+  - id: t-a741f2
+    status: done
+  - id: t-3f6aed
+    status: done
+  - id: t-683b1f
+    status: done
+  - id: t-e296cb
+    status: done
+  - id: t-232d97
+    status: done
+  - id: t-dfce13
+    status: done
+  - id: t-ebe6b4
+    status: done
+  - id: t-259e81
+    status: done
+  - id: t-527922
+    status: done
+  - id: t-014c50
+    status: done
+  - id: t-17937c
+    status: done
+  - id: t-c7c6cb
+    status: done
+  - id: t-1511cf
+    status: done
+  - id: t-abaebb
+    status: done
+  - id: t-bf0bf8
+    status: done
+  - id: t-e0c783
+    status: done
+  - id: t-f92aad
+    status: done
+  - id: t-a1fd67
+    status: done
+  - id: t-e6fed3
+    status: done
+  - id: t-9fbd01
+    status: done
+  - id: t-6ef84d
+    status: done
+  - id: t-85af4c
+    status: done
+  - id: t-a33917
+    status: done
+  - id: t-951c2d
+    status: done
+  - id: t-8522ea
+    status: done
+  - id: t-ee2782
+    status: done
+  - id: t-81d31e
+    status: done
+  - id: t-21150f
+    status: done
+  - id: t-70d5b5
+    status: done
+  - id: t-952b56
+    status: done
+  - id: t-c4062a
+    status: done
+  - id: t-7a3f18
+    status: done
+  - id: t-465278
+    status: done
+  - id: t-fac6a7
+    status: done
+  - id: t-2429c8
+    status: done
+  - id: t-168823
+    status: done
+  - id: t-b860fe
+    status: done
+  - id: t-8e7cc0
+    status: done
+  - id: t-12e33a
+    status: done
+  - id: t-c87d1e
+    status: done
+  - id: t-df899b
+    status: done
+  - id: t-4b9572
+    status: done
+  - id: t-ebfb8f
+    status: done
+  - id: t-15ce3f
+    status: done
+  - id: t-5e6463
+    status: done
+  - id: t-3b3c9b
+    status: done
+  - id: t-c96431
+    status: done
+  - id: t-33c0d2
+    status: done
+  - id: t-4e1f32
+    status: done
+  - id: t-8e66d6
+    status: done
+  - id: t-c8e75d
+    status: done

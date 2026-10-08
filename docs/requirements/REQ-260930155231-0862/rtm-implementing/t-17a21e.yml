@@ -1,0 +1,38 @@
+task:
+  id: t-17a21e
+  title: 客户端半：设置页骨架与目标页·研发
+  status: done
+  implements: |-
+    新增 client.js（window.__ModuleLoader__.load 格式，require('react')）；ctx.slots.inject('settings.section') 注册 {name,id:'dsh-notice-webhook',order:21,label:thunk}；实现 ChannelRail（含 6 渠道内联 SVG 图标与数量徽标）与 TargetCard 骨架，数据经 RPC GET /state。验证：打开设置页看 rail+卡片，控制台无报错；grep 命中 settings.section。
+
+    [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+  serves: []
+  depends_on:
+    - t-b7a098
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-17a21e
+    TASK_TITLE: 客户端半：设置页骨架与目标页·研发
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T10:49:48.893Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T10:49:48.739Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T10:49:48.893Z

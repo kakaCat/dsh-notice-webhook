@@ -1,0 +1,38 @@
+task:
+  id: t-1809aa
+  title: 测试与降级回归（含 2 处既有断言同步）
+  status: done
+  implements: "test/jobs-gate.test.js：增 makeAgents(entries) 假件（{ list: () => entries }，可增删改以模拟结算）与 TC-1..TC-11（判定层两路、血缘口径、降级容错、接线层抑制与补发、开关回滚、报文不回归）；把既有两处 deepEqual(..., {suppressed:false, reason:'no-jobs'}) 改为 'no-work'——这是本需求唯一触碰的既有断言；跑全量核对两条降级路径（不注入 agents / jobAwareComplete:false）与旧行为一致；结果写入 docs/requirements/REQ-261005120639-f801/tests/compat-report.md。"
+  serves:
+    - FR-1
+    - FR-2
+    - FR-3
+    - FR-4
+    - FR-5
+  depends_on:
+    - t-bde16a
+  phase: test
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261005120639-f801
+    TASK_ID: t-1809aa
+    TASK_TITLE: 测试与降级回归（含 2 处既有断言同步）
+    DESIGN_FILES: design/architecture.md
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: test
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: test
+      status: done
+      completed_at: 2026-10-05T04:37:17.793Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261005120639-f801
+  generated_at: 2026-10-05T04:36:34.919Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-05T04:39:45.840Z

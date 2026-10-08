@@ -1,0 +1,137 @@
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001202058-0fbe
+  generated_at: 2026-10-01T12:29:16.751Z
+  version: 73
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 24
+  last_updated: 2026-10-01T12:40:47.025Z
+inputs:
+  tasks:
+    - id: t-1c0dc2
+      title: 配置契约：新增 volatile 开关 jobAwareComplete
+      status: done
+    - id: t-30bbed
+      title: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）
+      status: done
+    - id: t-acae58
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路
+      status: done
+    - id: t-bdef4c
+      title: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）
+      status: done
+    - id: t-613fc4
+      title: 排障口径：drop 原因码 job-running 进运维文档
+      status: done
+    - id: t-fbe154
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」
+      status: done
+    - id: t-ae0636
+      title: 配置契约：新增 volatile 开关 jobAwareComplete·研发
+      status: done
+    - id: t-1a2036
+      title: 配置契约：新增 volatile 开关 jobAwareComplete·复核
+      status: done
+    - id: t-5456ad
+      title: 配置契约：新增 volatile 开关 jobAwareComplete·测试
+      status: done
+    - id: t-bf2be8
+      title: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·研发
+      status: done
+    - id: t-d4d793
+      title: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·复核
+      status: done
+    - id: t-e5e744
+      title: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·测试
+      status: done
+    - id: t-f468d1
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·研发
+      status: done
+    - id: t-ce6b74
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·联调
+      status: done
+    - id: t-1e395e
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·复核
+      status: done
+    - id: t-cbf134
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·测试
+      status: done
+    - id: t-830f85
+      title: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·研发
+      status: done
+    - id: t-c3b5bc
+      title: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·复核
+      status: done
+    - id: t-9905e8
+      title: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·测试
+      status: done
+    - id: t-ff3619
+      title: 排障口径：drop 原因码 job-running 进运维文档·研发
+      status: done
+    - id: t-93732c
+      title: 排障口径：drop 原因码 job-running 进运维文档·复核
+      status: done
+    - id: t-f8c218
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·研发
+      status: done
+    - id: t-0d216c
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·复核
+      status: done
+    - id: t-caa24b
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·测试
+      status: done
+status:
+  tasks_total: 24
+  tasks_done: 24
+  tasks_in_progress: 0
+  tasks_todo: 0
+tasks:
+  - id: t-1c0dc2
+    status: done
+  - id: t-30bbed
+    status: done
+  - id: t-acae58
+    status: done
+  - id: t-bdef4c
+    status: done
+  - id: t-613fc4
+    status: done
+  - id: t-fbe154
+    status: done
+  - id: t-ae0636
+    status: done
+  - id: t-1a2036
+    status: done
+  - id: t-5456ad
+    status: done
+  - id: t-bf2be8
+    status: done
+  - id: t-d4d793
+    status: done
+  - id: t-e5e744
+    status: done
+  - id: t-f468d1
+    status: done
+  - id: t-ce6b74
+    status: done
+  - id: t-1e395e
+    status: done
+  - id: t-cbf134
+    status: done
+  - id: t-830f85
+    status: done
+  - id: t-c3b5bc
+    status: done
+  - id: t-9905e8
+    status: done
+  - id: t-ff3619
+    status: done
+  - id: t-93732c
+    status: done
+  - id: t-f8c218
+    status: done
+  - id: t-0d216c
+    status: done
+  - id: t-caa24b
+    status: done

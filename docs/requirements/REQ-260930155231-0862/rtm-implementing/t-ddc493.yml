@@ -1,0 +1,38 @@
+task:
+  id: t-ddc493
+  title: 兼容与回滚收尾·复核
+  status: done
+  implements: |-
+    补齐 legacy 映射边界（legacy 与显式清单同 url 时只保留一条）、坏文件降级路径、卸载后目录残留检查；新增 test/compat.v2.test.js。验证：跑该测试全绿。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-f2fe94
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-ddc493
+    TASK_TITLE: 兼容与回滚收尾·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T10:46:34.175Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T10:46:34.012Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T10:46:34.175Z

@@ -1,0 +1,33 @@
+task:
+  id: t-9a8084
+  title: 实现 Slack / Discord / 通用三渠道
+  status: done
+  implements: 新增 src/channels/slack.js（{text}）、discord.js（{content}，204/2xx 为成功）、custom.js（原样 v1 载荷 + target.headers 原样带上）；在 index.js 注册三者。验证：新增 test/channels.global.test.js（含 TC-5 老契约断言）。
+  serves: []
+  depends_on:
+    - t-be124b
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-9a8084
+    TASK_TITLE: 实现 Slack / Discord / 通用三渠道
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T08:49:35.277Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T08:49:35.276Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T09:19:44.820Z

@@ -1,0 +1,39 @@
+task:
+  id: t-624074
+  title: 测试：决策表 / 链路集成 / 迁移三套用例·复核
+  status: done
+  implements: |-
+    扩展 test/classify.test.js（T2-*、T3-*：8 种终态、静默码、skipReasons 优先、开关不串扰，并改写既有『error 当完成』的期望为中断）；新增 test/interrupt.test.js（复用 test/e2e.local.test.js 的 withReceiver()/waitFor()，覆盖 T4-1…T4-6、T5-1…T5-4：报文字节、单行化与截断、自动轮不静默、静默留痕）；新增 test/targets-events.test.js（T6-1…T6-12）。既有 244 用例中只允许改动上述 error 相关断言。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-4a8281
+  phase: test
+  side: fullstack
+  workflow_params:
+    REQ_ID: REQ-261001203114-19b6
+    TASK_ID: t-624074
+    TASK_TITLE: 测试：决策表 / 链路集成 / 迁移三套用例·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: fullstack
+    PHASE: test
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: test
+      status: done
+      started_at: 2026-10-01T12:57:53.659Z
+      completed_at: 2026-10-01T12:57:53.763Z
+    - phase: implement
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:57:53.582Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-10-01T12:57:53.763Z

@@ -1,0 +1,32 @@
+task:
+  id: t-be124b
+  title: 实现渠道注册表与三国内渠道
+  status: done
+  implements: 新增 src/channels/index.js：channel→adapter 注册表，未知渠道返回 {error} 不抛异常；新增 wecom.js（msgtype=markdown）、feishu.js（msg_type=text，可选 timestamp+sign 进 body）、dingtalk.js（msgtype=markdown，可选 timestamp+sign 进 query）；加签用 node:crypto 的 hmacSHA256；isSuccess 同时看 HTTP 状态与业务码。验证：新增 test/channels.cn.test.js。
+  serves: []
+  depends_on: []
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-be124b
+    TASK_TITLE: 实现渠道注册表与三国内渠道
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T08:49:35.201Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T08:37:51.703Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T09:04:39.894Z

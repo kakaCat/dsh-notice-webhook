@@ -1,0 +1,4397 @@
+{
+  "version": 1,
+  "requirement_id": "REQ-261002150038-344a",
+  "schemaVersion": 9,
+  "generated_at": "2026-10-02T07:04:16.530Z",
+  "tasks": [
+    {
+      "id": "t-f48ac7",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "口径契约：isHumanSource 纯函数与真值表",
+      "cardDoc": "docs/requirements/REQ-261002150038-344a/tasks/t-f48ac7.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test test/source.test.js → 全绿且用例数 ≥ 5；node -e \"import('./src/source.js').then(m=>console.log(m.isHumanSource(undefined), m.isHumanSource({kind:'user'}), m.isHumanSource({kind:'dive'})))\" → 输出 `true true false`。",
+      "implementation": "新增 src/source.js：export function isHumanSource(source) —— source 缺失 / source.kind 缺失 / kind === 'user' → true；非对象 / 数组 / 其余 kind（goal、dive、plugin、未来新增）/ 非字符串 kind → false（见 design/interfaces.md §1 真值表，实现即契约）。新增 test/source.test.js 覆盖 TC-1…TC-5（undefined/null、{}、{kind:'user'}、{kind:'goal'|'dive'|'plugin'}、{kind:'brand-new'|42|'user' 非对象|数组}）。本卡不改任何既有文件。",
+      "context": "",
+      "requirementRefs": [
+        "FR-1"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-694923",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924679495,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 448,
+              "at": 1790924679505,
+              "totals": {
+                "uncachedInputTokens": 254472,
+                "outputTokens": 53994,
+                "cacheReadTokens": 4886144,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 575,
+              "at": 1790924815744,
+              "totals": {
+                "uncachedInputTokens": 265990,
+                "outputTokens": 65042,
+                "cacheReadTokens": 7604864,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 11518,
+              "outputTokens": 11048,
+              "cacheReadTokens": 2718720,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924815712
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924656190,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924679495,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "开工 t1：先落口径契约（isHumanSource 真值表），后续 t2/t3 共用同一条判定。"
+        },
+        {
+          "status": "done",
+          "at": 1790924815712,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t1 四张子卡全部完成（研发/联调/复核/测试），父卡收尾。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-b72bc5",
+          "body": "[状态] → in_progress：开工 t1：先落口径契约（isHumanSource 真值表），后续 t2/t3 共用同一条判定。（reqboard_task_move）",
+          "createdAt": 1790924679495,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-03d2f0",
+          "body": "[状态] → done：t1 四张子卡全部完成（研发/联调/复核/测试），父卡收尾。（reqboard_task_move）",
+          "createdAt": 1790924815712,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924656190,
+      "updatedAt": 1790924815712,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "layer": 0,
+      "lastReport": {
+        "at": 1790924815586,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/source.js",
+          "test/source.test.js"
+        ],
+        "completed": [
+          "新增 src/source.js：isHumanSource 唯一口径（缺失或 kind==='user' 算人，其余算注入）",
+          "新增 test/source.test.js：TC-1…TC-5 覆盖真值表全部行",
+          "复核 14/14 行与 design/interfaces.md §1 一致，无偏离",
+          "单文件 5 绿；全量 293 绿 / 0 失败",
+          "未改动任何既有文件（零回归风险）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924815586,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-1d9465",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "自动轮静默：GoalTracker 认入 dive / plugin 注入轮",
+      "cardDoc": "docs/requirements/REQ-261002150038-344a/tasks/t-1d9465.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-f48ac7"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test test/goal.auto.test.js → 全绿（含新增 TC-6…TC-12）；grep -n \"'goal'\" src/goal.js → 用户消息来源判定处不再出现 'goal' 字面量（仅 goal 终态通路 goal/change、EVENT_GOAL_* 保留）。",
+      "implementation": "src/goal.js：import { isHumanSource } from './source.js'；observe() 的 user/message 分支由 `event.data?.source?.kind === 'goal'` 改为 `isHumanSource(event.data?.source)`，轮次标记字段 sawGoal → sawInjected（缺省仍 {sawHuman:false, sawInjected:false}）；isAutoRound(session) 改为 `mark !== undefined && mark.sawInjected === true && mark.sawHuman !== true`；类头注释补「goal / dive / plugin 注入轮一律静默」。index.js 不改（`intent.kind === 'complete' && autoRound → {action:'silent'}` 分支已存在）。test/goal.auto.test.js 增 TC-6…TC-12（dive×3 轮 0 意图、plugin 0 意图、goal 0 意图回归、dive+人插话 1 条且 isAutoRound=false、无 user/message 轮 1 条、dive+error 1 条中断、dive+interrupted 1 条中断）。",
+      "context": "",
+      "requirementRefs": [
+        "FR-1",
+        "FR-2"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-a1073d",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924869479,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 674,
+              "at": 1790924869489,
+              "totals": {
+                "uncachedInputTokens": 276524,
+                "outputTokens": 74632,
+                "cacheReadTokens": 10130944,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 947,
+              "at": 1790925013903,
+              "totals": {
+                "uncachedInputTokens": 297915,
+                "outputTokens": 98066,
+                "cacheReadTokens": 17554816,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 21391,
+              "outputTokens": 23434,
+              "cacheReadTokens": 7423872,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925013879
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924656190,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924869479,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 开工：GoalTracker 轮次来源判定换口径（非 direct human 即注入）。"
+        },
+        {
+          "status": "done",
+          "at": 1790925013879,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 四张子卡全部完成（研发/联调/复核/测试），父卡收尾。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-69cd17",
+          "body": "[状态] → in_progress：t2 开工：GoalTracker 轮次来源判定换口径（非 direct human 即注入）。（reqboard_task_move）",
+          "createdAt": 1790924869479,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-d50dc4",
+          "body": "[状态] → done：t2 四张子卡全部完成（研发/联调/复核/测试），父卡收尾。（reqboard_task_move）",
+          "createdAt": 1790925013879,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924656190,
+      "updatedAt": 1790925013879,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "layer": 1,
+      "lastReport": {
+        "at": 1790924932366,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/goal.js",
+          "test/goal.auto.test.js"
+        ],
+        "completed": [
+          "GoalTracker 轮次标记改口径：非 direct human 即注入（goal / dive / plugin / 未来新增）",
+          "isAutoRound = 见过注入且无人工；整轮无 user/message 不静默",
+          "test/goal.auto.test.js 增 TC-6…TC-12",
+          "真实链路联调：Dive 轮 0 投递、报错轮 1 条中断",
+          "复核 9/9 行无偏离；全量 304 绿 / 0 失败"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924932366,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-0f608f",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "「任务」字段：注入正文不再冒充人的要求",
+      "cardDoc": "docs/requirements/REQ-261002150038-344a/tasks/t-0f608f.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-f48ac7"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test test/payload.test.js → 全绿（含 TC-13…TC-16）；用例数较基线只增不减。",
+      "implementation": "src/payload.js：createPromptTracker().observe() 的第二道门由 `if (event?.data?.source?.kind === 'goal') return` 改为 `if (!isHumanSource(event?.data?.source)) return`（import 自 './source.js'），函数头注释同步说明「只认 direct human」；take() / clear() 不动。test/payload.test.js 增 TC-13…TC-16：只喂 dive 注入 → take() 为 null；先 goal 后 user → 取 user 文本；先 dive 后无 source → 取无 source 文本；无 source → renderContext 的「任务」行等于人的文本。",
+      "context": "",
+      "requirementRefs": [
+        "FR-3"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-9a328a",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924869576,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 676,
+              "at": 1790924869586,
+              "totals": {
+                "uncachedInputTokens": 276524,
+                "outputTokens": 74632,
+                "cacheReadTokens": 10130944,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1227,
+              "at": 1790925284384,
+              "totals": {
+                "uncachedInputTokens": 316849,
+                "outputTokens": 118319,
+                "cacheReadTokens": 26723840,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 40325,
+              "outputTokens": 43687,
+              "cacheReadTokens": 16592896,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925284362
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924656190,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924869576,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 开工：PromptTracker 同口径（注入正文不进「任务」字段）。"
+        },
+        {
+          "status": "done",
+          "at": 1790925284362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 四张子卡全部完成且父卡已汇报，收尾（节流窗口已过）。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-56e4b1",
+          "body": "[状态] → in_progress：t3 开工：PromptTracker 同口径（注入正文不进「任务」字段）。（reqboard_task_move）",
+          "createdAt": 1790924869576,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-b63b8e",
+          "body": "[状态] → done：t3 四张子卡全部完成且父卡已汇报，收尾（节流窗口已过）。（reqboard_task_move）",
+          "createdAt": 1790925284362,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924656190,
+      "updatedAt": 1790925284362,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "layer": 1,
+      "lastReport": {
+        "at": 1790924932481,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/payload.js",
+          "test/payload.test.js"
+        ],
+        "completed": [
+          "PromptTracker 改用同一口径：只有 direct human 的消息才进「任务」",
+          "补 payload.js 对 source.js 的导入与说明注释",
+          "test/payload.test.js 增 TC-13…TC-16",
+          "真实报文核验：注入轮+真人轮后「任务」=人的话且不含注入正文",
+          "复核 6/6 行无偏离；全量 304 绿 / 0 失败"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924932481,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-955eca",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "飞书卡片：删掉与标题重复的「类型」行",
+      "cardDoc": "docs/requirements/REQ-261002150038-344a/tasks/t-955eca.md",
+      "description": "",
+      "phase": "ui",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test test/channels.feishu.test.js → 全绿；node -e 构造 buildCard 后打印 elements[0].fields 的标签拼接 → stdout 不含「类型」，且含 会话 / 工作区 / 任务 / 时间。",
+      "implementation": "src/channels/feishu.js：buildCard() 里删掉 `if (typeof context?.title === 'string' && context.title.length > 0) fields.push(cardField('类型', context.title))` 及其注释；其余字段（会话 / 工作区 / 任务 / 详情 / 时间）顺序与 header（title、template）、按钮条件、idTag、无 context 的纯文本回落、buildRequest 加签一律不动。test/channels.feishu.test.js：把 `assert.ok(fields.includes('**类型**'), ...)` 翻转为 `assert.ok(!fields.includes('**类型**'), '卡片标题已给出事件，正文不再重复「类型」')`，并加强断言（fields 顺序为 会话→工作区→任务→时间、header 标题与配色、text_tag 短 id、dsh:// 无按钮、无 context 时仍是 msg_type:'text'）。",
+      "context": "",
+      "requirementRefs": [
+        "FR-4"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-28c50f",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925013990,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 949,
+              "at": 1790925014000,
+              "totals": {
+                "uncachedInputTokens": 297915,
+                "outputTokens": 98066,
+                "cacheReadTokens": 17554816,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1028,
+              "at": 1790925116240,
+              "totals": {
+                "uncachedInputTokens": 305953,
+                "outputTokens": 103463,
+                "cacheReadTokens": 19676288,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 8038,
+              "outputTokens": 5397,
+              "cacheReadTokens": 2121472,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925116220
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924656190,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925013990,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 开工：飞书卡片删掉与标题重复的「类型」行。"
+        },
+        {
+          "status": "done",
+          "at": 1790925116220,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 四张子卡全部完成且父卡已汇报，收尾。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-659d45",
+          "body": "[状态] → in_progress：t4 开工：飞书卡片删掉与标题重复的「类型」行。（reqboard_task_move）",
+          "createdAt": 1790925013990,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-146fc0",
+          "body": "[状态] → done：t4 四张子卡全部完成且父卡已汇报，收尾。（reqboard_task_move）",
+          "createdAt": 1790925116220,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924656190,
+      "updatedAt": 1790925116220,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "layer": 0,
+      "lastReport": {
+        "at": 1790925116096,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/channels/feishu.js",
+          "test/channels.feishu.test.js"
+        ],
+        "completed": [
+          "飞书卡片正文删除与标题重复的「类型」行（src/channels/feishu.js）",
+          "test/channels.feishu.test.js 两处断言翻转 + 新增字段顺序断言（会话 → 工作区 → 任务 → 时间）",
+          "真实报文核对：标题 ✅ 对话完成 / 配色 green / 正文四行、卡片 JSON 无「类型」",
+          "文本渠道仍保留「**类型**」行（边界成立）；无 context 仍回落纯文本",
+          "复核无偏离；全量 305 绿 / 0 失败"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925116096,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-dc6479",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "设置页预览：卡片区不再显示「类型」行",
+      "cardDoc": "docs/requirements/REQ-261002150038-344a/tasks/t-dc6479.md",
+      "description": "",
+      "phase": "ui",
+      "side": "frontend",
+      "dependsOn": [
+        "t-955eca"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test test/client-render.test.js → 全绿（含 TC-21…TC-23）；既有 payloadPreviewLines 三行断言保持绿。",
+      "implementation": "client.js：PayloadPreview 的「飞书卡片」区行过滤条件追加「默认渲染的 `**类型**：…` 行不显示」（判据 line.startsWith('**类型**')，仅当未用自定义 template 时存在该行）；纯文本区保留该行；payloadPreviewLines() 不动。给卡片区容器加 data-dnw-region=\"feishu-card\" 供测试取段。test/client-render.test.js 增 TC-21…TC-23：PayloadPreview 卡片区文本无 `**类型**：✅ 对话完成`、纯文本区有、payloadPreviewLines(['event','session','prompt']) 返回值不变。",
+      "context": "",
+      "requirementRefs": [
+        "FR-4"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-0610bf",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925118021,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1034,
+              "at": 1790925118034,
+              "totals": {
+                "uncachedInputTokens": 306172,
+                "outputTokens": 103627,
+                "cacheReadTokens": 19916928,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1242,
+              "at": 1790925356210,
+              "totals": {
+                "uncachedInputTokens": 321009,
+                "outputTokens": 118647,
+                "cacheReadTokens": 27254272,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 14837,
+              "outputTokens": 15020,
+              "cacheReadTokens": 7337344,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925356186
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924656190,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925118021,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 开工：设置页卡片预览与真卡片口径一致。"
+        },
+        {
+          "status": "done",
+          "at": 1790925356186,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 四张子卡全部完成且父卡已汇报，收尾（节流窗口已过）。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-56cb9e",
+          "body": "[状态] → in_progress：t5 开工：设置页卡片预览与真卡片口径一致。（reqboard_task_move）",
+          "createdAt": 1790925118021,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-a2c080",
+          "body": "[状态] → done：t5 四张子卡全部完成且父卡已汇报，收尾（节流窗口已过）。（reqboard_task_move）",
+          "createdAt": 1790925356186,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924656190,
+      "updatedAt": 1790925356186,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "layer": 1,
+      "lastReport": {
+        "at": 1790925204288,
+        "reportIndex": 1,
+        "filesChanged": [
+          "client.js",
+          "test/client-render.test.js"
+        ],
+        "completed": [
+          "client.js 卡片预览过滤默认「类型」行 + data-dnw-region 取段标记",
+          "test/client-render.test.js 新增卡片/纯文本两区断言与 template 边界断言",
+          "payloadPreviewLines 与纯文本区一字未动（纯文本仍带事件标记）",
+          "客户端三文件 42 绿；全量 305 绿 / 0 失败"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925204288,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-cc2a0c",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "端到端、兼容与回归收尾（无数据迁移，验证回滚路径）",
+      "cardDoc": "docs/requirements/REQ-261002150038-344a/tasks/t-cc2a0c.md",
+      "description": "",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-1d9465",
+        "t-0f608f",
+        "t-dc6479"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test \"test/*.test.js\" → fail 0 且 tests ≥ 288；node --test test/e2e.local.test.js → 全绿（含 TC-24…TC-26）；docs/requirements/REQ-261002150038-344a/tests/verification-report.md 存在且含「基线 288」与改动后两组数字 + 回滚路径。",
+      "implementation": "test/e2e.local.test.js 复用既有 withReceiver() + createNotifier()：TC-24 dive 注入 + turn/end(completed) → received.length === 0；TC-25 紧接着 user 消息 + completed → 1 条，msg_type==='interactive'、card.header.title.content==='✅ 对话完成'、JSON.stringify(card) 不含 `**类型**`；TC-26 dive + turn/end(error) → 1 条且标题为 '⚠️ 会话中断'。README.md「为什么需要它」补全为「goal / dive / plugin 注入轮一律静默，只有真人与中断才响」。写 docs/requirements/REQ-261002150038-344a/tests/verification-report.md：基线 288/0 与改动后数字、四条不变量核验（文本渠道用例未改动全绿、无配置键/落盘变更、PAYLOAD_VERSION 仍为 1）、回滚路径（删 src/source.js + 还原 4 处）。",
+      "context": "",
+      "requirementRefs": [
+        "FR-2",
+        "FR-5"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-31ce8e",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925358572,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1248,
+              "at": 1790925358584,
+              "totals": {
+                "uncachedInputTokens": 321217,
+                "outputTokens": 118865,
+                "cacheReadTokens": 27521664,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1324,
+              "at": 1790925426985,
+              "totals": {
+                "uncachedInputTokens": 332902,
+                "outputTokens": 123154,
+                "cacheReadTokens": 30299904,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 11685,
+              "outputTokens": 4289,
+              "cacheReadTokens": 2778240,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925426961
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924656190,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925358572,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t6 开工：端到端 / 兼容与回归收尾（e2e 用例、README 同步、验收报告均已就位）。"
+        },
+        {
+          "status": "done",
+          "at": 1790925426961,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t6 三张子卡全部完成且父卡已汇报，收尾（节流窗口已过）。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-f5ae71",
+          "body": "[状态] → in_progress：t6 开工：端到端 / 兼容与回归收尾（e2e 用例、README 同步、验收报告均已就位）。（reqboard_task_move）",
+          "createdAt": 1790925358572,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-461590",
+          "body": "[状态] → done：t6 三张子卡全部完成且父卡已汇报，收尾（节流窗口已过）。（reqboard_task_move）",
+          "createdAt": 1790925426961,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924656190,
+      "updatedAt": 1790925426961,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "layer": 2,
+      "lastReport": {
+        "at": 1790925390393,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/e2e.local.test.js",
+          "README.md",
+          "docs/requirements/REQ-261002150038-344a/tests/verification-report.md"
+        ],
+        "completed": [
+          "端到端用例 4 条（TC-24…TC-27）：自动续跑 0 报文 / 人插话 1 条且任务=人的话 / 注入轮报错 1 条中断 / 飞书卡片无类型行",
+          "README 补全「谁在说话」口径表",
+          "验收报告落盘：数字对照（288→293→304→305→307）、逐条命令与输出、行为证据、不变量核验、回滚路径（含测试一起回退）",
+          "全量 307 绿 / 0 失败；端到端 6 绿",
+          "如实登记一条既有并发偶发（test/e2e.multi.test.js，非本次引入，4 次复跑未再现）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925390393,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-220981",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "口径契约：isHumanSource 纯函数与真值表·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "新增 src/source.js：export function isHumanSource(source) —— source 缺失 / source.kind 缺失 / kind === 'user' → true；非对象 / 数组 / 其余 kind（goal、dive、plugin、未来新增）/ 非字符串 kind → false（见 design/interfaces.md §1 真值表，实现即契约）。新增 test/source.test.js 覆盖 TC-1…TC-5（undefined/null、{}、{kind:'user'}、{kind:'goal'|'dive'|'plugin'}、{kind:'brand-new'|42|'user' 非对象|数组}）。本卡不改任何既有文件。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-f48ac7",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-b91586",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924696330,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 477,
+              "at": 1790924696340,
+              "totals": {
+                "uncachedInputTokens": 259950,
+                "outputTokens": 56801,
+                "cacheReadTokens": 5498496,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 493,
+              "at": 1790924709254,
+              "totals": {
+                "uncachedInputTokens": 260623,
+                "outputTokens": 58906,
+                "cacheReadTokens": 5811712,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 673,
+              "outputTokens": 2105,
+              "cacheReadTokens": 313216,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924709234
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-a15524",
+          "body": "[状态] → in_progress：t1 研发子卡开工：落 src/source.js 与 test/source.test.js。（reqboard_task_move）",
+          "createdAt": 1790924696330,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-14f00a",
+          "body": "[状态] → done：t1 研发完成并已落汇报：src/source.js + test/source.test.js，5 用例全绿。（reqboard_task_move）",
+          "createdAt": 1790924709234,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924679495,
+      "updatedAt": 1790924709234,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924679495,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924696330,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t1 研发子卡开工：落 src/source.js 与 test/source.test.js。"
+        },
+        {
+          "status": "done",
+          "at": 1790924709234,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t1 研发完成并已落汇报：src/source.js + test/source.test.js，5 用例全绿。"
+        }
+      ],
+      "layer": 0,
+      "lastReport": {
+        "at": 1790924709120,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/source.js",
+          "test/source.test.js"
+        ],
+        "completed": [
+          "新增 src/source.js：isHumanSource 与 HUMAN_SOURCE_KINDS 白名单",
+          "真值表落地：source 缺失或 kind 缺失或 kind==='user' 算人；goal/dive/plugin/未来新增 kind/非字符串 kind/非对象/数组 一律算注入",
+          "新增 test/source.test.js：TC-1…TC-5 五条用例覆盖真值表全部行",
+          "自测：node --test test/source.test.js → 5 passed / 0 failed",
+          "验收命令：node -e 打印 isHumanSource(undefined)/{kind:'user'}/{kind:'dive'} → true true false"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924709120,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-d75046",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "口径契约：isHumanSource 纯函数与真值表·联调",
+      "description": "子卡阶段：联调",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-220981"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "implementation": "新增 src/source.js：export function isHumanSource(source) —— source 缺失 / source.kind 缺失 / kind === 'user' → true；非对象 / 数组 / 其余 kind（goal、dive、plugin、未来新增）/ 非字符串 kind → false（见 design/interfaces.md §1 真值表，实现即契约）。新增 test/source.test.js 覆盖 TC-1…TC-5（undefined/null、{}、{kind:'user'}、{kind:'goal'|'dive'|'plugin'}、{kind:'brand-new'|42|'user' 非对象|数组}）。本卡不改任何既有文件。\n\n[子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "context": "",
+      "parentId": "t-f48ac7",
+      "stageKind": "integrate",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-ff3e9a",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924713149,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 499,
+              "at": 1790924713166,
+              "totals": {
+                "uncachedInputTokens": 260949,
+                "outputTokens": 59567,
+                "cacheReadTokens": 5970432,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 509,
+              "at": 1790924717101,
+              "totals": {
+                "uncachedInputTokens": 261383,
+                "outputTokens": 60109,
+                "cacheReadTokens": 6130048,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 434,
+              "outputTokens": 542,
+              "cacheReadTokens": 159616,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924717080
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-36ea2f",
+          "body": "[状态] → in_progress：t1 联调子卡开工：该卡为纯函数、无外部接口，联调口径 = 模块可被 ESM 导入、无循环依赖与 node: 依赖。（reqboard_task_move）",
+          "createdAt": 1790924713149,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-cf65d0",
+          "body": "[状态] → done：t1 联调完成：纯函数无外部接口，导入与导出核验通过。（reqboard_task_move）",
+          "createdAt": 1790924717080,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924679495,
+      "updatedAt": 1790924717080,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924679495,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924713149,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t1 联调子卡开工：该卡为纯函数、无外部接口，联调口径 = 模块可被 ESM 导入、无循环依赖与 node: 依赖。"
+        },
+        {
+          "status": "done",
+          "at": 1790924717080,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t1 联调完成：纯函数无外部接口，导入与导出核验通过。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790924716961,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/source.js"
+        ],
+        "completed": [
+          "联调口径确认：本卡为纯函数，无外部接口/服务需对接",
+          "node -e 导入 src/source.js → 导出 HUMAN_SOURCE_KINDS 与 isHumanSource 两个符号，导入无副作用",
+          "grep ^import src/source.js → 零依赖、零 node: 内置模块，不存在循环依赖风险"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924716961,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-6b15ab",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "口径契约：isHumanSource 纯函数与真值表·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-d75046"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "新增 src/source.js：export function isHumanSource(source) —— source 缺失 / source.kind 缺失 / kind === 'user' → true；非对象 / 数组 / 其余 kind（goal、dive、plugin、未来新增）/ 非字符串 kind → false（见 design/interfaces.md §1 真值表，实现即契约）。新增 test/source.test.js 覆盖 TC-1…TC-5（undefined/null、{}、{kind:'user'}、{kind:'goal'|'dive'|'plugin'}、{kind:'brand-new'|42|'user' 非对象|数组}）。本卡不改任何既有文件。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-f48ac7",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-6f175a",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924717182,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 511,
+              "at": 1790924717192,
+              "totals": {
+                "uncachedInputTokens": 261383,
+                "outputTokens": 60109,
+                "cacheReadTokens": 6130048,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 525,
+              "at": 1790924723405,
+              "totals": {
+                "uncachedInputTokens": 262286,
+                "outputTokens": 61049,
+                "cacheReadTokens": 6452096,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 903,
+              "outputTokens": 940,
+              "cacheReadTokens": 322048,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924723385
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-396fea",
+          "body": "[状态] → in_progress：t1 复核子卡开工：逐行对照设计真值表与实现分支。（reqboard_task_move）",
+          "createdAt": 1790924717182,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-697406",
+          "body": "[状态] → done：t1 复核完成：14/14 行与设计真值表一致，无偏离。（reqboard_task_move）",
+          "createdAt": 1790924723385,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924679495,
+      "updatedAt": 1790924723385,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924679495,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924717182,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t1 复核子卡开工：逐行对照设计真值表与实现分支。"
+        },
+        {
+          "status": "done",
+          "at": 1790924723385,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t1 复核完成：14/14 行与设计真值表一致，无偏离。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790924723268,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/source.js",
+          "test/source.test.js"
+        ],
+        "completed": [
+          "逐行对照 design/interfaces.md §1 真值表：14 行全部与实现一致（含 source 非对象字符串/数字/数组、kind 缺失/null、user、goal、dive、plugin、未知 kind、kind 非字符串）",
+          "偏离行数 = 0 / 14，无偏离",
+          "实现即契约：函数体 4 个判断分支与设计表顺序语义一致（缺失→人、非对象→注入、kind 缺失→人、白名单外→注入）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924723268,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-06742a",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "口径契约：isHumanSource 纯函数与真值表·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-6b15ab"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "新增 src/source.js：export function isHumanSource(source) —— source 缺失 / source.kind 缺失 / kind === 'user' → true；非对象 / 数组 / 其余 kind（goal、dive、plugin、未来新增）/ 非字符串 kind → false（见 design/interfaces.md §1 真值表，实现即契约）。新增 test/source.test.js 覆盖 TC-1…TC-5（undefined/null、{}、{kind:'user'}、{kind:'goal'|'dive'|'plugin'}、{kind:'brand-new'|42|'user' 非对象|数组}）。本卡不改任何既有文件。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-f48ac7",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-f8d3fb",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924723490,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 527,
+              "at": 1790924723500,
+              "totals": {
+                "uncachedInputTokens": 262286,
+                "outputTokens": 61049,
+                "cacheReadTokens": 6452096,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 571,
+              "at": 1790924815500,
+              "totals": {
+                "uncachedInputTokens": 265990,
+                "outputTokens": 65042,
+                "cacheReadTokens": 7604864,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 3704,
+              "outputTokens": 3993,
+              "cacheReadTokens": 1152768,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924815478
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-ff4665",
+          "body": "[状态] → in_progress：t1 测试子卡开工：跑单文件用例与全量回归基线。（reqboard_task_move）",
+          "createdAt": 1790924723490,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-fb8251",
+          "body": "[状态] → done：t1 测试子卡完成：单文件 5 绿 + 全量 293 绿 0 失败（另记一条 e2e.multi 并发偶发，两次复跑未复现）。（reqboard_task_move）",
+          "createdAt": 1790924815478,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924679495,
+      "updatedAt": 1790924815478,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924679495,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924723490,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t1 测试子卡开工：跑单文件用例与全量回归基线。"
+        },
+        {
+          "status": "done",
+          "at": 1790924815478,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t1 测试子卡完成：单文件 5 绿 + 全量 293 绿 0 失败（另记一条 e2e.multi 并发偶发，两次复跑未复现）。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790924815357,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/source.test.js"
+        ],
+        "completed": [
+          "node --test test/source.test.js → 5 passed / 0 failed",
+          "全量 pnpm test → tests 293 / pass 293 / fail 0（基线 288 + 本卡新增 5）",
+          "首次全量曾出现 1 条超时（test/e2e.multi.test.js 等待投递结果 4/5），单独复跑该文件 6/6 绿、全量复跑 293/293 绿 → 判定为该文件自述的并发偶发（文件注释第 110-112 行记录过同款 4 !== 5）",
+          "本卡未改任何既有文件，回归数字只增不减"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924815357,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-2fa8d1",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "自动轮静默：GoalTracker 认入 dive / plugin 注入轮·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-f48ac7"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "src/goal.js：import { isHumanSource } from './source.js'；observe() 的 user/message 分支由 `event.data?.source?.kind === 'goal'` 改为 `isHumanSource(event.data?.source)`，轮次标记字段 sawGoal → sawInjected（缺省仍 {sawHuman:false, sawInjected:false}）；isAutoRound(session) 改为 `mark !== undefined && mark.sawInjected === true && mark.sawHuman !== true`；类头注释补「goal / dive / plugin 注入轮一律静默」。index.js 不改（`intent.kind === 'complete' && autoRound → {action:'silent'}` 分支已存在）。test/goal.auto.test.js 增 TC-6…TC-12（dive×3 轮 0 意图、plugin 0 意图、goal 0 意图回归、dive+人插话 1 条且 isAutoRound=false、无 user/message 轮 1 条、dive+error 1 条中断、dive+interrupted 1 条中断）。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-1d9465",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-1e6a56",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924882613,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 699,
+              "at": 1790924882623,
+              "totals": {
+                "uncachedInputTokens": 281852,
+                "outputTokens": 77217,
+                "cacheReadTokens": 10511744,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 707,
+              "at": 1790924885705,
+              "totals": {
+                "uncachedInputTokens": 282644,
+                "outputTokens": 77596,
+                "cacheReadTokens": 10706816,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 792,
+              "outputTokens": 379,
+              "cacheReadTokens": 195072,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924885684
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-cce81e",
+          "body": "[状态] → in_progress：t2 研发子卡开工（成果已在工作区：goal.js 已换口径、TC-6…TC-12 已绿）。（reqboard_task_move）",
+          "createdAt": 1790924882613,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-04e9a2",
+          "body": "[状态] → done：t2 研发子卡完成（汇报已登记：goal.js 换口径，TC-6…TC-12 全绿）。（reqboard_task_move）",
+          "createdAt": 1790924885684,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924869479,
+      "updatedAt": 1790924885684,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924869479,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924882613,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 研发子卡开工（成果已在工作区：goal.js 已换口径、TC-6…TC-12 已绿）。"
+        },
+        {
+          "status": "done",
+          "at": 1790924885684,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 研发子卡完成（汇报已登记：goal.js 换口径，TC-6…TC-12 全绿）。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790924876839,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/goal.js",
+          "test/goal.auto.test.js"
+        ],
+        "completed": [
+          "src/goal.js 的 user/message 分支改调 isHumanSource（不再单点判断 kind === 'goal'）",
+          "轮次标记 sawGoal → sawInjected；isAutoRound 语义收敛为「见过注入且无人工」",
+          "无任何 user/message 的轮次不判自动轮（维持不静默）",
+          "类头注释记下本次修正的前因（Dive 每轮推「对话完成」的噪音）",
+          "test/goal.auto.test.js 增 TC-6…TC-12，文件内导出 tracker 供断言",
+          "node --test test/goal.auto.test.js → 13 passed / 0 failed"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924876839,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-448271",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "自动轮静默：GoalTracker 认入 dive / plugin 注入轮·联调",
+      "description": "子卡阶段：联调",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-2fa8d1"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "implementation": "src/goal.js：import { isHumanSource } from './source.js'；observe() 的 user/message 分支由 `event.data?.source?.kind === 'goal'` 改为 `isHumanSource(event.data?.source)`，轮次标记字段 sawGoal → sawInjected（缺省仍 {sawHuman:false, sawInjected:false}）；isAutoRound(session) 改为 `mark !== undefined && mark.sawInjected === true && mark.sawHuman !== true`；类头注释补「goal / dive / plugin 注入轮一律静默」。index.js 不改（`intent.kind === 'complete' && autoRound → {action:'silent'}` 分支已存在）。test/goal.auto.test.js 增 TC-6…TC-12（dive×3 轮 0 意图、plugin 0 意图、goal 0 意图回归、dive+人插话 1 条且 isAutoRound=false、无 user/message 轮 1 条、dive+error 1 条中断、dive+interrupted 1 条中断）。\n\n[子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "context": "",
+      "parentId": "t-1d9465",
+      "stageKind": "integrate",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-e16a88",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924885896,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 711,
+              "at": 1790924885906,
+              "totals": {
+                "uncachedInputTokens": 282644,
+                "outputTokens": 77596,
+                "cacheReadTokens": 10706816,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 747,
+              "at": 1790924908771,
+              "totals": {
+                "uncachedInputTokens": 284229,
+                "outputTokens": 81962,
+                "cacheReadTokens": 11703424,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1585,
+              "outputTokens": 4366,
+              "cacheReadTokens": 996608,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924908744
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-a27b09",
+          "body": "[状态] → in_progress：t2 联调子卡开工：用真实 notifier 主链路灌一条 Dive 轮。（reqboard_task_move）",
+          "createdAt": 1790924885896,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-bf783b",
+          "body": "[状态] → done：t2 联调完成：真实链路三段联调全部 OK。（reqboard_task_move）",
+          "createdAt": 1790924908744,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924869479,
+      "updatedAt": 1790924908744,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924869479,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924885896,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 联调子卡开工：用真实 notifier 主链路灌一条 Dive 轮。"
+        },
+        {
+          "status": "done",
+          "at": 1790924908744,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 联调完成：真实链路三段联调全部 OK。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790924908462,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/goal.js"
+        ],
+        "completed": [
+          "真实 notifier 主链路 + 本地 HTTP 接收端联调三段",
+          "场景1 Dive 注入轮完成 → handle 返回 silent、接收端 0 条（修复前这里是每轮 1 条）",
+          "场景3 Dive 注入轮报错 → 接收端 1 条且含「会话异常中断」（静默只挡完成）",
+          "过程自纠：首版脚本把 user/message 的返回值当成判定结果（action=ignored），改为取 turn/end 的返回值后对齐 silent，结论不变"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924908462,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-002a22",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "自动轮静默：GoalTracker 认入 dive / plugin 注入轮·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-448271"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "src/goal.js：import { isHumanSource } from './source.js'；observe() 的 user/message 分支由 `event.data?.source?.kind === 'goal'` 改为 `isHumanSource(event.data?.source)`，轮次标记字段 sawGoal → sawInjected（缺省仍 {sawHuman:false, sawInjected:false}）；isAutoRound(session) 改为 `mark !== undefined && mark.sawInjected === true && mark.sawHuman !== true`；类头注释补「goal / dive / plugin 注入轮一律静默」。index.js 不改（`intent.kind === 'complete' && autoRound → {action:'silent'}` 分支已存在）。test/goal.auto.test.js 增 TC-6…TC-12（dive×3 轮 0 意图、plugin 0 意图、goal 0 意图回归、dive+人插话 1 条且 isAutoRound=false、无 user/message 轮 1 条、dive+error 1 条中断、dive+interrupted 1 条中断）。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-1d9465",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-6c3a09",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924908970,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 751,
+              "at": 1790924908980,
+              "totals": {
+                "uncachedInputTokens": 284229,
+                "outputTokens": 81962,
+                "cacheReadTokens": 11703424,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 775,
+              "at": 1790924921035,
+              "totals": {
+                "uncachedInputTokens": 286150,
+                "outputTokens": 84465,
+                "cacheReadTokens": 12313728,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1921,
+              "outputTokens": 2503,
+              "cacheReadTokens": 610304,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924921014
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-28c68f",
+          "body": "[状态] → in_progress：t2 复核子卡开工：对照设计行为差异表逐行核对。（reqboard_task_move）",
+          "createdAt": 1790924908970,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-05bcfd",
+          "body": "[状态] → done：t2 复核完成：9/9 行无偏离。（reqboard_task_move）",
+          "createdAt": 1790924921014,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924869479,
+      "updatedAt": 1790924921014,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924869479,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924908970,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 复核子卡开工：对照设计行为差异表逐行核对。"
+        },
+        {
+          "status": "done",
+          "at": 1790924921014,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 复核完成：9/9 行无偏离。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790924920780,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/goal.js",
+          "test/goal.auto.test.js"
+        ],
+        "completed": [
+          "对照 design/interfaces.md §2 轮次行为差异表逐行核对：9 行全部一致，偏离 0",
+          "覆盖 goal/dive/plugin 三种注入轮静默、direct human 与无 source 照推、注入+人插话照推、整轮无消息不静默",
+          "FR-2 单独核对：dive 轮 error 与 interrupted 都照推中断（静默只挡完成）",
+          "口径单点检查：src/*.js 里 'user' 字面量只出现在 src/source.js（goal.js 那处是注释说明）",
+          "无偏离"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924920780,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-113155",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "自动轮静默：GoalTracker 认入 dive / plugin 注入轮·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-002a22"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "src/goal.js：import { isHumanSource } from './source.js'；observe() 的 user/message 分支由 `event.data?.source?.kind === 'goal'` 改为 `isHumanSource(event.data?.source)`，轮次标记字段 sawGoal → sawInjected（缺省仍 {sawHuman:false, sawInjected:false}）；isAutoRound(session) 改为 `mark !== undefined && mark.sawInjected === true && mark.sawHuman !== true`；类头注释补「goal / dive / plugin 注入轮一律静默」。index.js 不改（`intent.kind === 'complete' && autoRound → {action:'silent'}` 分支已存在）。test/goal.auto.test.js 增 TC-6…TC-12（dive×3 轮 0 意图、plugin 0 意图、goal 0 意图回归、dive+人插话 1 条且 isAutoRound=false、无 user/message 轮 1 条、dive+error 1 条中断、dive+interrupted 1 条中断）。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-1d9465",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-571c85",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924921230,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 779,
+              "at": 1790924921240,
+              "totals": {
+                "uncachedInputTokens": 286150,
+                "outputTokens": 84465,
+                "cacheReadTokens": 12313728,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 797,
+              "at": 1790924932171,
+              "totals": {
+                "uncachedInputTokens": 287533,
+                "outputTokens": 86018,
+                "cacheReadTokens": 12726656,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1383,
+              "outputTokens": 1553,
+              "cacheReadTokens": 412928,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924932151
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-c757f0",
+          "body": "[状态] → in_progress：t2 测试子卡开工：跑全量回归。（reqboard_task_move）",
+          "createdAt": 1790924921230,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-f8aa72",
+          "body": "[状态] → done：t2 测试子卡完成：单文件 13 绿、全量 304 绿。（reqboard_task_move）",
+          "createdAt": 1790924932151,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924869479,
+      "updatedAt": 1790924932151,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924869479,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924921230,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 测试子卡开工：跑全量回归。"
+        },
+        {
+          "status": "done",
+          "at": 1790924932151,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t2 测试子卡完成：单文件 13 绿、全量 304 绿。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790924931917,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/goal.auto.test.js"
+        ],
+        "completed": [
+          "node --test test/goal.auto.test.js → 13 passed / 0 failed",
+          "全量 pnpm test → tests 304 / pass 304 / fail 0（开工前基线 293，只增不减）",
+          "既有 goal 自动轮用例（三条自动轮 0 意图、插话放行、无 goal 零回归）全部保持绿"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924931917,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-f1e3ee",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "「任务」字段：注入正文不再冒充人的要求·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-f48ac7"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "src/payload.js：createPromptTracker().observe() 的第二道门由 `if (event?.data?.source?.kind === 'goal') return` 改为 `if (!isHumanSource(event?.data?.source)) return`（import 自 './source.js'），函数头注释同步说明「只认 direct human」；take() / clear() 不动。test/payload.test.js 增 TC-13…TC-16：只喂 dive 注入 → take() 为 null；先 goal 后 user → 取 user 文本；先 dive 后无 source → 取无 source 文本；无 source → renderContext 的「任务」行等于人的文本。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-0f608f",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-4b5980",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924882714,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 701,
+              "at": 1790924882725,
+              "totals": {
+                "uncachedInputTokens": 281852,
+                "outputTokens": 77217,
+                "cacheReadTokens": 10511744,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 709,
+              "at": 1790924885810,
+              "totals": {
+                "uncachedInputTokens": 282644,
+                "outputTokens": 77596,
+                "cacheReadTokens": 10706816,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 792,
+              "outputTokens": 379,
+              "cacheReadTokens": 195072,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924885790
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-8ffc88",
+          "body": "[状态] → in_progress：t3 研发子卡开工（成果已在工作区：payload.js 已换口径、TC-13…TC-16 已绿）。（reqboard_task_move）",
+          "createdAt": 1790924882714,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-646028",
+          "body": "[状态] → done：t3 研发子卡完成（汇报已登记：payload.js 换口径，TC-13…TC-16 全绿）。（reqboard_task_move）",
+          "createdAt": 1790924885790,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924869576,
+      "updatedAt": 1790924885790,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924869576,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924882714,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 研发子卡开工（成果已在工作区：payload.js 已换口径、TC-13…TC-16 已绿）。"
+        },
+        {
+          "status": "done",
+          "at": 1790924885790,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 研发子卡完成（汇报已登记：payload.js 换口径，TC-13…TC-16 全绿）。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790924877028,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/payload.js",
+          "test/payload.test.js"
+        ],
+        "completed": [
+          "src/payload.js 的 PromptTracker 改用 isHumanSource（不再单点跳过 goal）",
+          "补上 payload.js 对 src/source.js 的导入与说明注释",
+          "test/payload.test.js 增 TC-13…TC-16（注入不记、注入后取人的话、无 source 算人、渲染口径）",
+          "node --test test/payload.test.js → 11 passed / 0 failed"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924877028,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-d126c0",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "「任务」字段：注入正文不再冒充人的要求·联调",
+      "description": "子卡阶段：联调",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-f1e3ee"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "implementation": "src/payload.js：createPromptTracker().observe() 的第二道门由 `if (event?.data?.source?.kind === 'goal') return` 改为 `if (!isHumanSource(event?.data?.source)) return`（import 自 './source.js'），函数头注释同步说明「只认 direct human」；take() / clear() 不动。test/payload.test.js 增 TC-13…TC-16：只喂 dive 注入 → take() 为 null；先 goal 后 user → 取 user 文本；先 dive 后无 source → 取无 source 文本；无 source → renderContext 的「任务」行等于人的文本。\n\n[子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "context": "",
+      "parentId": "t-0f608f",
+      "stageKind": "integrate",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-ecd439",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924885995,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 713,
+              "at": 1790924886005,
+              "totals": {
+                "uncachedInputTokens": 282644,
+                "outputTokens": 77596,
+                "cacheReadTokens": 10706816,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 749,
+              "at": 1790924908884,
+              "totals": {
+                "uncachedInputTokens": 284229,
+                "outputTokens": 81962,
+                "cacheReadTokens": 11703424,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1585,
+              "outputTokens": 4366,
+              "cacheReadTokens": 996608,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924908864
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-23ff70",
+          "body": "[状态] → in_progress：t3 联调子卡开工：核验注入消息在真实报文装配路径里的取值。（reqboard_task_move）",
+          "createdAt": 1790924885995,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-6d62b3",
+          "body": "[状态] → done：t3 联调完成：报文里「任务」=人的话，注入正文不出现。（reqboard_task_move）",
+          "createdAt": 1790924908864,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924869576,
+      "updatedAt": 1790924908864,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924869576,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924885995,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 联调子卡开工：核验注入消息在真实报文装配路径里的取值。"
+        },
+        {
+          "status": "done",
+          "at": 1790924908864,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 联调完成：报文里「任务」=人的话，注入正文不出现。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790924908578,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/payload.js"
+        ],
+        "completed": [
+          "真实 notifier 报文核验：Dive 注入轮 + 真人轮后，「任务」行 = 人那句话（含人的话=true）",
+          "同一报文里不含 Dive 注入正文（含 Dive 正文=false）——注入不再冒充「任务」",
+          "三段联调全部 OK（0 条 / 1 条含人的话 / 1 条中断）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924908578,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-c10757",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "「任务」字段：注入正文不再冒充人的要求·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-d126c0"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "src/payload.js：createPromptTracker().observe() 的第二道门由 `if (event?.data?.source?.kind === 'goal') return` 改为 `if (!isHumanSource(event?.data?.source)) return`（import 自 './source.js'），函数头注释同步说明「只认 direct human」；take() / clear() 不动。test/payload.test.js 增 TC-13…TC-16：只喂 dive 注入 → take() 为 null；先 goal 后 user → 取 user 文本；先 dive 后无 source → 取无 source 文本；无 source → renderContext 的「任务」行等于人的文本。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-0f608f",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-6b36ff",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924909067,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 753,
+              "at": 1790924909077,
+              "totals": {
+                "uncachedInputTokens": 284229,
+                "outputTokens": 81962,
+                "cacheReadTokens": 11703424,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 777,
+              "at": 1790924921143,
+              "totals": {
+                "uncachedInputTokens": 286150,
+                "outputTokens": 84465,
+                "cacheReadTokens": 12313728,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1921,
+              "outputTokens": 2503,
+              "cacheReadTokens": 610304,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924921120
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-390962",
+          "body": "[状态] → in_progress：t3 复核子卡开工：对照设计「任务」字段口径逐条核对。（reqboard_task_move）",
+          "createdAt": 1790924909067,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-ec28df",
+          "body": "[状态] → done：t3 复核完成：6/6 行无偏离。（reqboard_task_move）",
+          "createdAt": 1790924921120,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924869576,
+      "updatedAt": 1790924921120,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924869576,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924909067,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 复核子卡开工：对照设计「任务」字段口径逐条核对。"
+        },
+        {
+          "status": "done",
+          "at": 1790924921120,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 复核完成：6/6 行无偏离。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790924920896,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/payload.js",
+          "test/payload.test.js"
+        ],
+        "completed": [
+          "对照 design/interfaces.md §3 口径逐条核对：6 行全部一致，偏离 0",
+          "dive/goal/plugin 注入与形状异常（kind=42）都不进「任务」；kind=user 与无 source 进",
+          "既有用例（goal 注入不进摘要）保持绿",
+          "无偏离"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924920896,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-b02ef3",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "「任务」字段：注入正文不再冒充人的要求·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-c10757"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "src/payload.js：createPromptTracker().observe() 的第二道门由 `if (event?.data?.source?.kind === 'goal') return` 改为 `if (!isHumanSource(event?.data?.source)) return`（import 自 './source.js'），函数头注释同步说明「只认 direct human」；take() / clear() 不动。test/payload.test.js 增 TC-13…TC-16：只喂 dive 注入 → take() 为 null；先 goal 后 user → 取 user 文本；先 dive 后无 source → 取无 source 文本；无 source → renderContext 的「任务」行等于人的文本。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-0f608f",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-eaf465",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790924921327,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 781,
+              "at": 1790924921337,
+              "totals": {
+                "uncachedInputTokens": 286150,
+                "outputTokens": 84465,
+                "cacheReadTokens": 12313728,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 799,
+              "at": 1790924932281,
+              "totals": {
+                "uncachedInputTokens": 287533,
+                "outputTokens": 86018,
+                "cacheReadTokens": 12726656,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1383,
+              "outputTokens": 1553,
+              "cacheReadTokens": 412928,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790924932258
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-a0b4b3",
+          "body": "[状态] → in_progress：t3 测试子卡开工：跑全量回归。（reqboard_task_move）",
+          "createdAt": 1790924921327,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-774c14",
+          "body": "[状态] → done：t3 测试子卡完成：单文件 11 绿、全量 304 绿。（reqboard_task_move）",
+          "createdAt": 1790924932258,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790924869576,
+      "updatedAt": 1790924932258,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790924869576,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790924921327,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 测试子卡开工：跑全量回归。"
+        },
+        {
+          "status": "done",
+          "at": 1790924932258,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t3 测试子卡完成：单文件 11 绿、全量 304 绿。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790924932034,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/payload.test.js"
+        ],
+        "completed": [
+          "node --test test/payload.test.js → 11 passed / 0 failed",
+          "全量 pnpm test → tests 304 / pass 304 / fail 0",
+          "既有摘要口径用例（goal 注入不进摘要）保持绿"
+        ]
+      },
+      "lastRun": {
+        "at": 1790924932034,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-1e5fa9",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "飞书卡片：删掉与标题重复的「类型」行·研发",
+      "description": "子卡阶段：研发",
+      "phase": "ui",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "src/channels/feishu.js：buildCard() 里删掉 `if (typeof context?.title === 'string' && context.title.length > 0) fields.push(cardField('类型', context.title))` 及其注释；其余字段（会话 / 工作区 / 任务 / 详情 / 时间）顺序与 header（title、template）、按钮条件、idTag、无 context 的纯文本回落、buildRequest 加签一律不动。test/channels.feishu.test.js：把 `assert.ok(fields.includes('**类型**'), ...)` 翻转为 `assert.ok(!fields.includes('**类型**'), '卡片标题已给出事件，正文不再重复「类型」')`，并加强断言（fields 顺序为 会话→工作区→任务→时间、header 标题与配色、text_tag 短 id、dsh:// 无按钮、无 context 时仍是 msg_type:'text'）。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-955eca",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-79c634",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925018136,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 956,
+              "at": 1790925018147,
+              "totals": {
+                "uncachedInputTokens": 302167,
+                "outputTokens": 98638,
+                "cacheReadTokens": 17782784,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 966,
+              "at": 1790925021729,
+              "totals": {
+                "uncachedInputTokens": 302809,
+                "outputTokens": 99232,
+                "cacheReadTokens": 18015488,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 642,
+              "outputTokens": 594,
+              "cacheReadTokens": 232704,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925021708
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-03d701",
+          "body": "[状态] → in_progress：t4 研发子卡开工（成果已在工作区：feishu.js 删「类型」行、断言翻转与字段顺序加强）。（reqboard_task_move）",
+          "createdAt": 1790925018136,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-018bcd",
+          "body": "[状态] → done：t4 研发完成：feishu.js 删行 + 断言翻转，7/7 绿。（reqboard_task_move）",
+          "createdAt": 1790925021708,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925013990,
+      "updatedAt": 1790925021708,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925013990,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925018136,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 研发子卡开工（成果已在工作区：feishu.js 删「类型」行、断言翻转与字段顺序加强）。"
+        },
+        {
+          "status": "done",
+          "at": 1790925021708,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 研发完成：feishu.js 删行 + 断言翻转，7/7 绿。"
+        }
+      ],
+      "layer": 0,
+      "lastReport": {
+        "at": 1790925021590,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/channels/feishu.js",
+          "test/channels.feishu.test.js"
+        ],
+        "completed": [
+          "src/channels/feishu.js 删掉正文里与标题重复的「类型」行（含其注释），其余字段/header/按钮条件/加签一字未动",
+          "test/channels.feishu.test.js：把「应有类型行」翻转为「不应有」，并新增字段顺序断言（会话 → 工作区 → 任务 → 时间）",
+          "同一文件 AC-20 测试通知用例同步翻转（标记列表去掉「类型」、补「事件标题仍在标题栏」）",
+          "node --test test/channels.feishu.test.js → 7 passed / 0 failed"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925021590,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-1fb3eb",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "飞书卡片：删掉与标题重复的「类型」行·联调",
+      "description": "子卡阶段：联调",
+      "phase": "ui",
+      "side": "backend",
+      "dependsOn": [
+        "t-1e5fa9"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "implementation": "src/channels/feishu.js：buildCard() 里删掉 `if (typeof context?.title === 'string' && context.title.length > 0) fields.push(cardField('类型', context.title))` 及其注释；其余字段（会话 / 工作区 / 任务 / 详情 / 时间）顺序与 header（title、template）、按钮条件、idTag、无 context 的纯文本回落、buildRequest 加签一律不动。test/channels.feishu.test.js：把 `assert.ok(fields.includes('**类型**'), ...)` 翻转为 `assert.ok(!fields.includes('**类型**'), '卡片标题已给出事件，正文不再重复「类型」')`，并加强断言（fields 顺序为 会话→工作区→任务→时间、header 标题与配色、text_tag 短 id、dsh:// 无按钮、无 context 时仍是 msg_type:'text'）。\n\n[子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "context": "",
+      "parentId": "t-955eca",
+      "stageKind": "integrate",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-3cba09",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925021816,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 968,
+              "at": 1790925021825,
+              "totals": {
+                "uncachedInputTokens": 302809,
+                "outputTokens": 99232,
+                "cacheReadTokens": 18015488,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 982,
+              "at": 1790925030669,
+              "totals": {
+                "uncachedInputTokens": 303717,
+                "outputTokens": 100560,
+                "cacheReadTokens": 18484352,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 908,
+              "outputTokens": 1328,
+              "cacheReadTokens": 468864,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925030649
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-514084",
+          "body": "[状态] → in_progress：t4 联调子卡开工：核对真实卡片报文的字段标签与标题。（reqboard_task_move）",
+          "createdAt": 1790925021816,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-f396ff",
+          "body": "[状态] → done：t4 联调完成：卡片/回落/文本渠道三类报文核对通过。（reqboard_task_move）",
+          "createdAt": 1790925030649,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925013990,
+      "updatedAt": 1790925030649,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925013990,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925021816,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 联调子卡开工：核对真实卡片报文的字段标签与标题。"
+        },
+        {
+          "status": "done",
+          "at": 1790925030649,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 联调完成：卡片/回落/文本渠道三类报文核对通过。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790925030512,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/channels/feishu.js"
+        ],
+        "completed": [
+          "真实报文核对：卡片标题 ✅ 对话完成、配色 green、正文字段 会话 / 工作区 / 任务 / 时间",
+          "卡片 JSON 不含「类型」",
+          "无 context 的老调用方仍回落 msg_type:text",
+          "文本渠道（企微 markdown）仍含「**类型**：✅ 对话完成」——边界「不改文本渠道」成立"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925030512,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-7486b9",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "飞书卡片：删掉与标题重复的「类型」行·复核",
+      "description": "子卡阶段：复核",
+      "phase": "ui",
+      "side": "backend",
+      "dependsOn": [
+        "t-1fb3eb"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "src/channels/feishu.js：buildCard() 里删掉 `if (typeof context?.title === 'string' && context.title.length > 0) fields.push(cardField('类型', context.title))` 及其注释；其余字段（会话 / 工作区 / 任务 / 详情 / 时间）顺序与 header（title、template）、按钮条件、idTag、无 context 的纯文本回落、buildRequest 加签一律不动。test/channels.feishu.test.js：把 `assert.ok(fields.includes('**类型**'), ...)` 翻转为 `assert.ok(!fields.includes('**类型**'), '卡片标题已给出事件，正文不再重复「类型」')`，并加强断言（fields 顺序为 会话→工作区→任务→时间、header 标题与配色、text_tag 短 id、dsh:// 无按钮、无 context 时仍是 msg_type:'text'）。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-955eca",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-a1853b",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925030756,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 984,
+              "at": 1790925030766,
+              "totals": {
+                "uncachedInputTokens": 303717,
+                "outputTokens": 100560,
+                "cacheReadTokens": 18484352,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 994,
+              "at": 1790925038653,
+              "totals": {
+                "uncachedInputTokens": 304541,
+                "outputTokens": 101916,
+                "cacheReadTokens": 18720256,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 824,
+              "outputTokens": 1356,
+              "cacheReadTokens": 235904,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925038624
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-f03972",
+          "body": "[状态] → in_progress：t4 复核子卡开工：对照设计接口 §4 逐条核对。（reqboard_task_move）",
+          "createdAt": 1790925030756,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-4efa67",
+          "body": "[状态] → done：t4 复核完成：字段集与不变项核对无偏离。（reqboard_task_move）",
+          "createdAt": 1790925038624,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925013990,
+      "updatedAt": 1790925038624,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925013990,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925030756,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 复核子卡开工：对照设计接口 §4 逐条核对。"
+        },
+        {
+          "status": "done",
+          "at": 1790925038624,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 复核完成：字段集与不变项核对无偏离。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790925038484,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/channels/feishu.js",
+          "test/channels.feishu.test.js"
+        ],
+        "completed": [
+          "对照 design/interfaces.md §4 逐条核对：字段集由 [类型,会话,工作区,任务,详情,时间] 变为 [会话,工作区,任务,详情,时间]，偏离 0",
+          "不变项核对：header.title/content 与 template、wide_screen_mode、按钮仅 http(s)、idTag 文本标签渲染、无 context 回落纯文本——全部保持",
+          "出站契约核对：PAYLOAD_VERSION 仍为 1，未新增/删除报文字段",
+          "文本渠道用例（cn/global）未改动且全绿 → 「不改文本渠道」成立",
+          "无偏离"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925038484,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-01300e",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "飞书卡片：删掉与标题重复的「类型」行·测试",
+      "description": "子卡阶段：测试",
+      "phase": "ui",
+      "side": "backend",
+      "dependsOn": [
+        "t-7486b9"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "src/channels/feishu.js：buildCard() 里删掉 `if (typeof context?.title === 'string' && context.title.length > 0) fields.push(cardField('类型', context.title))` 及其注释；其余字段（会话 / 工作区 / 任务 / 详情 / 时间）顺序与 header（title、template）、按钮条件、idTag、无 context 的纯文本回落、buildRequest 加签一律不动。test/channels.feishu.test.js：把 `assert.ok(fields.includes('**类型**'), ...)` 翻转为 `assert.ok(!fields.includes('**类型**'), '卡片标题已给出事件，正文不再重复「类型」')`，并加强断言（fields 顺序为 会话→工作区→任务→时间、header 标题与配色、text_tag 短 id、dsh:// 无按钮、无 context 时仍是 msg_type:'text'）。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-955eca",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-b01d47",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925038766,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 996,
+              "at": 1790925038776,
+              "totals": {
+                "uncachedInputTokens": 304541,
+                "outputTokens": 101916,
+                "cacheReadTokens": 18720256,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1018,
+              "at": 1790925112291,
+              "totals": {
+                "uncachedInputTokens": 305545,
+                "outputTokens": 102975,
+                "cacheReadTokens": 19436544,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1004,
+              "outputTokens": 1059,
+              "cacheReadTokens": 716288,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925112260
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-0688ee",
+          "body": "[状态] → in_progress：t4 测试子卡开工：跑全量回归。（reqboard_task_move）",
+          "createdAt": 1790925038766,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-b29207",
+          "body": "[状态] → done：t4 测试子卡完成：单文件 7 绿、全量 305 绿。（reqboard_task_move）",
+          "createdAt": 1790925112260,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925013990,
+      "updatedAt": 1790925112260,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925013990,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925038766,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 测试子卡开工：跑全量回归。"
+        },
+        {
+          "status": "done",
+          "at": 1790925112260,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t4 测试子卡完成：单文件 7 绿、全量 305 绿。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790925112133,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/channels.feishu.test.js"
+        ],
+        "completed": [
+          "node --test test/channels.feishu.test.js → 7 passed / 0 failed",
+          "全量 pnpm test → tests 305 / pass 305 / fail 0（开工前 304，只增）",
+          "文本渠道用例（cn/global）未改动且保持绿"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925112133,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-8ff324",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "设置页预览：卡片区不再显示「类型」行·研发",
+      "description": "子卡阶段：研发",
+      "phase": "ui",
+      "side": "frontend",
+      "dependsOn": [
+        "t-955eca"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "client.js：PayloadPreview 的「飞书卡片」区行过滤条件追加「默认渲染的 `**类型**：…` 行不显示」（判据 line.startsWith('**类型**')，仅当未用自定义 template 时存在该行）；纯文本区保留该行；payloadPreviewLines() 不动。给卡片区容器加 data-dnw-region=\"feishu-card\" 供测试取段。test/client-render.test.js 增 TC-21…TC-23：PayloadPreview 卡片区文本无 `**类型**：✅ 对话完成`、纯文本区有、payloadPreviewLines(['event','session','prompt']) 返回值不变。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-dc6479",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-ed16e3",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925120392,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1040,
+              "at": 1790925120403,
+              "totals": {
+                "uncachedInputTokens": 306608,
+                "outputTokens": 103814,
+                "cacheReadTokens": 20157824,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1050,
+              "at": 1790925125024,
+              "totals": {
+                "uncachedInputTokens": 307048,
+                "outputTokens": 104515,
+                "cacheReadTokens": 20399232,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 440,
+              "outputTokens": 701,
+              "cacheReadTokens": 241408,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925124998
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-6bd574",
+          "body": "[状态] → in_progress：t5 研发子卡开工（成果已在工作区：client.js 卡片区过滤 + 预览用例）。（reqboard_task_move）",
+          "createdAt": 1790925120392,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-6f6e5c",
+          "body": "[状态] → done：t5 研发完成：卡片区过滤 + 预览用例，19/19 绿。（reqboard_task_move）",
+          "createdAt": 1790925124998,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925118021,
+      "updatedAt": 1790925124998,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925118021,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925120392,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 研发子卡开工（成果已在工作区：client.js 卡片区过滤 + 预览用例）。"
+        },
+        {
+          "status": "done",
+          "at": 1790925124998,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 研发完成：卡片区过滤 + 预览用例，19/19 绿。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790925124851,
+        "reportIndex": 1,
+        "filesChanged": [
+          "client.js",
+          "test/client-render.test.js"
+        ],
+        "completed": [
+          "client.js：PayloadPreview 的飞书卡片区过滤掉默认渲染的「类型」行（判据 /^\\*\\*类型\\*\\*[：:]/，自定义 template 不猜）",
+          "卡片区容器加 data-dnw-region=\"feishu-card\" 便于测试取段；纯文本区保留该行",
+          "payloadPreviewLines() 一字未动（展示层过滤，不改取值口径）",
+          "test/client-render.test.js 增 TC-21/22 用例；node --test test/client-render.test.js → 19 passed / 0 failed",
+          "过程自纠：首版断言按 markdown 原文写（含星号），实际渲染已去星号，改为按渲染后文本断言；区域拼接改为无分隔连接"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925124851,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-98eaa8",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "设置页预览：卡片区不再显示「类型」行·联调",
+      "description": "子卡阶段：联调",
+      "phase": "ui",
+      "side": "frontend",
+      "dependsOn": [
+        "t-8ff324"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "implementation": "client.js：PayloadPreview 的「飞书卡片」区行过滤条件追加「默认渲染的 `**类型**：…` 行不显示」（判据 line.startsWith('**类型**')，仅当未用自定义 template 时存在该行）；纯文本区保留该行；payloadPreviewLines() 不动。给卡片区容器加 data-dnw-region=\"feishu-card\" 供测试取段。test/client-render.test.js 增 TC-21…TC-23：PayloadPreview 卡片区文本无 `**类型**：✅ 对话完成`、纯文本区有、payloadPreviewLines(['event','session','prompt']) 返回值不变。\n\n[子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "context": "",
+      "parentId": "t-dc6479",
+      "stageKind": "integrate",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-d35139",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925125124,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1052,
+              "at": 1790925125134,
+              "totals": {
+                "uncachedInputTokens": 307048,
+                "outputTokens": 104515,
+                "cacheReadTokens": 20399232,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1066,
+              "at": 1790925131138,
+              "totals": {
+                "uncachedInputTokens": 307952,
+                "outputTokens": 105148,
+                "cacheReadTokens": 20884736,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 904,
+              "outputTokens": 633,
+              "cacheReadTokens": 485504,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925131118
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-f4f648",
+          "body": "[状态] → in_progress：t5 联调子卡开工：确认设置页整页组件装载不受影响。（reqboard_task_move）",
+          "createdAt": 1790925125124,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-8bb24c",
+          "body": "[状态] → done：t5 联调完成：客户端三文件 42 绿。（reqboard_task_move）",
+          "createdAt": 1790925131118,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925118021,
+      "updatedAt": 1790925131118,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925118021,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925125124,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 联调子卡开工：确认设置页整页组件装载不受影响。"
+        },
+        {
+          "status": "done",
+          "at": 1790925131118,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 联调完成：客户端三文件 42 绿。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790925130982,
+        "reportIndex": 1,
+        "filesChanged": [
+          "client.js"
+        ],
+        "completed": [
+          "三个客户端测试文件一起跑：node --test test/client-render.test.js test/client-hooks.test.js test/client-service.test.js → 42 passed / 0 failed",
+          "确认给卡片区加 data-dnw-region 属性不影响设置页其余组件（渲染、hooks、服务接线三类用例全绿）",
+          "client.js 仍只依赖 react（测试用 requireShim 限制），未引入新依赖"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925130982,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-aeb234",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "设置页预览：卡片区不再显示「类型」行·复核",
+      "description": "子卡阶段：复核",
+      "phase": "ui",
+      "side": "frontend",
+      "dependsOn": [
+        "t-98eaa8"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "client.js：PayloadPreview 的「飞书卡片」区行过滤条件追加「默认渲染的 `**类型**：…` 行不显示」（判据 line.startsWith('**类型**')，仅当未用自定义 template 时存在该行）；纯文本区保留该行；payloadPreviewLines() 不动。给卡片区容器加 data-dnw-region=\"feishu-card\" 供测试取段。test/client-render.test.js 增 TC-21…TC-23：PayloadPreview 卡片区文本无 `**类型**：✅ 对话完成`、纯文本区有、payloadPreviewLines(['event','session','prompt']) 返回值不变。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-dc6479",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-7db66d",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925131228,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1068,
+              "at": 1790925131238,
+              "totals": {
+                "uncachedInputTokens": 307952,
+                "outputTokens": 105148,
+                "cacheReadTokens": 20884736,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1090,
+              "at": 1790925141672,
+              "totals": {
+                "uncachedInputTokens": 308999,
+                "outputTokens": 106442,
+                "cacheReadTokens": 21618560,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1047,
+              "outputTokens": 1294,
+              "cacheReadTokens": 733824,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925141652
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-de21b8",
+          "body": "[状态] → in_progress：t5 复核子卡开工：对照设计接口 §5 与用例 TC-21…TC-23 核对。（reqboard_task_move）",
+          "createdAt": 1790925131228,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-a04a99",
+          "body": "[状态] → done：t5 复核完成：无偏离，并补了 template 边界断言。（reqboard_task_move）",
+          "createdAt": 1790925141652,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925118021,
+      "updatedAt": 1790925141652,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925118021,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925131228,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 复核子卡开工：对照设计接口 §5 与用例 TC-21…TC-23 核对。"
+        },
+        {
+          "status": "done",
+          "at": 1790925141652,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 复核完成：无偏离，并补了 template 边界断言。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790925141529,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/client-render.test.js"
+        ],
+        "completed": [
+          "对照 design/interfaces.md §5 逐条核对：卡片区隐藏默认「类型」行、纯文本区保留、payloadPreviewLines 不变、template 不做猜测——偏离 0",
+          "复核期补一条断言：自定义 template 时卡片区原样展示（不删行），19/19 仍全绿",
+          "TC-23（payloadPreviewLines 返回值不变）由既有「文案预览按字段开关与模板变化」用例承载，保持绿",
+          "无偏离"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925141529,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-723dce",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "设置页预览：卡片区不再显示「类型」行·测试",
+      "description": "子卡阶段：测试",
+      "phase": "ui",
+      "side": "frontend",
+      "dependsOn": [
+        "t-aeb234"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "client.js：PayloadPreview 的「飞书卡片」区行过滤条件追加「默认渲染的 `**类型**：…` 行不显示」（判据 line.startsWith('**类型**')，仅当未用自定义 template 时存在该行）；纯文本区保留该行；payloadPreviewLines() 不动。给卡片区容器加 data-dnw-region=\"feishu-card\" 供测试取段。test/client-render.test.js 增 TC-21…TC-23：PayloadPreview 卡片区文本无 `**类型**：✅ 对话完成`、纯文本区有、payloadPreviewLines(['event','session','prompt']) 返回值不变。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-dc6479",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-c4b4e6",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925141762,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1092,
+              "at": 1790925141772,
+              "totals": {
+                "uncachedInputTokens": 308999,
+                "outputTokens": 106442,
+                "cacheReadTokens": 21618560,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1108,
+              "at": 1790925204170,
+              "totals": {
+                "uncachedInputTokens": 309748,
+                "outputTokens": 107678,
+                "cacheReadTokens": 22110720,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 749,
+              "outputTokens": 1236,
+              "cacheReadTokens": 492160,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925204141
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-4e26ff",
+          "body": "[状态] → in_progress：t5 测试子卡开工：跑全量回归。（reqboard_task_move）",
+          "createdAt": 1790925141762,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-5844b0",
+          "body": "[状态] → done：t5 测试子卡完成：单文件 19 绿、全量 305 绿。（reqboard_task_move）",
+          "createdAt": 1790925204141,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925118021,
+      "updatedAt": 1790925204141,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925118021,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925141762,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 测试子卡开工：跑全量回归。"
+        },
+        {
+          "status": "done",
+          "at": 1790925204141,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t5 测试子卡完成：单文件 19 绿、全量 305 绿。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790925204015,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/client-render.test.js"
+        ],
+        "completed": [
+          "node --test test/client-render.test.js → 19 passed / 0 failed",
+          "全量 pnpm test → tests 305 / pass 305 / fail 0",
+          "客户端三文件（渲染/hooks/服务）42 绿，设置页其余部分零回归"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925204015,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-b715ff",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·研发",
+      "description": "子卡阶段：研发",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-1d9465",
+        "t-0f608f",
+        "t-dc6479"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "test/e2e.local.test.js 复用既有 withReceiver() + createNotifier()：TC-24 dive 注入 + turn/end(completed) → received.length === 0；TC-25 紧接着 user 消息 + completed → 1 条，msg_type==='interactive'、card.header.title.content==='✅ 对话完成'、JSON.stringify(card) 不含 `**类型**`；TC-26 dive + turn/end(error) → 1 条且标题为 '⚠️ 会话中断'。README.md「为什么需要它」补全为「goal / dive / plugin 注入轮一律静默，只有真人与中断才响」。写 docs/requirements/REQ-261002150038-344a/tests/verification-report.md：基线 288/0 与改动后数字、四条不变量核验（文本渠道用例未改动全绿、无配置键/落盘变更、PAYLOAD_VERSION 仍为 1）、回滚路径（删 src/source.js + 还原 4 处）。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-cc2a0c",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-012ac1",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925361124,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1255,
+              "at": 1790925361136,
+              "totals": {
+                "uncachedInputTokens": 325272,
+                "outputTokens": 119152,
+                "cacheReadTokens": 27789440,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1264,
+              "at": 1790925365329,
+              "totals": {
+                "uncachedInputTokens": 329645,
+                "outputTokens": 119880,
+                "cacheReadTokens": 28061440,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 4373,
+              "outputTokens": 728,
+              "cacheReadTokens": 272000,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925365309
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-a36639",
+          "body": "[状态] → in_progress：t6 第一张子卡开工。（reqboard_task_move）",
+          "createdAt": 1790925361124,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-485d3b",
+          "body": "[状态] → done：t6 研发子卡完成：端到端 4 条用例 + README + 验收报告，全量 307 绿。（reqboard_task_move）",
+          "createdAt": 1790925365309,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925358572,
+      "updatedAt": 1790925365309,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925358572,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925361124,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t6 第一张子卡开工。"
+        },
+        {
+          "status": "done",
+          "at": 1790925365309,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t6 研发子卡完成：端到端 4 条用例 + README + 验收报告，全量 307 绿。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790925365184,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/e2e.local.test.js",
+          "README.md",
+          "docs/requirements/REQ-261002150038-344a/tests/verification-report.md"
+        ],
+        "completed": [
+          "test/e2e.local.test.js 新增 TC-24…TC-27：真 HTTP 接收端上验证「自动续跑不响 / 人插话就响且任务=人的话 / 注入轮报错仍叫 / 飞书卡片无类型行」",
+          "README「为什么需要它」补全注入轮口径表（谁在说话 → 推不推 / 任务字段显示什么）",
+          "写 docs/requirements/REQ-261002150038-344a/tests/verification-report.md：数字对照（288→293→304→305→307）、逐条命令、行为证据、不变量核验、回滚路径",
+          "node --test test/e2e.local.test.js → 6 passed / 0 failed；全量 pnpm test → tests 307 / pass 307 / fail 0",
+          "过程自纠两处：飞书目标 key 格式校验（改用整段 token）、key 渠道会被 composeUrl 改写地址（端到端改用只给完整地址的遗留形态）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925365184,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-e4a547",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·复核",
+      "description": "子卡阶段：复核",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-b715ff"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "test/e2e.local.test.js 复用既有 withReceiver() + createNotifier()：TC-24 dive 注入 + turn/end(completed) → received.length === 0；TC-25 紧接着 user 消息 + completed → 1 条，msg_type==='interactive'、card.header.title.content==='✅ 对话完成'、JSON.stringify(card) 不含 `**类型**`；TC-26 dive + turn/end(error) → 1 条且标题为 '⚠️ 会话中断'。README.md「为什么需要它」补全为「goal / dive / plugin 注入轮一律静默，只有真人与中断才响」。写 docs/requirements/REQ-261002150038-344a/tests/verification-report.md：基线 288/0 与改动后数字、四条不变量核验（文本渠道用例未改动全绿、无配置键/落盘变更、PAYLOAD_VERSION 仍为 1）、回滚路径（删 src/source.js + 还原 4 处）。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-cc2a0c",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-dfd93f",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925365423,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1266,
+              "at": 1790925365436,
+              "totals": {
+                "uncachedInputTokens": 329645,
+                "outputTokens": 119880,
+                "cacheReadTokens": 28061440,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1292,
+              "at": 1790925379065,
+              "totals": {
+                "uncachedInputTokens": 331163,
+                "outputTokens": 121736,
+                "cacheReadTokens": 29174656,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1518,
+              "outputTokens": 1856,
+              "cacheReadTokens": 1113216,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925379045
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-94e815",
+          "body": "[状态] → in_progress：t6 复核子卡开工：验收报告与设计/需求逐条对账。（reqboard_task_move）",
+          "createdAt": 1790925365423,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-a6c9a0",
+          "body": "[状态] → done：t6 复核完成：报告数字与回滚清单审计通过，补正一处漏写的测试回退。（reqboard_task_move）",
+          "createdAt": 1790925379045,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925358572,
+      "updatedAt": 1790925379045,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925358572,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925365423,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t6 复核子卡开工：验收报告与设计/需求逐条对账。"
+        },
+        {
+          "status": "done",
+          "at": 1790925379045,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t6 复核完成：报告数字与回滚清单审计通过，补正一处漏写的测试回退。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790925378921,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261002150038-344a/tests/verification-report.md"
+        ],
+        "completed": [
+          "逐条审计验收报告里的数字：288（基线实测）→293→304→305→307，均在本次会话真实跑出",
+          "核验回滚清单：代码 4 处 + 新增 src/source.js；测试必须一起回退（5 个既有文件 + 1 个新文件），已按此改写报告 §5（原稿漏写测试回退）",
+          "核验不变量：PAYLOAD_VERSION 仍为 1；isHumanSource 仅被 src/goal.js 与 src/payload.js 引用；'user' 字面量只在 src/source.js 与注释",
+          "无偏离（一处报告措辞已修正）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925378921,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-d3b450",
+      "requirementId": "REQ-261002150038-344a",
+      "title": "端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·测试",
+      "description": "子卡阶段：测试",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-e4a547"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "test/e2e.local.test.js 复用既有 withReceiver() + createNotifier()：TC-24 dive 注入 + turn/end(completed) → received.length === 0；TC-25 紧接着 user 消息 + completed → 1 条，msg_type==='interactive'、card.header.title.content==='✅ 对话完成'、JSON.stringify(card) 不含 `**类型**`；TC-26 dive + turn/end(error) → 1 条且标题为 '⚠️ 会话中断'。README.md「为什么需要它」补全为「goal / dive / plugin 注入轮一律静默，只有真人与中断才响」。写 docs/requirements/REQ-261002150038-344a/tests/verification-report.md：基线 288/0 与改动后数字、四条不变量核验（文本渠道用例未改动全绿、无配置键/落盘变更、PAYLOAD_VERSION 仍为 1）、回滚路径（删 src/source.js + 还原 4 处）。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-cc2a0c",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-1bcbb8",
+          "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+          "trigger": "manual",
+          "startedAt": 1790925379171,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1294,
+              "at": 1790925379185,
+              "totals": {
+                "uncachedInputTokens": 331163,
+                "outputTokens": 121736,
+                "cacheReadTokens": 29174656,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf",
+              "seq": 1308,
+              "at": 1790925390305,
+              "totals": {
+                "uncachedInputTokens": 332007,
+                "outputTokens": 122842,
+                "cacheReadTokens": 29735552,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 844,
+              "outputTokens": 1106,
+              "cacheReadTokens": 560896,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790925390284
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-76b803",
+          "body": "[状态] → in_progress：t6 测试子卡开工：最终全量复跑。（reqboard_task_move）",
+          "createdAt": 1790925379171,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        },
+        {
+          "id": "c-576c0d",
+          "body": "[状态] → done：t6 测试子卡完成：全量 307 绿、端到端 6 绿。（reqboard_task_move）",
+          "createdAt": 1790925390284,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790925358572,
+      "updatedAt": 1790925390284,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790925358572,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790925379171,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t6 测试子卡开工：最终全量复跑。"
+        },
+        {
+          "status": "done",
+          "at": 1790925390284,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-eda4a33c-31bc-4d31-901d-5a9c640287bf"
+          },
+          "reason": "t6 测试子卡完成：全量 307 绿、端到端 6 绿。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790925390158,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/e2e.local.test.js"
+        ],
+        "completed": [
+          "最终全量 pnpm test → tests 307 / pass 307 / fail 0",
+          "端到端单跑 node --test test/e2e.local.test.js → 6 passed / 0 failed",
+          "改动前后对照：288 → 307，用例只增；失败始终 0"
+        ]
+      },
+      "lastRun": {
+        "at": 1790925390158,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "t-f48ac7",
+      "to": "t-1d9465"
+    },
+    {
+      "from": "t-f48ac7",
+      "to": "t-0f608f"
+    },
+    {
+      "from": "t-955eca",
+      "to": "t-dc6479"
+    },
+    {
+      "from": "t-1d9465",
+      "to": "t-cc2a0c"
+    },
+    {
+      "from": "t-0f608f",
+      "to": "t-cc2a0c"
+    },
+    {
+      "from": "t-dc6479",
+      "to": "t-cc2a0c"
+    },
+    {
+      "from": "t-220981",
+      "to": "t-d75046"
+    },
+    {
+      "from": "t-d75046",
+      "to": "t-6b15ab"
+    },
+    {
+      "from": "t-6b15ab",
+      "to": "t-06742a"
+    },
+    {
+      "from": "t-f48ac7",
+      "to": "t-2fa8d1"
+    },
+    {
+      "from": "t-2fa8d1",
+      "to": "t-448271"
+    },
+    {
+      "from": "t-448271",
+      "to": "t-002a22"
+    },
+    {
+      "from": "t-002a22",
+      "to": "t-113155"
+    },
+    {
+      "from": "t-f48ac7",
+      "to": "t-f1e3ee"
+    },
+    {
+      "from": "t-f1e3ee",
+      "to": "t-d126c0"
+    },
+    {
+      "from": "t-d126c0",
+      "to": "t-c10757"
+    },
+    {
+      "from": "t-c10757",
+      "to": "t-b02ef3"
+    },
+    {
+      "from": "t-1e5fa9",
+      "to": "t-1fb3eb"
+    },
+    {
+      "from": "t-1fb3eb",
+      "to": "t-7486b9"
+    },
+    {
+      "from": "t-7486b9",
+      "to": "t-01300e"
+    },
+    {
+      "from": "t-955eca",
+      "to": "t-8ff324"
+    },
+    {
+      "from": "t-8ff324",
+      "to": "t-98eaa8"
+    },
+    {
+      "from": "t-98eaa8",
+      "to": "t-aeb234"
+    },
+    {
+      "from": "t-aeb234",
+      "to": "t-723dce"
+    },
+    {
+      "from": "t-1d9465",
+      "to": "t-b715ff"
+    },
+    {
+      "from": "t-0f608f",
+      "to": "t-b715ff"
+    },
+    {
+      "from": "t-dc6479",
+      "to": "t-b715ff"
+    },
+    {
+      "from": "t-b715ff",
+      "to": "t-e4a547"
+    },
+    {
+      "from": "t-e4a547",
+      "to": "t-d3b450"
+    }
+  ],
+  "layers": [
+    {
+      "layer": 0,
+      "tasks": [
+        "t-f48ac7",
+        "t-955eca",
+        "t-220981",
+        "t-1e5fa9"
+      ]
+    },
+    {
+      "layer": 1,
+      "tasks": [
+        "t-1d9465",
+        "t-0f608f",
+        "t-2fa8d1",
+        "t-f1e3ee",
+        "t-dc6479",
+        "t-8ff324",
+        "t-d75046",
+        "t-1fb3eb"
+      ]
+    },
+    {
+      "layer": 2,
+      "tasks": [
+        "t-448271",
+        "t-d126c0",
+        "t-cc2a0c",
+        "t-b715ff",
+        "t-98eaa8",
+        "t-6b15ab",
+        "t-7486b9"
+      ]
+    },
+    {
+      "layer": 3,
+      "tasks": [
+        "t-002a22",
+        "t-c10757",
+        "t-e4a547",
+        "t-aeb234",
+        "t-06742a",
+        "t-01300e"
+      ]
+    },
+    {
+      "layer": 4,
+      "tasks": [
+        "t-113155",
+        "t-b02ef3",
+        "t-d3b450",
+        "t-723dce"
+      ]
+    }
+  ],
+  "ready": [],
+  "updated_at": "2026-10-02T07:17:06.985Z"
+}

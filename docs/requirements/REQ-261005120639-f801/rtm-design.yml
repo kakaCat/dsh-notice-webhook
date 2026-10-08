@@ -1,0 +1,313 @@
+metadata:
+  stage: design
+  requirement_id: REQ-261005120639-f801
+  generated_at: 2026-10-05T04:10:03.813Z
+  version: 4
+  generated_by: dsh-pmboard
+  last_updated: 2026-10-05T04:43:34.364Z
+inputs:
+  requirements: []
+outputs:
+  design_sections:
+    - ref: design/architecture.md#目标与总体方案
+      title: 目标与总体方案 <!--
+      serves:
+        - FR-1
+        - FR-2
+      file: design/architecture.md
+      section: 目标与总体方案
+    - ref: design/architecture.md#模块改动地图
+      title: 模块改动地图 <!--
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/architecture.md
+      section: 模块改动地图
+    - ref: design/architecture.md#判定链与插入点
+      title: 判定链与插入点 <!--
+      serves:
+        - FR-1
+        - FR-5
+      file: design/architecture.md
+      section: 判定链与插入点
+    - ref: design/architecture.md#血缘与活体口径
+      title: 血缘与活体口径 <!--
+      serves:
+        - FR-3
+      file: design/architecture.md
+      section: 血缘与活体口径
+    - ref: design/architecture.md#结算与兜底补发时序
+      title: 结算与兜底补发时序 <!--
+      serves:
+        - FR-2
+      file: design/architecture.md
+      section: 结算与兜底补发时序
+    - ref: design/architecture.md#降级开关与回滚
+      title: 降级、开关与回滚 <!--
+      serves:
+        - FR-4
+      file: design/architecture.md
+      section: 降级开关与回滚
+    - ref: design/architecture.md#被否决的备选
+      title: 被否决的备选 <!--
+      serves:
+        - FR-1
+        - FR-3
+      file: design/architecture.md
+      section: 被否决的备选
+    - ref: design/architecture.md#不变量
+      title: 不变量 <!--
+      serves:
+        - FR-5
+      file: design/architecture.md
+      section: 不变量
+    - ref: design/architecture.md#文档口径纠正
+      title: 文档口径纠正 <!--
+      serves:
+        - FR-6
+      file: design/architecture.md
+      section: 文档口径纠正
+    - ref: design/data-model.md#内存状态模型
+      title: 内存状态模型 <!--
+      serves:
+        - FR-1
+        - FR-2
+      file: design/data-model.md
+      section: 内存状态模型
+    - ref: design/data-model.md#PendingRecord-字段
+      title: "`PendingRecord` 字段 <!--"
+      serves:
+        - FR-2
+      file: design/data-model.md
+      section: PendingRecord-字段
+    - ref: design/data-model.md#生命周期与清理
+      title: 生命周期与清理 <!--
+      serves:
+        - FR-2
+        - FR-4
+      file: design/data-model.md
+      section: 生命周期与清理
+    - ref: design/data-model.md#只读事实源形状
+      title: 只读事实源形状 <!--
+      serves:
+        - FR-3
+      file: design/data-model.md
+      section: 只读事实源形状
+    - ref: design/data-model.md#agentslist-条目只读字段
+      title: "`agents.list()` 条目（只读字段） <!--"
+      serves:
+        - FR-3
+      file: design/data-model.md
+      section: agentslist-条目只读字段
+    - ref: design/data-model.md#subagentend-事件只读首参仅作复检时机
+      title: "`subagent/end` 事件（只读首参，仅作复检时机） <!--"
+      serves:
+        - FR-2
+      file: design/data-model.md
+      section: subagentend-事件只读首参仅作复检时机
+    - ref: design/data-model.md#ctxjobs既有不变
+      title: "`ctx.jobs`（既有，不变） <!--"
+      serves:
+        - FR-1
+      file: design/data-model.md
+      section: ctxjobs既有不变
+    - ref: design/data-model.md#无落盘数据
+      title: 无落盘数据 <!--
+      serves:
+        - FR-5
+      file: design/data-model.md
+      section: 无落盘数据
+    - ref: design/interfaces.md#内部模块接口-srcjobsjs
+      title: 内部模块接口 · `src/jobs.js` <!--
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+      file: design/interfaces.md
+      section: 内部模块接口-srcjobsjs
+    - ref: design/interfaces.md#新增纯函数
+      title: 新增纯函数 <!--
+      serves:
+        - FR-1
+        - FR-3
+      file: design/interfaces.md
+      section: 新增纯函数
+    - ref: design/interfaces.md#createJobGateoptions-增量
+      title: "`createJobGate(options)` 增量 <!--"
+      serves:
+        - FR-1
+        - FR-2
+        - FR-4
+      file: design/interfaces.md
+      section: createJobGateoptions-增量
+    - ref: design/interfaces.md#gate-返回契约
+      title: "`gate()` 返回契约 <!--"
+      serves:
+        - FR-1
+        - FR-6
+      file: design/interfaces.md
+      section: gate-返回契约
+    - ref: design/interfaces.md#复检与补发契约内部
+      title: 复检与补发契约（内部） <!--
+      serves:
+        - FR-2
+      file: design/interfaces.md
+      section: 复检与补发契约内部
+    - ref: design/interfaces.md#接线接口-indexjs-applyctx
+      title: 接线接口 · `index.js` / `apply(ctx)` <!--
+      serves:
+        - FR-1
+        - FR-2
+        - FR-4
+      file: design/interfaces.md
+      section: 接线接口-indexjs-applyctx
+    - ref: design/interfaces.md#配置契约
+      title: 配置契约 <!--
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 配置契约
+    - ref: design/interfaces.md#出站契约
+      title: 出站契约 <!--
+      serves:
+        - FR-5
+      file: design/interfaces.md
+      section: 出站契约
+    - ref: design/interfaces.md#观测契约-drop-原因码与日志
+      title: 观测契约 · `drop` 原因码与日志 <!--
+      serves:
+        - FR-6
+      file: design/interfaces.md
+      section: 观测契约-drop-原因码与日志
+    - ref: design/interfaces.md#错误语义表
+      title: 错误语义表 <!--
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 错误语义表
+    - ref: design/use-cases.md#UC-1-主场景派活给-continuable-子代理现状误报修后不报
+      title: UC-1 主场景：派活给 continuable 子代理（现状误报，修后不报） <!--
+      serves:
+        - FR-1
+        - FR-2
+      file: design/use-cases.md
+      section: UC-1-主场景派活给-continuable-子代理现状误报修后不报
+    - ref: design/use-cases.md#UC-2-静默唤醒路径completionDeliveryquiet-唤醒预算耗尽
+      title: UC-2 静默唤醒路径（`completionDelivery:'quiet'` / 唤醒预算耗尽） <!--
+      serves:
+        - FR-2
+      file: design/use-cases.md
+      section: UC-2-静默唤醒路径completionDeliveryquiet-唤醒预算耗尽
+    - ref: design/use-cases.md#UC-3-continuable-的多-epoch唤醒既有子代理
+      title: UC-3 continuable 的多 epoch（唤醒既有子代理） <!--
+      serves:
+        - FR-2
+        - FR-3
+      file: design/use-cases.md
+      section: UC-3-continuable-的多-epoch唤醒既有子代理
+    - ref: design/use-cases.md#UC-4-混合场景后台-job-子代理
+      title: UC-4 混合场景：后台 job + 子代理 <!--
+      serves:
+        - FR-1
+        - FR-2
+        - FR-6
+      file: design/use-cases.md
+      section: UC-4-混合场景后台-job-子代理
+    - ref: design/use-cases.md#UC-5-不该被压住的四种情况
+      title: UC-5 不该被压住的四种情况 <!--
+      serves:
+        - FR-3
+        - FR-4
+      file: design/use-cases.md
+      section: UC-5-不该被压住的四种情况
+    - ref: design/use-cases.md#UC-6-子代理自己结束时的静默边界明确不做
+      title: UC-6 子代理自己结束时的静默（边界，明确不做） <!--
+      serves:
+        - FR-5
+      file: design/use-cases.md
+      section: UC-6-子代理自己结束时的静默边界明确不做
+    - ref: design/use-cases.md#UC-7-插件卸载-会话销毁
+      title: UC-7 插件卸载 / 会话销毁 <!--
+      serves:
+        - FR-2
+        - FR-4
+      file: design/use-cases.md
+      section: UC-7-插件卸载-会话销毁
+traceability:
+  fr_to_design:
+    FR-1:
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#判定链与插入点
+      - design/architecture.md#被否决的备选
+      - design/data-model.md#内存状态模型
+      - design/data-model.md#ctxjobs既有不变
+      - design/interfaces.md#内部模块接口-srcjobsjs
+      - design/interfaces.md#新增纯函数
+      - design/interfaces.md#createJobGateoptions-增量
+      - design/interfaces.md#gate-返回契约
+      - design/interfaces.md#接线接口-indexjs-applyctx
+      - design/use-cases.md#UC-1-主场景派活给-continuable-子代理现状误报修后不报
+      - design/use-cases.md#UC-4-混合场景后台-job-子代理
+    FR-2:
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#结算与兜底补发时序
+      - design/data-model.md#内存状态模型
+      - design/data-model.md#PendingRecord-字段
+      - design/data-model.md#生命周期与清理
+      - design/data-model.md#subagentend-事件只读首参仅作复检时机
+      - design/interfaces.md#内部模块接口-srcjobsjs
+      - design/interfaces.md#createJobGateoptions-增量
+      - design/interfaces.md#复检与补发契约内部
+      - design/interfaces.md#接线接口-indexjs-applyctx
+      - design/use-cases.md#UC-1-主场景派活给-continuable-子代理现状误报修后不报
+      - design/use-cases.md#UC-2-静默唤醒路径completionDeliveryquiet-唤醒预算耗尽
+      - design/use-cases.md#UC-3-continuable-的多-epoch唤醒既有子代理
+      - design/use-cases.md#UC-4-混合场景后台-job-子代理
+      - design/use-cases.md#UC-7-插件卸载-会话销毁
+    FR-3:
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#血缘与活体口径
+      - design/architecture.md#被否决的备选
+      - design/data-model.md#只读事实源形状
+      - design/data-model.md#agentslist-条目只读字段
+      - design/interfaces.md#内部模块接口-srcjobsjs
+      - design/interfaces.md#新增纯函数
+      - design/use-cases.md#UC-3-continuable-的多-epoch唤醒既有子代理
+      - design/use-cases.md#UC-5-不该被压住的四种情况
+    FR-4:
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#降级开关与回滚
+      - design/data-model.md#生命周期与清理
+      - design/interfaces.md#createJobGateoptions-增量
+      - design/interfaces.md#接线接口-indexjs-applyctx
+      - design/interfaces.md#配置契约
+      - design/interfaces.md#错误语义表
+      - design/use-cases.md#UC-5-不该被压住的四种情况
+      - design/use-cases.md#UC-7-插件卸载-会话销毁
+    FR-5:
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#判定链与插入点
+      - design/architecture.md#不变量
+      - design/data-model.md#无落盘数据
+      - design/interfaces.md#出站契约
+      - design/use-cases.md#UC-6-子代理自己结束时的静默边界明确不做
+    FR-6:
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#文档口径纠正
+      - design/interfaces.md#gate-返回契约
+      - design/interfaces.md#观测契约-drop-原因码与日志
+      - design/use-cases.md#UC-4-混合场景后台-job-子代理
+coverage:
+  design:
+    total: 0
+    covered: 0
+    uncovered: []
+    rate: 100
+    total_frs: 0
+    covered_frs: 0

@@ -1,0 +1,396 @@
+metadata:
+  stage: accepting
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T06:40:54.727Z
+  version: 3
+  generated_by: dsh-pmboard
+  last_updated: 2026-09-30T06:41:16.835Z
+inputs:
+  tasks:
+    - id: t-fd6e82
+      title: 建立插件包骨架与配置层
+      status: done
+    - id: t-20c962
+      title: 实现绑定表与原子持久化
+      status: done
+    - id: t-ae2996
+      title: 暴露 Host Service dshNoticeWebhook
+      status: done
+    - id: t-cbf2e4
+      title: 实现 webhook 投递层
+      status: done
+    - id: t-245978
+      title: 实现事件分类与过滤
+      status: done
+    - id: t-898417
+      title: 实现 goal 自动轮识别与静默
+      status: done
+    - id: t-f94377
+      title: 实现 goal 终态识别与去重
+      status: done
+    - id: t-966bd3
+      title: 实现路由层与总开关旁路
+      status: done
+    - id: t-f25d34
+      title: 接线整合与本地端到端联调
+      status: done
+    - id: t-87cafa
+      title: 装载到 profile 并做真实 Host 验收
+      status: done
+    - id: t-f01c88
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）
+      status: done
+    - id: t-886615
+      title: 写插件使用说明 README
+      status: done
+    - id: t-6eb2b2
+      title: 建立插件包骨架与配置层·研发
+      status: done
+    - id: t-a1f262
+      title: 建立插件包骨架与配置层·复核
+      status: done
+    - id: t-2fc91c
+      title: 建立插件包骨架与配置层·测试
+      status: done
+    - id: t-883faa
+      title: 实现绑定表与原子持久化·研发
+      status: done
+    - id: t-e7dd75
+      title: 实现绑定表与原子持久化·复核
+      status: done
+    - id: t-d8437b
+      title: 实现绑定表与原子持久化·测试
+      status: done
+    - id: t-55b341
+      title: 实现 webhook 投递层·研发
+      status: done
+    - id: t-d3ed02
+      title: 实现 webhook 投递层·复核
+      status: done
+    - id: t-7ae458
+      title: 实现 webhook 投递层·测试
+      status: done
+    - id: t-123825
+      title: 实现事件分类与过滤·研发
+      status: done
+    - id: t-e910b0
+      title: 实现事件分类与过滤·复核
+      status: done
+    - id: t-9e8eb9
+      title: 实现事件分类与过滤·测试
+      status: done
+    - id: t-a05d68
+      title: 暴露 Host Service dshNoticeWebhook·研发
+      status: done
+    - id: t-ef947a
+      title: 暴露 Host Service dshNoticeWebhook·联调
+      status: done
+    - id: t-3da71e
+      title: 暴露 Host Service dshNoticeWebhook·复核
+      status: done
+    - id: t-d54a86
+      title: 暴露 Host Service dshNoticeWebhook·测试
+      status: done
+    - id: t-e96439
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·研发
+      status: done
+    - id: t-b6df77
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·复核
+      status: done
+    - id: t-33a9df
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·测试
+      status: done
+    - id: t-096bbe
+      title: 实现 goal 自动轮识别与静默·研发
+      status: done
+    - id: t-a4ac0a
+      title: 实现 goal 自动轮识别与静默·复核
+      status: done
+    - id: t-527280
+      title: 实现 goal 自动轮识别与静默·测试
+      status: done
+    - id: t-3966e0
+      title: 实现路由层与总开关旁路·研发
+      status: done
+    - id: t-040d34
+      title: 实现路由层与总开关旁路·复核
+      status: done
+    - id: t-399c3a
+      title: 实现路由层与总开关旁路·测试
+      status: done
+    - id: t-9600c2
+      title: 实现 goal 终态识别与去重·研发
+      status: done
+    - id: t-5e3c2c
+      title: 实现 goal 终态识别与去重·复核
+      status: done
+    - id: t-9efd71
+      title: 实现 goal 终态识别与去重·测试
+      status: done
+    - id: t-c9c721
+      title: 接线整合与本地端到端联调·研发
+      status: done
+    - id: t-a0aed4
+      title: 接线整合与本地端到端联调·联调
+      status: done
+    - id: t-030e3c
+      title: 接线整合与本地端到端联调·复核
+      status: done
+    - id: t-ee2412
+      title: 接线整合与本地端到端联调·测试
+      status: done
+    - id: t-c7e70b
+      title: 装载到 profile 并做真实 Host 验收·研发
+      status: done
+    - id: t-168c3a
+      title: 装载到 profile 并做真实 Host 验收·复核
+      status: done
+    - id: t-623dc6
+      title: 装载到 profile 并做真实 Host 验收·测试
+      status: done
+    - id: t-6acade
+      title: 写插件使用说明 README·研发
+      status: done
+    - id: t-896aff
+      title: 写插件使用说明 README·复核
+      status: done
+outputs:
+  test_cases:
+    - id: TC-1
+      title: 任务覆盖对照（每张卡 ↔ 可复核的验证方式）
+      covers:
+        - t-xxxxxx
+      validates: []
+      source: tests/test-report.md
+    - id: TC-2
+      title: t1 建立插件包骨架与配置层
+      covers:
+        - t-fd6e82
+        - t-6eb2b2
+        - t-a1f262
+        - t-2fc91c
+      validates: []
+      source: tests/test-report.md
+    - id: TC-3
+      title: t2 实现绑定表与原子持久化
+      covers:
+        - t-20c962
+        - t-883faa
+        - t-e7dd75
+        - t-d8437b
+      validates: []
+      source: tests/test-report.md
+    - id: TC-4
+      title: t3 暴露 Host Service dshNoticeWebhook
+      covers:
+        - t-ae2996
+        - t-a05d68
+        - t-ef947a
+        - t-3da71e
+        - t-d54a86
+      validates: []
+      source: tests/test-report.md
+    - id: TC-5
+      title: t4 实现 webhook 投递层
+      covers:
+        - t-cbf2e4
+        - t-55b341
+        - t-d3ed02
+        - t-7ae458
+      validates: []
+      source: tests/test-report.md
+    - id: TC-6
+      title: t5 实现事件分类与过滤
+      covers:
+        - t-245978
+        - t-123825
+        - t-e910b0
+        - t-9e8eb9
+      validates: []
+      source: tests/test-report.md
+    - id: TC-7
+      title: t6a 实现 goal 自动轮识别与静默
+      covers:
+        - t-898417
+        - t-096bbe
+        - t-a4ac0a
+        - t-527280
+      validates: []
+      source: tests/test-report.md
+    - id: TC-8
+      title: t6b 实现 goal 终态识别与去重
+      covers:
+        - t-f94377
+        - t-9600c2
+        - t-5e3c2c
+        - t-9efd71
+      validates: []
+      source: tests/test-report.md
+    - id: TC-9
+      title: t7 实现路由层与总开关旁路
+      covers:
+        - t-966bd3
+        - t-3966e0
+        - t-040d34
+        - t-399c3a
+      validates: []
+      source: tests/test-report.md
+    - id: TC-10
+      title: t8 接线整合与本地端到端联调
+      covers:
+        - t-f25d34
+        - t-c9c721
+        - t-a0aed4
+        - t-030e3c
+        - t-ee2412
+      validates: []
+      source: tests/test-report.md
+    - id: TC-11
+      title: t9 装载到 profile 并做真实 Host 验收
+      covers:
+        - t-87cafa
+        - t-c7e70b
+        - t-168c3a
+        - t-623dc6
+      validates: []
+      source: tests/test-report.md
+    - id: TC-12
+      title: t10 处理迁移与兼容
+      covers:
+        - t-f01c88
+        - t-e96439
+        - t-b6df77
+        - t-33a9df
+      validates: []
+      source: tests/test-report.md
+    - id: TC-13
+      title: t11 写插件使用说明 README
+      covers:
+        - t-886615
+        - t-6acade
+        - t-896aff
+      validates: []
+      source: tests/test-report.md
+traceability:
+  task_to_tests:
+    t-fd6e82:
+      - TC-2
+    t-20c962:
+      - TC-3
+    t-ae2996:
+      - TC-4
+    t-cbf2e4:
+      - TC-5
+    t-245978:
+      - TC-6
+    t-898417:
+      - TC-7
+    t-f94377:
+      - TC-8
+    t-966bd3:
+      - TC-9
+    t-f25d34:
+      - TC-10
+    t-87cafa:
+      - TC-11
+    t-f01c88:
+      - TC-12
+    t-886615:
+      - TC-13
+    t-6eb2b2:
+      - TC-2
+    t-a1f262:
+      - TC-2
+    t-2fc91c:
+      - TC-2
+    t-883faa:
+      - TC-3
+    t-e7dd75:
+      - TC-3
+    t-d8437b:
+      - TC-3
+    t-55b341:
+      - TC-5
+    t-d3ed02:
+      - TC-5
+    t-7ae458:
+      - TC-5
+    t-123825:
+      - TC-6
+    t-e910b0:
+      - TC-6
+    t-9e8eb9:
+      - TC-6
+    t-a05d68:
+      - TC-4
+    t-ef947a:
+      - TC-4
+    t-3da71e:
+      - TC-4
+    t-d54a86:
+      - TC-4
+    t-e96439:
+      - TC-12
+    t-b6df77:
+      - TC-12
+    t-33a9df:
+      - TC-12
+    t-096bbe:
+      - TC-7
+    t-a4ac0a:
+      - TC-7
+    t-527280:
+      - TC-7
+    t-3966e0:
+      - TC-9
+    t-040d34:
+      - TC-9
+    t-399c3a:
+      - TC-9
+    t-9600c2:
+      - TC-8
+    t-5e3c2c:
+      - TC-8
+    t-9efd71:
+      - TC-8
+    t-c9c721:
+      - TC-10
+    t-a0aed4:
+      - TC-10
+    t-030e3c:
+      - TC-10
+    t-ee2412:
+      - TC-10
+    t-c7e70b:
+      - TC-11
+    t-168c3a:
+      - TC-11
+    t-623dc6:
+      - TC-11
+    t-6acade:
+      - TC-13
+    t-896aff:
+      - TC-13
+    t-xxxxxx:
+      - TC-1
+  fr_to_tests:
+    FR-1: []
+    FR-4: []
+    FR-2: []
+    FR-3: []
+    FR-11: []
+    FR-5: []
+    FR-6: []
+    FR-7: []
+    FR-8: []
+    FR-9: []
+    FR-10: []
+coverage:
+  testing:
+    total: 49
+    covered: 49
+    uncovered: []
+    rate: 100
+    total_tasks: 49
+    tested_tasks: 49
+    untested: []

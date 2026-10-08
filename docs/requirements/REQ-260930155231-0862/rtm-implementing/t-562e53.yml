@@ -1,0 +1,37 @@
+task:
+  id: t-562e53
+  title: 声明插件 Config schema 与双半包清单·研发
+  status: done
+  implements: |-
+    在 package.json 增加依赖 @deepseek-ai/schemastery@3.18.4，并加 exports["./client"]=./client.js 与 dsh.client={platform:web,immediately:true,inject:[...]}；在 src/config.js 用 schemastery 声明 Config（enabled/timeoutMs/retry/cooldownMs/notifyComplete/notifyApproval/notifyQuestion/onlyTopLevel/includeTitle 标 .volatile()；webhookUrl 与文案/skipReasons 保持普通字段），保留 normalizeConfig 作为无 schema 时的兑底。验证：新增 test/config.test.js 并跑绿。
+
+    [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+  serves: []
+  depends_on: []
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-562e53
+    TASK_TITLE: 声明插件 Config schema 与双半包清单·研发
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T08:51:04.058Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T08:50:26.125Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T08:51:04.059Z

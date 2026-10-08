@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>文案配置页 · 设计原型</title>
+<style>
+  :root { --surface: #fff; --text: #1d1d1f; --muted: rgba(60,60,67,.6); --line: rgba(60,60,67,.16);
+          --soft: rgba(120,120,128,.1); --accent: #0071e3; }
+  html[data-theme="dark"] { --surface: #1e232e; --text: #e6e8ec; --muted: rgba(235,235,245,.6);
+          --line: rgba(255,255,255,.16); --soft: rgba(255,255,255,.08); --accent: #0a84ff; }
+  html { color-scheme: light; }
+  html[data-theme="dark"] { color-scheme: dark; }
+  body { margin: 0; padding: 22px; background: light-dark(#f5f6f8, #14171f); color: var(--text);
+         font: 13px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif; }
+  .crumb { font-size: 13px; color: var(--muted); }
+  h1 { font-size: 15px; font-weight: 600; margin: 2px 0 12px; letter-spacing: -.01em; }
+  .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+  .tab { padding: 6px 12px; color: var(--muted); border-bottom: 2px solid transparent; }
+  .tab.on { color: var(--text); border-bottom-color: var(--accent); font-weight: 500; }
+  .cols { display: flex; gap: 14px; align-items: flex-start; }
+  .card { background: color-mix(in srgb, Canvas 92%, transparent); border: 1px solid var(--line);
+          border-radius: 12px; padding: 14px; }
+  .left { flex: 1 1 auto; min-width: 0; }
+  .right { flex: 0 0 360px; }
+  .title { font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .sub { font-size: 12px; color: var(--muted); margin: -6px 0 10px; }
+  .row { display: flex; align-items: center; gap: 10px; padding: 7px 8px; border-radius: 8px; }
+  .row:hover { background: var(--soft); }
+  .row .grab { color: var(--muted); font-size: 12px; width: 14px; }
+  .row .name { flex: 1 1 auto; }
+  .row .name small { display: block; color: var(--muted); font-size: 11px; }
+  .field { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+  .field label { flex: 0 0 92px; text-align: right; color: var(--muted); }
+  .inp { flex: 1 1 auto; height: 30px; padding: 0 10px; border-radius: 6px; border: 1px solid var(--line);
+         background: color-mix(in srgb, Canvas 96%, CanvasText 4%); color: inherit; font: inherit; display: flex; align-items: center; }
+  .inp.sel::after { content: "⌄"; margin-left: auto; color: var(--muted); }
+  textarea.inp { height: 66px; padding: 8px 10px; font-family: ui-monospace, Menlo, monospace; font-size: 12px; line-height: 1.5; }
+  .switch { width: 42px; height: 26px; border-radius: 999px; background: #34c759; position: relative; flex: 0 0 auto; }
+  .switch::after { content: ""; position: absolute; top: 2px; left: 18px; width: 22px; height: 22px; border-radius: 999px;
+                   background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.28); }
+  .switch.off { background: color-mix(in srgb, CanvasText 24%, transparent); }
+  .switch.off::after { left: 2px; }
+  .actions { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+  .btn { height: 28px; padding: 0 13px; border-radius: 6px; border: 1px solid var(--line);
+         background: linear-gradient(180deg, color-mix(in srgb, Canvas 100%, transparent), color-mix(in srgb, Canvas 92%, CanvasText 8%));
+         display: inline-flex; align-items: center; }
+  .btn.primary { border-color: transparent; background: linear-gradient(180deg, #0a84ff, #0071e3); color: #fff; font-weight: 500; }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 7px; overflow: hidden; margin-bottom: 10px; }
+  .seg div { padding: 4px 12px; font-size: 12px; color: var(--muted); }
+  .seg div.on { background: var(--soft); color: var(--text); font-weight: 500; }
+  /* 飞书卡片预览 */
+  .fcard { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .fhead { padding: 10px 12px; font-weight: 600; }
+  .fhead.green { background: rgba(52,199,89,.16); color: #1f9d4d; }
+  .fbody { padding: 12px; }
+  .fbody .line { margin-bottom: 6px; }
+  .fbody b { font-weight: 600; margin-right: 8px; }
+  .fbtn { display: inline-block; margin-top: 8px; padding: 5px 12px; border: 1px solid var(--accent);
+          color: var(--accent); border-radius: 6px; font-size: 12px; }
+  .plain { border: 1px dashed var(--line); border-radius: 10px; padding: 12px; font-size: 12px; white-space: pre-wrap; }
+  .hint { font-size: 11px; color: var(--muted); margin-top: 8px; }
+</style>
+</head>
+<body>
+  <div class="crumb">设置 › Webhook 通知</div>
+  <h1>文案配置 <span style="font-weight:400;color:var(--muted);font-size:12px">· 决定「推送出去的这条消息」长什么样</span></h1>
+
+  <div class="tabs">
+    <div class="tab">目标</div>
+    <div class="tab">会话绑定</div>
+    <div class="tab on">文案</div>
+  </div>
+
+  <div class="cols">
+    <!-- 左：字段与参数 -->
+    <div class="card left">
+      <div class="title">显示哪些内容</div>
+      <div class="sub">拖动排序 · 关掉就不出现在消息里</div>
+
+      <div class="row"><span class="grab">⠿</span><span class="name">事件标题<small>✅ 对话完成 / ❓ 等待回答 …</small></span><span class="switch"></span></div>
+      <div class="row"><span class="grab">⠿</span><span class="name">时间<small>按下面的格式渲染</small></span><span class="switch"></span></div>
+      <div class="row"><span class="grab">⠿</span><span class="name">会话<small>会话标题 + 短 id，便于定位</small></span><span class="switch"></span></div>
+      <div class="row"><span class="grab">⠿</span><span class="name">工作区<small>目录名或全路径</small></span><span class="switch"></span></div>
+      <div class="row"><span class="grab">⠿</span><span class="name">任务摘要<small>你这一轮说的话（可截断）</small></span><span class="switch"></span></div>
+      <div class="row"><span class="grab">⠿</span><span class="name">事件详情<small>问的是 / 工具 / 目标状态</small></span><span class="switch"></span></div>
+      <div class="row"><span class="grab">⠿</span><span class="name">打开 DSH 按钮<small>点一下回到 DSH 窗口</small></span><span class="switch"></span></div>
+
+      <div class="field"><label>摘要长度</label><div class="inp" style="flex:0 0 90px">60</div><span style="color:var(--muted)">字，超出加「…」；填 0 表示不带摘要</span></div>
+      <div class="field"><label>时间格式</label><div class="inp sel" style="flex:0 0 210px">YYYY-MM-DD HH:mm</div><span style="color:var(--muted)">也支持 HH:mm</span></div>
+      <div class="field"><label>工作区显示</label><div class="inp sel" style="flex:0 0 160px">目录名</div><span style="color:var(--muted)">或全路径（便于定位，可能含敏感目录）</span></div>
+      <div class="field"><label>跳转地址</label><div class="inp" style="font-family:Menlo,monospace">dsh://open</div></div>
+      <div class="field" style="align-items:flex-start"><label style="padding-top:8px">自定义模板</label>
+        <div style="flex:1 1 auto">
+          <textarea class="inp" style="width:100%">{event}
+会话：{session}（#{id}）
+任务：{prompt}
+{link}</textarea>
+          <div class="hint">留空 = 用上面的开关拼装；填了则以模板为准。可用占位符：{event} {time} {session} {id} {workspace} {prompt} {detail} {link}</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <span class="btn">恢复默认</span>
+        <span class="btn">发送示例到当前目标</span>
+        <span style="flex:1"></span>
+        <span class="btn primary">保存</span>
+      </div>
+    </div>
+
+    <!-- 右：实时预览 -->
+    <div class="card right">
+      <div class="title">实时预览</div>
+      <div class="seg"><div class="on">飞书卡片</div><div>纯文本</div></div>
+      <div class="fcard">
+        <div class="fhead green">✅ 对话完成</div>
+        <div class="fbody">
+          <div class="line"><b>会话</b>飞书通知改卡片（#7d6c5b）</div>
+          <div class="line"><b>工作区</b>dsh-notice-webhook</div>
+          <div class="line"><b>任务</b>把飞书通知改成卡片，底部加个打开 DSH 的按钮</div>
+          <div class="line"><b>时间</b>2026-09-30 10:19</div>
+          <div class="fbtn">打开 DSH</div>
+        </div>
+      </div>
+      <div class="hint">用示例数据渲染，改左边即时变；切到「纯文本」看企微/钉钉/Slack/Discord 收到的样子。</div>
+    </div>
+  </div>
+</body>
+</html>

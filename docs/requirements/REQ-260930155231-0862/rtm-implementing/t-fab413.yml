@@ -1,0 +1,37 @@
+task:
+  id: t-fab413
+  title: 实现投递结果存储（内存）·研发
+  status: done
+  implements: |-
+    新增 src/outcomes.js：Map<targetId, Outcome[]>，append 时裁剪到 5 条；reason 只允许业务码/网络错误文本；提供 list(targetId) 与 snapshot()。验证：新增 test/outcomes.test.js。
+
+    [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+  serves: []
+  depends_on: []
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-fab413
+    TASK_TITLE: 实现投递结果存储（内存）·研发
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T09:45:18.116Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T09:45:17.926Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T09:45:18.117Z

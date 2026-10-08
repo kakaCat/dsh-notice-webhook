@@ -1,0 +1,162 @@
+metadata:
+  stage: implementing
+  requirement_id: REQ-261002150038-344a
+  generated_at: 2026-10-02T07:04:16.411Z
+  version: 88
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 29
+  last_updated: 2026-10-02T07:17:07.072Z
+inputs:
+  tasks:
+    - id: t-f48ac7
+      title: 口径契约：isHumanSource 纯函数与真值表
+      status: done
+    - id: t-1d9465
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮
+      status: done
+    - id: t-0f608f
+      title: 「任务」字段：注入正文不再冒充人的要求
+      status: done
+    - id: t-955eca
+      title: 飞书卡片：删掉与标题重复的「类型」行
+      status: done
+    - id: t-dc6479
+      title: 设置页预览：卡片区不再显示「类型」行
+      status: done
+    - id: t-cc2a0c
+      title: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）
+      status: done
+    - id: t-220981
+      title: 口径契约：isHumanSource 纯函数与真值表·研发
+      status: done
+    - id: t-d75046
+      title: 口径契约：isHumanSource 纯函数与真值表·联调
+      status: done
+    - id: t-6b15ab
+      title: 口径契约：isHumanSource 纯函数与真值表·复核
+      status: done
+    - id: t-06742a
+      title: 口径契约：isHumanSource 纯函数与真值表·测试
+      status: done
+    - id: t-2fa8d1
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮·研发
+      status: done
+    - id: t-448271
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮·联调
+      status: done
+    - id: t-002a22
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮·复核
+      status: done
+    - id: t-113155
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮·测试
+      status: done
+    - id: t-f1e3ee
+      title: 「任务」字段：注入正文不再冒充人的要求·研发
+      status: done
+    - id: t-d126c0
+      title: 「任务」字段：注入正文不再冒充人的要求·联调
+      status: done
+    - id: t-c10757
+      title: 「任务」字段：注入正文不再冒充人的要求·复核
+      status: done
+    - id: t-b02ef3
+      title: 「任务」字段：注入正文不再冒充人的要求·测试
+      status: done
+    - id: t-1e5fa9
+      title: 飞书卡片：删掉与标题重复的「类型」行·研发
+      status: done
+    - id: t-1fb3eb
+      title: 飞书卡片：删掉与标题重复的「类型」行·联调
+      status: done
+    - id: t-7486b9
+      title: 飞书卡片：删掉与标题重复的「类型」行·复核
+      status: done
+    - id: t-01300e
+      title: 飞书卡片：删掉与标题重复的「类型」行·测试
+      status: done
+    - id: t-8ff324
+      title: 设置页预览：卡片区不再显示「类型」行·研发
+      status: done
+    - id: t-98eaa8
+      title: 设置页预览：卡片区不再显示「类型」行·联调
+      status: done
+    - id: t-aeb234
+      title: 设置页预览：卡片区不再显示「类型」行·复核
+      status: done
+    - id: t-723dce
+      title: 设置页预览：卡片区不再显示「类型」行·测试
+      status: done
+    - id: t-b715ff
+      title: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·研发
+      status: done
+    - id: t-e4a547
+      title: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·复核
+      status: done
+    - id: t-d3b450
+      title: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·测试
+      status: done
+status:
+  tasks_total: 29
+  tasks_done: 29
+  tasks_in_progress: 0
+  tasks_todo: 0
+tasks:
+  - id: t-f48ac7
+    status: done
+  - id: t-1d9465
+    status: done
+  - id: t-0f608f
+    status: done
+  - id: t-955eca
+    status: done
+  - id: t-dc6479
+    status: done
+  - id: t-cc2a0c
+    status: done
+  - id: t-220981
+    status: done
+  - id: t-d75046
+    status: done
+  - id: t-6b15ab
+    status: done
+  - id: t-06742a
+    status: done
+  - id: t-2fa8d1
+    status: done
+  - id: t-448271
+    status: done
+  - id: t-002a22
+    status: done
+  - id: t-113155
+    status: done
+  - id: t-f1e3ee
+    status: done
+  - id: t-d126c0
+    status: done
+  - id: t-c10757
+    status: done
+  - id: t-b02ef3
+    status: done
+  - id: t-1e5fa9
+    status: done
+  - id: t-1fb3eb
+    status: done
+  - id: t-7486b9
+    status: done
+  - id: t-01300e
+    status: done
+  - id: t-8ff324
+    status: done
+  - id: t-98eaa8
+    status: done
+  - id: t-aeb234
+    status: done
+  - id: t-723dce
+    status: done
+  - id: t-b715ff
+    status: done
+  - id: t-e4a547
+    status: done
+  - id: t-d3b450
+    status: done

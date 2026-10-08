@@ -1,0 +1,33 @@
+task:
+  id: t-c47b93
+  title: targets.json v2 与校验收口
+  status: done
+  implements: src/targets.js：TARGET_FILE_VERSION 升 2；读写按 v2 结构（targets[] 含 key + 派生 url）；校验失败路径保持“不落盘 + 不改内存”。验证：test/targets.test.js 增 v2 与非法 key 用例。
+  serves: []
+  depends_on:
+    - t-74862d
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-c47b93
+    TASK_TITLE: targets.json v2 与校验收口
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:26:32.260Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:26:32.151Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T14:29:44.935Z

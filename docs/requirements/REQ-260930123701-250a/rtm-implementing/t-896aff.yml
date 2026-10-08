@@ -1,0 +1,45 @@
+task:
+  id: t-896aff
+  title: 写插件使用说明 README·复核
+  status: done
+  implements: |-
+    新增 README.md：写装载步骤（cordis.patch.yml 片段）、与 design/interfaces.md 一致的配置项表、webhook 契约与字段说明、Host Service 消费示例代码、本地接收端验证命令（python3 接收器与 curl 失败隔离两段）。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-6acade
+  phase: doc
+  side: doc
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-896aff
+    TASK_TITLE: 写插件使用说明 README·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: doc
+    PHASE: doc
+  workflow_total: 4
+  workflow_done: 4
+  workflow:
+    - phase: doc
+      status: done
+      completed_at: 2026-09-30T06:38:16.875Z
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T06:38:16.929Z
+    - phase: test
+      status: done
+      completed_at: 2026-09-30T06:38:16.929Z
+    - phase: commit
+      status: done
+      completed_at: 2026-09-30T06:38:16.929Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T06:38:16.794Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 4
+  last_updated: 2026-09-30T06:38:16.929Z

@@ -1,0 +1,860 @@
+metadata:
+  stage: decomposing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T05:32:58.684Z
+  version: 149
+  generated_by: dsh-pmboard
+  last_updated: 2026-09-30T06:39:19.120Z
+inputs:
+  requirements: []
+  design_sections:
+    - ref: design/architecture.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-1
+        - FR-4
+      file: design/architecture.md
+      section: TLDR
+    - ref: design/architecture.md#目标与总体方案
+      title: 目标与总体方案 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-11
+      file: design/architecture.md
+      section: 目标与总体方案
+    - ref: design/architecture.md#模块改动地图
+      title: 模块改动地图 `
+      serves:
+        - FR-1
+      file: design/architecture.md
+      section: 模块改动地图
+    - ref: design/architecture.md#关键流程
+      title: 关键流程 `
+      serves:
+        - FR-5
+        - FR-6
+        - FR-7
+        - FR-11
+      file: design/architecture.md
+      section: 关键流程
+    - ref: design/architecture.md#一次-sessionevent-的完整判定
+      title: 一次 `session/event` 的完整判定 `
+      serves:
+        - FR-1
+        - FR-5
+        - FR-11
+      file: design/architecture.md
+      section: 一次-sessionevent-的完整判定
+    - ref: design/architecture.md#事件分类表
+      title: 事件分类表 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+      file: design/architecture.md
+      section: 事件分类表
+    - ref: design/architecture.md#goal-自动轮判定
+      title: goal 自动轮判定 `
+      serves:
+        - FR-11
+      file: design/architecture.md
+      section: goal-自动轮判定
+    - ref: design/architecture.md#终态去重
+      title: 终态去重 `
+      serves:
+        - FR-11
+      file: design/architecture.md
+      section: 终态去重
+    - ref: design/architecture.md#关键决策点
+      title: 关键决策点 `
+      serves:
+        - FR-4
+        - FR-6
+        - FR-11
+      file: design/architecture.md
+      section: 关键决策点
+    - ref: design/architecture.md#依赖关系
+      title: 依赖关系 `
+      serves:
+        - FR-4
+      file: design/architecture.md
+      section: 依赖关系
+    - ref: design/architecture.md#错误处理
+      title: 错误处理 `
+      serves:
+        - FR-4
+        - FR-8
+      file: design/architecture.md
+      section: 错误处理
+    - ref: design/architecture.md#安全与性能
+      title: 安全与性能 `
+      serves:
+        - FR-4
+      file: design/architecture.md
+      section: 安全与性能
+    - ref: design/architecture.md#测试策略
+      title: 测试策略 `
+      serves:
+        - FR-1
+      file: design/architecture.md
+      section: 测试策略
+    - ref: design/architecture.md#遗留问题
+      title: 遗留问题 `
+      serves:
+        - FR-9
+        - FR-11
+      file: design/architecture.md
+      section: 遗留问题
+    - ref: design/data-model.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: TLDR
+    - ref: design/data-model.md#持久化数据结构
+      title: 持久化数据结构 `
+      serves:
+        - FR-6
+        - FR-9
+        - FR-10
+      file: design/data-model.md
+      section: 持久化数据结构
+    - ref: design/data-model.md#BindingEntry
+      title: BindingEntry `
+      serves:
+        - FR-6
+        - FR-10
+      file: design/data-model.md
+      section: BindingEntry
+    - ref: design/data-model.md#BindingsFile
+      title: BindingsFile `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: BindingsFile
+    - ref: design/data-model.md#内存状态
+      title: 内存状态 `
+      serves:
+        - FR-5
+        - FR-11
+      file: design/data-model.md
+      section: 内存状态
+    - ref: design/data-model.md#迁移与兼容
+      title: 迁移与兼容 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 迁移与兼容
+    - ref: design/data-model.md#孤儿绑定
+      title: 孤儿绑定 `
+      serves:
+        - FR-6
+        - FR-9
+      file: design/data-model.md
+      section: 孤儿绑定
+    - ref: design/interfaces.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: TLDR
+    - ref: design/interfaces.md#出站-Webhook-契约
+      title: 出站 Webhook 契约 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-4
+        - FR-11
+      file: design/interfaces.md
+      section: 出站-Webhook-契约
+    - ref: design/interfaces.md#请求
+      title: 请求 `
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 请求
+    - ref: design/interfaces.md#请求体字段
+      title: 请求体字段 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-11
+      file: design/interfaces.md
+      section: 请求体字段
+    - ref: design/interfaces.md#请求体样例
+      title: 请求体样例 `
+      serves:
+        - FR-11
+      file: design/interfaces.md
+      section: 请求体样例
+    - ref: design/interfaces.md#响应与错误语义
+      title: 响应与错误语义 `
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 响应与错误语义
+    - ref: design/interfaces.md#版本兼容
+      title: 版本兼容 `
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: 版本兼容
+    - ref: design/interfaces.md#Host-Service-契约
+      title: Host Service 契约 `
+      serves:
+        - FR-6
+        - FR-8
+        - FR-10
+      file: design/interfaces.md
+      section: Host-Service-契约
+    - ref: design/interfaces.md#服务定义
+      title: 服务定义 `
+      serves:
+        - FR-8
+        - FR-10
+      file: design/interfaces.md
+      section: 服务定义
+    - ref: design/interfaces.md#配置项契约
+      title: 配置项契约 `
+      serves:
+        - FR-4
+        - FR-5
+        - FR-6
+        - FR-7
+      file: design/interfaces.md
+      section: 配置项契约
+    - ref: design/use-cases.md#场景总览
+      title: 场景总览 `
+      serves:
+        - FR-1
+        - FR-6
+        - FR-8
+        - FR-11
+      file: design/use-cases.md
+      section: 场景总览
+    - ref: design/use-cases.md#UC-1-离开电脑也不错过阻塞点
+      title: UC-1 离开电脑也不错过阻塞点 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+      file: design/use-cases.md
+      section: UC-1-离开电脑也不错过阻塞点
+    - ref: design/use-cases.md#UC-2-其他插件把会话绑到自己的通道
+      title: UC-2 其他插件把会话绑到自己的通道 `
+      serves:
+        - FR-6
+        - FR-8
+      file: design/use-cases.md
+      section: UC-2-其他插件把会话绑到自己的通道
+    - ref: design/use-cases.md#UC-3-goal-自动跑轮全程安静卡住时叫人
+      title: UC-3 goal 自动跑轮全程安静、卡住时叫人 `
+      serves:
+        - FR-11
+      file: design/use-cases.md
+      section: UC-3-goal-自动跑轮全程安静卡住时叫人
+outputs:
+  tasks:
+    - id: t-fd6e82
+      title: 建立插件包骨架与配置层
+      implements: "新增 package.json（type: module、dsh.bundle.patch 指向 ./cordis.patch.yml、不引第三方依赖）；新增 cordis.patch.yml 用 insert 写一条 id: dsh-notice-webhook 的装载行；新增 index.js 只导出 apply(ctx, config) 做接线；新增 src/config.js 提供 DEFAULTS 与 normalizeConfig（类型不符或越界回落默认值并写一条 warn）。"
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-20c962
+      title: 实现绑定表与原子持久化
+      implements: 新增 src/bindings.js：BindingStore 以 Map 保存 sessionId→{url,updatedAt}；load() 读 $DSH_HOME/state/dsh-notice-webhook/bindings.json（文件缺失返回空表且不创建；非法 JSON 或未知 version 记 warn 并返回空表且不覆盖原文件；单条字段非法跳过）；persist() 先写 .tmp 再 rename 实现原子写；list() 按 sessionId 升序返回。
+      serves: []
+      depends_on:
+        - t-fd6e82
+      phase: implement
+      side: backend
+    - id: t-ae2996
+      title: 暴露 Host Service dshNoticeWebhook
+      implements: "新增 src/service.js：以 ctx.provide('dshNoticeWebhook', svc) 暴露 { version: 1, bind, unbind, list, resolve }；bind 校验 sessionId 为非空字符串、url 能被 new URL 解析且 protocol 属于 http:/https: 否则返回 false（不抛异常）；用 ctx.effect 在 apply 中注册并在卸载时释放。"
+      serves: []
+      depends_on:
+        - t-20c962
+      phase: implement
+      side: backend
+    - id: t-cbf2e4
+      title: 实现 webhook 投递层
+      implements: "新增 src/deliver.js：用 Node 内置 fetch 发 POST JSON（带 Content-Type: application/json; charset=utf-8 与 webhookHeaders）；用 AbortSignal.timeout(timeoutMs) 控制超时；redirect 设为 'manual' 且把 3xx 判定为失败；仅对网络错误、5xx、超时按 retry 次数重试，4xx 不重试；所有分支包 try/catch，失败只写 logger.warn，日志只输出 new URL(url).host 不输出完整 URL 与 headers。"
+      serves: []
+      depends_on:
+        - t-fd6e82
+      phase: implement
+      side: backend
+    - id: t-245978
+      title: 实现事件分类与过滤
+      implements: 新增 src/classify.js：把 session/event 分类成通知意图——turn/end 按标题拼正文、approval/asked 带 toolName、tool/call 且 name==='ask_user_question' 产出提问意图；用 WeakMap 缓存 session/title；实现 onlyTopLevel（存在 parentSession 或 origin==='subagent' 时跳过）、skipReasons、cooldownMs 三类过滤；未命中返回 null。
+      serves: []
+      depends_on:
+        - t-fd6e82
+      phase: implement
+      side: backend
+    - id: t-898417
+      title: 实现 goal 自动轮识别与静默
+      implements: 新增 src/goal.js 的自动轮部分：在 session/event 中记录每条 user/message 的 source.kind 是否为 'goal'，并维护「本 turn 是否出现过人工输入」标记；turn/end 到达时若本轮全部 user message 均为 goal 注入则返回静默（不产出意图），只要出现一条非 goal 的 user/message 就按人工轮放行。
+      serves: []
+      depends_on:
+        - t-245978
+      phase: implement
+      side: backend
+    - id: t-f94377
+      title: 实现 goal 终态识别与去重
+      implements: 在 src/goal.js 增加终态部分：监听 goal/change 更新当前 goal 的 {id, revision, phase, maxGoalRounds}；phase 变为 complete 时产出 goal/complete 意图；变为 blocked 时产出 goal/blocked 意图——blockedReason.code === 'round-limit' 时正文用「目标轮次耗尽（N/N）」且 N = maxGoalRounds，其他 code 用「目标阻塞（code）」；paused 与清除不产出；用 Set 按 goalId:revision:phase 做进程内去重。
+      serves: []
+      depends_on:
+        - t-898417
+      phase: implement
+      side: backend
+    - id: t-966bd3
+      title: 实现路由层与总开关旁路
+      implements: 新增 src/router.js：第一步应用类型开关（notifyComplete/notifyApproval/notifyQuestion）作内容级过滤，命中窗口绑定也不豁免；第二步解析目标地址——命中窗口绑定则无视 enabled 直接投递；未命中绑定且 enabled=false 时丢弃；未命中绑定且 enabled=true 时用 webhookUrl，为空则丢弃并写一条 debug 日志。
+      serves: []
+      depends_on:
+        - t-ae2996
+        - t-245978
+      phase: implement
+      side: backend
+    - id: t-f25d34
+      title: 接线整合与本地端到端联调
+      implements: 在 index.js 组装主链路 classify → goal → router → deliver，用 ctx.on('session/event') 订阅会话事件，完成 service 注册与 bindings.load() 的调用顺序；新增 test/e2e.local.test.js：起本地 HTTP 接收端并按序灌入 turn/end、approval/asked、ask_user_question、goal/complete、goal/blocked，断言收到的 event 取值与正文；再把地址指向 http://127.0.0.1:1/ 重跑，断言无未捕获异常与未处理拒绝。
+      serves: []
+      depends_on:
+        - t-cbf2e4
+        - t-f94377
+        - t-966bd3
+      phase: implement
+      side: fullstack
+    - id: t-87cafa
+      title: 装载到 profile 并做真实 Host 验收
+      implements: 用 plugin_manager install_bundle 把插件包装进当前 profile 并确认生效；在真实 dsh 会话中触发一轮对话、一次需要授权的操作与一次 ask_user_question，用本地接收端日志逐条核对 payload 字段；再对某会话执行 bind() 到接收端 B 并设 enabled:false，验证只有 B 收到。
+      serves: []
+      depends_on:
+        - t-f25d34
+      phase: test
+      side: backend
+    - id: t-f01c88
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）
+      implements: 固化 src/bindings.js 的读取降级路径（文件缺失、非法 JSON、未知 version、单条字段非法）；确认 payload 为追加式演进且 version 保持 1；验证与 dsh-notice 共存（不读写其配置与触发目录）；验证卸载回滚后除 bindings.json 外无残留；新增 test/compat.test.js 覆盖上述路径。
+      serves: []
+      depends_on:
+        - t-20c962
+      phase: implement
+      side: backend
+    - id: t-886615
+      title: 写插件使用说明 README
+      implements: 新增 README.md：写装载步骤（cordis.patch.yml 片段）、与 design/interfaces.md 一致的配置项表、webhook 契约与字段说明、Host Service 消费示例代码、本地接收端验证命令（python3 接收器与 curl 失败隔离两段）。
+      serves: []
+      depends_on:
+        - t-87cafa
+      phase: doc
+      side: doc
+    - id: t-6eb2b2
+      title: 建立插件包骨架与配置层·研发
+      implements: |-
+        新增 package.json（type: module、dsh.bundle.patch 指向 ./cordis.patch.yml、不引第三方依赖）；新增 cordis.patch.yml 用 insert 写一条 id: dsh-notice-webhook 的装载行；新增 index.js 只导出 apply(ctx, config) 做接线；新增 src/config.js 提供 DEFAULTS 与 normalizeConfig（类型不符或越界回落默认值并写一条 warn）。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-a1f262
+      title: 建立插件包骨架与配置层·复核
+      implements: |-
+        新增 package.json（type: module、dsh.bundle.patch 指向 ./cordis.patch.yml、不引第三方依赖）；新增 cordis.patch.yml 用 insert 写一条 id: dsh-notice-webhook 的装载行；新增 index.js 只导出 apply(ctx, config) 做接线；新增 src/config.js 提供 DEFAULTS 与 normalizeConfig（类型不符或越界回落默认值并写一条 warn）。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-6eb2b2
+      phase: implement
+      side: backend
+    - id: t-2fc91c
+      title: 建立插件包骨架与配置层·测试
+      implements: |-
+        新增 package.json（type: module、dsh.bundle.patch 指向 ./cordis.patch.yml、不引第三方依赖）；新增 cordis.patch.yml 用 insert 写一条 id: dsh-notice-webhook 的装载行；新增 index.js 只导出 apply(ctx, config) 做接线；新增 src/config.js 提供 DEFAULTS 与 normalizeConfig（类型不符或越界回落默认值并写一条 warn）。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-a1f262
+      phase: implement
+      side: backend
+    - id: t-883faa
+      title: 实现绑定表与原子持久化·研发
+      implements: |-
+        新增 src/bindings.js：BindingStore 以 Map 保存 sessionId→{url,updatedAt}；load() 读 $DSH_HOME/state/dsh-notice-webhook/bindings.json（文件缺失返回空表且不创建；非法 JSON 或未知 version 记 warn 并返回空表且不覆盖原文件；单条字段非法跳过）；persist() 先写 .tmp 再 rename 实现原子写；list() 按 sessionId 升序返回。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-fd6e82
+      phase: implement
+      side: backend
+    - id: t-e7dd75
+      title: 实现绑定表与原子持久化·复核
+      implements: |-
+        新增 src/bindings.js：BindingStore 以 Map 保存 sessionId→{url,updatedAt}；load() 读 $DSH_HOME/state/dsh-notice-webhook/bindings.json（文件缺失返回空表且不创建；非法 JSON 或未知 version 记 warn 并返回空表且不覆盖原文件；单条字段非法跳过）；persist() 先写 .tmp 再 rename 实现原子写；list() 按 sessionId 升序返回。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-883faa
+      phase: implement
+      side: backend
+    - id: t-d8437b
+      title: 实现绑定表与原子持久化·测试
+      implements: |-
+        新增 src/bindings.js：BindingStore 以 Map 保存 sessionId→{url,updatedAt}；load() 读 $DSH_HOME/state/dsh-notice-webhook/bindings.json（文件缺失返回空表且不创建；非法 JSON 或未知 version 记 warn 并返回空表且不覆盖原文件；单条字段非法跳过）；persist() 先写 .tmp 再 rename 实现原子写；list() 按 sessionId 升序返回。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-e7dd75
+      phase: implement
+      side: backend
+    - id: t-55b341
+      title: 实现 webhook 投递层·研发
+      implements: |-
+        新增 src/deliver.js：用 Node 内置 fetch 发 POST JSON（带 Content-Type: application/json; charset=utf-8 与 webhookHeaders）；用 AbortSignal.timeout(timeoutMs) 控制超时；redirect 设为 'manual' 且把 3xx 判定为失败；仅对网络错误、5xx、超时按 retry 次数重试，4xx 不重试；所有分支包 try/catch，失败只写 logger.warn，日志只输出 new URL(url).host 不输出完整 URL 与 headers。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-fd6e82
+      phase: implement
+      side: backend
+    - id: t-d3ed02
+      title: 实现 webhook 投递层·复核
+      implements: |-
+        新增 src/deliver.js：用 Node 内置 fetch 发 POST JSON（带 Content-Type: application/json; charset=utf-8 与 webhookHeaders）；用 AbortSignal.timeout(timeoutMs) 控制超时；redirect 设为 'manual' 且把 3xx 判定为失败；仅对网络错误、5xx、超时按 retry 次数重试，4xx 不重试；所有分支包 try/catch，失败只写 logger.warn，日志只输出 new URL(url).host 不输出完整 URL 与 headers。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-55b341
+      phase: implement
+      side: backend
+    - id: t-7ae458
+      title: 实现 webhook 投递层·测试
+      implements: |-
+        新增 src/deliver.js：用 Node 内置 fetch 发 POST JSON（带 Content-Type: application/json; charset=utf-8 与 webhookHeaders）；用 AbortSignal.timeout(timeoutMs) 控制超时；redirect 设为 'manual' 且把 3xx 判定为失败；仅对网络错误、5xx、超时按 retry 次数重试，4xx 不重试；所有分支包 try/catch，失败只写 logger.warn，日志只输出 new URL(url).host 不输出完整 URL 与 headers。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-d3ed02
+      phase: implement
+      side: backend
+    - id: t-123825
+      title: 实现事件分类与过滤·研发
+      implements: |-
+        新增 src/classify.js：把 session/event 分类成通知意图——turn/end 按标题拼正文、approval/asked 带 toolName、tool/call 且 name==='ask_user_question' 产出提问意图；用 WeakMap 缓存 session/title；实现 onlyTopLevel（存在 parentSession 或 origin==='subagent' 时跳过）、skipReasons、cooldownMs 三类过滤；未命中返回 null。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-fd6e82
+      phase: implement
+      side: backend
+    - id: t-e910b0
+      title: 实现事件分类与过滤·复核
+      implements: |-
+        新增 src/classify.js：把 session/event 分类成通知意图——turn/end 按标题拼正文、approval/asked 带 toolName、tool/call 且 name==='ask_user_question' 产出提问意图；用 WeakMap 缓存 session/title；实现 onlyTopLevel（存在 parentSession 或 origin==='subagent' 时跳过）、skipReasons、cooldownMs 三类过滤；未命中返回 null。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-123825
+      phase: implement
+      side: backend
+    - id: t-9e8eb9
+      title: 实现事件分类与过滤·测试
+      implements: |-
+        新增 src/classify.js：把 session/event 分类成通知意图——turn/end 按标题拼正文、approval/asked 带 toolName、tool/call 且 name==='ask_user_question' 产出提问意图；用 WeakMap 缓存 session/title；实现 onlyTopLevel（存在 parentSession 或 origin==='subagent' 时跳过）、skipReasons、cooldownMs 三类过滤；未命中返回 null。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-e910b0
+      phase: implement
+      side: backend
+    - id: t-a05d68
+      title: 暴露 Host Service dshNoticeWebhook·研发
+      implements: |-
+        新增 src/service.js：以 ctx.provide('dshNoticeWebhook', svc) 暴露 { version: 1, bind, unbind, list, resolve }；bind 校验 sessionId 为非空字符串、url 能被 new URL 解析且 protocol 属于 http:/https: 否则返回 false（不抛异常）；用 ctx.effect 在 apply 中注册并在卸载时释放。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-20c962
+      phase: implement
+      side: backend
+    - id: t-ef947a
+      title: 暴露 Host Service dshNoticeWebhook·联调
+      implements: |-
+        新增 src/service.js：以 ctx.provide('dshNoticeWebhook', svc) 暴露 { version: 1, bind, unbind, list, resolve }；bind 校验 sessionId 为非空字符串、url 能被 new URL 解析且 protocol 属于 http:/https: 否则返回 false（不抛异常）；用 ctx.effect 在 apply 中注册并在卸载时释放。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-a05d68
+      phase: implement
+      side: backend
+    - id: t-3da71e
+      title: 暴露 Host Service dshNoticeWebhook·复核
+      implements: |-
+        新增 src/service.js：以 ctx.provide('dshNoticeWebhook', svc) 暴露 { version: 1, bind, unbind, list, resolve }；bind 校验 sessionId 为非空字符串、url 能被 new URL 解析且 protocol 属于 http:/https: 否则返回 false（不抛异常）；用 ctx.effect 在 apply 中注册并在卸载时释放。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-ef947a
+      phase: implement
+      side: backend
+    - id: t-d54a86
+      title: 暴露 Host Service dshNoticeWebhook·测试
+      implements: |-
+        新增 src/service.js：以 ctx.provide('dshNoticeWebhook', svc) 暴露 { version: 1, bind, unbind, list, resolve }；bind 校验 sessionId 为非空字符串、url 能被 new URL 解析且 protocol 属于 http:/https: 否则返回 false（不抛异常）；用 ctx.effect 在 apply 中注册并在卸载时释放。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-3da71e
+      phase: implement
+      side: backend
+    - id: t-e96439
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·研发
+      implements: |-
+        固化 src/bindings.js 的读取降级路径（文件缺失、非法 JSON、未知 version、单条字段非法）；确认 payload 为追加式演进且 version 保持 1；验证与 dsh-notice 共存（不读写其配置与触发目录）；验证卸载回滚后除 bindings.json 外无残留；新增 test/compat.test.js 覆盖上述路径。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-20c962
+      phase: implement
+      side: backend
+    - id: t-b6df77
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·复核
+      implements: |-
+        固化 src/bindings.js 的读取降级路径（文件缺失、非法 JSON、未知 version、单条字段非法）；确认 payload 为追加式演进且 version 保持 1；验证与 dsh-notice 共存（不读写其配置与触发目录）；验证卸载回滚后除 bindings.json 外无残留；新增 test/compat.test.js 覆盖上述路径。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-e96439
+      phase: implement
+      side: backend
+    - id: t-33a9df
+      title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·测试
+      implements: |-
+        固化 src/bindings.js 的读取降级路径（文件缺失、非法 JSON、未知 version、单条字段非法）；确认 payload 为追加式演进且 version 保持 1；验证与 dsh-notice 共存（不读写其配置与触发目录）；验证卸载回滚后除 bindings.json 外无残留；新增 test/compat.test.js 覆盖上述路径。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-b6df77
+      phase: implement
+      side: backend
+    - id: t-096bbe
+      title: 实现 goal 自动轮识别与静默·研发
+      implements: |-
+        新增 src/goal.js 的自动轮部分：在 session/event 中记录每条 user/message 的 source.kind 是否为 'goal'，并维护「本 turn 是否出现过人工输入」标记；turn/end 到达时若本轮全部 user message 均为 goal 注入则返回静默（不产出意图），只要出现一条非 goal 的 user/message 就按人工轮放行。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-245978
+      phase: implement
+      side: backend
+    - id: t-a4ac0a
+      title: 实现 goal 自动轮识别与静默·复核
+      implements: |-
+        新增 src/goal.js 的自动轮部分：在 session/event 中记录每条 user/message 的 source.kind 是否为 'goal'，并维护「本 turn 是否出现过人工输入」标记；turn/end 到达时若本轮全部 user message 均为 goal 注入则返回静默（不产出意图），只要出现一条非 goal 的 user/message 就按人工轮放行。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-096bbe
+      phase: implement
+      side: backend
+    - id: t-527280
+      title: 实现 goal 自动轮识别与静默·测试
+      implements: |-
+        新增 src/goal.js 的自动轮部分：在 session/event 中记录每条 user/message 的 source.kind 是否为 'goal'，并维护「本 turn 是否出现过人工输入」标记；turn/end 到达时若本轮全部 user message 均为 goal 注入则返回静默（不产出意图），只要出现一条非 goal 的 user/message 就按人工轮放行。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-a4ac0a
+      phase: implement
+      side: backend
+    - id: t-3966e0
+      title: 实现路由层与总开关旁路·研发
+      implements: |-
+        新增 src/router.js：第一步应用类型开关（notifyComplete/notifyApproval/notifyQuestion）作内容级过滤，命中窗口绑定也不豁免；第二步解析目标地址——命中窗口绑定则无视 enabled 直接投递；未命中绑定且 enabled=false 时丢弃；未命中绑定且 enabled=true 时用 webhookUrl，为空则丢弃并写一条 debug 日志。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-ae2996
+        - t-245978
+      phase: implement
+      side: backend
+    - id: t-040d34
+      title: 实现路由层与总开关旁路·复核
+      implements: |-
+        新增 src/router.js：第一步应用类型开关（notifyComplete/notifyApproval/notifyQuestion）作内容级过滤，命中窗口绑定也不豁免；第二步解析目标地址——命中窗口绑定则无视 enabled 直接投递；未命中绑定且 enabled=false 时丢弃；未命中绑定且 enabled=true 时用 webhookUrl，为空则丢弃并写一条 debug 日志。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-3966e0
+      phase: implement
+      side: backend
+    - id: t-399c3a
+      title: 实现路由层与总开关旁路·测试
+      implements: |-
+        新增 src/router.js：第一步应用类型开关（notifyComplete/notifyApproval/notifyQuestion）作内容级过滤，命中窗口绑定也不豁免；第二步解析目标地址——命中窗口绑定则无视 enabled 直接投递；未命中绑定且 enabled=false 时丢弃；未命中绑定且 enabled=true 时用 webhookUrl，为空则丢弃并写一条 debug 日志。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-040d34
+      phase: implement
+      side: backend
+    - id: t-9600c2
+      title: 实现 goal 终态识别与去重·研发
+      implements: |-
+        在 src/goal.js 增加终态部分：监听 goal/change 更新当前 goal 的 {id, revision, phase, maxGoalRounds}；phase 变为 complete 时产出 goal/complete 意图；变为 blocked 时产出 goal/blocked 意图——blockedReason.code === 'round-limit' 时正文用「目标轮次耗尽（N/N）」且 N = maxGoalRounds，其他 code 用「目标阻塞（code）」；paused 与清除不产出；用 Set 按 goalId:revision:phase 做进程内去重。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-898417
+      phase: implement
+      side: backend
+    - id: t-5e3c2c
+      title: 实现 goal 终态识别与去重·复核
+      implements: |-
+        在 src/goal.js 增加终态部分：监听 goal/change 更新当前 goal 的 {id, revision, phase, maxGoalRounds}；phase 变为 complete 时产出 goal/complete 意图；变为 blocked 时产出 goal/blocked 意图——blockedReason.code === 'round-limit' 时正文用「目标轮次耗尽（N/N）」且 N = maxGoalRounds，其他 code 用「目标阻塞（code）」；paused 与清除不产出；用 Set 按 goalId:revision:phase 做进程内去重。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-9600c2
+      phase: implement
+      side: backend
+    - id: t-9efd71
+      title: 实现 goal 终态识别与去重·测试
+      implements: |-
+        在 src/goal.js 增加终态部分：监听 goal/change 更新当前 goal 的 {id, revision, phase, maxGoalRounds}；phase 变为 complete 时产出 goal/complete 意图；变为 blocked 时产出 goal/blocked 意图——blockedReason.code === 'round-limit' 时正文用「目标轮次耗尽（N/N）」且 N = maxGoalRounds，其他 code 用「目标阻塞（code）」；paused 与清除不产出；用 Set 按 goalId:revision:phase 做进程内去重。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-5e3c2c
+      phase: implement
+      side: backend
+    - id: t-c9c721
+      title: 接线整合与本地端到端联调·研发
+      implements: |-
+        在 index.js 组装主链路 classify → goal → router → deliver，用 ctx.on('session/event') 订阅会话事件，完成 service 注册与 bindings.load() 的调用顺序；新增 test/e2e.local.test.js：起本地 HTTP 接收端并按序灌入 turn/end、approval/asked、ask_user_question、goal/complete、goal/blocked，断言收到的 event 取值与正文；再把地址指向 http://127.0.0.1:1/ 重跑，断言无未捕获异常与未处理拒绝。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-cbf2e4
+        - t-f94377
+        - t-966bd3
+      phase: implement
+      side: fullstack
+    - id: t-a0aed4
+      title: 接线整合与本地端到端联调·联调
+      implements: |-
+        在 index.js 组装主链路 classify → goal → router → deliver，用 ctx.on('session/event') 订阅会话事件，完成 service 注册与 bindings.load() 的调用顺序；新增 test/e2e.local.test.js：起本地 HTTP 接收端并按序灌入 turn/end、approval/asked、ask_user_question、goal/complete、goal/blocked，断言收到的 event 取值与正文；再把地址指向 http://127.0.0.1:1/ 重跑，断言无未捕获异常与未处理拒绝。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-c9c721
+      phase: implement
+      side: fullstack
+    - id: t-030e3c
+      title: 接线整合与本地端到端联调·复核
+      implements: |-
+        在 index.js 组装主链路 classify → goal → router → deliver，用 ctx.on('session/event') 订阅会话事件，完成 service 注册与 bindings.load() 的调用顺序；新增 test/e2e.local.test.js：起本地 HTTP 接收端并按序灌入 turn/end、approval/asked、ask_user_question、goal/complete、goal/blocked，断言收到的 event 取值与正文；再把地址指向 http://127.0.0.1:1/ 重跑，断言无未捕获异常与未处理拒绝。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-a0aed4
+      phase: implement
+      side: fullstack
+    - id: t-ee2412
+      title: 接线整合与本地端到端联调·测试
+      implements: |-
+        在 index.js 组装主链路 classify → goal → router → deliver，用 ctx.on('session/event') 订阅会话事件，完成 service 注册与 bindings.load() 的调用顺序；新增 test/e2e.local.test.js：起本地 HTTP 接收端并按序灌入 turn/end、approval/asked、ask_user_question、goal/complete、goal/blocked，断言收到的 event 取值与正文；再把地址指向 http://127.0.0.1:1/ 重跑，断言无未捕获异常与未处理拒绝。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-030e3c
+      phase: implement
+      side: fullstack
+    - id: t-c7e70b
+      title: 装载到 profile 并做真实 Host 验收·研发
+      implements: |-
+        用 plugin_manager install_bundle 把插件包装进当前 profile 并确认生效；在真实 dsh 会话中触发一轮对话、一次需要授权的操作与一次 ask_user_question，用本地接收端日志逐条核对 payload 字段；再对某会话执行 bind() 到接收端 B 并设 enabled:false，验证只有 B 收到。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-f25d34
+      phase: test
+      side: backend
+    - id: t-168c3a
+      title: 装载到 profile 并做真实 Host 验收·复核
+      implements: |-
+        用 plugin_manager install_bundle 把插件包装进当前 profile 并确认生效；在真实 dsh 会话中触发一轮对话、一次需要授权的操作与一次 ask_user_question，用本地接收端日志逐条核对 payload 字段；再对某会话执行 bind() 到接收端 B 并设 enabled:false，验证只有 B 收到。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-c7e70b
+      phase: test
+      side: backend
+    - id: t-623dc6
+      title: 装载到 profile 并做真实 Host 验收·测试
+      implements: |-
+        用 plugin_manager install_bundle 把插件包装进当前 profile 并确认生效；在真实 dsh 会话中触发一轮对话、一次需要授权的操作与一次 ask_user_question，用本地接收端日志逐条核对 payload 字段；再对某会话执行 bind() 到接收端 B 并设 enabled:false，验证只有 B 收到。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-168c3a
+      phase: test
+      side: backend
+    - id: t-6acade
+      title: 写插件使用说明 README·研发
+      implements: |-
+        新增 README.md：写装载步骤（cordis.patch.yml 片段）、与 design/interfaces.md 一致的配置项表、webhook 契约与字段说明、Host Service 消费示例代码、本地接收端验证命令（python3 接收器与 curl 失败隔离两段）。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-87cafa
+      phase: doc
+      side: doc
+    - id: t-896aff
+      title: 写插件使用说明 README·复核
+      implements: |-
+        新增 README.md：写装载步骤（cordis.patch.yml 片段）、与 design/interfaces.md 一致的配置项表、webhook 契约与字段说明、Host Service 消费示例代码、本地接收端验证命令（python3 接收器与 curl 失败隔离两段）。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-6acade
+      phase: doc
+      side: doc
+traceability:
+  design_to_tasks:
+    design/architecture.md#TLDR: []
+    design/architecture.md#目标与总体方案: []
+    design/architecture.md#模块改动地图: []
+    design/architecture.md#关键流程: []
+    design/architecture.md#一次-sessionevent-的完整判定: []
+    design/architecture.md#事件分类表: []
+    design/architecture.md#goal-自动轮判定: []
+    design/architecture.md#终态去重: []
+    design/architecture.md#关键决策点: []
+    design/architecture.md#依赖关系: []
+    design/architecture.md#错误处理: []
+    design/architecture.md#安全与性能: []
+    design/architecture.md#测试策略: []
+    design/architecture.md#遗留问题: []
+    design/data-model.md#TLDR: []
+    design/data-model.md#持久化数据结构: []
+    design/data-model.md#BindingEntry: []
+    design/data-model.md#BindingsFile: []
+    design/data-model.md#内存状态: []
+    design/data-model.md#迁移与兼容: []
+    design/data-model.md#孤儿绑定: []
+    design/interfaces.md#TLDR: []
+    design/interfaces.md#出站-Webhook-契约: []
+    design/interfaces.md#请求: []
+    design/interfaces.md#请求体字段: []
+    design/interfaces.md#请求体样例: []
+    design/interfaces.md#响应与错误语义: []
+    design/interfaces.md#版本兼容: []
+    design/interfaces.md#Host-Service-契约: []
+    design/interfaces.md#服务定义: []
+    design/interfaces.md#配置项契约: []
+    design/use-cases.md#场景总览: []
+    design/use-cases.md#UC-1-离开电脑也不错过阻塞点: []
+    design/use-cases.md#UC-2-其他插件把会话绑到自己的通道: []
+    design/use-cases.md#UC-3-goal-自动跑轮全程安静卡住时叫人: []
+  fr_to_tasks:
+    FR-1: []
+    FR-4: []
+    FR-2: []
+    FR-3: []
+    FR-11: []
+    FR-5: []
+    FR-6: []
+    FR-7: []
+    FR-8: []
+    FR-9: []
+    FR-10: []
+coverage:
+  implementation:
+    total: 35
+    covered: 0
+    uncovered:
+      - design/architecture.md#TLDR
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#关键流程
+      - design/architecture.md#一次-sessionevent-的完整判定
+      - design/architecture.md#事件分类表
+      - design/architecture.md#goal-自动轮判定
+      - design/architecture.md#终态去重
+      - design/architecture.md#关键决策点
+      - design/architecture.md#依赖关系
+      - design/architecture.md#错误处理
+      - design/architecture.md#安全与性能
+      - design/architecture.md#测试策略
+      - design/architecture.md#遗留问题
+      - design/data-model.md#TLDR
+      - design/data-model.md#持久化数据结构
+      - design/data-model.md#BindingEntry
+      - design/data-model.md#BindingsFile
+      - design/data-model.md#内存状态
+      - design/data-model.md#迁移与兼容
+      - design/data-model.md#孤儿绑定
+      - design/interfaces.md#TLDR
+      - design/interfaces.md#出站-Webhook-契约
+      - design/interfaces.md#请求
+      - design/interfaces.md#请求体字段
+      - design/interfaces.md#请求体样例
+      - design/interfaces.md#响应与错误语义
+      - design/interfaces.md#版本兼容
+      - design/interfaces.md#Host-Service-契约
+      - design/interfaces.md#服务定义
+      - design/interfaces.md#配置项契约
+      - design/use-cases.md#场景总览
+      - design/use-cases.md#UC-1-离开电脑也不错过阻塞点
+      - design/use-cases.md#UC-2-其他插件把会话绑到自己的通道
+      - design/use-cases.md#UC-3-goal-自动跑轮全程安静卡住时叫人
+    rate: 0
+    total_designs: 35
+    covered_designs: 0

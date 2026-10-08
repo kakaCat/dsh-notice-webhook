@@ -1,0 +1,38 @@
+task:
+  id: t-33adde
+  title: 接线层：ctx.agents 注入 + subagent/end 复检·测试
+  status: done
+  implements: |-
+    index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。
+
+    [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+  serves: []
+  depends_on:
+    - t-f66dc8
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261005120639-f801
+    TASK_ID: t-33adde
+    TASK_TITLE: 接线层：ctx.agents 注入 + subagent/end 复检·测试
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-05T04:36:28.001Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-261005120639-f801
+  generated_at: 2026-10-05T04:36:15.560Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-10-05T04:36:28.001Z

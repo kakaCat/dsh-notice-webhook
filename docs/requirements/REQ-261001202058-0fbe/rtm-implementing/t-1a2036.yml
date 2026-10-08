@@ -1,0 +1,38 @@
+task:
+  id: t-1a2036
+  title: 配置契约：新增 volatile 开关 jobAwareComplete·复核
+  status: done
+  implements: |-
+    src/config.js 四处同进同出：DEFAULTS.jobAwareComplete=true、BOOLEAN_KEYS 增键、Config schema 增 jobAwareComplete: z.boolean().default(true).volatile()、VOLATILE_KEYS 增键；test/config.test.js:35 只把测试标题文案「恰好这 9 个」改成「恰好这 10 个」（该用例断言 schema volatile 集合与 VOLATILE_KEYS 相等，两侧同时新增即通过，零断言改动）；在 test/jobs-gate.test.js 落配置断言（默认值 true、非法值回落 + warn、volatile 集合成员）。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-ae0636
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001202058-0fbe
+    TASK_ID: t-1a2036
+    TASK_TITLE: 配置契约：新增 volatile 开关 jobAwareComplete·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-01T12:31:20.780Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001202058-0fbe
+  generated_at: 2026-10-01T12:31:09.392Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-10-01T12:31:20.780Z

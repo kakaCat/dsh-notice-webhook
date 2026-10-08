@@ -1,0 +1,971 @@
+metadata:
+  stage: decomposing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:41:04.419Z
+  version: 109
+  generated_by: dsh-pmboard
+  last_updated: 2026-10-01T13:01:32.488Z
+inputs:
+  requirements: []
+  design_sections:
+    - ref: design/architecture.md#1
+      title: 判定点：从「二值」到「终态分类表」（
+      serves:
+        - FR-1
+        - FR-5
+      file: design/architecture.md
+      section: "1"
+    - ref: design/architecture.md#2
+      title: 模块改动地图（
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/architecture.md
+      section: "2"
+    - ref: design/architecture.md#3
+      title: 关键流程（
+      serves:
+        - FR-1
+        - FR-3
+        - FR-4
+        - FR-6
+      file: design/architecture.md
+      section: "3"
+    - ref: design/architecture.md#4
+      title: 不变量（
+      serves:
+        - FR-1
+        - FR-3
+        - FR-5
+      file: design/architecture.md
+      section: "4"
+    - ref: design/architecture.md#5
+      title: 迁移与回滚（
+      serves:
+        - FR-5
+      file: design/architecture.md
+      section: "5"
+    - ref: design/architecture.md#6
+      title: 依赖与降级（
+      serves:
+        - FR-1
+      file: design/architecture.md
+      section: "6"
+    - ref: design/architecture.md#7
+      title: 测试策略（
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/architecture.md
+      section: "7"
+    - ref: design/architecture.md#8
+      title: 记账：与需求文档的措辞偏差 + 遗留风险（
+      serves:
+        - FR-3
+        - FR-5
+      file: design/architecture.md
+      section: "8"
+    - ref: design/backend.md#1
+      title: "`src/classify.js`（"
+      serves:
+        - FR-1
+        - FR-2
+        - FR-6
+      file: design/backend.md
+      section: "1"
+    - ref: design/backend.md#2
+      title: "`src/config.js`（"
+      serves:
+        - FR-4
+      file: design/backend.md
+      section: "2"
+    - ref: design/backend.md#3
+      title: "`src/router.js`（"
+      serves:
+        - FR-4
+      file: design/backend.md
+      section: "3"
+    - ref: design/backend.md#4
+      title: "`src/channels/custom.js` + `src/payload.js`（"
+      serves:
+        - FR-3
+      file: design/backend.md
+      section: "4"
+    - ref: design/backend.md#5
+      title: "`src/targets.js`（"
+      serves:
+        - FR-5
+      file: design/backend.md
+      section: "5"
+    - ref: design/backend.md#6
+      title: "`index.js`（"
+      serves:
+        - FR-4
+        - FR-6
+      file: design/backend.md
+      section: "6"
+    - ref: design/backend.md#7
+      title: 错误处理与日志（
+      serves:
+        - FR-1
+        - FR-6
+      file: design/backend.md
+      section: "7"
+    - ref: design/backend.md#8
+      title: 验收口径（
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/backend.md
+      section: "8"
+    - ref: design/data-model.md#1
+      title: 新增 / 变更的配置字段（
+      serves:
+        - FR-4
+      file: design/data-model.md
+      section: "1"
+    - ref: design/data-model.md#2
+      title: 目标记录的事件语义（
+      serves:
+        - FR-5
+      file: design/data-model.md
+      section: "2"
+    - ref: design/data-model.md#3
+      title: 意图对象（内存，不落盘）（
+      serves:
+        - FR-2
+      file: design/data-model.md
+      section: "3"
+    - ref: design/data-model.md#4
+      title: 不落盘 / 不迁移清单（
+      serves:
+        - FR-3
+        - FR-5
+      file: design/data-model.md
+      section: "4"
+    - ref: design/data-model.md#5
+      title: 内存上界（
+      serves:
+        - FR-1
+      file: design/data-model.md
+      section: "5"
+    - ref: design/frontend.md#1
+      title: 关心事件列表新增一项（
+      serves:
+        - FR-5
+      file: design/frontend.md
+      section: "1"
+    - ref: design/frontend.md#2
+      title: 保存语义：全收 vs 显式（
+      serves:
+        - FR-5
+      file: design/frontend.md
+      section: "2"
+    - ref: design/frontend.md#3
+      title: 回显规则（
+      serves:
+        - FR-5
+      file: design/frontend.md
+      section: "3"
+    - ref: design/frontend.md#4
+      title: 验收口径（
+      serves:
+        - FR-5
+      file: design/frontend.md
+      section: "4"
+    - ref: design/interfaces.md#1
+      title: "`Classifier.classify()` 的输出契约（"
+      serves:
+        - FR-1
+        - FR-2
+      file: design/interfaces.md
+      section: "1"
+    - ref: design/interfaces.md#2
+      title: 新增 / 变更的导出（
+      serves:
+        - FR-1
+        - FR-6
+      file: design/interfaces.md
+      section: "2"
+    - ref: design/interfaces.md#3
+      title: 路由的类型开关（
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: "3"
+    - ref: design/interfaces.md#4
+      title: "`handle()` 的返回契约（"
+      serves:
+        - FR-6
+      file: design/interfaces.md
+      section: "4"
+    - ref: design/interfaces.md#5
+      title: 配置项契约（
+      serves:
+        - FR-4
+      file: design/interfaces.md
+      section: "5"
+    - ref: design/interfaces.md#6
+      title: 出站报文（插件 → 接收端）（
+      serves:
+        - FR-3
+      file: design/interfaces.md
+      section: "6"
+    - ref: design/interfaces.md#7
+      title: 目标与 RPC 契约（
+      serves:
+        - FR-5
+      file: design/interfaces.md
+      section: "7"
+    - ref: design/interfaces.md#8
+      title: 客户端内部契约（
+      serves:
+        - FR-5
+      file: design/interfaces.md
+      section: "8"
+    - ref: design/use-cases.md#场景总览
+      title: 场景总览（
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/use-cases.md
+      section: 场景总览
+    - ref: design/use-cases.md#UC-1-模型流报错必须叫而且不许说已完成
+      title: UC-1 模型流报错：必须叫，而且不许说「已完成」（
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+      file: design/use-cases.md
+      section: UC-1-模型流报错必须叫而且不许说已完成
+    - ref: design/use-cases.md#UC-2-崩溃中断孤儿-turn-收尾要叫人
+      title: UC-2 崩溃中断：孤儿 turn 收尾要叫人（
+      serves:
+        - FR-1
+        - FR-3
+      file: design/use-cases.md
+      section: UC-2-崩溃中断孤儿-turn-收尾要叫人
+    - ref: design/use-cases.md#UC-3-自己按的-Esc不许吵
+      title: UC-3 自己按的 Esc：不许吵（
+      serves:
+        - FR-1
+        - FR-6
+      file: design/use-cases.md
+      section: UC-3-自己按的-Esc不许吵
+    - ref: design/use-cases.md#UC-4-自动轮里报错无人值守时更要叫
+      title: UC-4 自动轮里报错：无人值守时更要叫（
+      serves:
+        - FR-1
+        - FR-4
+      file: design/use-cases.md
+      section: UC-4-自动轮里报错无人值守时更要叫
+    - ref: design/use-cases.md#UC-5-只想收完成通知安静但不许被喂假消息
+      title: UC-5 只想收完成通知：安静，但不许被喂假消息（
+      serves:
+        - FR-4
+      file: design/use-cases.md
+      section: UC-5-只想收完成通知安静但不许被喂假消息
+    - ref: design/use-cases.md#UC-6-老用户升级什么都不用配也不许漏
+      title: UC-6 老用户升级：什么都不用配，也不许漏（
+      serves:
+        - FR-5
+      file: design/use-cases.md
+      section: UC-6-老用户升级什么都不用配也不许漏
+    - ref: design/use-cases.md#UC-7-排障与回滚
+      title: UC-7 排障与回滚（
+      serves:
+        - FR-5
+        - FR-6
+      file: design/use-cases.md
+      section: UC-7-排障与回滚
+outputs:
+  tasks:
+    - id: t-5e2101
+      title: 分类契约：turn/end 终态决策表（纯函数）
+      implements: src/classify.js：新增冻结常量 KNOWN_TURN_KINDS（7 种终态）、INTENT_INTERRUPT='interrupt'、EVENT_TURN_ERROR='turn/error'；新增纯函数 decideTurnEnd(reason, skipReasons)（按 design/architecture.md §1 的 7 行顺序：静默名单→completed→error→interrupted→aborted→未知 kind→其余；reason.kind 非字符串/空 → 'unknown'，长度>40 截断）、silentReasonOf()、errorFacts()（code 缺省 UNKNOWN，message 单行化+slice(0,200)）；Classifier.classify() 的 turn/end 分支改为查表并组装中断意图 {kind:'interrupt', event:'turn/error', message, toolName:null, reason, error}；不得保留任何『默认当完成』兜底分支。
+      serves:
+        - FR-1
+        - FR-2
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-a36090
+      title: 数据契约：目标事件语义 eventsMode 与事件清单
+      implements: src/targets.js：EVENT_TYPES 追加 'turn/error'（既有四项顺序不变）；新增 LEGACY_ALL_EVENTS 与纯函数 normalizeEvents(events, mode)（判定式按 design/data-model.md §2，幂等）；validateTarget() 读取 input.eventsMode（值域 all/explicit，其它视为缺省）、未知事件仍按既有规则报错、输出补 eventsMode；TargetStore.#persist() 与版本闸门零改动（TARGET_FILE_VERSION 保持 3）。
+      serves:
+        - FR-5
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-413c55
+      title: 接线：开关、类型过滤与静默留痕
+      implements: src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。
+      serves:
+        - FR-1
+        - FR-4
+        - FR-6
+      depends_on:
+        - t-5e2101
+        - t-a36090
+      phase: implement
+      side: backend
+    - id: t-5cbf4c
+      title: 出站报文：中断意图的 reason / error 与事件元数据
+      implements: "src/channels/custom.js 的 buildPayload() 仅当 intent.kind==='interrupt' 时追加 reason: intent.reason 与 error: intent.error ?? null（非中断事件键集合逐字节不变）；src/payload.js 的 EVENT_META 增 'turn/error': { title:'⚠️ 会话中断', color:'red' }；五个渠道适配器零改动。"
+      serves:
+        - FR-2
+        - FR-3
+      depends_on:
+        - t-5e2101
+      phase: implement
+      side: backend
+    - id: t-ca1e16
+      title: 前端：设置页「关心事件」与保存语义
+      implements: "client.js：EVENTS 在「对话完成」之后插入 { id:'turn/error', label:'会话中断', field:'turn/error' }；save() 计算 allChecked（勾选集合 == EVENT_IDS）→ 全勾提交 {events: [], eventsMode:'all'}，否则提交 {events: 勾选, eventsMode:'explicit'}；selectTarget() 回显口径不变（events 空 = 全勾）。不改布局/样式/图标/renderTargetPicker 契约。"
+      serves:
+        - FR-5
+      depends_on:
+        - t-a36090
+      phase: ui
+      side: frontend
+    - id: t-ef4fa8
+      title: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读
+      implements: 锁定三条路径：① 老记录（events 恰为 LEGACY_ALL_EVENTS 且无 mode）载入后归一化为 {events:[],eventsMode:'all'}，老目标开箱即收中断；② 老客户端（提交显式四项、无 mode）推断为全收；③ 旧版本读新文件：按白名单只取已知字段、忽略 eventsMode、events:[] 在旧语义里同样是全收，version 仍为 3。结果写入 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md。
+      serves:
+        - FR-5
+      depends_on:
+        - t-413c55
+      phase: test
+      side: backend
+    - id: t-cdd782
+      title: 测试：决策表 / 链路集成 / 迁移三套用例
+      implements: 扩展 test/classify.test.js（T2-*、T3-*：8 种终态、静默码、skipReasons 优先、开关不串扰，并改写既有『error 当完成』的期望为中断）；新增 test/interrupt.test.js（复用 test/e2e.local.test.js 的 withReceiver()/waitFor()，覆盖 T4-1…T4-6、T5-1…T5-4：报文字节、单行化与截断、自动轮不静默、静默留痕）；新增 test/targets-events.test.js（T6-1…T6-12）。既有 244 用例中只允许改动上述 error 相关断言。
+      serves:
+        - FR-4
+        - FR-6
+      depends_on:
+        - t-413c55
+        - t-5cbf4c
+        - t-ca1e16
+      phase: test
+      side: fullstack
+    - id: t-691d67
+      title: 文档同步：报文契约、事件分类表、排障原因码
+      implements: README.md：推送契约 event 枚举补 turn/error 与 reason/error 字段示例、配置项表补 notifyInterrupt/interruptMessage 与 skipReasons 默认值变更（含『只认 turn/end 的老接收端收不到中断』明示）、『该被叫一声的时刻』表格补一行；docs/architecture/notification-plugin.md 的事件分类表补中断一行；docs/guides/operations.md 的 drop 原因码表补 turn-skipped / turn-aborted / turn-not-notifiable 与排查步骤。
+      serves:
+        - FR-3
+        - FR-5
+      depends_on:
+        - t-5cbf4c
+        - t-ef4fa8
+      phase: doc
+      side: doc
+    - id: t-ce4b1a
+      title: 需求级自检：逐条 FR 对照可跑命令并汇总证据
+      implements: 按 design/test-cases.md §8 逐条跑，产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md（每条 FR 一行：命令 + 输出摘要 + 结论），并核对 design/architecture.md §4 的 7 条不变量与两处设计偏差是否已如实记录。
+      serves:
+        - FR-6
+      depends_on:
+        - t-cdd782
+        - t-691d67
+      phase: test
+      side: fullstack
+    - id: t-0a89bd
+      title: 分类契约：turn/end 终态决策表（纯函数）·研发
+      implements: |-
+        src/classify.js：新增冻结常量 KNOWN_TURN_KINDS（7 种终态）、INTENT_INTERRUPT='interrupt'、EVENT_TURN_ERROR='turn/error'；新增纯函数 decideTurnEnd(reason, skipReasons)（按 design/architecture.md §1 的 7 行顺序：静默名单→completed→error→interrupted→aborted→未知 kind→其余；reason.kind 非字符串/空 → 'unknown'，长度>40 截断）、silentReasonOf()、errorFacts()（code 缺省 UNKNOWN，message 单行化+slice(0,200)）；Classifier.classify() 的 turn/end 分支改为查表并组装中断意图 {kind:'interrupt', event:'turn/error', message, toolName:null, reason, error}；不得保留任何『默认当完成』兜底分支。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-96b6a2
+      title: 分类契约：turn/end 终态决策表（纯函数）·复核
+      implements: |-
+        src/classify.js：新增冻结常量 KNOWN_TURN_KINDS（7 种终态）、INTENT_INTERRUPT='interrupt'、EVENT_TURN_ERROR='turn/error'；新增纯函数 decideTurnEnd(reason, skipReasons)（按 design/architecture.md §1 的 7 行顺序：静默名单→completed→error→interrupted→aborted→未知 kind→其余；reason.kind 非字符串/空 → 'unknown'，长度>40 截断）、silentReasonOf()、errorFacts()（code 缺省 UNKNOWN，message 单行化+slice(0,200)）；Classifier.classify() 的 turn/end 分支改为查表并组装中断意图 {kind:'interrupt', event:'turn/error', message, toolName:null, reason, error}；不得保留任何『默认当完成』兜底分支。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-0a89bd
+      phase: implement
+      side: backend
+    - id: t-5249d2
+      title: 分类契约：turn/end 终态决策表（纯函数）·测试
+      implements: |-
+        src/classify.js：新增冻结常量 KNOWN_TURN_KINDS（7 种终态）、INTENT_INTERRUPT='interrupt'、EVENT_TURN_ERROR='turn/error'；新增纯函数 decideTurnEnd(reason, skipReasons)（按 design/architecture.md §1 的 7 行顺序：静默名单→completed→error→interrupted→aborted→未知 kind→其余；reason.kind 非字符串/空 → 'unknown'，长度>40 截断）、silentReasonOf()、errorFacts()（code 缺省 UNKNOWN，message 单行化+slice(0,200)）；Classifier.classify() 的 turn/end 分支改为查表并组装中断意图 {kind:'interrupt', event:'turn/error', message, toolName:null, reason, error}；不得保留任何『默认当完成』兜底分支。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-96b6a2
+      phase: implement
+      side: backend
+    - id: t-f5f9e9
+      title: 数据契约：目标事件语义 eventsMode 与事件清单·研发
+      implements: |-
+        src/targets.js：EVENT_TYPES 追加 'turn/error'（既有四项顺序不变）；新增 LEGACY_ALL_EVENTS 与纯函数 normalizeEvents(events, mode)（判定式按 design/data-model.md §2，幂等）；validateTarget() 读取 input.eventsMode（值域 all/explicit，其它视为缺省）、未知事件仍按既有规则报错、输出补 eventsMode；TargetStore.#persist() 与版本闸门零改动（TARGET_FILE_VERSION 保持 3）。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-4039c3
+      title: 数据契约：目标事件语义 eventsMode 与事件清单·复核
+      implements: |-
+        src/targets.js：EVENT_TYPES 追加 'turn/error'（既有四项顺序不变）；新增 LEGACY_ALL_EVENTS 与纯函数 normalizeEvents(events, mode)（判定式按 design/data-model.md §2，幂等）；validateTarget() 读取 input.eventsMode（值域 all/explicit，其它视为缺省）、未知事件仍按既有规则报错、输出补 eventsMode；TargetStore.#persist() 与版本闸门零改动（TARGET_FILE_VERSION 保持 3）。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-f5f9e9
+      phase: implement
+      side: backend
+    - id: t-90073b
+      title: 数据契约：目标事件语义 eventsMode 与事件清单·测试
+      implements: |-
+        src/targets.js：EVENT_TYPES 追加 'turn/error'（既有四项顺序不变）；新增 LEGACY_ALL_EVENTS 与纯函数 normalizeEvents(events, mode)（判定式按 design/data-model.md §2，幂等）；validateTarget() 读取 input.eventsMode（值域 all/explicit，其它视为缺省）、未知事件仍按既有规则报错、输出补 eventsMode；TargetStore.#persist() 与版本闸门零改动（TARGET_FILE_VERSION 保持 3）。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-4039c3
+      phase: implement
+      side: backend
+    - id: t-a6684d
+      title: 接线：开关、类型过滤与静默留痕·研发
+      implements: |-
+        src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-5e2101
+        - t-a36090
+      phase: implement
+      side: backend
+    - id: t-9bd584
+      title: 接线：开关、类型过滤与静默留痕·联调
+      implements: |-
+        src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。
+
+        [子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）
+      serves: []
+      depends_on:
+        - t-a6684d
+      phase: implement
+      side: backend
+    - id: t-5a02c2
+      title: 接线：开关、类型过滤与静默留痕·复核
+      implements: |-
+        src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-9bd584
+      phase: implement
+      side: backend
+    - id: t-946335
+      title: 接线：开关、类型过滤与静默留痕·测试
+      implements: |-
+        src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-5a02c2
+      phase: implement
+      side: backend
+    - id: t-626838
+      title: 出站报文：中断意图的 reason / error 与事件元数据·研发
+      implements: |-
+        src/channels/custom.js 的 buildPayload() 仅当 intent.kind==='interrupt' 时追加 reason: intent.reason 与 error: intent.error ?? null（非中断事件键集合逐字节不变）；src/payload.js 的 EVENT_META 增 'turn/error': { title:'⚠️ 会话中断', color:'red' }；五个渠道适配器零改动。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-5e2101
+      phase: implement
+      side: backend
+    - id: t-e0032e
+      title: 出站报文：中断意图的 reason / error 与事件元数据·复核
+      implements: |-
+        src/channels/custom.js 的 buildPayload() 仅当 intent.kind==='interrupt' 时追加 reason: intent.reason 与 error: intent.error ?? null（非中断事件键集合逐字节不变）；src/payload.js 的 EVENT_META 增 'turn/error': { title:'⚠️ 会话中断', color:'red' }；五个渠道适配器零改动。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-626838
+      phase: implement
+      side: backend
+    - id: t-539bd4
+      title: 出站报文：中断意图的 reason / error 与事件元数据·测试
+      implements: |-
+        src/channels/custom.js 的 buildPayload() 仅当 intent.kind==='interrupt' 时追加 reason: intent.reason 与 error: intent.error ?? null（非中断事件键集合逐字节不变）；src/payload.js 的 EVENT_META 增 'turn/error': { title:'⚠️ 会话中断', color:'red' }；五个渠道适配器零改动。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-e0032e
+      phase: implement
+      side: backend
+    - id: t-5d66e3
+      title: 前端：设置页「关心事件」与保存语义·研发
+      implements: |-
+        client.js：EVENTS 在「对话完成」之后插入 { id:'turn/error', label:'会话中断', field:'turn/error' }；save() 计算 allChecked（勾选集合 == EVENT_IDS）→ 全勾提交 {events: [], eventsMode:'all'}，否则提交 {events: 勾选, eventsMode:'explicit'}；selectTarget() 回显口径不变（events 空 = 全勾）。不改布局/样式/图标/renderTargetPicker 契约。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-a36090
+      phase: ui
+      side: frontend
+    - id: t-3b3e5b
+      title: 前端：设置页「关心事件」与保存语义·复核
+      implements: |-
+        client.js：EVENTS 在「对话完成」之后插入 { id:'turn/error', label:'会话中断', field:'turn/error' }；save() 计算 allChecked（勾选集合 == EVENT_IDS）→ 全勾提交 {events: [], eventsMode:'all'}，否则提交 {events: 勾选, eventsMode:'explicit'}；selectTarget() 回显口径不变（events 空 = 全勾）。不改布局/样式/图标/renderTargetPicker 契约。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-5d66e3
+      phase: ui
+      side: frontend
+    - id: t-5a0f0d
+      title: 前端：设置页「关心事件」与保存语义·测试
+      implements: |-
+        client.js：EVENTS 在「对话完成」之后插入 { id:'turn/error', label:'会话中断', field:'turn/error' }；save() 计算 allChecked（勾选集合 == EVENT_IDS）→ 全勾提交 {events: [], eventsMode:'all'}，否则提交 {events: 勾选, eventsMode:'explicit'}；selectTarget() 回显口径不变（events 空 = 全勾）。不改布局/样式/图标/renderTargetPicker 契约。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-3b3e5b
+      phase: ui
+      side: frontend
+    - id: t-774e6d
+      title: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·研发
+      implements: |-
+        锁定三条路径：① 老记录（events 恰为 LEGACY_ALL_EVENTS 且无 mode）载入后归一化为 {events:[],eventsMode:'all'}，老目标开箱即收中断；② 老客户端（提交显式四项、无 mode）推断为全收；③ 旧版本读新文件：按白名单只取已知字段、忽略 eventsMode、events:[] 在旧语义里同样是全收，version 仍为 3。结果写入 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-413c55
+      phase: test
+      side: backend
+    - id: t-126c83
+      title: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·复核
+      implements: |-
+        锁定三条路径：① 老记录（events 恰为 LEGACY_ALL_EVENTS 且无 mode）载入后归一化为 {events:[],eventsMode:'all'}，老目标开箱即收中断；② 老客户端（提交显式四项、无 mode）推断为全收；③ 旧版本读新文件：按白名单只取已知字段、忽略 eventsMode、events:[] 在旧语义里同样是全收，version 仍为 3。结果写入 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-774e6d
+      phase: test
+      side: backend
+    - id: t-13691e
+      title: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·测试
+      implements: |-
+        锁定三条路径：① 老记录（events 恰为 LEGACY_ALL_EVENTS 且无 mode）载入后归一化为 {events:[],eventsMode:'all'}，老目标开箱即收中断；② 老客户端（提交显式四项、无 mode）推断为全收；③ 旧版本读新文件：按白名单只取已知字段、忽略 eventsMode、events:[] 在旧语义里同样是全收，version 仍为 3。结果写入 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-126c83
+      phase: test
+      side: backend
+    - id: t-4a8281
+      title: 测试：决策表 / 链路集成 / 迁移三套用例·研发
+      implements: |-
+        扩展 test/classify.test.js（T2-*、T3-*：8 种终态、静默码、skipReasons 优先、开关不串扰，并改写既有『error 当完成』的期望为中断）；新增 test/interrupt.test.js（复用 test/e2e.local.test.js 的 withReceiver()/waitFor()，覆盖 T4-1…T4-6、T5-1…T5-4：报文字节、单行化与截断、自动轮不静默、静默留痕）；新增 test/targets-events.test.js（T6-1…T6-12）。既有 244 用例中只允许改动上述 error 相关断言。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-413c55
+        - t-5cbf4c
+        - t-ca1e16
+      phase: test
+      side: fullstack
+    - id: t-624074
+      title: 测试：决策表 / 链路集成 / 迁移三套用例·复核
+      implements: |-
+        扩展 test/classify.test.js（T2-*、T3-*：8 种终态、静默码、skipReasons 优先、开关不串扰，并改写既有『error 当完成』的期望为中断）；新增 test/interrupt.test.js（复用 test/e2e.local.test.js 的 withReceiver()/waitFor()，覆盖 T4-1…T4-6、T5-1…T5-4：报文字节、单行化与截断、自动轮不静默、静默留痕）；新增 test/targets-events.test.js（T6-1…T6-12）。既有 244 用例中只允许改动上述 error 相关断言。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-4a8281
+      phase: test
+      side: fullstack
+    - id: t-014928
+      title: 测试：决策表 / 链路集成 / 迁移三套用例·测试
+      implements: |-
+        扩展 test/classify.test.js（T2-*、T3-*：8 种终态、静默码、skipReasons 优先、开关不串扰，并改写既有『error 当完成』的期望为中断）；新增 test/interrupt.test.js（复用 test/e2e.local.test.js 的 withReceiver()/waitFor()，覆盖 T4-1…T4-6、T5-1…T5-4：报文字节、单行化与截断、自动轮不静默、静默留痕）；新增 test/targets-events.test.js（T6-1…T6-12）。既有 244 用例中只允许改动上述 error 相关断言。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-624074
+      phase: test
+      side: fullstack
+    - id: t-3f1491
+      title: 文档同步：报文契约、事件分类表、排障原因码·研发
+      implements: |-
+        README.md：推送契约 event 枚举补 turn/error 与 reason/error 字段示例、配置项表补 notifyInterrupt/interruptMessage 与 skipReasons 默认值变更（含『只认 turn/end 的老接收端收不到中断』明示）、『该被叫一声的时刻』表格补一行；docs/architecture/notification-plugin.md 的事件分类表补中断一行；docs/guides/operations.md 的 drop 原因码表补 turn-skipped / turn-aborted / turn-not-notifiable 与排查步骤。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-5cbf4c
+        - t-ef4fa8
+      phase: doc
+      side: doc
+    - id: t-79265a
+      title: 文档同步：报文契约、事件分类表、排障原因码·复核
+      implements: |-
+        README.md：推送契约 event 枚举补 turn/error 与 reason/error 字段示例、配置项表补 notifyInterrupt/interruptMessage 与 skipReasons 默认值变更（含『只认 turn/end 的老接收端收不到中断』明示）、『该被叫一声的时刻』表格补一行；docs/architecture/notification-plugin.md 的事件分类表补中断一行；docs/guides/operations.md 的 drop 原因码表补 turn-skipped / turn-aborted / turn-not-notifiable 与排查步骤。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-3f1491
+      phase: doc
+      side: doc
+    - id: t-577377
+      title: 需求级自检：逐条 FR 对照可跑命令并汇总证据·研发
+      implements: |-
+        按 design/test-cases.md §8 逐条跑，产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md（每条 FR 一行：命令 + 输出摘要 + 结论），并核对 design/architecture.md §4 的 7 条不变量与两处设计偏差是否已如实记录。
+
+        [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+      serves: []
+      depends_on:
+        - t-cdd782
+        - t-691d67
+      phase: test
+      side: fullstack
+    - id: t-2c64b0
+      title: 需求级自检：逐条 FR 对照可跑命令并汇总证据·复核
+      implements: |-
+        按 design/test-cases.md §8 逐条跑，产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md（每条 FR 一行：命令 + 输出摘要 + 结论），并核对 design/architecture.md §4 的 7 条不变量与两处设计偏差是否已如实记录。
+
+        [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-577377
+      phase: test
+      side: fullstack
+    - id: t-d3aa47
+      title: 需求级自检：逐条 FR 对照可跑命令并汇总证据·测试
+      implements: |-
+        按 design/test-cases.md §8 逐条跑，产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md（每条 FR 一行：命令 + 输出摘要 + 结论），并核对 design/architecture.md §4 的 7 条不变量与两处设计偏差是否已如实记录。
+
+        [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+      serves: []
+      depends_on:
+        - t-2c64b0
+      phase: test
+      side: fullstack
+traceability:
+  design_to_tasks:
+    design/architecture.md#1:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/architecture.md#2:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+    design/architecture.md#3:
+      - t-5e2101
+      - t-413c55
+      - t-5cbf4c
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+    design/architecture.md#4:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/architecture.md#5:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/architecture.md#6:
+      - t-5e2101
+      - t-413c55
+    design/architecture.md#7:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+    design/architecture.md#8:
+      - t-a36090
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/backend.md#1:
+      - t-5e2101
+      - t-413c55
+      - t-5cbf4c
+      - t-cdd782
+      - t-ce4b1a
+    design/backend.md#2:
+      - t-413c55
+      - t-cdd782
+    design/backend.md#3:
+      - t-413c55
+      - t-cdd782
+    design/backend.md#4:
+      - t-5cbf4c
+      - t-691d67
+    design/backend.md#5:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/backend.md#6:
+      - t-413c55
+      - t-cdd782
+      - t-ce4b1a
+    design/backend.md#7:
+      - t-5e2101
+      - t-413c55
+      - t-cdd782
+      - t-ce4b1a
+    design/backend.md#8:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+    design/data-model.md#1:
+      - t-413c55
+      - t-cdd782
+    design/data-model.md#2:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/data-model.md#3:
+      - t-5e2101
+      - t-5cbf4c
+    design/data-model.md#4:
+      - t-a36090
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/data-model.md#5:
+      - t-5e2101
+      - t-413c55
+    design/frontend.md#1:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/frontend.md#2:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/frontend.md#3:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/frontend.md#4:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/interfaces.md#1:
+      - t-5e2101
+      - t-413c55
+      - t-5cbf4c
+    design/interfaces.md#2:
+      - t-5e2101
+      - t-413c55
+      - t-cdd782
+      - t-ce4b1a
+    design/interfaces.md#3:
+      - t-413c55
+      - t-cdd782
+    design/interfaces.md#4:
+      - t-413c55
+      - t-cdd782
+      - t-ce4b1a
+    design/interfaces.md#5:
+      - t-413c55
+      - t-cdd782
+    design/interfaces.md#6:
+      - t-5cbf4c
+      - t-691d67
+    design/interfaces.md#7:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/interfaces.md#8:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/use-cases.md#场景总览:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+    design/use-cases.md#UC-1-模型流报错必须叫而且不许说已完成:
+      - t-5e2101
+      - t-413c55
+      - t-5cbf4c
+      - t-691d67
+    design/use-cases.md#UC-2-崩溃中断孤儿-turn-收尾要叫人:
+      - t-5e2101
+      - t-413c55
+      - t-5cbf4c
+      - t-691d67
+    design/use-cases.md#UC-3-自己按的-Esc不许吵:
+      - t-5e2101
+      - t-413c55
+      - t-cdd782
+      - t-ce4b1a
+    design/use-cases.md#UC-4-自动轮里报错无人值守时更要叫:
+      - t-5e2101
+      - t-413c55
+      - t-cdd782
+    design/use-cases.md#UC-5-只想收完成通知安静但不许被喂假消息:
+      - t-413c55
+      - t-cdd782
+    design/use-cases.md#UC-6-老用户升级什么都不用配也不许漏:
+      - t-a36090
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+    design/use-cases.md#UC-7-排障与回滚:
+      - t-a36090
+      - t-413c55
+      - t-ca1e16
+      - t-ef4fa8
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+  fr_to_tasks:
+    FR-1:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+      - t-5cbf4c
+      - t-cdd782
+      - t-ce4b1a
+    FR-5:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-ca1e16
+      - t-ef4fa8
+      - t-691d67
+      - t-5cbf4c
+      - t-cdd782
+      - t-ce4b1a
+    FR-2:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+    FR-3:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+    FR-4:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+    FR-6:
+      - t-5e2101
+      - t-a36090
+      - t-413c55
+      - t-5cbf4c
+      - t-ca1e16
+      - t-ef4fa8
+      - t-cdd782
+      - t-691d67
+      - t-ce4b1a
+coverage:
+  implementation:
+    total: 41
+    covered: 41
+    uncovered: []
+    rate: 100
+    total_designs: 41
+    covered_designs: 41

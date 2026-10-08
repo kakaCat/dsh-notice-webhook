@@ -1,0 +1,38 @@
+task:
+  id: t-33a9df
+  title: 处理迁移与兼容（旧数据 / 共存 / 回滚）·测试
+  status: done
+  implements: |-
+    固化 src/bindings.js 的读取降级路径（文件缺失、非法 JSON、未知 version、单条字段非法）；确认 payload 为追加式演进且 version 保持 1；验证与 dsh-notice 共存（不读写其配置与触发目录）；验证卸载回滚后除 bindings.json 外无残留；新增 test/compat.test.js 覆盖上述路径。
+
+    [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+  serves: []
+  depends_on:
+    - t-b6df77
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-33a9df
+    TASK_TITLE: 处理迁移与兼容（旧数据 / 共存 / 回滚）·测试
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T06:12:41.325Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T06:10:28.286Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T06:12:41.325Z

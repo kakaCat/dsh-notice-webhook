@@ -1,0 +1,42 @@
+task:
+  id: t-4e1f32
+  title: 装载验收与文档更新·研发
+  status: done
+  implements: |-
+    装载到 profile 后用 plugin_manager 与 cordis_inspect_query 复验双半；更新 README.md（配置口径改为只填 key、补迁移与回滚说明、图标来源署名）与 docs/architecture/notification-plugin.md（追加「组装点迁移」与「渠道元数据单点真相」两条决策）；THIRD_PARTY_NOTICES 记图标来源。验证：三条活体查询 + 回滚用例 + README grep。
+
+    [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+  serves: []
+  depends_on:
+    - t-d57116
+    - t-738f23
+    - t-71241e
+    - t-3f6aed
+    - t-683b1f
+  phase: test
+  side: fullstack
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-4e1f32
+    TASK_TITLE: 装载验收与文档更新·研发
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: fullstack
+    PHASE: test
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: test
+      status: done
+      completed_at: 2026-09-30T15:01:45.766Z
+    - phase: doc
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T15:01:45.605Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T15:01:45.766Z

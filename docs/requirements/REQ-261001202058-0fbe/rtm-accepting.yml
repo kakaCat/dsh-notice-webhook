@@ -1,0 +1,242 @@
+metadata:
+  stage: accepting
+  requirement_id: REQ-261001202058-0fbe
+  generated_at: 2026-10-01T12:41:22.550Z
+  version: 3
+  generated_by: dsh-pmboard
+  last_updated: 2026-10-01T12:41:46.320Z
+inputs:
+  tasks:
+    - id: t-1c0dc2
+      title: 配置契约：新增 volatile 开关 jobAwareComplete
+      status: done
+    - id: t-30bbed
+      title: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）
+      status: done
+    - id: t-acae58
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路
+      status: done
+    - id: t-bdef4c
+      title: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）
+      status: done
+    - id: t-613fc4
+      title: 排障口径：drop 原因码 job-running 进运维文档
+      status: done
+    - id: t-fbe154
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」
+      status: done
+    - id: t-ae0636
+      title: 配置契约：新增 volatile 开关 jobAwareComplete·研发
+      status: done
+    - id: t-1a2036
+      title: 配置契约：新增 volatile 开关 jobAwareComplete·复核
+      status: done
+    - id: t-5456ad
+      title: 配置契约：新增 volatile 开关 jobAwareComplete·测试
+      status: done
+    - id: t-bf2be8
+      title: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·研发
+      status: done
+    - id: t-d4d793
+      title: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·复核
+      status: done
+    - id: t-e5e744
+      title: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·测试
+      status: done
+    - id: t-f468d1
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·研发
+      status: done
+    - id: t-ce6b74
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·联调
+      status: done
+    - id: t-1e395e
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·复核
+      status: done
+    - id: t-cbf134
+      title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·测试
+      status: done
+    - id: t-830f85
+      title: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·研发
+      status: done
+    - id: t-c3b5bc
+      title: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·复核
+      status: done
+    - id: t-9905e8
+      title: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·测试
+      status: done
+    - id: t-ff3619
+      title: 排障口径：drop 原因码 job-running 进运维文档·研发
+      status: done
+    - id: t-93732c
+      title: 排障口径：drop 原因码 job-running 进运维文档·复核
+      status: done
+    - id: t-f8c218
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·研发
+      status: done
+    - id: t-0d216c
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·复核
+      status: done
+    - id: t-caa24b
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·测试
+      status: done
+outputs:
+  test_cases:
+    - id: TC-1
+      title: t1 配置契约（`jobAwareComplete`）
+      covers:
+        - t-1c0dc2
+        - t-ae0636
+        - t-1a2036
+        - t-5456ad
+      validates: []
+      source: tests/test-report.md
+    - id: TC-2
+      title: t2 判定闸门模块
+      covers:
+        - t-30bbed
+        - t-bf2be8
+        - t-d4d793
+        - t-e5e744
+      validates: []
+      source: tests/test-report.md
+    - id: TC-3
+      title: t3 接线（主链路 + `ctx.inject(['jobs'])` + 补发通路）
+      covers:
+        - t-acae58
+        - t-f468d1
+        - t-ce6b74
+        - t-1e395e
+        - t-cbf134
+      validates: []
+      source: tests/test-report.md
+    - id: TC-4
+      title: t4 迁移与兼容回归
+      covers:
+        - t-bdef4c
+        - t-report
+        - t-830f85
+        - t-c3b5bc
+        - t-9905e8
+      validates: []
+      source: tests/test-report.md
+    - id: TC-5
+      title: t5 排障口径
+      covers:
+        - t-613fc4
+        - t-ff3619
+        - t-93732c
+      validates: []
+      source: tests/test-report.md
+    - id: TC-6
+      title: t6 端到端联调
+      covers:
+        - t-fbe154
+        - t-f8c218
+        - t-0d216c
+        - t-caa24b
+      validates: []
+      source: tests/test-report.md
+traceability:
+  task_to_tests:
+    t-1c0dc2:
+      - TC-1
+    t-30bbed:
+      - TC-2
+    t-acae58:
+      - TC-3
+    t-bdef4c:
+      - TC-4
+    t-613fc4:
+      - TC-5
+    t-fbe154:
+      - TC-6
+    t-ae0636:
+      - TC-1
+    t-1a2036:
+      - TC-1
+    t-5456ad:
+      - TC-1
+    t-bf2be8:
+      - TC-2
+    t-d4d793:
+      - TC-2
+    t-e5e744:
+      - TC-2
+    t-f468d1:
+      - TC-3
+    t-ce6b74:
+      - TC-3
+    t-1e395e:
+      - TC-3
+    t-cbf134:
+      - TC-3
+    t-830f85:
+      - TC-4
+    t-c3b5bc:
+      - TC-4
+    t-9905e8:
+      - TC-4
+    t-ff3619:
+      - TC-5
+    t-93732c:
+      - TC-5
+    t-f8c218:
+      - TC-6
+    t-0d216c:
+      - TC-6
+    t-caa24b:
+      - TC-6
+    t-report:
+      - TC-4
+  fr_to_tests:
+    FR-1:
+      - TC-2
+      - TC-3
+      - TC-1
+      - TC-4
+      - TC-5
+      - TC-6
+    FR-2:
+      - TC-2
+      - TC-3
+      - TC-1
+      - TC-4
+      - TC-5
+      - TC-6
+    FR-3:
+      - TC-1
+      - TC-2
+      - TC-3
+      - TC-4
+      - TC-5
+      - TC-6
+    FR-4:
+      - TC-1
+      - TC-2
+      - TC-3
+      - TC-4
+      - TC-5
+      - TC-6
+    FR-5:
+      - TC-1
+      - TC-2
+      - TC-3
+      - TC-4
+      - TC-5
+      - TC-6
+    FR-6:
+      - TC-1
+      - TC-2
+      - TC-3
+      - TC-4
+      - TC-5
+      - TC-6
+coverage:
+  testing:
+    total: 24
+    covered: 24
+    uncovered: []
+    rate: 100
+    total_tasks: 24
+    tested_tasks: 24
+    untested: []

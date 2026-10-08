@@ -1,0 +1,3676 @@
+{
+  "version": 1,
+  "requirement_id": "REQ-261005120639-f801",
+  "schemaVersion": 9,
+  "generated_at": "2026-10-05T04:31:31.227Z",
+  "tasks": [
+    {
+      "id": "t-200413",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "判定层：闸门看两路活（job + subagent 后代）",
+      "cardDoc": "docs/requirements/REQ-261005120639-f801/tasks/t-200413.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test test/jobs-gate.test.js 退出码 0。断言覆盖：1 个本会话 running 子代理 → suppressed:true + reason:'subagent-running' + subagentIds 非空；只有未结算 job → reason:'job-running'（逐字保留）；两者都有 → 'work-running'；idle 子代理 / parentSession 指向别的会话 / 有 parentSession 但 origin 缺失（普通 fork）/ 脏条目 → reason:'no-work'；孙代（两级血统）计入；自指环不死循环；attachSubagents({}) 与 list() 抛错都不抛异常。",
+      "implementation": "src/jobs.js：新增 isAgentRegistryLike(agents)（typeof list === 'function'）与 liveSubagentIds(agents, sessionId)（血统 BFS 沿 session.header.parentSession 下钻、只认 origin==='subagent' ∧ status==='running'、visited 防环、条目形状不符跳过、形状不符/抛错/非数组返回 null）；createJobGate 增 options.subagents、attachSubagents()（形状不符 → 空 detach + 只报一次 warn）、detachSubagents()、observeSubagentEnd()、subagentsAvailable；gate() 同时计算 jobIds 与 subagentIds，两者都空 → {suppressed:false, reason:'no-work'}，两路都不可用 → 'unavailable'（既有语义），有活 → {suppressed:true, reason:'job-running'|'subagent-running'|'work-running', jobIds, subagentIds}（不抑制时不带额外键）；抽出 maybeSettle(sessionId)（watched.size===0 ∧ liveSubagentIds 为空 → 起宽限），observe() 改为调用它；pending 记录增 subagentIds；pendingOf 快照带上。",
+      "context": "",
+      "skipIntegration": true,
+      "footprint": {
+        "files": 1,
+        "anchors": 8,
+        "chars": 3000
+      },
+      "requirementRefs": [
+        "FR-1",
+        "FR-3"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-311dd2",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174704989,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 681,
+              "at": 1791174704989,
+              "totals": {
+                "uncachedInputTokens": 133558,
+                "outputTokens": 81144,
+                "cacheReadTokens": 10499968,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 681,
+                  "totals": {
+                    "uncachedInputTokens": 133558,
+                    "outputTokens": 81144,
+                    "cacheReadTokens": 10499968,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 922,
+              "at": 1791174871441,
+              "totals": {
+                "uncachedInputTokens": 163739,
+                "outputTokens": 108204,
+                "cacheReadTokens": 19341696,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 922,
+                  "totals": {
+                    "uncachedInputTokens": 163739,
+                    "outputTokens": 108204,
+                    "cacheReadTokens": 19341696,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 30181,
+              "outputTokens": 27060,
+              "cacheReadTokens": 8841728,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791174871441
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174691162,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174704989,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "开工 t1 判定层：按 design/interfaces.md §1 与 data-model.md §2 扩写 src/jobs.js（两路事实源 + maybeSettle + 三态 reason）。"
+        },
+        {
+          "status": "done",
+          "at": 1791174871441,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "判定层父卡收尾：研发/复核/测试三张子卡全部完成，验收命令 node --test test/jobs-gate.test.js 全绿。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-47b50a",
+          "body": "[状态] → in_progress：开工 t1 判定层：按 design/interfaces.md §1 与 data-model.md §2 扩写 src/jobs.js（两路事实源 + maybeSettle + 三态 reason）。（reqboard_task_move）",
+          "createdAt": 1791174704989,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-08f869",
+          "body": "[状态] → done：判定层父卡收尾：研发/复核/测试三张子卡全部完成，验收命令 node --test test/jobs-gate.test.js 全绿。（reqboard_task_move）",
+          "createdAt": 1791174871441,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174691162,
+      "updatedAt": 1791174871441,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "layer": 0,
+      "lastReport": {
+        "at": 1791174806107,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/jobs.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "新增 isAgentRegistryLike 与 liveSubagentIds：按 parentSession 血统下钻任意深度，只认 origin=subagent 且 status=running，防环、跳过脏条目",
+          "闸门同时看两路活：既有后台 job + 新增子代理后代；有活即抑制并给出 job-running / subagent-running / work-running 三态原因码",
+          "两路都不可用仍逐字回到旧行为（reason=unavailable），只有一路可用时另一路照常工作",
+          "子代理这条路降级不抛：注册表形状不符只告警一次，list() 抛错或返回非数组都按「没活」处理（宁可误报，不可漏报）",
+          "新增 observeSubagentEnd 复检入口：两路都空才起宽限，已在等宽限时不重置窗口（无关结算事件不会把补发一直往后推）",
+          "补发动作带上被压住的 job / 子代理 id 列表，排障能看到「是谁压住了这条通知」",
+          "新增 8 条判定层用例（TC-S1…TC-S8），并把 2 处既有诊断码断言 no-jobs 同步为 no-work"
+        ]
+      },
+      "lastRun": {
+        "at": 1791174806107,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-bde16a",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "接线层：ctx.agents 注入 + subagent/end 复检",
+      "cardDoc": "docs/requirements/REQ-261005120639-f801/tasks/t-bde16a.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-200413"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test test/jobs-gate.test.js 退出码 0；grep -n \"subagent/end\" index.js 命中接线与 dispose 两处。接线层断言：注入假 agents 后 handle(turn/end) → action:'dropped' / reason:'subagent-running' 且接收端 0 条；子代理转 idle + observeSubagentEnd() + 推进宽限 → 接收端恰好 1 条且与基线完成报文逐字段相等（忽略 at）；宽限内 turn/start → 0 条补发；jobAwareComplete:false 与不注入 agents → action:'sent'。",
+      "implementation": "index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。",
+      "context": "",
+      "footprint": {
+        "files": 1,
+        "anchors": 6,
+        "chars": 2000
+      },
+      "requirementRefs": [
+        "FR-1",
+        "FR-2",
+        "FR-4"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-0df4a1",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174874655,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 929,
+              "at": 1791174874655,
+              "totals": {
+                "uncachedInputTokens": 167632,
+                "outputTokens": 108434,
+                "cacheReadTokens": 19593088,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 929,
+                  "totals": {
+                    "uncachedInputTokens": 167632,
+                    "outputTokens": 108434,
+                    "cacheReadTokens": 19593088,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1124,
+              "at": 1791174994826,
+              "totals": {
+                "uncachedInputTokens": 186183,
+                "outputTokens": 124806,
+                "cacheReadTokens": 28102400,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1124,
+                  "totals": {
+                    "uncachedInputTokens": 186183,
+                    "outputTokens": 124806,
+                    "cacheReadTokens": 28102400,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 18551,
+              "outputTokens": 16372,
+              "cacheReadTokens": 8509312,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791174994826
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174691162,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174874655,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "开工 t2 接线层：把 ctx.agents 与 subagent/end 接进 apply()，并让 handle() 返回新原因码与 id 列表。"
+        },
+        {
+          "status": "done",
+          "at": 1791174994826,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "接线层收尾：四张子卡全绿，验收命令与 grep 锚点均命中。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-5c2ec1",
+          "body": "[状态] → in_progress：开工 t2 接线层：把 ctx.agents 与 subagent/end 接进 apply()，并让 handle() 返回新原因码与 id 列表。（reqboard_task_move）",
+          "createdAt": 1791174874655,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-4ef623",
+          "body": "[状态] → done：接线层收尾：四张子卡全绿，验收命令与 grep 锚点均命中。（reqboard_task_move）",
+          "createdAt": 1791174994826,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174691162,
+      "updatedAt": 1791174994826,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "layer": 1,
+      "lastReport": {
+        "at": 1791174992405,
+        "reportIndex": 1,
+        "filesChanged": [
+          "index.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "插件在真实运行时主动订阅子代理结算事件（subagent/end），子代理一结束就复检该不该补发完成通知",
+          "插件在真实运行时主动获取 agent 注册表（ctx.inject([agents])），拿不到就自动降级为旧行为，不影响既有 job 判定",
+          "抑制结果里带上原因码与 id 列表，排障能直接看出是被后台 job 还是被子代理压住",
+          "卸载时三处新接线（agents / subagent/end）全部摘掉，不留悬挂监听",
+          "本卡 4 张子卡（研发/联调/复核/测试）全部完成：jobs-gate 38/38、全量 320/320 全绿",
+          "验收锚点 grep -n subagent/end index.js 命中接线与 dispose 两处"
+        ]
+      },
+      "lastRun": {
+        "at": 1791174992405,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-1809aa",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "测试与降级回归（含 2 处既有断言同步）",
+      "cardDoc": "docs/requirements/REQ-261005120639-f801/tasks/t-1809aa.md",
+      "description": "",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-bde16a"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test \"test/*.test.js\" 退出码 0、fail 0、tests ≥ 307（只增不减）；grep -rn \"no-jobs\" test/ src/ 期望 0 命中；兼容报告逐条列出唯一既有断言改动（2 处诊断码）与降级路径等价的证据（用例名 + 断言）。",
+      "implementation": "test/jobs-gate.test.js：增 makeAgents(entries) 假件（{ list: () => entries }，可增删改以模拟结算）与 TC-1..TC-11（判定层两路、血缘口径、降级容错、接线层抑制与补发、开关回滚、报文不回归）；把既有两处 deepEqual(..., {suppressed:false, reason:'no-jobs'}) 改为 'no-work'——这是本需求唯一触碰的既有断言；跑全量核对两条降级路径（不注入 agents / jobAwareComplete:false）与旧行为一致；结果写入 docs/requirements/REQ-261005120639-f801/tests/compat-report.md。",
+      "context": "",
+      "skipIntegration": true,
+      "footprint": {
+        "files": 1,
+        "anchors": 10,
+        "chars": 3000
+      },
+      "requirementRefs": [
+        "FR-1",
+        "FR-2",
+        "FR-3",
+        "FR-4",
+        "FR-5"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-d9bc6b",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174994886,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1126,
+              "at": 1791174994886,
+              "totals": {
+                "uncachedInputTokens": 186183,
+                "outputTokens": 124806,
+                "cacheReadTokens": 28102400,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1126,
+                  "totals": {
+                    "uncachedInputTokens": 186183,
+                    "outputTokens": 124806,
+                    "cacheReadTokens": 28102400,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1446,
+              "at": 1791175185807,
+              "totals": {
+                "uncachedInputTokens": 216194,
+                "outputTokens": 148059,
+                "cacheReadTokens": 43743744,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1446,
+                  "totals": {
+                    "uncachedInputTokens": 216194,
+                    "outputTokens": 148059,
+                    "cacheReadTokens": 43743744,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 30011,
+              "outputTokens": 23253,
+              "cacheReadTokens": 15641344,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175185807
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174691162,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174994886,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t3 测试与降级回归开工：补齐兼容报告与全量回归证据。"
+        },
+        {
+          "status": "done",
+          "at": 1791175185807,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "测试与降级回归卡收尾：三张子卡全绿（兼容报告落盘、锚点 0 命中、全量 320/320、现场复算 27 窗口）。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-9f3b16",
+          "body": "[状态] → in_progress：t3 测试与降级回归开工：补齐兼容报告与全量回归证据。（reqboard_task_move）",
+          "createdAt": 1791174994886,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-cdab56",
+          "body": "[状态] → done：测试与降级回归卡收尾：三张子卡全绿（兼容报告落盘、锚点 0 命中、全量 320/320、现场复算 27 窗口）。（reqboard_task_move）",
+          "createdAt": 1791175185807,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174691162,
+      "updatedAt": 1791175185807,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "layer": 2,
+      "lastReport": {
+        "at": 1791175037732,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261005120639-f801/tests/compat-report.md"
+        ],
+        "completed": [
+          "兼容报告落盘并可复核：docs/requirements/REQ-261005120639-f801/tests/compat-report.md",
+          "唯一既有断言改动 2 处（诊断码 no-jobs → no-work），其余既有断言零改动",
+          "降级路径与旧行为等价的证据已逐条绑定用例名与断言",
+          "全量 320/320、fail 0（基线 307，只增 13 条）",
+          "grep -rn no-jobs test/ src/ → 0 命中"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175037732,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-d94488",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "文档口径：完成闸门 + 两个新原因码",
+      "cardDoc": "docs/requirements/REQ-261005120639-f801/tasks/t-d94488.md",
+      "description": "",
+      "phase": "doc",
+      "side": "doc",
+      "dependsOn": [
+        "t-bde16a"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "grep -rn \"subagent-running\\|work-running\" docs/guides/operations.md 两行都命中；grep -rn \"只读 ctx.jobs\" docs/ 期望 0 命中；人工核对三份 architecture 文档里「完成闸门」口径一致。",
+      "implementation": "docs/guides/operations.md：drop 原因码表补 subagent-running（本会话仍有在跑的 subagent 后代）与 work-running（两者都有）两行，jobAwareComplete 一行改述为「完成闸门（后台 job + subagent 后代）总开关」；docs/architecture/project-manual.md 第三节、docs/architecture/index.md、docs/architecture/notification-plugin.md 三处把「完成通知只读 ctx.jobs」的旧口径改述为两路判定，并补一句「continuable 子代理不注册 job」的事实。",
+      "context": "",
+      "skipIntegration": true,
+      "footprint": {
+        "files": 4,
+        "anchors": 4,
+        "chars": 1500
+      },
+      "requirementRefs": [
+        "FR-6"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-af0205",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175040605,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1207,
+              "at": 1791175040605,
+              "totals": {
+                "uncachedInputTokens": 194080,
+                "outputTokens": 129516,
+                "cacheReadTokens": 31645440,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1207,
+                  "totals": {
+                    "uncachedInputTokens": 194080,
+                    "outputTokens": 129516,
+                    "cacheReadTokens": 31645440,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1652,
+              "at": 1791175307019,
+              "totals": {
+                "uncachedInputTokens": 233605,
+                "outputTokens": 156880,
+                "cacheReadTokens": 55301632,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1652,
+                  "totals": {
+                    "uncachedInputTokens": 233605,
+                    "outputTokens": 156880,
+                    "cacheReadTokens": 55301632,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 39525,
+              "outputTokens": 27364,
+              "cacheReadTokens": 23656192,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175307019
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174691162,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175040605,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t4 文档口径卡开工：改述为完成闸门 + 补两个新原因码。"
+        },
+        {
+          "status": "done",
+          "at": 1791175307019,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "文档卡收尾：四份文档口径统一、锚点全中，两张子卡已完成。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-c9768b",
+          "body": "[状态] → in_progress：t4 文档口径卡开工：改述为完成闸门 + 补两个新原因码。（reqboard_task_move）",
+          "createdAt": 1791175040605,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-c91973",
+          "body": "[状态] → done：文档卡收尾：四份文档口径统一、锚点全中，两张子卡已完成。（reqboard_task_move）",
+          "createdAt": 1791175307019,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174691162,
+      "updatedAt": 1791175307019,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "layer": 2,
+      "lastReport": {
+        "at": 1791175224423,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/guides/operations.md",
+          "docs/architecture/project-manual.md",
+          "docs/architecture/index.md",
+          "docs/architecture/notification-plugin.md"
+        ],
+        "completed": [
+          "运维文档：drop 原因码表新增 subagent-running 与 work-running，job-running 改述为可由同一个开关关掉整个完成闸门，排障表补「子代理还在跑却收到已完成」一行",
+          "项目说明书：第三节改写为「完成闸门（两路事实源）」并给出四条不可翻案口径，演进表与能力清单各补一行，跨需求约束改述为按形状消费 ctx.jobs / ctx.agents / subagent-end 事件",
+          "首页：TL;DR 与架构图口径改述为两路判定",
+          "架构与关键决策：决策 7 重写为两路事实源（含「continuable 子代理不注册 job」的关键事实与三态原因码），相关需求表补本需求一行",
+          "锚点：operations.md 两行原因码命中；口径类文档旧说法 0 命中；三份 architecture 文档都出现完成闸门口径",
+          "两张子卡（研发/复核）全部完成，复核结论为无偏离"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175224423,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-2f8316",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」",
+      "cardDoc": "docs/requirements/REQ-261005120639-f801/tasks/t-2f8316.md",
+      "description": "",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-1809aa"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "node --test test/jobs-gate.test.js 退出码 0；两条链路的接收端条数与字段断言逐条通过（报文含 version:1 / event:'turn/end' / 完成文案）。",
+      "implementation": "仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 串两条完整链路：① turn/start → 派子代理（running）→ turn/end（断言 0 条）→ 子代理转 idle + observeSubagentEnd() + 推进宽限（断言 1 条，字段与基线一致）；② 抑制后宽限内 turn/start（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。报告写入 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md。",
+      "context": "",
+      "footprint": {
+        "files": 1,
+        "anchors": 5,
+        "chars": 1500
+      },
+      "requirementRefs": [
+        "FR-2",
+        "FR-5"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-6781a4",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175189039,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1453,
+              "at": 1791175189039,
+              "totals": {
+                "uncachedInputTokens": 220152,
+                "outputTokens": 148408,
+                "cacheReadTokens": 44080640,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1453,
+                  "totals": {
+                    "uncachedInputTokens": 220152,
+                    "outputTokens": 148408,
+                    "cacheReadTokens": 44080640,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1561,
+              "at": 1791175246008,
+              "totals": {
+                "uncachedInputTokens": 226518,
+                "outputTokens": 152819,
+                "cacheReadTokens": 49951488,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1561,
+                  "totals": {
+                    "uncachedInputTokens": 226518,
+                    "outputTokens": 152819,
+                    "cacheReadTokens": 49951488,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 6366,
+              "outputTokens": 4411,
+              "cacheReadTokens": 5870848,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175246008
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174691162,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175189039,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t5 端到端联调卡开工：两条链路已由真 HTTP 接收端用例覆盖，报告已落盘。"
+        },
+        {
+          "status": "done",
+          "at": 1791175246008,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "联调卡收尾：两条链路在真 HTTP 接收端跑通，三张子卡全绿。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-085254",
+          "body": "[状态] → in_progress：t5 端到端联调卡开工：两条链路已由真 HTTP 接收端用例覆盖，报告已落盘。（reqboard_task_move）",
+          "createdAt": 1791175189039,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-bb11f1",
+          "body": "[状态] → done：联调卡收尾：两条链路在真 HTTP 接收端跑通，三张子卡全绿。（reqboard_task_move）",
+          "createdAt": 1791175246008,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174691162,
+      "updatedAt": 1791175246008,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "layer": 3,
+      "lastReport": {
+        "at": 1791175219629,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261005120639-f801/tests/e2e-report.md",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "两条端到端链路在真 HTTP 接收端跑通：压住 → 子代理结束 → 补发一条；压住 → 新轮次 → 不重复",
+          "补发报文与基线逐字段相等（忽略 at）",
+          "联调报告落盘 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md",
+          "三张子卡（研发/复核/测试）全部完成",
+          "诚实标注：真机验证（重载插件后观察 Host 日志）留待人工按报告第六节步骤做一次"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175219629,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-776b2f",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "判定层：闸门看两路活（job + subagent 后代）·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "src/jobs.js：新增 isAgentRegistryLike(agents)（typeof list === 'function'）与 liveSubagentIds(agents, sessionId)（血统 BFS 沿 session.header.parentSession 下钻、只认 origin==='subagent' ∧ status==='running'、visited 防环、条目形状不符跳过、形状不符/抛错/非数组返回 null）；createJobGate 增 options.subagents、attachSubagents()（形状不符 → 空 detach + 只报一次 warn）、detachSubagents()、observeSubagentEnd()、subagentsAvailable；gate() 同时计算 jobIds 与 subagentIds，两者都空 → {suppressed:false, reason:'no-work'}，两路都不可用 → 'unavailable'（既有语义），有活 → {suppressed:true, reason:'job-running'|'subagent-running'|'work-running', jobIds, subagentIds}（不抑制时不带额外键）；抽出 maybeSettle(sessionId)（watched.size===0 ∧ liveSubagentIds 为空 → 起宽限），observe() 改为调用它；pending 记录增 subagentIds；pendingOf 快照带上。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-200413",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-0a3341",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174840224,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 866,
+              "at": 1791174840224,
+              "totals": {
+                "uncachedInputTokens": 160662,
+                "outputTokens": 105186,
+                "cacheReadTokens": 17352192,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 866,
+                  "totals": {
+                    "uncachedInputTokens": 160662,
+                    "outputTokens": 105186,
+                    "cacheReadTokens": 17352192,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 886,
+              "at": 1791174847680,
+              "totals": {
+                "uncachedInputTokens": 161581,
+                "outputTokens": 106121,
+                "cacheReadTokens": 18093056,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 886,
+                  "totals": {
+                    "uncachedInputTokens": 161581,
+                    "outputTokens": 106121,
+                    "cacheReadTokens": 18093056,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 919,
+              "outputTokens": 935,
+              "cacheReadTokens": 740864,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791174847679
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-a82ca0",
+          "body": "[状态] → in_progress：t1 研发子卡开工：实现已完成（src/jobs.js 两路事实源 + 8 条新用例全绿）。（reqboard_task_move）",
+          "createdAt": 1791174840224,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-6ceee7",
+          "body": "[状态] → done：研发完成：node --test test/jobs-gate.test.js 34/34 全绿（含 9 条新判定层用例）。（reqboard_task_move）",
+          "createdAt": 1791174847679,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174704989,
+      "updatedAt": 1791174847679,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174704989,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174840224,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t1 研发子卡开工：实现已完成（src/jobs.js 两路事实源 + 8 条新用例全绿）。"
+        },
+        {
+          "status": "done",
+          "at": 1791174847679,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "研发完成：node --test test/jobs-gate.test.js 34/34 全绿（含 9 条新判定层用例）。"
+        }
+      ],
+      "layer": 0,
+      "lastReport": {
+        "at": 1791174845582,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/jobs.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "src/jobs.js 新增 isAgentRegistryLike 与 liveSubagentIds（血统下钻 + origin=subagent + status=running，防环、跳脏条目）",
+          "gate() 同时看 job 与子代理两路，给出 job-running / subagent-running / work-running 三态原因码",
+          "新增 attachSubagents / detachSubagents / observeSubagentEnd / subagentsAvailable",
+          "抽出 maybeSettle：两路都空才起宽限，已在等宽限不重置窗口",
+          "宽限到点若又忙起来：保留 pending 不静默丢弃（复核阶段发现并修掉）",
+          "test/jobs-gate.test.js 新增 TC-S1…TC-S9 共 9 条判定层用例，2 处既有诊断码断言同步为 no-work"
+        ]
+      },
+      "lastRun": {
+        "at": 1791174845582,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-fb44a5",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "判定层：闸门看两路活（job + subagent 后代）·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-776b2f"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "src/jobs.js：新增 isAgentRegistryLike(agents)（typeof list === 'function'）与 liveSubagentIds(agents, sessionId)（血统 BFS 沿 session.header.parentSession 下钻、只认 origin==='subagent' ∧ status==='running'、visited 防环、条目形状不符跳过、形状不符/抛错/非数组返回 null）；createJobGate 增 options.subagents、attachSubagents()（形状不符 → 空 detach + 只报一次 warn）、detachSubagents()、observeSubagentEnd()、subagentsAvailable；gate() 同时计算 jobIds 与 subagentIds，两者都空 → {suppressed:false, reason:'no-work'}，两路都不可用 → 'unavailable'（既有语义），有活 → {suppressed:true, reason:'job-running'|'subagent-running'|'work-running', jobIds, subagentIds}（不抑制时不带额外键）；抽出 maybeSettle(sessionId)（watched.size===0 ∧ liveSubagentIds 为空 → 起宽限），observe() 改为调用它；pending 记录增 subagentIds；pendingOf 快照带上。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-200413",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-0fde75",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174847735,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 888,
+              "at": 1791174847735,
+              "totals": {
+                "uncachedInputTokens": 161581,
+                "outputTokens": 106121,
+                "cacheReadTokens": 18093056,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 888,
+                  "totals": {
+                    "uncachedInputTokens": 161581,
+                    "outputTokens": 106121,
+                    "cacheReadTokens": 18093056,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 900,
+              "at": 1791174856507,
+              "totals": {
+                "uncachedInputTokens": 162350,
+                "outputTokens": 107403,
+                "cacheReadTokens": 18590592,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 900,
+                  "totals": {
+                    "uncachedInputTokens": 162350,
+                    "outputTokens": 107403,
+                    "cacheReadTokens": 18590592,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 769,
+              "outputTokens": 1282,
+              "cacheReadTokens": 497536,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791174856506
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-09b46f",
+          "body": "[状态] → in_progress：复核子卡开工：核对只读/同步/降级/无出站变化四条不变量与边界用例。（reqboard_task_move）",
+          "createdAt": 1791174847735,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-a069e6",
+          "body": "[状态] → done：复核完成：无偏离（一处边界缺陷已在复核中修复并加 TC-S9 锁定）。（reqboard_task_move）",
+          "createdAt": 1791174856506,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174704989,
+      "updatedAt": 1791174856506,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174704989,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174847735,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "复核子卡开工：核对只读/同步/降级/无出站变化四条不变量与边界用例。"
+        },
+        {
+          "status": "done",
+          "at": 1791174856506,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "复核完成：无偏离（一处边界缺陷已在复核中修复并加 TC-S9 锁定）。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1791174854074,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/jobs.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "逐条核对设计：接口签名、pending 字段、三态原因码、pendingOf 快照、降级语义均与 design/interfaces.md 与 data-model.md 一致",
+          "不变量一：只读 —— grep 无 import / require / cancel / kill / followup，闸门从不动任何 job 或子代理",
+          "不变量二：同步 —— grep 无 await，agents.list() 同步调用，判定不阻塞会话",
+          "不变量三：降级 —— 两路都不可用仍返回 unavailable（既有语义）；只有一路可用时另一路照常工作；形状不符只告警一次",
+          "不变量四：无出站变化 —— 未触碰 src/classify.js、src/router.js、src/channels/**、src/payload.js 与出站版本号",
+          "发现并修掉一处真缺陷：宽限到点时若子代理又被唤醒（新 epoch），原写法先删 pending 再返回，会把这条完成通知静默丢掉；改为保留 pending 并允许下次复检重新起窗口",
+          "为上述修复补 TC-S9 用例锁定行为；复核后 node --test test/jobs-gate.test.js 34/34 全绿"
+        ]
+      },
+      "lastRun": {
+        "at": 1791174854074,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-405c41",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "判定层：闸门看两路活（job + subagent 后代）·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-fb44a5"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "src/jobs.js：新增 isAgentRegistryLike(agents)（typeof list === 'function'）与 liveSubagentIds(agents, sessionId)（血统 BFS 沿 session.header.parentSession 下钻、只认 origin==='subagent' ∧ status==='running'、visited 防环、条目形状不符跳过、形状不符/抛错/非数组返回 null）；createJobGate 增 options.subagents、attachSubagents()（形状不符 → 空 detach + 只报一次 warn）、detachSubagents()、observeSubagentEnd()、subagentsAvailable；gate() 同时计算 jobIds 与 subagentIds，两者都空 → {suppressed:false, reason:'no-work'}，两路都不可用 → 'unavailable'（既有语义），有活 → {suppressed:true, reason:'job-running'|'subagent-running'|'work-running', jobIds, subagentIds}（不抑制时不带额外键）；抽出 maybeSettle(sessionId)（watched.size===0 ∧ liveSubagentIds 为空 → 起宽限），observe() 改为调用它；pending 记录增 subagentIds；pendingOf 快照带上。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-200413",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-0073d5",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174856563,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 902,
+              "at": 1791174856563,
+              "totals": {
+                "uncachedInputTokens": 162350,
+                "outputTokens": 107403,
+                "cacheReadTokens": 18590592,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 902,
+                  "totals": {
+                    "uncachedInputTokens": 162350,
+                    "outputTokens": 107403,
+                    "cacheReadTokens": 18590592,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 920,
+              "at": 1791174871386,
+              "totals": {
+                "uncachedInputTokens": 163739,
+                "outputTokens": 108204,
+                "cacheReadTokens": 19341696,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 920,
+                  "totals": {
+                    "uncachedInputTokens": 163739,
+                    "outputTokens": 108204,
+                    "cacheReadTokens": 19341696,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 1389,
+              "outputTokens": 801,
+              "cacheReadTokens": 751104,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791174871386
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-62830d",
+          "body": "[状态] → in_progress：测试子卡开工：跑本卡相关测试与全量回归，确认 fail 0 且只增不减。（reqboard_task_move）",
+          "createdAt": 1791174856563,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-e12e02",
+          "body": "[状态] → done：测试完成：jobs-gate 34/34、全量 316/316 全绿（基线 307，只增 9 条）。（reqboard_task_move）",
+          "createdAt": 1791174871386,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174704989,
+      "updatedAt": 1791174871386,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174704989,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174856563,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "测试子卡开工：跑本卡相关测试与全量回归，确认 fail 0 且只增不减。"
+        },
+        {
+          "status": "done",
+          "at": 1791174871386,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "测试完成：jobs-gate 34/34、全量 316/316 全绿（基线 307，只增 9 条）。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1791174868777,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/jobs-gate.test.js",
+          "src/jobs.js"
+        ],
+        "completed": [
+          "node --test test/jobs-gate.test.js → tests 34 / pass 34 / fail 0",
+          "npm test（全量）→ tests 316 / pass 316 / fail 0，比开工前基线 307 只增 9 条，无一条既有用例失败",
+          "本仓无 TypeScript 工程（无 tsconfig、纯 ESM JS），故 npx tsc --noEmit 不适用；以 node --test 为准",
+          "新增用例覆盖：两路抑制、三态原因码、空闲/异血统/无 origin/脏条目不抑制、孙代与环、两路单独可用、形状不符与抛错降级、复检补发与宽限窗口不重置、job 与子代理混合、宽限到点又忙起来不丢 pending"
+        ]
+      },
+      "lastRun": {
+        "at": 1791174868777,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-65d2a4",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "接线层：ctx.agents 注入 + subagent/end 复检·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-200413"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-bde16a",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-118e2f",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174949874,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1044,
+              "at": 1791174949874,
+              "totals": {
+                "uncachedInputTokens": 181732,
+                "outputTokens": 120185,
+                "cacheReadTokens": 24703744,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1044,
+                  "totals": {
+                    "uncachedInputTokens": 181732,
+                    "outputTokens": 120185,
+                    "cacheReadTokens": 24703744,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1056,
+              "at": 1791174955837,
+              "totals": {
+                "uncachedInputTokens": 182316,
+                "outputTokens": 120783,
+                "cacheReadTokens": 25262976,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1056,
+                  "totals": {
+                    "uncachedInputTokens": 182316,
+                    "outputTokens": 120783,
+                    "cacheReadTokens": 25262976,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 584,
+              "outputTokens": 598,
+              "cacheReadTokens": 559232,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791174955837
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-bebab0",
+          "body": "[状态] → in_progress：t2 研发子卡开工：index.js 接线已实现（agents 注入 + subagent/end 复检 + handle 返回扩展）。（reqboard_task_move）",
+          "createdAt": 1791174949874,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-4482d1",
+          "body": "[状态] → done：研发完成：index.js 接线落地，jobs-gate 38/38 全绿。（reqboard_task_move）",
+          "createdAt": 1791174955837,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174874655,
+      "updatedAt": 1791174955837,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174874655,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174949874,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t2 研发子卡开工：index.js 接线已实现（agents 注入 + subagent/end 复检 + handle 返回扩展）。"
+        },
+        {
+          "status": "done",
+          "at": 1791174955837,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "研发完成：index.js 接线落地，jobs-gate 38/38 全绿。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1791174953227,
+        "reportIndex": 1,
+        "filesChanged": [
+          "index.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "createNotifier 增 options.subagents，构造期即校验形状（形状不符只告警一次）",
+          "handle() 抑制分支返回 verdict.reason 与 subagentIds，排障能看到是被 job 还是被子代理压住",
+          "apply() 增 ctx.inject([agents]) 接线（与既有 jobs 接线同一模式，服务不在即降级）",
+          "apply() 增 ctx.on(subagent/end) 复检订阅，回调 try/catch 兜住，绝不影响会话与子代理结算",
+          "dispose() 先摘 agents 接线与 subagent/end 订阅，再清闸门状态（grep 命中两处）",
+          "新增接线层用例 TC-S10（压住 + 补发报文与基线逐字段一致）",
+          "新增 TC-S11（宽限内新轮次不补发、新轮次正常投递）",
+          "新增 TC-S12（开关关闭 / 未注入 agents 逐字回旧行为）",
+          "新增 TC-S13（生产路径：inject 要了 agents、订阅了 subagent/end、卸载后摘掉）"
+        ]
+      },
+      "lastRun": {
+        "at": 1791174953227,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-99dadb",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "接线层：ctx.agents 注入 + subagent/end 复检·联调",
+      "description": "子卡阶段：联调",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-65d2a4"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "implementation": "index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。\n\n[子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "context": "",
+      "parentId": "t-bde16a",
+      "stageKind": "integrate",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-032939",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174955893,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1058,
+              "at": 1791174955893,
+              "totals": {
+                "uncachedInputTokens": 182316,
+                "outputTokens": 120783,
+                "cacheReadTokens": 25262976,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1058,
+                  "totals": {
+                    "uncachedInputTokens": 182316,
+                    "outputTokens": 120783,
+                    "cacheReadTokens": 25262976,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1070,
+              "at": 1791174961057,
+              "totals": {
+                "uncachedInputTokens": 183014,
+                "outputTokens": 121366,
+                "cacheReadTokens": 25824384,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1070,
+                  "totals": {
+                    "uncachedInputTokens": 183014,
+                    "outputTokens": 121366,
+                    "cacheReadTokens": 25824384,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 698,
+              "outputTokens": 583,
+              "cacheReadTokens": 561408,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791174961056
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-316043",
+          "body": "[状态] → in_progress：t2 联调子卡开工：核对 DSH 真实 ctx.agents 形状与消费口径。（reqboard_task_move）",
+          "createdAt": 1791174955893,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-aaa247",
+          "body": "[状态] → done：联调完成：消费形状与 DSH 真实字段逐条对齐，无需适配。（reqboard_task_move）",
+          "createdAt": 1791174961056,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174874655,
+      "updatedAt": 1791174961056,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174874655,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174955893,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t2 联调子卡开工：核对 DSH 真实 ctx.agents 形状与消费口径。"
+        },
+        {
+          "status": "done",
+          "at": 1791174961056,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "联调完成：消费形状与 DSH 真实字段逐条对齐，无需适配。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1791174959087,
+        "reportIndex": 1,
+        "filesChanged": [
+          "index.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "核对 DSH 源码：ctx.agents（AgentRegistry）提供同步 list(): Agent[]（packages/core/agent/src/index.ts:586）",
+          "核对 Agent 公开字段：readonly session: Session 与 readonly status: AgentStatus 都在（runtime-types.ts:168,172），Agent.id: SessionId（types.ts:17）",
+          "核对 SessionHeader 字段：parentSession? / origin?: 'subagent' / delegationDepth? 都在（packages/core/session/src/types.ts:107,117,123）",
+          "结论：我们消费的 { id, status, session.header.{parentSession, origin} } 与 DSH 真实形状逐字段对得上，无需适配层",
+          "子代理不注册 job 的事实复核：packages/subagent/tool-subagent/src/index.ts:526-549（continuable 走 startContinuable，只有 one-shot 才 jobs.start）",
+          "生产路径接线契约由 TC-S13 覆盖：inject 要了 agents、订阅了 subagent/end、卸载后两处都摘掉"
+        ]
+      },
+      "lastRun": {
+        "at": 1791174959087,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-f66dc8",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "接线层：ctx.agents 注入 + subagent/end 复检·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-99dadb"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-bde16a",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-0e302a",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174961112,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1072,
+              "at": 1791174961112,
+              "totals": {
+                "uncachedInputTokens": 183014,
+                "outputTokens": 121366,
+                "cacheReadTokens": 25824384,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1072,
+                  "totals": {
+                    "uncachedInputTokens": 183014,
+                    "outputTokens": 121366,
+                    "cacheReadTokens": 25824384,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1090,
+              "at": 1791174975471,
+              "totals": {
+                "uncachedInputTokens": 184812,
+                "outputTokens": 123087,
+                "cacheReadTokens": 26673152,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1090,
+                  "totals": {
+                    "uncachedInputTokens": 184812,
+                    "outputTokens": 123087,
+                    "cacheReadTokens": 26673152,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 1798,
+              "outputTokens": 1721,
+              "cacheReadTokens": 848768,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791174975471
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-2e80a9",
+          "body": "[状态] → in_progress：t2 复核子卡开工：复核 index.js 三处改动与清理顺序。（reqboard_task_move）",
+          "createdAt": 1791174961112,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-acf614",
+          "body": "[状态] → done：复核完成：无偏离，另记一条残余风险进验收材料。（reqboard_task_move）",
+          "createdAt": 1791174975471,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174874655,
+      "updatedAt": 1791174975471,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174874655,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174961112,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t2 复核子卡开工：复核 index.js 三处改动与清理顺序。"
+        },
+        {
+          "status": "done",
+          "at": 1791174975471,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "复核完成：无偏离，另记一条残余风险进验收材料。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1791174973351,
+        "reportIndex": 1,
+        "filesChanged": [
+          "index.js"
+        ],
+        "completed": [
+          "对照设计逐条核对：options.subagents 注入、handle() 返回 reason/jobIds/subagentIds、ctx.inject([agents])、ctx.on(subagent/end)、dispose 顺序，全部与 design/interfaces.md §2 一致",
+          "接线模式与既有 ctx.inject([jobs]) 完全同构（服务就绪才回调、effect 负责回收），没有引入新的生命周期写法",
+          "异常隔离复核：subagent/end 回调 try/catch 兜住，未捕获异常不会打断子代理结算或会话",
+          "清理顺序复核：先摘 jobs/agents/subagent/end 三处接线，再 runtime.dispose() 清 pending 与计时器，最后摘既有 session/event 与提问订阅",
+          "结论：无偏离（依据 = design/interfaces.md §2 与 §4 的接线契约 + TC-S13 生产路径断言）",
+          "记录一条残余风险：若 subagent/end 事件在某组合下不被投递、且父会话始终没被唤醒，则这次补发不会发生；缓解是父会话被唤醒时新轮次的 turn/end 会正常通知，且该事件与 session/event 走同一条派发路径（已被验证可达）"
+        ]
+      },
+      "lastRun": {
+        "at": 1791174973351,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-33adde",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "接线层：ctx.agents 注入 + subagent/end 复检·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-f66dc8"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-bde16a",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-08f745",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791174975529,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1092,
+              "at": 1791174975529,
+              "totals": {
+                "uncachedInputTokens": 184812,
+                "outputTokens": 123087,
+                "cacheReadTokens": 26673152,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1092,
+                  "totals": {
+                    "uncachedInputTokens": 184812,
+                    "outputTokens": 123087,
+                    "cacheReadTokens": 26673152,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1110,
+              "at": 1791174987967,
+              "totals": {
+                "uncachedInputTokens": 185738,
+                "outputTokens": 123897,
+                "cacheReadTokens": 27529088,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1110,
+                  "totals": {
+                    "uncachedInputTokens": 185738,
+                    "outputTokens": 123897,
+                    "cacheReadTokens": 27529088,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 926,
+              "outputTokens": 810,
+              "cacheReadTokens": 855936,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791174987967
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-b05e0d",
+          "body": "[状态] → in_progress：t2 测试子卡开工：跑接线层用例与全量回归。（reqboard_task_move）",
+          "createdAt": 1791174975529,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-5d79c2",
+          "body": "[状态] → done：测试完成：jobs-gate 38/38、全量 320/320 全绿（基线 316，只增 4 条接线层用例）。（reqboard_task_move）",
+          "createdAt": 1791174987967,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174874655,
+      "updatedAt": 1791174987967,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174874655,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791174975529,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t2 测试子卡开工：跑接线层用例与全量回归。"
+        },
+        {
+          "status": "done",
+          "at": 1791174987967,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "测试完成：jobs-gate 38/38、全量 320/320 全绿（基线 316，只增 4 条接线层用例）。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1791174985302,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/jobs-gate.test.js",
+          "index.js"
+        ],
+        "completed": [
+          "node --test test/jobs-gate.test.js → tests 38 / pass 38 / fail 0（其中 TC-S* 共 13 条：9 条判定层 + 4 条接线层）",
+          "npm test（全量）→ tests 320 / pass 320 / fail 0；相对 t2 开工前基线 316 只增 4 条，既有用例零失败",
+          "接线层断言覆盖：注入假 agents 后 turn/end 被压住且接收端 0 条、子代理结束后宽限到点恰好补发 1 条且与基线报文逐字段相等、宽限内新轮次不补发且新轮次正常投递 1 条、开关关闭与未注入 agents 都逐字回旧行为",
+          "生产路径断言（TC-S13）：inject 向 agents 服务要过、subagent/end 订阅上了、卸载后订阅摘掉",
+          "本仓无 TypeScript 工程，npx tsc --noEmit 不适用；以 node --test 汇总为准"
+        ]
+      },
+      "lastRun": {
+        "at": 1791174985302,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-23a870",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "测试与降级回归（含 2 处既有断言同步）·研发",
+      "description": "子卡阶段：研发",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-bde16a"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "test/jobs-gate.test.js：增 makeAgents(entries) 假件（{ list: () => entries }，可增删改以模拟结算）与 TC-1..TC-11（判定层两路、血缘口径、降级容错、接线层抑制与补发、开关回滚、报文不回归）；把既有两处 deepEqual(..., {suppressed:false, reason:'no-jobs'}) 改为 'no-work'——这是本需求唯一触碰的既有断言；跑全量核对两条降级路径（不注入 agents / jobAwareComplete:false）与旧行为一致；结果写入 docs/requirements/REQ-261005120639-f801/tests/compat-report.md。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-1809aa",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-e163d9",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175012385,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1151,
+              "at": 1791175012385,
+              "totals": {
+                "uncachedInputTokens": 191740,
+                "outputTokens": 126952,
+                "cacheReadTokens": 29270016,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1151,
+                  "totals": {
+                    "uncachedInputTokens": 191740,
+                    "outputTokens": 126952,
+                    "cacheReadTokens": 29270016,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1163,
+              "at": 1791175018289,
+              "totals": {
+                "uncachedInputTokens": 192284,
+                "outputTokens": 127512,
+                "cacheReadTokens": 29860608,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1163,
+                  "totals": {
+                    "uncachedInputTokens": 192284,
+                    "outputTokens": 127512,
+                    "cacheReadTokens": 29860608,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 544,
+              "outputTokens": 560,
+              "cacheReadTokens": 590592,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175018289
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-7edd98",
+          "body": "[状态] → in_progress：t3 研发子卡开工：兼容报告已落盘（唯一既有断言 = 2 处诊断码）。（reqboard_task_move）",
+          "createdAt": 1791175012385,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-0a4592",
+          "body": "[状态] → done：研发完成：兼容报告落盘，锚点 0 命中残留诊断码。（reqboard_task_move）",
+          "createdAt": 1791175018289,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174994886,
+      "updatedAt": 1791175018289,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174994886,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175012385,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t3 研发子卡开工：兼容报告已落盘（唯一既有断言 = 2 处诊断码）。"
+        },
+        {
+          "status": "done",
+          "at": 1791175018289,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "研发完成：兼容报告落盘，锚点 0 命中残留诊断码。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1791175015413,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261005120639-f801/tests/compat-report.md",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "落盘 docs/requirements/REQ-261005120639-f801/tests/compat-report.md：基线对比、唯一既有断言改动、降级路径等价证据表、未改动清单、残余风险",
+          "核对锚点 grep -rn no-jobs test/ src/ → 0 命中（诊断码已全部改名）",
+          "核对两条降级路径与旧行为等价：不注入 agents 与 jobAwareComplete:false 都由 TC-S12 与 TC-15 锁定为 action:sent",
+          "列明逐字保留的既有诊断码：unavailable / no-turn-start / error / job-running",
+          "明细写清唯一既有断言改动 = test/jobs-gate.test.js:193 与 :214 两行诊断码（no-jobs → no-work），其余断言零改动",
+          "报告同时记录三条残余风险（子代理结算事件不可达的组合、长命子代理压住完成通知、agents 形状漂移）"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175015413,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-23d4c6",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "测试与降级回归（含 2 处既有断言同步）·复核",
+      "description": "子卡阶段：复核",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-23a870"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "test/jobs-gate.test.js：增 makeAgents(entries) 假件（{ list: () => entries }，可增删改以模拟结算）与 TC-1..TC-11（判定层两路、血缘口径、降级容错、接线层抑制与补发、开关回滚、报文不回归）；把既有两处 deepEqual(..., {suppressed:false, reason:'no-jobs'}) 改为 'no-work'——这是本需求唯一触碰的既有断言；跑全量核对两条降级路径（不注入 agents / jobAwareComplete:false）与旧行为一致；结果写入 docs/requirements/REQ-261005120639-f801/tests/compat-report.md。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-1809aa",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-1abdab",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175018345,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1165,
+              "at": 1791175018345,
+              "totals": {
+                "uncachedInputTokens": 192284,
+                "outputTokens": 127512,
+                "cacheReadTokens": 29860608,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1165,
+                  "totals": {
+                    "uncachedInputTokens": 192284,
+                    "outputTokens": 127512,
+                    "cacheReadTokens": 29860608,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1183,
+              "at": 1791175030060,
+              "totals": {
+                "uncachedInputTokens": 193134,
+                "outputTokens": 128485,
+                "cacheReadTokens": 30750848,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1183,
+                  "totals": {
+                    "uncachedInputTokens": 193134,
+                    "outputTokens": 128485,
+                    "cacheReadTokens": 30750848,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 850,
+              "outputTokens": 973,
+              "cacheReadTokens": 890240,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175030060
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-10b584",
+          "body": "[状态] → in_progress：t3 复核子卡开工：核对兼容报告与设计/需求口径是否一致。（reqboard_task_move）",
+          "createdAt": 1791175018345,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-cfb1fe",
+          "body": "[状态] → done：复核完成：无偏离（依据 = 需求 FR-4/FR-5 + 设计错误语义表 + 实测命令）。（reqboard_task_move）",
+          "createdAt": 1791175030060,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174994886,
+      "updatedAt": 1791175030060,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174994886,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175018345,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t3 复核子卡开工：核对兼容报告与设计/需求口径是否一致。"
+        },
+        {
+          "status": "done",
+          "at": 1791175030060,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "复核完成：无偏离（依据 = 需求 FR-4/FR-5 + 设计错误语义表 + 实测命令）。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1791175022826,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261005120639-f801/tests/compat-report.md"
+        ],
+        "completed": [
+          "对照需求 FR-4（开关与降级）与 FR-5（出站不变）：报告中每条降级结论都能指到具体用例（TC-2 / TC-15 / TC-16 / TC-16b / TC-S5 / TC-S6 / TC-S12），无空口结论",
+          "对照 design/interfaces.md 错误语义表：unavailable / no-turn-start / error / no-work 四种非抑制诊断码与实现逐条一致",
+          "对照 design/architecture.md 降级表：两路都不可用、单路可用、形状不符、抛错四种情形全部有对应用例锁定",
+          "复核报告中的可复核命令：grep -rn no-jobs test/ src/ 实测 0 命中；node --test 全量实测 320/320",
+          "复核唯一既有断言改动确实只有 2 行（test/jobs-gate.test.js:193、:214），其余既有断言未动",
+          "结论：无偏离（依据 = 需求 FR-4/FR-5 + design/interfaces.md 错误语义表 + 实测命令输出）"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175022826,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-30dd89",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "测试与降级回归（含 2 处既有断言同步）·测试",
+      "description": "子卡阶段：测试",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-23d4c6"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "test/jobs-gate.test.js：增 makeAgents(entries) 假件（{ list: () => entries }，可增删改以模拟结算）与 TC-1..TC-11（判定层两路、血缘口径、降级容错、接线层抑制与补发、开关回滚、报文不回归）；把既有两处 deepEqual(..., {suppressed:false, reason:'no-jobs'}) 改为 'no-work'——这是本需求唯一触碰的既有断言；跑全量核对两条降级路径（不注入 agents / jobAwareComplete:false）与旧行为一致；结果写入 docs/requirements/REQ-261005120639-f801/tests/compat-report.md。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-1809aa",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-c4ad78",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175030137,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1185,
+              "at": 1791175030137,
+              "totals": {
+                "uncachedInputTokens": 193134,
+                "outputTokens": 128485,
+                "cacheReadTokens": 30750848,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1185,
+                  "totals": {
+                    "uncachedInputTokens": 193134,
+                    "outputTokens": 128485,
+                    "cacheReadTokens": 30750848,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1197,
+              "at": 1791175037677,
+              "totals": {
+                "uncachedInputTokens": 193779,
+                "outputTokens": 129158,
+                "cacheReadTokens": 31346688,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1197,
+                  "totals": {
+                    "uncachedInputTokens": 193779,
+                    "outputTokens": 129158,
+                    "cacheReadTokens": 31346688,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 645,
+              "outputTokens": 673,
+              "cacheReadTokens": 595840,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175037677
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-fe0756",
+          "body": "[状态] → in_progress：t3 测试子卡开工：复跑全量与降级路径。（reqboard_task_move）",
+          "createdAt": 1791175030137,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-6b820a",
+          "body": "[状态] → done：测试完成：全量 320/320、fail 0，降级路径四条全部实测照发。（reqboard_task_move）",
+          "createdAt": 1791175037677,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791174994886,
+      "updatedAt": 1791175037677,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791174994886,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175030137,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t3 测试子卡开工：复跑全量与降级路径。"
+        },
+        {
+          "status": "done",
+          "at": 1791175037677,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "测试完成：全量 320/320、fail 0，降级路径四条全部实测照发。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1791175033651,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "node --test \"test/*.test.js\" → tests 320 / pass 320 / fail 0 / duration 2.3s",
+          "相对开工前基线 307：只增 13 条（9 条判定层 + 4 条接线层），失败数为 0，满足「失败数 ≤ 基线」",
+          "降级路径复跑：TC-15（jobAwareComplete=false）、TC-16（无 job 服务）、TC-16b（job 形状不符）、TC-S12（无 agents）全部 action:sent",
+          "锚点复跑：grep -rn no-jobs test/ src/ → 0 命中",
+          "本仓无 TypeScript 工程（无 tsconfig），npx tsc --noEmit 不适用，已用 node --test 汇总替代"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175033651,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-07352e",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "文档口径：完成闸门 + 两个新原因码·研发",
+      "description": "子卡阶段：研发",
+      "phase": "doc",
+      "side": "doc",
+      "dependsOn": [
+        "t-bde16a"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "docs/guides/operations.md：drop 原因码表补 subagent-running（本会话仍有在跑的 subagent 后代）与 work-running（两者都有）两行，jobAwareComplete 一行改述为「完成闸门（后台 job + subagent 后代）总开关」；docs/architecture/project-manual.md 第三节、docs/architecture/index.md、docs/architecture/notification-plugin.md 三处把「完成通知只读 ctx.jobs」的旧口径改述为两路判定，并补一句「continuable 子代理不注册 job」的事实。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-d94488",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-8502b4",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175101949,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1321,
+              "at": 1791175101949,
+              "totals": {
+                "uncachedInputTokens": 206501,
+                "outputTokens": 138805,
+                "cacheReadTokens": 37189632,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1321,
+                  "totals": {
+                    "uncachedInputTokens": 206501,
+                    "outputTokens": 138805,
+                    "cacheReadTokens": 37189632,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1333,
+              "at": 1791175107681,
+              "totals": {
+                "uncachedInputTokens": 207111,
+                "outputTokens": 139472,
+                "cacheReadTokens": 37829376,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1333,
+                  "totals": {
+                    "uncachedInputTokens": 207111,
+                    "outputTokens": 139472,
+                    "cacheReadTokens": 37829376,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 610,
+              "outputTokens": 667,
+              "cacheReadTokens": 639744,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175107681
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-868323",
+          "body": "[状态] → in_progress：t4 研发子卡开工：四份文档已改述（运维表补两个原因码 + 三份 architecture 口径）。（reqboard_task_move）",
+          "createdAt": 1791175101949,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-1425ec",
+          "body": "[状态] → done：研发完成：四份文档改述落地，锚点全中。（reqboard_task_move）",
+          "createdAt": 1791175107681,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791175040605,
+      "updatedAt": 1791175107681,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791175040605,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175101949,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t4 研发子卡开工：四份文档已改述（运维表补两个原因码 + 三份 architecture 口径）。"
+        },
+        {
+          "status": "done",
+          "at": 1791175107681,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "研发完成：四份文档改述落地，锚点全中。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1791175105423,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/guides/operations.md",
+          "docs/architecture/project-manual.md",
+          "docs/architecture/index.md",
+          "docs/architecture/notification-plugin.md"
+        ],
+        "completed": [
+          "docs/guides/operations.md：drop 原因码表补 subagent-running 与 work-running 两行，job-running 一行改为「可关掉整个完成闸门」，配置表改述为「完成闸门（后台 job + subagent 后代）总开关」，排障表补两行（含「子代理还在跑却收到已完成」的判定）",
+          "docs/architecture/project-manual.md：第三节从「后台 job 感知」改写为「完成闸门（两路事实源）」+ 四条不可翻案口径 + 两路降级；演进表与能力清单各补一行，跨需求约束改为按形状消费 ctx.jobs / ctx.agents / subagent-end 事件",
+          "docs/architecture/index.md：TL;DR 与架构图下方口径改述为两路判定，页面索引同步",
+          "docs/architecture/notification-plugin.md：决策 7 重写为两路事实源（含 continuable 子代理不注册 job 的关键事实与三态原因码），相关需求表补本需求一行",
+          "三份 architecture 文档都出现「完成闸门」口径（index 2 处 / project-manual 6 处 / notification-plugin 4 处）",
+          "口径类文档里旧说法「只读 ctx.jobs」0 命中（仅需求目录自身的验收文字仍引用该字符串）"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175105423,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-9c31b2",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "文档口径：完成闸门 + 两个新原因码·复核",
+      "description": "子卡阶段：复核",
+      "phase": "doc",
+      "side": "doc",
+      "dependsOn": [
+        "t-07352e"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "docs/guides/operations.md：drop 原因码表补 subagent-running（本会话仍有在跑的 subagent 后代）与 work-running（两者都有）两行，jobAwareComplete 一行改述为「完成闸门（后台 job + subagent 后代）总开关」；docs/architecture/project-manual.md 第三节、docs/architecture/index.md、docs/architecture/notification-plugin.md 三处把「完成通知只读 ctx.jobs」的旧口径改述为两路判定，并补一句「continuable 子代理不注册 job」的事实。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-d94488",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-eb8c85",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175107739,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1335,
+              "at": 1791175107739,
+              "totals": {
+                "uncachedInputTokens": 207111,
+                "outputTokens": 139472,
+                "cacheReadTokens": 37829376,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1335,
+                  "totals": {
+                    "uncachedInputTokens": 207111,
+                    "outputTokens": 139472,
+                    "cacheReadTokens": 37829376,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1359,
+              "at": 1791175125498,
+              "totals": {
+                "uncachedInputTokens": 208615,
+                "outputTokens": 142022,
+                "cacheReadTokens": 39118592,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1359,
+                  "totals": {
+                    "uncachedInputTokens": 208615,
+                    "outputTokens": 142022,
+                    "cacheReadTokens": 39118592,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 1504,
+              "outputTokens": 2550,
+              "cacheReadTokens": 1289216,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175125498
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-fe6949",
+          "body": "[状态] → in_progress：t4 复核子卡开工：核对文案与实现一致、无自相矛盾。（reqboard_task_move）",
+          "createdAt": 1791175107739,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-67532a",
+          "body": "[状态] → done：文档复核完成：无偏离（文案与实现逐条对齐，另修一处图表对齐）。（reqboard_task_move）",
+          "createdAt": 1791175125498,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791175040605,
+      "updatedAt": 1791175125498,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791175040605,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175107739,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t4 复核子卡开工：核对文案与实现一致、无自相矛盾。"
+        },
+        {
+          "status": "done",
+          "at": 1791175125498,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "文档复核完成：无偏离（文案与实现逐条对齐，另修一处图表对齐）。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1791175123482,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/architecture/notification-plugin.md"
+        ],
+        "completed": [
+          "逐条核对文案与实现：job 只算本轮拉起的（startedAt ≥ 轮次起点）、子代理按活体算（血统 ∧ origin=subagent ∧ status=running，任意深度）、两路都清空才补发、三态原因码，全部与 src/jobs.js 实现一致",
+          "核对两路独立降级：文案说「形状不符即降级 + 一条 warn，两条路各自独立」，实现里确实是两个独立的告警标志与两条独立判定",
+          "核对开关口径：jobAwareComplete 是完成闸门总开关（同时管 job 与子代理），与 index.js 的 handle() 判定位置一致",
+          "核对结算信号描述：job 走 ctx.jobs.events、子代理走 ctx.on(subagent/end) 且存活现查——与实现一致（宽限到点还会再查一次存活）",
+          "核对运维表与排障表：subagent-running / work-running 两行语义与 handle() 返回值一致；补的排障行指向本修复的版本事实",
+          "修了一处图表对齐（两路事实源的 ASCII 图），内容不变",
+          "结论：无偏离（依据 = src/jobs.js 与 index.js 实现 + 设计 design/architecture.md §降级与 §文档口径纠正）"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175123482,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-378503",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」·研发",
+      "description": "子卡阶段：研发",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-1809aa"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 串两条完整链路：① turn/start → 派子代理（running）→ turn/end（断言 0 条）→ 子代理转 idle + observeSubagentEnd() + 推进宽限（断言 1 条，字段与基线一致）；② 抑制后宽限内 turn/start（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。报告写入 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-2f8316",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-73ebe8",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175192555,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1459,
+              "at": 1791175192555,
+              "totals": {
+                "uncachedInputTokens": 220530,
+                "outputTokens": 148648,
+                "cacheReadTokens": 44421760,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1459,
+                  "totals": {
+                    "uncachedInputTokens": 220530,
+                    "outputTokens": 148648,
+                    "cacheReadTokens": 44421760,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1471,
+              "at": 1791175198415,
+              "totals": {
+                "uncachedInputTokens": 221133,
+                "outputTokens": 149218,
+                "cacheReadTokens": 45105792,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1471,
+                  "totals": {
+                    "uncachedInputTokens": 221133,
+                    "outputTokens": 149218,
+                    "cacheReadTokens": 45105792,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 603,
+              "outputTokens": 570,
+              "cacheReadTokens": 684032,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175198415
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-193ff8",
+          "body": "[状态] → in_progress：t5 研发子卡开工：两条 e2e 链路用例（TC-S10 / TC-S11）与联调报告已就位。（reqboard_task_move）",
+          "createdAt": 1791175192555,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-01cb56",
+          "body": "[状态] → done：联调研发完成：两条链路用例与报告就位。（reqboard_task_move）",
+          "createdAt": 1791175198415,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791175189039,
+      "updatedAt": 1791175198415,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791175189039,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175192555,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t5 研发子卡开工：两条 e2e 链路用例（TC-S10 / TC-S11）与联调报告已就位。"
+        },
+        {
+          "status": "done",
+          "at": 1791175198415,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "联调研发完成：两条链路用例与报告就位。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1791175196120,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/jobs-gate.test.js",
+          "docs/requirements/REQ-261005120639-f801/tests/e2e-report.md"
+        ],
+        "completed": [
+          "链路①用例 TC-S10：真人说一句 → 派 running 子代理 → turn/end 被压住（drop subagent-running，接收端 0 条新增）→ 子代理结束 + 复检 + 宽限到点 → 接收端恰好 1 条，且与基线报文逐字段相等（忽略 at）",
+          "链路②用例 TC-S11：压住后子代理结束并起宽限，宽限窗口内父会话新轮次 → 0 条补发；该新轮次自己的 turn/end 正常投递 1 条",
+          "两条链路都用真实 HTTP 接收端（起真 server、收真 JSON），口径照既有 test/e2e.local.test.js",
+          "联调报告落盘 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md（含实测输出节选与未在真机做的部分）",
+          "与既有 job 链路对照：TC-10/18/19 继续通过，两条来源共用同一条 pending/宽限/补发通路"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175196120,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-e65db0",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」·复核",
+      "description": "子卡阶段：复核",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-378503"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 串两条完整链路：① turn/start → 派子代理（running）→ turn/end（断言 0 条）→ 子代理转 idle + observeSubagentEnd() + 推进宽限（断言 1 条，字段与基线一致）；② 抑制后宽限内 turn/start（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。报告写入 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-2f8316",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-f1ecf1",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175198479,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1473,
+              "at": 1791175198479,
+              "totals": {
+                "uncachedInputTokens": 221133,
+                "outputTokens": 149218,
+                "cacheReadTokens": 45105792,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1473,
+                  "totals": {
+                    "uncachedInputTokens": 221133,
+                    "outputTokens": 149218,
+                    "cacheReadTokens": 45105792,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1485,
+              "at": 1791175205568,
+              "totals": {
+                "uncachedInputTokens": 221885,
+                "outputTokens": 149770,
+                "cacheReadTokens": 45791872,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1485,
+                  "totals": {
+                    "uncachedInputTokens": 221885,
+                    "outputTokens": 149770,
+                    "cacheReadTokens": 45791872,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 752,
+              "outputTokens": 552,
+              "cacheReadTokens": 686080,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175205568
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-942da0",
+          "body": "[状态] → in_progress：t5 下一个子卡开工。（reqboard_task_move）",
+          "createdAt": 1791175198479,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-5ed947",
+          "body": "[状态] → done：联调复核完成：无偏离。（reqboard_task_move）",
+          "createdAt": 1791175205568,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791175189039,
+      "updatedAt": 1791175205568,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791175189039,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175198479,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t5 下一个子卡开工。"
+        },
+        {
+          "status": "done",
+          "at": 1791175205568,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "联调复核完成：无偏离。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1791175202715,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261005120639-f801/tests/e2e-report.md"
+        ],
+        "completed": [
+          "对照 design/use-cases.md：UC-1（主场景派活）与 UC-2（静默唤醒路径兜底补发）分别由 TC-S10 与 TC-S11 覆盖，时序与断言一致",
+          "对照 design/test-cases.md：TC-7（接线层抑制与补发）与 TC-12（现场复算）在本卡补齐证据；补发报文与基线逐字段相等这一条在两条链路上都实测过",
+          "核对 e2e 报告里的实测输出节选与当前测试结果一致（TC-S10 / TC-S11 / TC-10/18/19 全绿，38/38）",
+          "核对报告的诚实性：明确写出「未在真实 DSH 运行期跑过，真机验证留给下一回合」并给出步骤，没有把本地注入说成真机验证",
+          "结论：无偏离（依据 = design/use-cases.md UC-1/UC-2 + design/test-cases.md TC-7/TC-12）"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175202715,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-35a9ea",
+      "requirementId": "REQ-261005120639-f801",
+      "title": "端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」·测试",
+      "description": "子卡阶段：测试",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-e65db0"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 串两条完整链路：① turn/start → 派子代理（running）→ turn/end（断言 0 条）→ 子代理转 idle + observeSubagentEnd() + 推进宽限（断言 1 条，字段与基线一致）；② 抑制后宽限内 turn/start（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。报告写入 docs/requirements/REQ-261005120639-f801/tests/e2e-report.md。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-2f8316",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-d8a361",
+          "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+          "trigger": "manual",
+          "startedAt": 1791175205683,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1487,
+              "at": 1791175205683,
+              "totals": {
+                "uncachedInputTokens": 221885,
+                "outputTokens": 149770,
+                "cacheReadTokens": 45791872,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1487,
+                  "totals": {
+                    "uncachedInputTokens": 221885,
+                    "outputTokens": 149770,
+                    "cacheReadTokens": 45791872,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "end": {
+              "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+              "seq": 1505,
+              "at": 1791175219572,
+              "totals": {
+                "uncachedInputTokens": 222784,
+                "outputTokens": 150580,
+                "cacheReadTokens": 46824704,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection",
+              "scope": "self+descendants",
+              "members": [
+                {
+                  "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4",
+                  "depth": 0,
+                  "seq": 1505,
+                  "totals": {
+                    "uncachedInputTokens": 222784,
+                    "outputTokens": 150580,
+                    "cacheReadTokens": 46824704,
+                    "cacheWriteTokens": 0
+                  }
+                }
+              ]
+            },
+            "delta": {
+              "uncachedInputTokens": 899,
+              "outputTokens": 810,
+              "cacheReadTokens": 1032832,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1791175219572
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-b4aa8c",
+          "body": "[状态] → in_progress：t5 测试子卡开工：复跑两条链路用例。（reqboard_task_move）",
+          "createdAt": 1791175205683,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        },
+        {
+          "id": "c-b7df50",
+          "body": "[状态] → done：联调测试完成：两条链路用例全绿，全量 320/320。（reqboard_task_move）",
+          "createdAt": 1791175219572,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1791175189039,
+      "updatedAt": 1791175219572,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1791175189039,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1791175205683,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "t5 测试子卡开工：复跑两条链路用例。"
+        },
+        {
+          "status": "done",
+          "at": 1791175219572,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-df00704c-5bd1-4d81-a003-3d3a4b648ea4"
+          },
+          "reason": "联调测试完成：两条链路用例全绿，全量 320/320。"
+        }
+      ],
+      "layer": 5,
+      "lastReport": {
+        "at": 1791175216522,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "node --test test/jobs-gate.test.js → tests 38 / pass 38 / fail 0；TC-S10 与 TC-S11 两条链路用例实测通过（88.8ms / 67.0ms）",
+          "node --test \"test/*.test.js\" → tests 320 / pass 320 / fail 0，失败数 0 ≤ 开工前基线 307 的失败数 0",
+          "两条链路都用真 HTTP 接收端收真报文，断言含条数与字段级相等",
+          "本仓无 TypeScript 工程，npx tsc --noEmit 不适用"
+        ]
+      },
+      "lastRun": {
+        "at": 1791175216522,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "t-200413",
+      "to": "t-bde16a"
+    },
+    {
+      "from": "t-bde16a",
+      "to": "t-1809aa"
+    },
+    {
+      "from": "t-bde16a",
+      "to": "t-d94488"
+    },
+    {
+      "from": "t-1809aa",
+      "to": "t-2f8316"
+    },
+    {
+      "from": "t-776b2f",
+      "to": "t-fb44a5"
+    },
+    {
+      "from": "t-fb44a5",
+      "to": "t-405c41"
+    },
+    {
+      "from": "t-200413",
+      "to": "t-65d2a4"
+    },
+    {
+      "from": "t-65d2a4",
+      "to": "t-99dadb"
+    },
+    {
+      "from": "t-99dadb",
+      "to": "t-f66dc8"
+    },
+    {
+      "from": "t-f66dc8",
+      "to": "t-33adde"
+    },
+    {
+      "from": "t-bde16a",
+      "to": "t-23a870"
+    },
+    {
+      "from": "t-23a870",
+      "to": "t-23d4c6"
+    },
+    {
+      "from": "t-23d4c6",
+      "to": "t-30dd89"
+    },
+    {
+      "from": "t-bde16a",
+      "to": "t-07352e"
+    },
+    {
+      "from": "t-07352e",
+      "to": "t-9c31b2"
+    },
+    {
+      "from": "t-1809aa",
+      "to": "t-378503"
+    },
+    {
+      "from": "t-378503",
+      "to": "t-e65db0"
+    },
+    {
+      "from": "t-e65db0",
+      "to": "t-35a9ea"
+    }
+  ],
+  "layers": [
+    {
+      "layer": 0,
+      "tasks": [
+        "t-200413",
+        "t-776b2f"
+      ]
+    },
+    {
+      "layer": 1,
+      "tasks": [
+        "t-bde16a",
+        "t-65d2a4",
+        "t-fb44a5"
+      ]
+    },
+    {
+      "layer": 2,
+      "tasks": [
+        "t-1809aa",
+        "t-d94488",
+        "t-23a870",
+        "t-07352e",
+        "t-99dadb",
+        "t-405c41"
+      ]
+    },
+    {
+      "layer": 3,
+      "tasks": [
+        "t-2f8316",
+        "t-378503",
+        "t-23d4c6",
+        "t-9c31b2",
+        "t-f66dc8"
+      ]
+    },
+    {
+      "layer": 4,
+      "tasks": [
+        "t-e65db0",
+        "t-30dd89",
+        "t-33adde"
+      ]
+    },
+    {
+      "layer": 5,
+      "tasks": [
+        "t-35a9ea"
+      ]
+    }
+  ],
+  "ready": [],
+  "updated_at": "2026-10-05T04:41:47.019Z"
+}

@@ -1,0 +1,1434 @@
+metadata:
+  stage: decomposing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T08:37:32.620Z
+  version: 263
+  generated_by: dsh-pmboard
+  last_updated: 2026-09-30T12:10:19.462Z
+inputs:
+  requirements: []
+  design_sections:
+    - ref: design/architecture.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+      file: design/architecture.md
+      section: TLDR
+    - ref: design/architecture.md#目标与总体方案
+      title: 目标与总体方案 `
+      serves:
+        - FR-1
+        - FR-2
+        - FR-3
+        - FR-5
+      file: design/architecture.md
+      section: 目标与总体方案
+    - ref: design/architecture.md#模块改动地图
+      title: 模块改动地图 `
+      serves:
+        - FR-1
+        - FR-3
+      file: design/architecture.md
+      section: 模块改动地图
+    - ref: design/architecture.md#关键流程
+      title: 关键流程 `
+      serves:
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/architecture.md
+      section: 关键流程
+    - ref: design/architecture.md#从事件到投递
+      title: 从事件到投递 `
+      serves:
+        - FR-3
+        - FR-4
+        - FR-5
+        - FR-6
+      file: design/architecture.md
+      section: 从事件到投递
+    - ref: design/architecture.md#为什么过滤顺序是这个顺序
+      title: 为什么过滤顺序是这个顺序 `
+      serves:
+        - FR-4
+        - FR-6
+      file: design/architecture.md
+      section: 为什么过滤顺序是这个顺序
+    - ref: design/architecture.md#渠道适配的两段式
+      title: 渠道适配的两段式 `
+      serves:
+        - FR-1
+      file: design/architecture.md
+      section: 渠道适配的两段式
+    - ref: design/architecture.md#依赖关系
+      title: 依赖关系 `
+      serves:
+        - FR-1
+        - FR-7
+      file: design/architecture.md
+      section: 依赖关系
+    - ref: design/architecture.md#错误处理
+      title: 错误处理 `
+      serves:
+        - FR-1
+        - FR-3
+        - FR-7
+        - FR-8
+      file: design/architecture.md
+      section: 错误处理
+    - ref: design/architecture.md#安全与性能
+      title: 安全与性能 `
+      serves:
+        - FR-7
+      file: design/architecture.md
+      section: 安全与性能
+    - ref: design/architecture.md#文件结构
+      title: 文件结构 `
+      serves:
+        - FR-2
+      file: design/architecture.md
+      section: 文件结构
+    - ref: design/architecture.md#测试策略
+      title: 测试策略 `
+      serves:
+        - FR-1
+        - FR-3
+        - FR-4
+        - FR-9
+      file: design/architecture.md
+      section: 测试策略
+    - ref: design/architecture.md#遗留问题
+      title: 遗留问题 `
+      serves:
+        - FR-10
+      file: design/architecture.md
+      section: 遗留问题
+    - ref: design/data-model.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-2
+        - FR-5
+      file: design/data-model.md
+      section: TLDR
+    - ref: design/data-model.md#目标记录
+      title: 目标记录 `
+      serves:
+        - FR-2
+        - FR-4
+        - FR-7
+      file: design/data-model.md
+      section: 目标记录
+    - ref: design/data-model.md#目标清单文件
+      title: 目标清单文件 `
+      serves:
+        - FR-2
+        - FR-9
+      file: design/data-model.md
+      section: 目标清单文件
+    - ref: design/data-model.md#窗口绑定扩展既有文件
+      title: 窗口绑定（扩展既有文件）`
+      serves:
+        - FR-5
+        - FR-9
+      file: design/data-model.md
+      section: 窗口绑定扩展既有文件
+    - ref: design/data-model.md#绑定语义替代而非叠加
+      title: 绑定语义（替代而非叠加）`
+      serves:
+        - FR-5
+        - FR-6
+      file: design/data-model.md
+      section: 绑定语义替代而非叠加
+    - ref: design/data-model.md#投递结果
+      title: 投递结果 `
+      serves:
+        - FR-10
+      file: design/data-model.md
+      section: 投递结果
+    - ref: design/data-model.md#迁移与兼容
+      title: 迁移与兼容 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 迁移与兼容
+    - ref: design/data-model.md#老配置的等价映射
+      title: 老配置的等价映射 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 老配置的等价映射
+    - ref: design/data-model.md#回滚路径
+      title: 回滚路径 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 回滚路径
+    - ref: design/data-model.md#破坏性变更
+      title: 破坏性变更 `
+      serves:
+        - FR-9
+      file: design/data-model.md
+      section: 破坏性变更
+    - ref: design/frontend.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: TLDR
+    - ref: design/frontend.md#页面与入口
+      title: 页面与入口 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 页面与入口
+    - ref: design/frontend.md#布局与信息架构
+      title: 布局与信息架构 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 布局与信息架构
+    - ref: design/frontend.md#会话绑定页第二个标签
+      title: 会话绑定页（第二个标签）`
+      serves:
+        - FR-5
+      file: design/frontend.md
+      section: 会话绑定页第二个标签
+    - ref: design/frontend.md#交互流程
+      title: 交互流程 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 交互流程
+    - ref: design/frontend.md#新增目标
+      title: 新增目标 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 新增目标
+    - ref: design/frontend.md#发送测试
+      title: 发送测试 `
+      serves:
+        - FR-2
+        - FR-8
+        - FR-10
+      file: design/frontend.md
+      section: 发送测试
+    - ref: design/frontend.md#编辑-删除-启停
+      title: 编辑 / 删除 / 启停 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 编辑-删除-启停
+    - ref: design/frontend.md#解绑会话绑定页
+      title: 解绑（会话绑定页）`
+      serves:
+        - FR-5
+        - FR-6
+      file: design/frontend.md
+      section: 解绑会话绑定页
+    - ref: design/frontend.md#宿主嵌入选择器其他插件的界面怎么用
+      title: 宿主嵌入选择器（其他插件的界面怎么用）`
+      serves:
+        - FR-5
+        - FR-2
+      file: design/frontend.md
+      section: 宿主嵌入选择器其他插件的界面怎么用
+    - ref: design/frontend.md#状态与边界
+      title: 状态与边界 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 状态与边界
+    - ref: design/frontend.md#凭据展示规则
+      title: 凭据展示规则 `
+      serves:
+        - FR-7
+      file: design/frontend.md
+      section: 凭据展示规则
+    - ref: design/frontend.md#文案与本地化
+      title: 文案与本地化 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 文案与本地化
+    - ref: design/frontend.md#主题与样式约束
+      title: 主题与样式约束 `
+      serves:
+        - FR-2
+      file: design/frontend.md
+      section: 主题与样式约束
+    - ref: design/frontend.md#与-RPC-的映射
+      title: 与 RPC 的映射 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 与-RPC-的映射
+    - ref: design/frontend.md#原型锚点
+      title: 原型锚点 `
+      serves:
+        - FR-2
+        - FR-4
+        - FR-5
+      file: design/frontend.md
+      section: 原型锚点
+    - ref: design/frontend.md#验收口径
+      title: 验收口径 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/frontend.md
+      section: 验收口径
+    - ref: design/interfaces.md#TLDR
+      title: TL;DR `
+      serves:
+        - FR-1
+      file: design/interfaces.md
+      section: TLDR
+    - ref: design/interfaces.md#渠道适配器契约
+      title: 渠道适配器契约 `
+      serves:
+        - FR-1
+      file: design/interfaces.md
+      section: 渠道适配器契约
+    - ref: design/interfaces.md#渠道报文契约
+      title: 渠道报文契约 `
+      serves:
+        - FR-1
+      file: design/interfaces.md
+      section: 渠道报文契约
+    - ref: design/interfaces.md#Host-RPC设置页-Host
+      title: Host RPC（设置页 → Host）`
+      serves:
+        - FR-2
+        - FR-8
+        - FR-10
+      file: design/interfaces.md
+      section: Host-RPC设置页-Host
+    - ref: design/interfaces.md#Host-Service其他插件-Host
+      title: Host Service（其他插件 → Host）`
+      serves:
+        - FR-5
+        - FR-9
+      file: design/interfaces.md
+      section: Host-Service其他插件-Host
+    - ref: design/interfaces.md#客户端服务供其他插件的界面复用
+      title: 客户端服务（供其他插件的界面复用）`
+      serves:
+        - FR-5
+        - FR-2
+      file: design/interfaces.md
+      section: 客户端服务供其他插件的界面复用
+    - ref: design/interfaces.md#服务定义
+      title: 服务定义 `
+      serves:
+        - FR-5
+      file: design/interfaces.md
+      section: 服务定义
+    - ref: design/interfaces.md#渲染语义与生命周期
+      title: 渲染语义与生命周期 `
+      serves:
+        - FR-5
+        - FR-8
+      file: design/interfaces.md
+      section: 渲染语义与生命周期
+    - ref: design/interfaces.md#降级与错误语义
+      title: 降级与错误语义 `
+      serves:
+        - FR-5
+      file: design/interfaces.md
+      section: 降级与错误语义
+    - ref: design/interfaces.md#插件-Config
+      title: 插件 Config `
+      serves:
+        - FR-8
+        - FR-9
+      file: design/interfaces.md
+      section: 插件-Config
+    - ref: design/use-cases.md#场景总览
+      title: 场景总览 `
+      serves:
+        - FR-1
+        - FR-5
+        - FR-8
+      file: design/use-cases.md
+      section: 场景总览
+    - ref: design/use-cases.md#UC-1-授权与完成分流到不同群
+      title: UC-1 授权与完成分流到不同群 `
+      serves:
+        - FR-4
+        - FR-5
+      file: design/use-cases.md
+      section: UC-1-授权与完成分流到不同群
+    - ref: design/use-cases.md#UC-2-临时加一条通道不用重启
+      title: UC-2 临时加一条通道，不用重启 `
+      serves:
+        - FR-2
+        - FR-8
+      file: design/use-cases.md
+      section: UC-2-临时加一条通道不用重启
+    - ref: design/use-cases.md#UC-3-其他插件把项目会话绑到项目群
+      title: UC-3 其他插件把项目会话绑到项目群 `
+      serves:
+        - FR-3
+        - FR-5
+      file: design/use-cases.md
+      section: UC-3-其他插件把项目会话绑到项目群
+    - ref: design/use-cases.md#UC-4-老用户升级零改动
+      title: UC-4 老用户升级零改动 `
+      serves:
+        - FR-9
+      file: design/use-cases.md
+      section: UC-4-老用户升级零改动
+    - ref: design/use-cases.md#UC-5-按会话查绑定并解绑
+      title: UC-5 按会话查绑定并解绑 `
+      serves:
+        - FR-5
+        - FR-6
+      file: design/use-cases.md
+      section: UC-5-按会话查绑定并解绑
+outputs:
+  tasks:
+    - id: t-3a35f9
+      title: 声明插件 Config schema 与双半包清单
+      implements: 在 package.json 增加依赖 @deepseek-ai/schemastery@3.18.4，并加 exports["./client"]=./client.js 与 dsh.client={platform:web,immediately:true,inject:[...]}；在 src/config.js 用 schemastery 声明 Config（enabled/timeoutMs/retry/cooldownMs/notifyComplete/notifyApproval/notifyQuestion/onlyTopLevel/includeTitle 标 .volatile()；webhookUrl 与文案/skipReasons 保持普通字段），保留 normalizeConfig 作为无 schema 时的兑底。验证：新增 test/config.test.js 并跑绿。
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-be124b
+      title: 实现渠道注册表与三国内渠道
+      implements: 新增 src/channels/index.js：channel→adapter 注册表，未知渠道返回 {error} 不抛异常；新增 wecom.js（msgtype=markdown）、feishu.js（msg_type=text，可选 timestamp+sign 进 body）、dingtalk.js（msgtype=markdown，可选 timestamp+sign 进 query）；加签用 node:crypto 的 hmacSHA256；isSuccess 同时看 HTTP 状态与业务码。验证：新增 test/channels.cn.test.js。
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-9a8084
+      title: 实现 Slack / Discord / 通用三渠道
+      implements: 新增 src/channels/slack.js（{text}）、discord.js（{content}，204/2xx 为成功）、custom.js（原样 v1 载荷 + target.headers 原样带上）；在 index.js 注册三者。验证：新增 test/channels.global.test.js（含 TC-5 老契约断言）。
+      serves: []
+      depends_on:
+        - t-be124b
+      phase: implement
+      side: backend
+    - id: t-13af87
+      title: 实现目标清单存储与 CRUD
+      implements: 新增 src/targets.js：TargetStore（load/bind…），路径 $DSH_HOME/state/dsh-notice-webhook/targets.json；字段校验（id 唯一、name 非空、url http(s)、events 仅受控取值、secretRef 仅 feishu/dingtalk）；写盘 tmp→rename；坏文件/未知 version 记 warn 且不覆盖。验证：新增 test/targets.test.js。
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-f65a82
+      title: 实现投递结果存储（内存）
+      implements: 新增 src/outcomes.js：Map<targetId, Outcome[]>，append 时裁剪到 5 条；reason 只允许业务码/网络错误文本；提供 list(targetId) 与 snapshot()。验证：新增 test/outcomes.test.js。
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-c9e09a
+      title: 升级绑定存储：targetBindings 段
+      implements: 在 src/bindings.js 增加 targetBindings 段（{ targetIds[], updatedAt }）；读时 targetBindings 优先，缺则回落 bindings url 映射；写时两段一起写（保旧版本可用）；提供 bindTargetsTargets/unbindTargets/listBindings 基础方法。验证：新增 test/bindings.v2.test.js（含“旧版本读新文件不报错”断言）。
+      serves: []
+      depends_on:
+        - t-13af87
+      phase: implement
+      side: backend
+    - id: t-3188ad
+      title: 升级 Host Service 到 v2
+      implements: 在 src/service.js 新增四方法并在 index.js 接线时注入 targets/outcomes；bindTargets 对不存在的 id 整笔返回 false；unbindTargets 清 targetBindings 并同时清旧 url 绑定；listTargets 不回密钥明文。验证：新增 test/service.v2.test.js。
+      serves: []
+      depends_on:
+        - t-c9e09a
+      phase: implement
+      side: backend
+    - id: t-792424
+      title: 实现 RPC 只读端点与状态投影
+      implements: 新增 src/rpc.js 并注册 GET /api/dsh-notice-webhook/state（沿用 Host 既有认证/信任域）；返回 targets（TargetView，secretRef 只给存在标记）、bindings（含展开的 targets）、defaults、outcomes、secrets、revision。验证：新增 test/rpc.read.test.js。
+      serves: []
+      depends_on:
+        - t-3188ad
+      phase: implement
+      side: backend
+    - id: t-b7a098
+      title: 实现 RPC 写入端点与 revision 栅栏
+      implements: 在 src/rpc.js 实现 POST /targets、/targets/delete、/test、/bind、/bindings/delete；每次写校验 revision（不符返回 409 + 最新状态），校验失败返回 400 且不落盘；成功返回新 revision。验证：新增 test/rpc.write.test.js。
+      serves: []
+      depends_on:
+        - t-792424
+      phase: implement
+      side: backend
+    - id: t-5a7d2f
+      title: 实现目标集合解析与替代默认组
+      implements: 在 src/router.js 实现 resolveTargets(sessionId, intent)：targetBindings 非空→只取这些（enabled 过滤，空则回落默认组）；否则取 isDefault && enabled；总开关仅作用默认组；输出目标集合供逐目标打包。验证：新增 test/router.resolve.test.js（含 TC-19 断言）。
+      serves: []
+      depends_on:
+        - t-9a8084
+        - t-c9e09a
+      phase: implement
+      side: backend
+    - id: t-1146e7
+      title: 实现逐目标过滤与去重
+      implements: 在 src/router.js 增加逐目标 events 过滤（空数组=全收）与去重（同 channel+url 只保留一条）；与类开关的叠加顺序固定为：类开关→目标解析→总开关→目标过滤→去重。验证：新增 test/router.filter.test.js。
+      serves: []
+      depends_on:
+        - t-5a7d2f
+      phase: implement
+      side: backend
+    - id: t-10a822
+      title: 接线主链路与 legacy 等价映射
+      implements: 在 index.js 组装主链路并接入 channels；启动时把 legacy webhookUrl → 隐式 custom 默认目标、老 bindings url → 同地址目标（不重复建）；投递结果写入 outcomes。验证：新增 test/e2e.multi.test.js（含 TC-15 老配置兼容）。
+      serves: []
+      depends_on:
+        - t-f65a82
+        - t-b7a098
+        - t-1146e7
+      phase: implement
+      side: fullstack
+    - id: t-cefe17
+      title: 客户端半：设置页骨架与目标页
+      implements: 新增 client.js（window.__ModuleLoader__.load 格式，require('react')）；ctx.slots.inject('settings.section') 注册 {name,id:'dsh-notice-webhook',order:21,label:thunk}；实现 ChannelRail（含 6 渠道内联 SVG 图标与数量徽标）与 TargetCard 骨架，数据经 RPC GET /state。验证：打开设置页看 rail+卡片，控制台无报错；grep 命中 settings.section。
+      serves: []
+      depends_on:
+        - t-b7a098
+      phase: implement
+      side: frontend
+    - id: t-3f89ef
+      title: 客户端半：目标编辑与动作
+      implements: 在 client.js 实现表单（渠道切换时字段可见性变化）与动作：保存 POST /targets、删除 /targets/delete、启停开关（乐观更新+失败回滚）、发送测试 /test；错误行内展示，409 提示刷新并保留已填内容。验证：打开设置页操作并看行内错误与徽标变化。
+      serves: []
+      depends_on:
+        - t-cefe17
+      phase: implement
+      side: frontend
+    - id: t-6b4417
+      title: 客户端半：事件过滤网格与全局开关
+      implements: 在 client.js 实现 EventFilterGrid（四项，空=全收并显式提示）与 GlobalSwitches（总开关/超时/重试/冷却写入 volatile 配置）；保存后刷新状态。验证：界面勾选后 GET /state 比对 events；改全局开关后不重启触发一次通知看生效。
+      serves: []
+      depends_on:
+        - t-cefe17
+      phase: implement
+      side: frontend
+    - id: t-10999f
+      title: 客户端半：会话绑定页与解绑
+      implements: 在 client.js 实现会话绑定页：表格（会话标题+id 尾串 / 目标 chips / 解绑），悬空引用显示「目标已删除（回落默认组）」+ 清理；解绑二次确认后 POST /bindings/delete；409/404 口径与目标页一致。验证：界面解绑后 e2e 断言回落默认组。
+      serves: []
+      depends_on:
+        - t-cefe17
+      phase: implement
+      side: frontend
+    - id: t-0c0243
+      title: 可嵌入选择器与客户端服务
+      implements: 在 client.js 实现 TargetPicker（目标复选 + 默认组标记 + 空态引导，不自己开弹框）并以 ctx.provide('dshNoticeWebhookClient',{version:1,renderTargetPicker}) 注册；每次返回新 element，服务失效返回 null。验证：新增 test/client-service.test.js（mock 宿主）。
+      serves: []
+      depends_on:
+        - t-cefe17
+      phase: implement
+      side: frontend
+    - id: t-3b6f2f
+      title: 兼容与回滚收尾
+      implements: 补齐 legacy 映射边界（legacy 与显式清单同 url 时只保留一条）、坏文件降级路径、卸载后目录残留检查；新增 test/compat.v2.test.js。验证：跑该测试全绿。
+      serves: []
+      depends_on:
+        - t-10a822
+      phase: implement
+      side: backend
+    - id: t-836336
+      title: 装载到 profile 并做真实 Host 验收
+      implements: 用 plugin_manager install_bundle 安装本包；确认真实 Host 中服务与客户端半均生效（插槽占用者出现 dsh-notice-webhook）；用本地接收端验证多目标投递与解绑回落。验证：list_plugins + 设置页截图 + 接收端日志。
+      serves: []
+      depends_on:
+        - t-3f89ef
+        - t-6b4417
+        - t-10999f
+        - t-0c0243
+        - t-3b6f2f
+      phase: test
+      side: fullstack
+    - id: t-738e92
+      title: 更新 README（多渠道 / 配置页 / 服务契约）
+      implements: 在 README.md 补：渠道与报文对照表（含加签与业务码）、设置页两页说明、Host Service v2 与客户端服务用法、旧配置兼容与回滚说明。验证：两条 grep 命中且三段齐备。
+      serves: []
+      depends_on:
+        - t-836336
+      phase: doc
+      side: doc
+    - id: t-562e53
+      title: 声明插件 Config schema 与双半包清单·研发
+      implements: |-
+        在 package.json 增加依赖 @deepseek-ai/schemastery@3.18.4，并加 exports["./client"]=./client.js 与 dsh.client={platform:web,immediately:true,inject:[...]}；在 src/config.js 用 schemastery 声明 Config（enabled/timeoutMs/retry/cooldownMs/notifyComplete/notifyApproval/notifyQuestion/onlyTopLevel/includeTitle 标 .volatile()；webhookUrl 与文案/skipReasons 保持普通字段），保留 normalizeConfig 作为无 schema 时的兑底。验证：新增 test/config.test.js 并跑绿。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-b7ad0c
+      title: 声明插件 Config schema 与双半包清单·复核
+      implements: |-
+        在 package.json 增加依赖 @deepseek-ai/schemastery@3.18.4，并加 exports["./client"]=./client.js 与 dsh.client={platform:web,immediately:true,inject:[...]}；在 src/config.js 用 schemastery 声明 Config（enabled/timeoutMs/retry/cooldownMs/notifyComplete/notifyApproval/notifyQuestion/onlyTopLevel/includeTitle 标 .volatile()；webhookUrl 与文案/skipReasons 保持普通字段），保留 normalizeConfig 作为无 schema 时的兑底。验证：新增 test/config.test.js 并跑绿。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-562e53
+      phase: implement
+      side: backend
+    - id: t-851244
+      title: 声明插件 Config schema 与双半包清单·测试
+      implements: |-
+        在 package.json 增加依赖 @deepseek-ai/schemastery@3.18.4，并加 exports["./client"]=./client.js 与 dsh.client={platform:web,immediately:true,inject:[...]}；在 src/config.js 用 schemastery 声明 Config（enabled/timeoutMs/retry/cooldownMs/notifyComplete/notifyApproval/notifyQuestion/onlyTopLevel/includeTitle 标 .volatile()；webhookUrl 与文案/skipReasons 保持普通字段），保留 normalizeConfig 作为无 schema 时的兑底。验证：新增 test/config.test.js 并跑绿。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-b7ad0c
+      phase: implement
+      side: backend
+    - id: t-e73d91
+      title: 实现渠道注册表与三国内渠道·研发
+      implements: |-
+        新增 src/channels/index.js：channel→adapter 注册表，未知渠道返回 {error} 不抛异常；新增 wecom.js（msgtype=markdown）、feishu.js（msg_type=text，可选 timestamp+sign 进 body）、dingtalk.js（msgtype=markdown，可选 timestamp+sign 进 query）；加签用 node:crypto 的 hmacSHA256；isSuccess 同时看 HTTP 状态与业务码。验证：新增 test/channels.cn.test.js。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-2f6225
+      title: 实现渠道注册表与三国内渠道·复核
+      implements: |-
+        新增 src/channels/index.js：channel→adapter 注册表，未知渠道返回 {error} 不抛异常；新增 wecom.js（msgtype=markdown）、feishu.js（msg_type=text，可选 timestamp+sign 进 body）、dingtalk.js（msgtype=markdown，可选 timestamp+sign 进 query）；加签用 node:crypto 的 hmacSHA256；isSuccess 同时看 HTTP 状态与业务码。验证：新增 test/channels.cn.test.js。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-e73d91
+      phase: implement
+      side: backend
+    - id: t-c6837b
+      title: 实现渠道注册表与三国内渠道·测试
+      implements: |-
+        新增 src/channels/index.js：channel→adapter 注册表，未知渠道返回 {error} 不抛异常；新增 wecom.js（msgtype=markdown）、feishu.js（msg_type=text，可选 timestamp+sign 进 body）、dingtalk.js（msgtype=markdown，可选 timestamp+sign 进 query）；加签用 node:crypto 的 hmacSHA256；isSuccess 同时看 HTTP 状态与业务码。验证：新增 test/channels.cn.test.js。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-2f6225
+      phase: implement
+      side: backend
+    - id: t-db8e0b
+      title: 实现目标清单存储与 CRUD·研发
+      implements: |-
+        新增 src/targets.js：TargetStore（load/bind…），路径 $DSH_HOME/state/dsh-notice-webhook/targets.json；字段校验（id 唯一、name 非空、url http(s)、events 仅受控取值、secretRef 仅 feishu/dingtalk）；写盘 tmp→rename；坏文件/未知 version 记 warn 且不覆盖。验证：新增 test/targets.test.js。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-9823b3
+      title: 实现目标清单存储与 CRUD·复核
+      implements: |-
+        新增 src/targets.js：TargetStore（load/bind…），路径 $DSH_HOME/state/dsh-notice-webhook/targets.json；字段校验（id 唯一、name 非空、url http(s)、events 仅受控取值、secretRef 仅 feishu/dingtalk）；写盘 tmp→rename；坏文件/未知 version 记 warn 且不覆盖。验证：新增 test/targets.test.js。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-db8e0b
+      phase: implement
+      side: backend
+    - id: t-2b1038
+      title: 实现目标清单存储与 CRUD·测试
+      implements: |-
+        新增 src/targets.js：TargetStore（load/bind…），路径 $DSH_HOME/state/dsh-notice-webhook/targets.json；字段校验（id 唯一、name 非空、url http(s)、events 仅受控取值、secretRef 仅 feishu/dingtalk）；写盘 tmp→rename；坏文件/未知 version 记 warn 且不覆盖。验证：新增 test/targets.test.js。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-9823b3
+      phase: implement
+      side: backend
+    - id: t-fab413
+      title: 实现投递结果存储（内存）·研发
+      implements: |-
+        新增 src/outcomes.js：Map<targetId, Outcome[]>，append 时裁剪到 5 条；reason 只允许业务码/网络错误文本；提供 list(targetId) 与 snapshot()。验证：新增 test/outcomes.test.js。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on: []
+      phase: implement
+      side: backend
+    - id: t-33e6a5
+      title: 实现投递结果存储（内存）·复核
+      implements: |-
+        新增 src/outcomes.js：Map<targetId, Outcome[]>，append 时裁剪到 5 条；reason 只允许业务码/网络错误文本；提供 list(targetId) 与 snapshot()。验证：新增 test/outcomes.test.js。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-fab413
+      phase: implement
+      side: backend
+    - id: t-5744a1
+      title: 实现投递结果存储（内存）·测试
+      implements: |-
+        新增 src/outcomes.js：Map<targetId, Outcome[]>，append 时裁剪到 5 条；reason 只允许业务码/网络错误文本；提供 list(targetId) 与 snapshot()。验证：新增 test/outcomes.test.js。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-33e6a5
+      phase: implement
+      side: backend
+    - id: t-cfb1af
+      title: 实现 Slack / Discord / 通用三渠道·研发
+      implements: |-
+        新增 src/channels/slack.js（{text}）、discord.js（{content}，204/2xx 为成功）、custom.js（原样 v1 载荷 + target.headers 原样带上）；在 index.js 注册三者。验证：新增 test/channels.global.test.js（含 TC-5 老契约断言）。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-be124b
+      phase: implement
+      side: backend
+    - id: t-40cd86
+      title: 实现 Slack / Discord / 通用三渠道·复核
+      implements: |-
+        新增 src/channels/slack.js（{text}）、discord.js（{content}，204/2xx 为成功）、custom.js（原样 v1 载荷 + target.headers 原样带上）；在 index.js 注册三者。验证：新增 test/channels.global.test.js（含 TC-5 老契约断言）。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-cfb1af
+      phase: implement
+      side: backend
+    - id: t-e5d3cb
+      title: 实现 Slack / Discord / 通用三渠道·测试
+      implements: |-
+        新增 src/channels/slack.js（{text}）、discord.js（{content}，204/2xx 为成功）、custom.js（原样 v1 载荷 + target.headers 原样带上）；在 index.js 注册三者。验证：新增 test/channels.global.test.js（含 TC-5 老契约断言）。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-40cd86
+      phase: implement
+      side: backend
+    - id: t-b7dd7a
+      title: 升级绑定存储：targetBindings 段·研发
+      implements: |-
+        在 src/bindings.js 增加 targetBindings 段（{ targetIds[], updatedAt }）；读时 targetBindings 优先，缺则回落 bindings url 映射；写时两段一起写（保旧版本可用）；提供 bindTargetsTargets/unbindTargets/listBindings 基础方法。验证：新增 test/bindings.v2.test.js（含“旧版本读新文件不报错”断言）。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-13af87
+      phase: implement
+      side: backend
+    - id: t-7203aa
+      title: 升级绑定存储：targetBindings 段·复核
+      implements: |-
+        在 src/bindings.js 增加 targetBindings 段（{ targetIds[], updatedAt }）；读时 targetBindings 优先，缺则回落 bindings url 映射；写时两段一起写（保旧版本可用）；提供 bindTargetsTargets/unbindTargets/listBindings 基础方法。验证：新增 test/bindings.v2.test.js（含“旧版本读新文件不报错”断言）。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-b7dd7a
+      phase: implement
+      side: backend
+    - id: t-521025
+      title: 升级绑定存储：targetBindings 段·测试
+      implements: |-
+        在 src/bindings.js 增加 targetBindings 段（{ targetIds[], updatedAt }）；读时 targetBindings 优先，缺则回落 bindings url 映射；写时两段一起写（保旧版本可用）；提供 bindTargetsTargets/unbindTargets/listBindings 基础方法。验证：新增 test/bindings.v2.test.js（含“旧版本读新文件不报错”断言）。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-7203aa
+      phase: implement
+      side: backend
+    - id: t-ce5f74
+      title: 升级 Host Service 到 v2·研发
+      implements: |-
+        在 src/service.js 新增四方法并在 index.js 接线时注入 targets/outcomes；bindTargets 对不存在的 id 整笔返回 false；unbindTargets 清 targetBindings 并同时清旧 url 绑定；listTargets 不回密钥明文。验证：新增 test/service.v2.test.js。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-c9e09a
+      phase: implement
+      side: backend
+    - id: t-6d63df
+      title: 升级 Host Service 到 v2·联调
+      implements: |-
+        在 src/service.js 新增四方法并在 index.js 接线时注入 targets/outcomes；bindTargets 对不存在的 id 整笔返回 false；unbindTargets 清 targetBindings 并同时清旧 url 绑定；listTargets 不回密钥明文。验证：新增 test/service.v2.test.js。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-ce5f74
+      phase: implement
+      side: backend
+    - id: t-407b70
+      title: 升级 Host Service 到 v2·复核
+      implements: |-
+        在 src/service.js 新增四方法并在 index.js 接线时注入 targets/outcomes；bindTargets 对不存在的 id 整笔返回 false；unbindTargets 清 targetBindings 并同时清旧 url 绑定；listTargets 不回密钥明文。验证：新增 test/service.v2.test.js。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-6d63df
+      phase: implement
+      side: backend
+    - id: t-33f976
+      title: 升级 Host Service 到 v2·测试
+      implements: |-
+        在 src/service.js 新增四方法并在 index.js 接线时注入 targets/outcomes；bindTargets 对不存在的 id 整笔返回 false；unbindTargets 清 targetBindings 并同时清旧 url 绑定；listTargets 不回密钥明文。验证：新增 test/service.v2.test.js。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-407b70
+      phase: implement
+      side: backend
+    - id: t-52f7a6
+      title: 实现 RPC 只读端点与状态投影·研发
+      implements: |-
+        新增 src/rpc.js 并注册 GET /api/dsh-notice-webhook/state（沿用 Host 既有认证/信任域）；返回 targets（TargetView，secretRef 只给存在标记）、bindings（含展开的 targets）、defaults、outcomes、secrets、revision。验证：新增 test/rpc.read.test.js。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-3188ad
+      phase: implement
+      side: backend
+    - id: t-733d1a
+      title: 实现 RPC 只读端点与状态投影·联调
+      implements: |-
+        新增 src/rpc.js 并注册 GET /api/dsh-notice-webhook/state（沿用 Host 既有认证/信任域）；返回 targets（TargetView，secretRef 只给存在标记）、bindings（含展开的 targets）、defaults、outcomes、secrets、revision。验证：新增 test/rpc.read.test.js。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-52f7a6
+      phase: implement
+      side: backend
+    - id: t-53678f
+      title: 实现 RPC 只读端点与状态投影·复核
+      implements: |-
+        新增 src/rpc.js 并注册 GET /api/dsh-notice-webhook/state（沿用 Host 既有认证/信任域）；返回 targets（TargetView，secretRef 只给存在标记）、bindings（含展开的 targets）、defaults、outcomes、secrets、revision。验证：新增 test/rpc.read.test.js。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-733d1a
+      phase: implement
+      side: backend
+    - id: t-4709f0
+      title: 实现 RPC 只读端点与状态投影·测试
+      implements: |-
+        新增 src/rpc.js 并注册 GET /api/dsh-notice-webhook/state（沿用 Host 既有认证/信任域）；返回 targets（TargetView，secretRef 只给存在标记）、bindings（含展开的 targets）、defaults、outcomes、secrets、revision。验证：新增 test/rpc.read.test.js。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-53678f
+      phase: implement
+      side: backend
+    - id: t-7d67cf
+      title: 实现目标集合解析与替代默认组·研发
+      implements: |-
+        在 src/router.js 实现 resolveTargets(sessionId, intent)：targetBindings 非空→只取这些（enabled 过滤，空则回落默认组）；否则取 isDefault && enabled；总开关仅作用默认组；输出目标集合供逐目标打包。验证：新增 test/router.resolve.test.js（含 TC-19 断言）。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-9a8084
+        - t-c9e09a
+      phase: implement
+      side: backend
+    - id: t-cec0c4
+      title: 实现目标集合解析与替代默认组·复核
+      implements: |-
+        在 src/router.js 实现 resolveTargets(sessionId, intent)：targetBindings 非空→只取这些（enabled 过滤，空则回落默认组）；否则取 isDefault && enabled；总开关仅作用默认组；输出目标集合供逐目标打包。验证：新增 test/router.resolve.test.js（含 TC-19 断言）。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-7d67cf
+      phase: implement
+      side: backend
+    - id: t-ba2a92
+      title: 实现目标集合解析与替代默认组·测试
+      implements: |-
+        在 src/router.js 实现 resolveTargets(sessionId, intent)：targetBindings 非空→只取这些（enabled 过滤，空则回落默认组）；否则取 isDefault && enabled；总开关仅作用默认组；输出目标集合供逐目标打包。验证：新增 test/router.resolve.test.js（含 TC-19 断言）。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-cec0c4
+      phase: implement
+      side: backend
+    - id: t-c05999
+      title: 实现 RPC 写入端点与 revision 栅栏·研发
+      implements: |-
+        在 src/rpc.js 实现 POST /targets、/targets/delete、/test、/bind、/bindings/delete；每次写校验 revision（不符返回 409 + 最新状态），校验失败返回 400 且不落盘；成功返回新 revision。验证：新增 test/rpc.write.test.js。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-792424
+      phase: implement
+      side: backend
+    - id: t-11f9b8
+      title: 实现 RPC 写入端点与 revision 栅栏·联调
+      implements: |-
+        在 src/rpc.js 实现 POST /targets、/targets/delete、/test、/bind、/bindings/delete；每次写校验 revision（不符返回 409 + 最新状态），校验失败返回 400 且不落盘；成功返回新 revision。验证：新增 test/rpc.write.test.js。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-c05999
+      phase: implement
+      side: backend
+    - id: t-b34fad
+      title: 实现 RPC 写入端点与 revision 栅栏·复核
+      implements: |-
+        在 src/rpc.js 实现 POST /targets、/targets/delete、/test、/bind、/bindings/delete；每次写校验 revision（不符返回 409 + 最新状态），校验失败返回 400 且不落盘；成功返回新 revision。验证：新增 test/rpc.write.test.js。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-11f9b8
+      phase: implement
+      side: backend
+    - id: t-1a96c2
+      title: 实现 RPC 写入端点与 revision 栅栏·测试
+      implements: |-
+        在 src/rpc.js 实现 POST /targets、/targets/delete、/test、/bind、/bindings/delete；每次写校验 revision（不符返回 409 + 最新状态），校验失败返回 400 且不落盘；成功返回新 revision。验证：新增 test/rpc.write.test.js。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-b34fad
+      phase: implement
+      side: backend
+    - id: t-dd80f1
+      title: 实现逐目标过滤与去重·研发
+      implements: |-
+        在 src/router.js 增加逐目标 events 过滤（空数组=全收）与去重（同 channel+url 只保留一条）；与类开关的叠加顺序固定为：类开关→目标解析→总开关→目标过滤→去重。验证：新增 test/router.filter.test.js。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-5a7d2f
+      phase: implement
+      side: backend
+    - id: t-e7187b
+      title: 实现逐目标过滤与去重·复核
+      implements: |-
+        在 src/router.js 增加逐目标 events 过滤（空数组=全收）与去重（同 channel+url 只保留一条）；与类开关的叠加顺序固定为：类开关→目标解析→总开关→目标过滤→去重。验证：新增 test/router.filter.test.js。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-dd80f1
+      phase: implement
+      side: backend
+    - id: t-c915f2
+      title: 实现逐目标过滤与去重·测试
+      implements: |-
+        在 src/router.js 增加逐目标 events 过滤（空数组=全收）与去重（同 channel+url 只保留一条）；与类开关的叠加顺序固定为：类开关→目标解析→总开关→目标过滤→去重。验证：新增 test/router.filter.test.js。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-e7187b
+      phase: implement
+      side: backend
+    - id: t-054a9c
+      title: 接线主链路与 legacy 等价映射·研发
+      implements: |-
+        在 index.js 组装主链路并接入 channels；启动时把 legacy webhookUrl → 隐式 custom 默认目标、老 bindings url → 同地址目标（不重复建）；投递结果写入 outcomes。验证：新增 test/e2e.multi.test.js（含 TC-15 老配置兼容）。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-f65a82
+        - t-b7a098
+        - t-1146e7
+      phase: implement
+      side: fullstack
+    - id: t-89ad70
+      title: 接线主链路与 legacy 等价映射·联调
+      implements: |-
+        在 index.js 组装主链路并接入 channels；启动时把 legacy webhookUrl → 隐式 custom 默认目标、老 bindings url → 同地址目标（不重复建）；投递结果写入 outcomes。验证：新增 test/e2e.multi.test.js（含 TC-15 老配置兼容）。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-054a9c
+      phase: implement
+      side: fullstack
+    - id: t-b20b60
+      title: 接线主链路与 legacy 等价映射·复核
+      implements: |-
+        在 index.js 组装主链路并接入 channels；启动时把 legacy webhookUrl → 隐式 custom 默认目标、老 bindings url → 同地址目标（不重复建）；投递结果写入 outcomes。验证：新增 test/e2e.multi.test.js（含 TC-15 老配置兼容）。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-89ad70
+      phase: implement
+      side: fullstack
+    - id: t-3f07d3
+      title: 接线主链路与 legacy 等价映射·测试
+      implements: |-
+        在 index.js 组装主链路并接入 channels；启动时把 legacy webhookUrl → 隐式 custom 默认目标、老 bindings url → 同地址目标（不重复建）；投递结果写入 outcomes。验证：新增 test/e2e.multi.test.js（含 TC-15 老配置兼容）。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-b20b60
+      phase: implement
+      side: fullstack
+    - id: t-f2fe94
+      title: 兼容与回滚收尾·研发
+      implements: |-
+        补齐 legacy 映射边界（legacy 与显式清单同 url 时只保留一条）、坏文件降级路径、卸载后目录残留检查；新增 test/compat.v2.test.js。验证：跑该测试全绿。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-10a822
+      phase: implement
+      side: backend
+    - id: t-ddc493
+      title: 兼容与回滚收尾·复核
+      implements: |-
+        补齐 legacy 映射边界（legacy 与显式清单同 url 时只保留一条）、坏文件降级路径、卸载后目录残留检查；新增 test/compat.v2.test.js。验证：跑该测试全绿。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-f2fe94
+      phase: implement
+      side: backend
+    - id: t-805ee8
+      title: 兼容与回滚收尾·测试
+      implements: |-
+        补齐 legacy 映射边界（legacy 与显式清单同 url 时只保留一条）、坏文件降级路径、卸载后目录残留检查；新增 test/compat.v2.test.js。验证：跑该测试全绿。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-ddc493
+      phase: implement
+      side: backend
+    - id: t-17a21e
+      title: 客户端半：设置页骨架与目标页·研发
+      implements: |-
+        新增 client.js（window.__ModuleLoader__.load 格式，require('react')）；ctx.slots.inject('settings.section') 注册 {name,id:'dsh-notice-webhook',order:21,label:thunk}；实现 ChannelRail（含 6 渠道内联 SVG 图标与数量徽标）与 TargetCard 骨架，数据经 RPC GET /state。验证：打开设置页看 rail+卡片，控制台无报错；grep 命中 settings.section。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-b7a098
+      phase: implement
+      side: frontend
+    - id: t-c49715
+      title: 客户端半：设置页骨架与目标页·联调
+      implements: |-
+        新增 client.js（window.__ModuleLoader__.load 格式，require('react')）；ctx.slots.inject('settings.section') 注册 {name,id:'dsh-notice-webhook',order:21,label:thunk}；实现 ChannelRail（含 6 渠道内联 SVG 图标与数量徽标）与 TargetCard 骨架，数据经 RPC GET /state。验证：打开设置页看 rail+卡片，控制台无报错；grep 命中 settings.section。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-17a21e
+      phase: implement
+      side: frontend
+    - id: t-c9584c
+      title: 客户端半：设置页骨架与目标页·复核
+      implements: |-
+        新增 client.js（window.__ModuleLoader__.load 格式，require('react')）；ctx.slots.inject('settings.section') 注册 {name,id:'dsh-notice-webhook',order:21,label:thunk}；实现 ChannelRail（含 6 渠道内联 SVG 图标与数量徽标）与 TargetCard 骨架，数据经 RPC GET /state。验证：打开设置页看 rail+卡片，控制台无报错；grep 命中 settings.section。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-c49715
+      phase: implement
+      side: frontend
+    - id: t-eb1fcb
+      title: 客户端半：设置页骨架与目标页·测试
+      implements: |-
+        新增 client.js（window.__ModuleLoader__.load 格式，require('react')）；ctx.slots.inject('settings.section') 注册 {name,id:'dsh-notice-webhook',order:21,label:thunk}；实现 ChannelRail（含 6 渠道内联 SVG 图标与数量徽标）与 TargetCard 骨架，数据经 RPC GET /state。验证：打开设置页看 rail+卡片，控制台无报错；grep 命中 settings.section。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-c9584c
+      phase: implement
+      side: frontend
+    - id: t-27ceb6
+      title: 客户端半：目标编辑与动作·研发
+      implements: |-
+        在 client.js 实现表单（渠道切换时字段可见性变化）与动作：保存 POST /targets、删除 /targets/delete、启停开关（乐观更新+失败回滚）、发送测试 /test；错误行内展示，409 提示刷新并保留已填内容。验证：打开设置页操作并看行内错误与徽标变化。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-cefe17
+      phase: implement
+      side: frontend
+    - id: t-aec5db
+      title: 客户端半：目标编辑与动作·联调
+      implements: |-
+        在 client.js 实现表单（渠道切换时字段可见性变化）与动作：保存 POST /targets、删除 /targets/delete、启停开关（乐观更新+失败回滚）、发送测试 /test；错误行内展示，409 提示刷新并保留已填内容。验证：打开设置页操作并看行内错误与徽标变化。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-27ceb6
+      phase: implement
+      side: frontend
+    - id: t-b3a6a6
+      title: 客户端半：目标编辑与动作·复核
+      implements: |-
+        在 client.js 实现表单（渠道切换时字段可见性变化）与动作：保存 POST /targets、删除 /targets/delete、启停开关（乐观更新+失败回滚）、发送测试 /test；错误行内展示，409 提示刷新并保留已填内容。验证：打开设置页操作并看行内错误与徽标变化。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-aec5db
+      phase: implement
+      side: frontend
+    - id: t-a02b0a
+      title: 客户端半：目标编辑与动作·测试
+      implements: |-
+        在 client.js 实现表单（渠道切换时字段可见性变化）与动作：保存 POST /targets、删除 /targets/delete、启停开关（乐观更新+失败回滚）、发送测试 /test；错误行内展示，409 提示刷新并保留已填内容。验证：打开设置页操作并看行内错误与徽标变化。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-b3a6a6
+      phase: implement
+      side: frontend
+    - id: t-d6ee82
+      title: 客户端半：事件过滤网格与全局开关·研发
+      implements: |-
+        在 client.js 实现 EventFilterGrid（四项，空=全收并显式提示）与 GlobalSwitches（总开关/超时/重试/冷却写入 volatile 配置）；保存后刷新状态。验证：界面勾选后 GET /state 比对 events；改全局开关后不重启触发一次通知看生效。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-cefe17
+      phase: implement
+      side: frontend
+    - id: t-de7f4b
+      title: 客户端半：事件过滤网格与全局开关·复核
+      implements: |-
+        在 client.js 实现 EventFilterGrid（四项，空=全收并显式提示）与 GlobalSwitches（总开关/超时/重试/冷却写入 volatile 配置）；保存后刷新状态。验证：界面勾选后 GET /state 比对 events；改全局开关后不重启触发一次通知看生效。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-d6ee82
+      phase: implement
+      side: frontend
+    - id: t-234f89
+      title: 客户端半：事件过滤网格与全局开关·测试
+      implements: |-
+        在 client.js 实现 EventFilterGrid（四项，空=全收并显式提示）与 GlobalSwitches（总开关/超时/重试/冷却写入 volatile 配置）；保存后刷新状态。验证：界面勾选后 GET /state 比对 events；改全局开关后不重启触发一次通知看生效。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-de7f4b
+      phase: implement
+      side: frontend
+    - id: t-8b13aa
+      title: 客户端半：会话绑定页与解绑·研发
+      implements: |-
+        在 client.js 实现会话绑定页：表格（会话标题+id 尾串 / 目标 chips / 解绑），悬空引用显示「目标已删除（回落默认组）」+ 清理；解绑二次确认后 POST /bindings/delete；409/404 口径与目标页一致。验证：界面解绑后 e2e 断言回落默认组。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-cefe17
+      phase: implement
+      side: frontend
+    - id: t-a6137d
+      title: 客户端半：会话绑定页与解绑·联调
+      implements: |-
+        在 client.js 实现会话绑定页：表格（会话标题+id 尾串 / 目标 chips / 解绑），悬空引用显示「目标已删除（回落默认组）」+ 清理；解绑二次确认后 POST /bindings/delete；409/404 口径与目标页一致。验证：界面解绑后 e2e 断言回落默认组。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-8b13aa
+      phase: implement
+      side: frontend
+    - id: t-6f1114
+      title: 客户端半：会话绑定页与解绑·复核
+      implements: |-
+        在 client.js 实现会话绑定页：表格（会话标题+id 尾串 / 目标 chips / 解绑），悬空引用显示「目标已删除（回落默认组）」+ 清理；解绑二次确认后 POST /bindings/delete；409/404 口径与目标页一致。验证：界面解绑后 e2e 断言回落默认组。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-a6137d
+      phase: implement
+      side: frontend
+    - id: t-0482bd
+      title: 客户端半：会话绑定页与解绑·测试
+      implements: |-
+        在 client.js 实现会话绑定页：表格（会话标题+id 尾串 / 目标 chips / 解绑），悬空引用显示「目标已删除（回落默认组）」+ 清理；解绑二次确认后 POST /bindings/delete；409/404 口径与目标页一致。验证：界面解绑后 e2e 断言回落默认组。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-6f1114
+      phase: implement
+      side: frontend
+    - id: t-8afa35
+      title: 可嵌入选择器与客户端服务·研发
+      implements: |-
+        在 client.js 实现 TargetPicker（目标复选 + 默认组标记 + 空态引导，不自己开弹框）并以 ctx.provide('dshNoticeWebhookClient',{version:1,renderTargetPicker}) 注册；每次返回新 element，服务失效返回 null。验证：新增 test/client-service.test.js（mock 宿主）。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-cefe17
+      phase: implement
+      side: frontend
+    - id: t-e2182d
+      title: 可嵌入选择器与客户端服务·联调
+      implements: |-
+        在 client.js 实现 TargetPicker（目标复选 + 默认组标记 + 空态引导，不自己开弹框）并以 ctx.provide('dshNoticeWebhookClient',{version:1,renderTargetPicker}) 注册；每次返回新 element，服务失效返回 null。验证：新增 test/client-service.test.js（mock 宿主）。
+
+        [子卡阶段·联调] 只做本阶段；验收：接口联调通过：给出请求样例与期望响应，实际返回与预期一致
+      serves: []
+      depends_on:
+        - t-8afa35
+      phase: implement
+      side: frontend
+    - id: t-05f9a5
+      title: 可嵌入选择器与客户端服务·复核
+      implements: |-
+        在 client.js 实现 TargetPicker（目标复选 + 默认组标记 + 空态引导，不自己开弹框）并以 ctx.provide('dshNoticeWebhookClient',{version:1,renderTargetPicker}) 注册；每次返回新 element，服务失效返回 null。验证：新增 test/client-service.test.js（mock 宿主）。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-e2182d
+      phase: implement
+      side: frontend
+    - id: t-40565e
+      title: 可嵌入选择器与客户端服务·测试
+      implements: |-
+        在 client.js 实现 TargetPicker（目标复选 + 默认组标记 + 空态引导，不自己开弹框）并以 ctx.provide('dshNoticeWebhookClient',{version:1,renderTargetPicker}) 注册；每次返回新 element，服务失效返回 null。验证：新增 test/client-service.test.js（mock 宿主）。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-05f9a5
+      phase: implement
+      side: frontend
+    - id: t-be5e03
+      title: 装载到 profile 并做真实 Host 验收·研发
+      implements: |-
+        用 plugin_manager install_bundle 安装本包；确认真实 Host 中服务与客户端半均生效（插槽占用者出现 dsh-notice-webhook）；用本地接收端验证多目标投递与解绑回落。验证：list_plugins + 设置页截图 + 接收端日志。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-3f89ef
+        - t-6b4417
+        - t-10999f
+        - t-0c0243
+        - t-3b6f2f
+      phase: test
+      side: fullstack
+    - id: t-565295
+      title: 装载到 profile 并做真实 Host 验收·复核
+      implements: |-
+        用 plugin_manager install_bundle 安装本包；确认真实 Host 中服务与客户端半均生效（插槽占用者出现 dsh-notice-webhook）；用本地接收端验证多目标投递与解绑回落。验证：list_plugins + 设置页截图 + 接收端日志。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-be5e03
+      phase: test
+      side: fullstack
+    - id: t-51f9b9
+      title: 装载到 profile 并做真实 Host 验收·测试
+      implements: |-
+        用 plugin_manager install_bundle 安装本包；确认真实 Host 中服务与客户端半均生效（插槽占用者出现 dsh-notice-webhook）；用本地接收端验证多目标投递与解绑回落。验证：list_plugins + 设置页截图 + 接收端日志。
+
+        [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+      serves: []
+      depends_on:
+        - t-565295
+      phase: test
+      side: fullstack
+    - id: t-cb4b6f
+      title: 更新 README（多渠道 / 配置页 / 服务契约）·研发
+      implements: |-
+        在 README.md 补：渠道与报文对照表（含加签与业务码）、设置页两页说明、Host Service v2 与客户端服务用法、旧配置兼容与回滚说明。验证：两条 grep 命中且三段齐备。
+
+        [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+      serves: []
+      depends_on:
+        - t-836336
+      phase: doc
+      side: doc
+    - id: t-231afa
+      title: 更新 README（多渠道 / 配置页 / 服务契约）·复核
+      implements: |-
+        在 README.md 补：渠道与报文对照表（含加签与业务码）、设置页两页说明、Host Service v2 与客户端服务用法、旧配置兼容与回滚说明。验证：两条 grep 命中且三段齐备。
+
+        [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+      serves: []
+      depends_on:
+        - t-cb4b6f
+      phase: doc
+      side: doc
+traceability:
+  design_to_tasks:
+    design/architecture.md#TLDR: []
+    design/architecture.md#目标与总体方案: []
+    design/architecture.md#模块改动地图: []
+    design/architecture.md#关键流程: []
+    design/architecture.md#从事件到投递: []
+    design/architecture.md#为什么过滤顺序是这个顺序: []
+    design/architecture.md#渠道适配的两段式: []
+    design/architecture.md#依赖关系: []
+    design/architecture.md#错误处理: []
+    design/architecture.md#安全与性能: []
+    design/architecture.md#文件结构: []
+    design/architecture.md#测试策略: []
+    design/architecture.md#遗留问题: []
+    design/data-model.md#TLDR: []
+    design/data-model.md#目标记录: []
+    design/data-model.md#目标清单文件: []
+    design/data-model.md#窗口绑定扩展既有文件: []
+    design/data-model.md#绑定语义替代而非叠加: []
+    design/data-model.md#投递结果: []
+    design/data-model.md#迁移与兼容: []
+    design/data-model.md#老配置的等价映射: []
+    design/data-model.md#回滚路径: []
+    design/data-model.md#破坏性变更: []
+    design/frontend.md#TLDR: []
+    design/frontend.md#页面与入口: []
+    design/frontend.md#布局与信息架构: []
+    design/frontend.md#会话绑定页第二个标签: []
+    design/frontend.md#交互流程: []
+    design/frontend.md#新增目标: []
+    design/frontend.md#发送测试: []
+    design/frontend.md#编辑-删除-启停: []
+    design/frontend.md#解绑会话绑定页: []
+    design/frontend.md#宿主嵌入选择器其他插件的界面怎么用: []
+    design/frontend.md#状态与边界: []
+    design/frontend.md#凭据展示规则: []
+    design/frontend.md#文案与本地化: []
+    design/frontend.md#主题与样式约束: []
+    design/frontend.md#与-RPC-的映射: []
+    design/frontend.md#原型锚点: []
+    design/frontend.md#验收口径: []
+    design/interfaces.md#TLDR: []
+    design/interfaces.md#渠道适配器契约: []
+    design/interfaces.md#渠道报文契约: []
+    design/interfaces.md#Host-RPC设置页-Host: []
+    design/interfaces.md#Host-Service其他插件-Host: []
+    design/interfaces.md#客户端服务供其他插件的界面复用: []
+    design/interfaces.md#服务定义: []
+    design/interfaces.md#渲染语义与生命周期: []
+    design/interfaces.md#降级与错误语义: []
+    design/interfaces.md#插件-Config: []
+    design/use-cases.md#场景总览: []
+    design/use-cases.md#UC-1-授权与完成分流到不同群: []
+    design/use-cases.md#UC-2-临时加一条通道不用重启: []
+    design/use-cases.md#UC-3-其他插件把项目会话绑到项目群: []
+    design/use-cases.md#UC-4-老用户升级零改动: []
+    design/use-cases.md#UC-5-按会话查绑定并解绑: []
+  fr_to_tasks:
+    FR-1: []
+    FR-2: []
+    FR-3: []
+    FR-5: []
+    FR-4: []
+    FR-6: []
+    FR-7: []
+    FR-8: []
+    FR-9: []
+    FR-10: []
+coverage:
+  implementation:
+    total: 56
+    covered: 0
+    uncovered:
+      - design/architecture.md#TLDR
+      - design/architecture.md#目标与总体方案
+      - design/architecture.md#模块改动地图
+      - design/architecture.md#关键流程
+      - design/architecture.md#从事件到投递
+      - design/architecture.md#为什么过滤顺序是这个顺序
+      - design/architecture.md#渠道适配的两段式
+      - design/architecture.md#依赖关系
+      - design/architecture.md#错误处理
+      - design/architecture.md#安全与性能
+      - design/architecture.md#文件结构
+      - design/architecture.md#测试策略
+      - design/architecture.md#遗留问题
+      - design/data-model.md#TLDR
+      - design/data-model.md#目标记录
+      - design/data-model.md#目标清单文件
+      - design/data-model.md#窗口绑定扩展既有文件
+      - design/data-model.md#绑定语义替代而非叠加
+      - design/data-model.md#投递结果
+      - design/data-model.md#迁移与兼容
+      - design/data-model.md#老配置的等价映射
+      - design/data-model.md#回滚路径
+      - design/data-model.md#破坏性变更
+      - design/frontend.md#TLDR
+      - design/frontend.md#页面与入口
+      - design/frontend.md#布局与信息架构
+      - design/frontend.md#会话绑定页第二个标签
+      - design/frontend.md#交互流程
+      - design/frontend.md#新增目标
+      - design/frontend.md#发送测试
+      - design/frontend.md#编辑-删除-启停
+      - design/frontend.md#解绑会话绑定页
+      - design/frontend.md#宿主嵌入选择器其他插件的界面怎么用
+      - design/frontend.md#状态与边界
+      - design/frontend.md#凭据展示规则
+      - design/frontend.md#文案与本地化
+      - design/frontend.md#主题与样式约束
+      - design/frontend.md#与-RPC-的映射
+      - design/frontend.md#原型锚点
+      - design/frontend.md#验收口径
+      - design/interfaces.md#TLDR
+      - design/interfaces.md#渠道适配器契约
+      - design/interfaces.md#渠道报文契约
+      - design/interfaces.md#Host-RPC设置页-Host
+      - design/interfaces.md#Host-Service其他插件-Host
+      - design/interfaces.md#客户端服务供其他插件的界面复用
+      - design/interfaces.md#服务定义
+      - design/interfaces.md#渲染语义与生命周期
+      - design/interfaces.md#降级与错误语义
+      - design/interfaces.md#插件-Config
+      - design/use-cases.md#场景总览
+      - design/use-cases.md#UC-1-授权与完成分流到不同群
+      - design/use-cases.md#UC-2-临时加一条通道不用重启
+      - design/use-cases.md#UC-3-其他插件把项目会话绑到项目群
+      - design/use-cases.md#UC-4-老用户升级零改动
+      - design/use-cases.md#UC-5-按会话查绑定并解绑
+    rate: 0
+    total_designs: 56
+    covered_designs: 0

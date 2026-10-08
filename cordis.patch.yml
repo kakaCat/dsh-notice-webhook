@@ -1,0 +1,12 @@
+# dsh-notice-webhook 的装载层（bundle patch）。
+#
+# 用法：把本包装进目标 profile 后，这一行会作为 Loader 条目插入；改 config 即可生效。
+# 配置项含义见 README.md 与 docs/requirements/REQ-260930123701-250a/design/interfaces.md。
+- insert:
+    - id: dsh-notice-webhook
+      name: dsh-notice-webhook
+      config:
+        # 默认 webhook 地址。留空 = 未绑定会话没有目标（静默丢弃，不报错）。
+        webhookUrl: ''
+        # 总开关：只管默认通道。已绑定 webhook 的会话窗口不受它影响。
+        enabled: true

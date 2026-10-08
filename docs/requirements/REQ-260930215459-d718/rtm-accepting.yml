@@ -1,0 +1,400 @@
+metadata:
+  stage: accepting
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T15:06:13.891Z
+  version: 4
+  generated_by: dsh-pmboard
+  last_updated: 2026-10-02T07:00:45.648Z
+inputs:
+  tasks:
+    - id: t-783472
+      title: 建渠道元数据表与校验
+      status: done
+    - id: t-3d8fb5
+      title: 渠道适配器加 composeUrl / parseKey
+      status: done
+    - id: t-74862d
+      title: TargetRecord 加 key 与派生 url
+      status: done
+    - id: t-c47b93
+      title: targets.json v2 与校验收口
+      status: done
+    - id: t-d57116
+      title: v1→v2 迁移与回滚
+      status: done
+    - id: t-33df5a
+      title: RPC 追加 channelMeta / help / key
+      status: done
+    - id: t-738f23
+      title: 投递前用 composeUrl 组装（报文零变化）
+      status: done
+    - id: t-b14480
+      title: 图标表：dsh-im 品牌 glyph 内联
+      status: done
+    - id: t-71241e
+      title: 左栏 rail 三段与徽标
+      status: done
+    - id: t-4a0d90
+      title: 详情卡骨架：content-head / card-head / 动作区
+      status: done
+    - id: t-a741f2
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递
+      status: done
+    - id: t-3f6aed
+      title: 「怎么拿 key」说明浮层
+      status: done
+    - id: t-683b1f
+      title: 会话绑定页对齐原型
+      status: done
+    - id: t-e296cb
+      title: 装载验收与文档更新
+      status: done
+    - id: t-232d97
+      title: 建渠道元数据表与校验·研发
+      status: done
+    - id: t-dfce13
+      title: 建渠道元数据表与校验·复核
+      status: done
+    - id: t-ebe6b4
+      title: 建渠道元数据表与校验·测试
+      status: done
+    - id: t-259e81
+      title: 图标表：dsh-im 品牌 glyph 内联·研发
+      status: done
+    - id: t-527922
+      title: 图标表：dsh-im 品牌 glyph 内联·复核
+      status: done
+    - id: t-014c50
+      title: 图标表：dsh-im 品牌 glyph 内联·测试
+      status: done
+    - id: t-17937c
+      title: 渠道适配器加 composeUrl / parseKey·研发
+      status: done
+    - id: t-c7c6cb
+      title: 渠道适配器加 composeUrl / parseKey·复核
+      status: done
+    - id: t-1511cf
+      title: 渠道适配器加 composeUrl / parseKey·测试
+      status: done
+    - id: t-abaebb
+      title: TargetRecord 加 key 与派生 url·研发
+      status: done
+    - id: t-bf0bf8
+      title: TargetRecord 加 key 与派生 url·复核
+      status: done
+    - id: t-e0c783
+      title: TargetRecord 加 key 与派生 url·测试
+      status: done
+    - id: t-f92aad
+      title: targets.json v2 与校验收口·研发
+      status: done
+    - id: t-a1fd67
+      title: targets.json v2 与校验收口·复核
+      status: done
+    - id: t-e6fed3
+      title: targets.json v2 与校验收口·测试
+      status: done
+    - id: t-9fbd01
+      title: v1→v2 迁移与回滚·研发
+      status: done
+    - id: t-6ef84d
+      title: v1→v2 迁移与回滚·复核
+      status: done
+    - id: t-85af4c
+      title: v1→v2 迁移与回滚·测试
+      status: done
+    - id: t-a33917
+      title: RPC 追加 channelMeta / help / key·研发
+      status: done
+    - id: t-951c2d
+      title: RPC 追加 channelMeta / help / key·联调
+      status: done
+    - id: t-8522ea
+      title: RPC 追加 channelMeta / help / key·复核
+      status: done
+    - id: t-ee2782
+      title: RPC 追加 channelMeta / help / key·测试
+      status: done
+    - id: t-81d31e
+      title: 投递前用 composeUrl 组装（报文零变化）·研发
+      status: done
+    - id: t-21150f
+      title: 投递前用 composeUrl 组装（报文零变化）·复核
+      status: done
+    - id: t-70d5b5
+      title: 投递前用 composeUrl 组装（报文零变化）·测试
+      status: done
+    - id: t-952b56
+      title: 左栏 rail 三段与徽标·研发
+      status: done
+    - id: t-c4062a
+      title: 左栏 rail 三段与徽标·联调
+      status: done
+    - id: t-7a3f18
+      title: 左栏 rail 三段与徽标·复核
+      status: done
+    - id: t-465278
+      title: 左栏 rail 三段与徽标·测试
+      status: done
+    - id: t-fac6a7
+      title: 详情卡骨架：content-head / card-head / 动作区·研发
+      status: done
+    - id: t-2429c8
+      title: 详情卡骨架：content-head / card-head / 动作区·联调
+      status: done
+    - id: t-168823
+      title: 详情卡骨架：content-head / card-head / 动作区·复核
+      status: done
+    - id: t-b860fe
+      title: 详情卡骨架：content-head / card-head / 动作区·测试
+      status: done
+    - id: t-8e7cc0
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·研发
+      status: done
+    - id: t-12e33a
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·联调
+      status: done
+    - id: t-c87d1e
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·复核
+      status: done
+    - id: t-df899b
+      title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·测试
+      status: done
+    - id: t-4b9572
+      title: 「怎么拿 key」说明浮层·研发
+      status: done
+    - id: t-ebfb8f
+      title: 「怎么拿 key」说明浮层·联调
+      status: done
+    - id: t-15ce3f
+      title: 「怎么拿 key」说明浮层·复核
+      status: done
+    - id: t-5e6463
+      title: 「怎么拿 key」说明浮层·测试
+      status: done
+    - id: t-3b3c9b
+      title: 会话绑定页对齐原型·研发
+      status: done
+    - id: t-c96431
+      title: 会话绑定页对齐原型·复核
+      status: done
+    - id: t-33c0d2
+      title: 会话绑定页对齐原型·测试
+      status: done
+    - id: t-4e1f32
+      title: 装载验收与文档更新·研发
+      status: done
+    - id: t-8e66d6
+      title: 装载验收与文档更新·复核
+      status: done
+    - id: t-c8e75d
+      title: 装载验收与文档更新·测试
+      status: done
+outputs:
+  test_cases:
+    - id: TC-1
+      title: 覆盖对照（covers）
+      covers:
+        - t-783472
+        - t-232d97
+        - t-dfce13
+        - t-ebe6b4
+        - t-3d8fb5
+        - t-17937c
+        - t-c7c6cb
+        - t-1511cf
+        - t-74862d
+        - t-abaebb
+        - t-bf0bf8
+        - t-e0c783
+        - t-c47b93
+        - t-f92aad
+        - t-a1fd67
+        - t-e6fed3
+        - t-d57116
+        - t-9fbd01
+        - t-6ef84d
+        - t-85af4c
+        - t-33df5a
+        - t-a33917
+        - t-951c2d
+        - t-8522ea
+        - t-ee2782
+        - t-738f23
+        - t-81d31e
+        - t-21150f
+        - t-70d5b5
+        - t-b14480
+        - t-259e81
+        - t-527922
+        - t-014c50
+        - t-71241e
+        - t-952b56
+        - t-c4062a
+        - t-7a3f18
+        - t-465278
+        - t-4a0d90
+        - t-fac6a7
+        - t-2429c8
+        - t-168823
+        - t-b860fe
+        - t-a741f2
+        - t-8e7cc0
+        - t-12e33a
+        - t-c87d1e
+        - t-df899b
+        - t-3f6aed
+        - t-4b9572
+        - t-ebfb8f
+        - t-15ce3f
+        - t-5e6463
+        - t-683b1f
+        - t-3b3c9b
+        - t-c96431
+        - t-33c0d2
+        - t-e296cb
+        - t-4e1f32
+        - t-8e66d6
+        - t-c8e75d
+      validates: []
+      source: tests/test-report.md
+traceability:
+  task_to_tests:
+    t-783472:
+      - TC-1
+    t-3d8fb5:
+      - TC-1
+    t-74862d:
+      - TC-1
+    t-c47b93:
+      - TC-1
+    t-d57116:
+      - TC-1
+    t-33df5a:
+      - TC-1
+    t-738f23:
+      - TC-1
+    t-b14480:
+      - TC-1
+    t-71241e:
+      - TC-1
+    t-4a0d90:
+      - TC-1
+    t-a741f2:
+      - TC-1
+    t-3f6aed:
+      - TC-1
+    t-683b1f:
+      - TC-1
+    t-e296cb:
+      - TC-1
+    t-232d97:
+      - TC-1
+    t-dfce13:
+      - TC-1
+    t-ebe6b4:
+      - TC-1
+    t-259e81:
+      - TC-1
+    t-527922:
+      - TC-1
+    t-014c50:
+      - TC-1
+    t-17937c:
+      - TC-1
+    t-c7c6cb:
+      - TC-1
+    t-1511cf:
+      - TC-1
+    t-abaebb:
+      - TC-1
+    t-bf0bf8:
+      - TC-1
+    t-e0c783:
+      - TC-1
+    t-f92aad:
+      - TC-1
+    t-a1fd67:
+      - TC-1
+    t-e6fed3:
+      - TC-1
+    t-9fbd01:
+      - TC-1
+    t-6ef84d:
+      - TC-1
+    t-85af4c:
+      - TC-1
+    t-a33917:
+      - TC-1
+    t-951c2d:
+      - TC-1
+    t-8522ea:
+      - TC-1
+    t-ee2782:
+      - TC-1
+    t-81d31e:
+      - TC-1
+    t-21150f:
+      - TC-1
+    t-70d5b5:
+      - TC-1
+    t-952b56:
+      - TC-1
+    t-c4062a:
+      - TC-1
+    t-7a3f18:
+      - TC-1
+    t-465278:
+      - TC-1
+    t-fac6a7:
+      - TC-1
+    t-2429c8:
+      - TC-1
+    t-168823:
+      - TC-1
+    t-b860fe:
+      - TC-1
+    t-8e7cc0:
+      - TC-1
+    t-12e33a:
+      - TC-1
+    t-c87d1e:
+      - TC-1
+    t-df899b:
+      - TC-1
+    t-4b9572:
+      - TC-1
+    t-ebfb8f:
+      - TC-1
+    t-15ce3f:
+      - TC-1
+    t-5e6463:
+      - TC-1
+    t-3b3c9b:
+      - TC-1
+    t-c96431:
+      - TC-1
+    t-33c0d2:
+      - TC-1
+    t-4e1f32:
+      - TC-1
+    t-8e66d6:
+      - TC-1
+    t-c8e75d:
+      - TC-1
+  fr_to_tests:
+    FR-2: []
+    FR-6: []
+    FR-3: []
+    FR-1: []
+    FR-4: []
+    FR-5: []
+coverage:
+  testing:
+    total: 61
+    covered: 61
+    uncovered: []
+    rate: 100
+    total_tasks: 61
+    tested_tasks: 61
+    untested: []

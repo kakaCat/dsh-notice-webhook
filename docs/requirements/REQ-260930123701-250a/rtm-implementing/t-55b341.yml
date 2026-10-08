@@ -1,0 +1,36 @@
+task:
+  id: t-55b341
+  title: 实现 webhook 投递层·研发
+  status: done
+  implements: |-
+    新增 src/deliver.js：用 Node 内置 fetch 发 POST JSON（带 Content-Type: application/json; charset=utf-8 与 webhookHeaders）；用 AbortSignal.timeout(timeoutMs) 控制超时；redirect 设为 'manual' 且把 3xx 判定为失败；仅对网络错误、5xx、超时按 retry 次数重试，4xx 不重试；所有分支包 try/catch，失败只写 logger.warn，日志只输出 new URL(url).host 不输出完整 URL 与 headers。
+
+    [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+  serves: []
+  depends_on:
+    - t-fd6e82
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-55b341
+    TASK_TITLE: 实现 webhook 投递层·研发
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T05:39:54.114Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T05:37:41.262Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T05:41:06.131Z

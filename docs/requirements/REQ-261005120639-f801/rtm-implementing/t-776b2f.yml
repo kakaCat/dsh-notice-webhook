@@ -1,0 +1,37 @@
+task:
+  id: t-776b2f
+  title: 判定层：闸门看两路活（job + subagent 后代）·研发
+  status: done
+  implements: |-
+    src/jobs.js：新增 isAgentRegistryLike(agents)（typeof list === 'function'）与 liveSubagentIds(agents, sessionId)（血统 BFS 沿 session.header.parentSession 下钻、只认 origin==='subagent' ∧ status==='running'、visited 防环、条目形状不符跳过、形状不符/抛错/非数组返回 null）；createJobGate 增 options.subagents、attachSubagents()（形状不符 → 空 detach + 只报一次 warn）、detachSubagents()、observeSubagentEnd()、subagentsAvailable；gate() 同时计算 jobIds 与 subagentIds，两者都空 → {suppressed:false, reason:'no-work'}，两路都不可用 → 'unavailable'（既有语义），有活 → {suppressed:true, reason:'job-running'|'subagent-running'|'work-running', jobIds, subagentIds}（不抑制时不带额外键）；抽出 maybeSettle(sessionId)（watched.size===0 ∧ liveSubagentIds 为空 → 起宽限），observe() 改为调用它；pending 记录增 subagentIds；pendingOf 快照带上。
+
+    [子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要
+  serves: []
+  depends_on: []
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261005120639-f801
+    TASK_ID: t-776b2f
+    TASK_TITLE: 判定层：闸门看两路活（job + subagent 后代）·研发
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-05T04:34:07.713Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-261005120639-f801
+  generated_at: 2026-10-05T04:34:00.255Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-10-05T04:34:07.713Z

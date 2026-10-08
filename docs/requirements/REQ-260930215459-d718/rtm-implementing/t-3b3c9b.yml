@@ -1,0 +1,36 @@
+task:
+  id: t-3b3c9b
+  title: 会话绑定页对齐原型·研发
+  status: done
+  implements: |-
+    client.js：BindingTable 复用 ChannelIcon 渲染目标 chips；悬空引用（目标已删）标红并加「（目标已删除）」后缀；行尾 hint 与空态文案对齐 frontend.md 第 6 节；解绑二次确认保留。验证：界面人工核对（prototype.html 帧 3）+ client-service 断言。
+
+    [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+  serves: []
+  depends_on:
+    - t-a741f2
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-3b3c9b
+    TASK_TITLE: 会话绑定页对齐原型·研发
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:58:26.078Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:58:25.988Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T14:58:26.144Z

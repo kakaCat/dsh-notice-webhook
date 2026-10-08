@@ -1,0 +1,34 @@
+task:
+  id: t-966bd3
+  title: 实现路由层与总开关旁路
+  status: done
+  implements: 新增 src/router.js：第一步应用类型开关（notifyComplete/notifyApproval/notifyQuestion）作内容级过滤，命中窗口绑定也不豁免；第二步解析目标地址——命中窗口绑定则无视 enabled 直接投递；未命中绑定且 enabled=false 时丢弃；未命中绑定且 enabled=true 时用 webhookUrl，为空则丢弃并写一条 debug 日志。
+  serves: []
+  depends_on:
+    - t-ae2996
+    - t-245978
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-966bd3
+    TASK_TITLE: 实现路由层与总开关旁路
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T06:16:55.227Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T06:01:51.878Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T06:16:55.289Z

@@ -1,0 +1,38 @@
+task:
+  id: t-a1fd67
+  title: targets.json v2 与校验收口·复核
+  status: done
+  implements: |-
+    src/targets.js：TARGET_FILE_VERSION 升 2；读写按 v2 结构（targets[] 含 key + 派生 url）；校验失败路径保持“不落盘 + 不改内存”。验证：test/targets.test.js 增 v2 与非法 key 用例。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-f92aad
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-a1fd67
+    TASK_TITLE: targets.json v2 与校验收口·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:27:40.559Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:27:40.412Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T14:27:40.559Z

@@ -1,0 +1,36 @@
+task:
+  id: t-6b15ab
+  title: 口径契约：isHumanSource 纯函数与真值表·复核
+  status: done
+  implements: |-
+    新增 src/source.js：export function isHumanSource(source) —— source 缺失 / source.kind 缺失 / kind === 'user' → true；非对象 / 数组 / 其余 kind（goal、dive、plugin、未来新增）/ 非字符串 kind → false（见 design/interfaces.md §1 真值表，实现即契约）。新增 test/source.test.js 覆盖 TC-1…TC-5（undefined/null、{}、{kind:'user'}、{kind:'goal'|'dive'|'plugin'}、{kind:'brand-new'|42|'user' 非对象|数组}）。本卡不改任何既有文件。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-d75046
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261002150038-344a
+    TASK_ID: t-6b15ab
+    TASK_TITLE: 口径契约：isHumanSource 纯函数与真值表·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-02T07:05:23.352Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261002150038-344a
+  generated_at: 2026-10-02T07:05:17.227Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-02T07:05:23.443Z

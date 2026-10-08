@@ -1,0 +1,38 @@
+task:
+  id: t-c87d1e
+  title: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·复核
+  status: done
+  implements: |-
+    client.js：ConnectionField 按 channelMeta.input 渲染 key 输入框（或 url 输入框）+ [发送测试]；加签字段加「已配置」chip；EventFilterGrid 调序为 turn/end→ask_user_question→approval/asked→goal/*；新增「谁在用」chips（默认组 / 会话 X（绑定），只读）；最近投递行加 ✓/✗ 与状态码分列。验证：test/client-service.test.js 增断言 + 人工照 frontend.md 差距表核对。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-12e33a
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-c87d1e
+    TASK_TITLE: 详情卡字段区：key 输入 / 加签 chip / 事件网格 / 谁在用 / 最近投递·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:51:41.717Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:51:41.549Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T14:51:41.717Z

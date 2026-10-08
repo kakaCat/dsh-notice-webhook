@@ -1,0 +1,171 @@
+metadata:
+  stage: accepting
+  requirement_id: REQ-261005120639-f801
+  generated_at: 2026-10-05T04:42:07.097Z
+  version: 3
+  generated_by: dsh-pmboard
+  last_updated: 2026-10-05T04:42:22.048Z
+inputs:
+  tasks:
+    - id: t-200413
+      title: 判定层：闸门看两路活（job + subagent 后代）
+      status: done
+    - id: t-bde16a
+      title: 接线层：ctx.agents 注入 + subagent/end 复检
+      status: done
+    - id: t-1809aa
+      title: 测试与降级回归（含 2 处既有断言同步）
+      status: done
+    - id: t-d94488
+      title: 文档口径：完成闸门 + 两个新原因码
+      status: done
+    - id: t-2f8316
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」
+      status: done
+    - id: t-776b2f
+      title: 判定层：闸门看两路活（job + subagent 后代）·研发
+      status: done
+    - id: t-fb44a5
+      title: 判定层：闸门看两路活（job + subagent 后代）·复核
+      status: done
+    - id: t-405c41
+      title: 判定层：闸门看两路活（job + subagent 后代）·测试
+      status: done
+    - id: t-65d2a4
+      title: 接线层：ctx.agents 注入 + subagent/end 复检·研发
+      status: done
+    - id: t-99dadb
+      title: 接线层：ctx.agents 注入 + subagent/end 复检·联调
+      status: done
+    - id: t-f66dc8
+      title: 接线层：ctx.agents 注入 + subagent/end 复检·复核
+      status: done
+    - id: t-33adde
+      title: 接线层：ctx.agents 注入 + subagent/end 复检·测试
+      status: done
+    - id: t-23a870
+      title: 测试与降级回归（含 2 处既有断言同步）·研发
+      status: done
+    - id: t-23d4c6
+      title: 测试与降级回归（含 2 处既有断言同步）·复核
+      status: done
+    - id: t-30dd89
+      title: 测试与降级回归（含 2 处既有断言同步）·测试
+      status: done
+    - id: t-07352e
+      title: 文档口径：完成闸门 + 两个新原因码·研发
+      status: done
+    - id: t-9c31b2
+      title: 文档口径：完成闸门 + 两个新原因码·复核
+      status: done
+    - id: t-378503
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」·研发
+      status: done
+    - id: t-e65db0
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」·复核
+      status: done
+    - id: t-35a9ea
+      title: 端到端联调：真 HTTP 接收端跑「抑制 → 复检 → 补发」·测试
+      status: done
+outputs:
+  test_cases:
+    - id: TC-1
+      title: 6. 覆盖标注（本报告覆盖的任务卡）
+      covers:
+        - t-200413
+        - t-776b2f
+        - t-fb44a5
+        - t-405c41
+        - t-1809aa
+        - t-23a870
+        - t-23d4c6
+        - t-30dd89
+        - t-d94488
+        - t-07352e
+        - t-9c31b2
+      validates: []
+      source: tests/compat-report.md
+    - id: TC-2
+      title: 5. 覆盖标注（本报告覆盖的任务卡）
+      covers:
+        - t-bde16a
+        - t-65d2a4
+        - t-99dadb
+        - t-f66dc8
+        - t-33adde
+        - t-2f8316
+        - t-378503
+        - t-e65db0
+        - t-35a9ea
+      validates: []
+      source: tests/e2e-report.md
+traceability:
+  task_to_tests:
+    t-200413:
+      - TC-1
+    t-bde16a:
+      - TC-2
+    t-1809aa:
+      - TC-1
+    t-d94488:
+      - TC-1
+    t-2f8316:
+      - TC-2
+    t-776b2f:
+      - TC-1
+    t-fb44a5:
+      - TC-1
+    t-405c41:
+      - TC-1
+    t-65d2a4:
+      - TC-2
+    t-99dadb:
+      - TC-2
+    t-f66dc8:
+      - TC-2
+    t-33adde:
+      - TC-2
+    t-23a870:
+      - TC-1
+    t-23d4c6:
+      - TC-1
+    t-30dd89:
+      - TC-1
+    t-07352e:
+      - TC-1
+    t-9c31b2:
+      - TC-1
+    t-378503:
+      - TC-2
+    t-e65db0:
+      - TC-2
+    t-35a9ea:
+      - TC-2
+  fr_to_tests:
+    FR-1:
+      - TC-1
+      - TC-2
+    FR-2:
+      - TC-1
+      - TC-2
+    FR-3:
+      - TC-1
+      - TC-2
+    FR-4:
+      - TC-1
+      - TC-2
+    FR-5:
+      - TC-1
+      - TC-2
+    FR-6:
+      - TC-1
+      - TC-2
+coverage:
+  testing:
+    total: 20
+    covered: 20
+    uncovered: []
+    rate: 100
+    total_tasks: 20
+    tested_tasks: 20
+    untested: []

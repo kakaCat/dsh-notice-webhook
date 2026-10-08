@@ -1,0 +1,33 @@
+task:
+  id: t-10999f
+  title: 客户端半：会话绑定页与解绑
+  status: done
+  implements: 在 client.js 实现会话绑定页：表格（会话标题+id 尾串 / 目标 chips / 解绑），悬空引用显示「目标已删除（回落默认组）」+ 清理；解绑二次确认后 POST /bindings/delete；409/404 口径与目标页一致。验证：界面解绑后 e2e 断言回落默认组。
+  serves: []
+  depends_on:
+    - t-cefe17
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-10999f
+    TASK_TITLE: 客户端半：会话绑定页与解绑
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T11:48:35.991Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T11:48:27.872Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T11:53:47.436Z

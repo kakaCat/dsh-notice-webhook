@@ -1,0 +1,197 @@
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:41:04.420Z
+  version: 109
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 36
+  last_updated: 2026-10-01T13:01:32.472Z
+inputs:
+  tasks:
+    - id: t-5e2101
+      title: 分类契约：turn/end 终态决策表（纯函数）
+      status: done
+    - id: t-a36090
+      title: 数据契约：目标事件语义 eventsMode 与事件清单
+      status: done
+    - id: t-413c55
+      title: 接线：开关、类型过滤与静默留痕
+      status: done
+    - id: t-5cbf4c
+      title: 出站报文：中断意图的 reason / error 与事件元数据
+      status: done
+    - id: t-ca1e16
+      title: 前端：设置页「关心事件」与保存语义
+      status: done
+    - id: t-ef4fa8
+      title: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读
+      status: done
+    - id: t-cdd782
+      title: 测试：决策表 / 链路集成 / 迁移三套用例
+      status: done
+    - id: t-691d67
+      title: 文档同步：报文契约、事件分类表、排障原因码
+      status: done
+    - id: t-ce4b1a
+      title: 需求级自检：逐条 FR 对照可跑命令并汇总证据
+      status: done
+    - id: t-0a89bd
+      title: 分类契约：turn/end 终态决策表（纯函数）·研发
+      status: done
+    - id: t-96b6a2
+      title: 分类契约：turn/end 终态决策表（纯函数）·复核
+      status: done
+    - id: t-5249d2
+      title: 分类契约：turn/end 终态决策表（纯函数）·测试
+      status: done
+    - id: t-f5f9e9
+      title: 数据契约：目标事件语义 eventsMode 与事件清单·研发
+      status: done
+    - id: t-4039c3
+      title: 数据契约：目标事件语义 eventsMode 与事件清单·复核
+      status: done
+    - id: t-90073b
+      title: 数据契约：目标事件语义 eventsMode 与事件清单·测试
+      status: done
+    - id: t-a6684d
+      title: 接线：开关、类型过滤与静默留痕·研发
+      status: done
+    - id: t-9bd584
+      title: 接线：开关、类型过滤与静默留痕·联调
+      status: done
+    - id: t-5a02c2
+      title: 接线：开关、类型过滤与静默留痕·复核
+      status: done
+    - id: t-946335
+      title: 接线：开关、类型过滤与静默留痕·测试
+      status: done
+    - id: t-626838
+      title: 出站报文：中断意图的 reason / error 与事件元数据·研发
+      status: done
+    - id: t-e0032e
+      title: 出站报文：中断意图的 reason / error 与事件元数据·复核
+      status: done
+    - id: t-539bd4
+      title: 出站报文：中断意图的 reason / error 与事件元数据·测试
+      status: done
+    - id: t-5d66e3
+      title: 前端：设置页「关心事件」与保存语义·研发
+      status: done
+    - id: t-3b3e5b
+      title: 前端：设置页「关心事件」与保存语义·复核
+      status: done
+    - id: t-5a0f0d
+      title: 前端：设置页「关心事件」与保存语义·测试
+      status: done
+    - id: t-774e6d
+      title: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·研发
+      status: done
+    - id: t-126c83
+      title: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·复核
+      status: done
+    - id: t-13691e
+      title: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·测试
+      status: done
+    - id: t-4a8281
+      title: 测试：决策表 / 链路集成 / 迁移三套用例·研发
+      status: done
+    - id: t-624074
+      title: 测试：决策表 / 链路集成 / 迁移三套用例·复核
+      status: done
+    - id: t-014928
+      title: 测试：决策表 / 链路集成 / 迁移三套用例·测试
+      status: done
+    - id: t-3f1491
+      title: 文档同步：报文契约、事件分类表、排障原因码·研发
+      status: done
+    - id: t-79265a
+      title: 文档同步：报文契约、事件分类表、排障原因码·复核
+      status: done
+    - id: t-577377
+      title: 需求级自检：逐条 FR 对照可跑命令并汇总证据·研发
+      status: done
+    - id: t-2c64b0
+      title: 需求级自检：逐条 FR 对照可跑命令并汇总证据·复核
+      status: done
+    - id: t-d3aa47
+      title: 需求级自检：逐条 FR 对照可跑命令并汇总证据·测试
+      status: done
+status:
+  tasks_total: 36
+  tasks_done: 36
+  tasks_in_progress: 0
+  tasks_todo: 0
+tasks:
+  - id: t-5e2101
+    status: done
+  - id: t-a36090
+    status: done
+  - id: t-413c55
+    status: done
+  - id: t-5cbf4c
+    status: done
+  - id: t-ca1e16
+    status: done
+  - id: t-ef4fa8
+    status: done
+  - id: t-cdd782
+    status: done
+  - id: t-691d67
+    status: done
+  - id: t-ce4b1a
+    status: done
+  - id: t-0a89bd
+    status: done
+  - id: t-96b6a2
+    status: done
+  - id: t-5249d2
+    status: done
+  - id: t-f5f9e9
+    status: done
+  - id: t-4039c3
+    status: done
+  - id: t-90073b
+    status: done
+  - id: t-a6684d
+    status: done
+  - id: t-9bd584
+    status: done
+  - id: t-5a02c2
+    status: done
+  - id: t-946335
+    status: done
+  - id: t-626838
+    status: done
+  - id: t-e0032e
+    status: done
+  - id: t-539bd4
+    status: done
+  - id: t-5d66e3
+    status: done
+  - id: t-3b3e5b
+    status: done
+  - id: t-5a0f0d
+    status: done
+  - id: t-774e6d
+    status: done
+  - id: t-126c83
+    status: done
+  - id: t-13691e
+    status: done
+  - id: t-4a8281
+    status: done
+  - id: t-624074
+    status: done
+  - id: t-014928
+    status: done
+  - id: t-3f1491
+    status: done
+  - id: t-79265a
+    status: done
+  - id: t-577377
+    status: done
+  - id: t-2c64b0
+    status: done
+  - id: t-d3aa47
+    status: done

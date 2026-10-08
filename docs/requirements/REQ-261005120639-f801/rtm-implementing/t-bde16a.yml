@@ -1,0 +1,36 @@
+task:
+  id: t-bde16a
+  title: 接线层：ctx.agents 注入 + subagent/end 复检
+  status: done
+  implements: "index.js：createNotifier 增 options.subagents（单测注入假件，生产由接线层传）；handle() 抑制分支返回 {action:'dropped', reason: verdict.reason, intent, jobIds: verdict.jobIds, subagentIds: verdict.subagentIds}；apply() 增 ctx.inject(['agents'], agentsCtx => agentsCtx.effect(() => runtime.gate.attachSubagents(agentsCtx.agents))) 与 ctx.on('subagent/end', () => { try { runtime.gate.observeSubagentEnd() } catch (error) { logger?.warn?.(...) } })；dispose() 先摘 offSubagentEnd 再 runtime.dispose()。"
+  serves:
+    - FR-1
+    - FR-2
+    - FR-4
+  depends_on:
+    - t-200413
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261005120639-f801
+    TASK_ID: t-bde16a
+    TASK_TITLE: 接线层：ctx.agents 注入 + subagent/end 复检
+    DESIGN_FILES: design/architecture.md
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-05T04:36:32.484Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261005120639-f801
+  generated_at: 2026-10-05T04:34:34.693Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-05T04:36:34.863Z

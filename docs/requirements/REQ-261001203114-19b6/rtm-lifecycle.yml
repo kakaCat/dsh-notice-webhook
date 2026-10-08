@@ -1,0 +1,205 @@
+requirement:
+  id: REQ-261001203114-19b6
+  title: 会话异常中断通知：turn/end 按 reason 分类，error/interrupted 不再谎报完成
+  category: feature
+  created_at: 2026-10-01T12:31:14.904Z
+  source_session: session-7b01a16b-35da-4360-9fc7-cc419417ae5e
+  dir: /Users/mac/Documents/ai/dsh/dsh-notice-webhook/docs/requirements/REQ-261001203114-19b6
+lifecycle:
+  current_stage: accepting
+  stage_count: 7
+  stage_list:
+    - draft
+    - brainstorming
+    - design
+    - decomposing
+    - implementing
+    - accepting
+    - done
+  stages:
+    - stage: draft
+      status: completed
+      enabled: true
+      entered_at: 2026-10-01T12:31:14.904Z
+      completed_at: 2026-10-01T12:31:14.947Z
+    - stage: brainstorming
+      status: completed
+      enabled: true
+      entered_at: 2026-10-01T12:31:14.947Z
+      completed_at: 2026-10-01T12:34:36.783Z
+      artifacts:
+        - kind: requirement
+          path: docs/requirements/REQ-261001203114-19b6/requirement.md
+          confirmed_at: 2026-10-01T12:34:36.783Z
+    - stage: design
+      status: completed
+      enabled: true
+      entered_at: 2026-10-01T12:34:36.783Z
+      completed_at: 2026-10-01T12:39:56.429Z
+      artifacts:
+        - kind: design
+          path: docs/requirements/REQ-261001203114-19b6/design/architecture.md
+          confirmed_at: 2026-10-01T12:39:56.429Z
+        - kind: design
+          path: docs/requirements/REQ-261001203114-19b6/design/backend.md
+          confirmed_at: 2026-10-01T12:39:56.429Z
+        - kind: design
+          path: docs/requirements/REQ-261001203114-19b6/design/data-model.md
+          confirmed_at: 2026-10-01T12:39:56.429Z
+        - kind: design
+          path: docs/requirements/REQ-261001203114-19b6/design/frontend.md
+          confirmed_at: 2026-10-01T12:39:56.429Z
+        - kind: design
+          path: docs/requirements/REQ-261001203114-19b6/design/interfaces.md
+          confirmed_at: 2026-10-01T12:39:56.429Z
+        - kind: design
+          path: docs/requirements/REQ-261001203114-19b6/design/test-cases.md
+          confirmed_at: 2026-10-01T12:39:56.429Z
+        - kind: design
+          path: docs/requirements/REQ-261001203114-19b6/design/use-cases.md
+          confirmed_at: 2026-10-01T12:39:56.429Z
+    - stage: decomposing
+      status: completed
+      enabled: true
+      entered_at: 2026-10-01T12:39:56.429Z
+      completed_at: 2026-10-01T12:41:04.362Z
+      artifacts:
+        - kind: decomposition
+          path: docs/requirements/REQ-261001203114-19b6/decomposition.md
+          confirmed_at: 2026-10-01T12:41:04.362Z
+    - stage: implementing
+      status: completed
+      enabled: true
+      entered_at: 2026-10-01T12:41:04.362Z
+      completed_at: 2026-10-01T13:01:32.416Z
+      artifacts:
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-5e2101.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-a36090.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-413c55.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-5cbf4c.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-ca1e16.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-ef4fa8.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-cdd782.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-691d67.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-ce4b1a.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-0a89bd.md
+        - kind: task_output
+          path: src/classify.js
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-f5f9e9.md
+        - kind: task_output
+          path: src/targets.js
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-96b6a2.md
+        - kind: task_output
+          path: docs/requirements/REQ-261001203114-19b6/design/architecture.md
+        - kind: task_output
+          path: docs/requirements/REQ-261001203114-19b6/design/test-cases.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-4039c3.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-5249d2.md
+        - kind: task_output
+          path: test/classify.test.js
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-90073b.md
+        - kind: task_output
+          path: test/targets-events.test.js
+        - kind: task_output
+          path: src/config.js
+        - kind: task_output
+          path: src/router.js
+        - kind: task_output
+          path: index.js
+        - kind: task_output
+          path: src/channels/custom.js
+        - kind: task_output
+          path: src/payload.js
+        - kind: task_output
+          path: client.js
+        - kind: task_output
+          path: docs/requirements/REQ-261001203114-19b6/tests/compat-report.md
+        - kind: task_output
+          path: test/interrupt.test.js
+        - kind: task_output
+          path: test/config.test.js
+        - kind: task_output
+          path: README.md
+        - kind: task_output
+          path: docs/architecture/notification-plugin.md
+        - kind: task_output
+          path: docs/guides/operations.md
+        - kind: task_output
+          path: docs/requirements/REQ-261001203114-19b6/tests/verification-report.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-a6684d.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-9bd584.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-5a02c2.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-946335.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-626838.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-e0032e.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-539bd4.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-5d66e3.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-3b3e5b.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-5a0f0d.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-774e6d.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-126c83.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-13691e.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-4a8281.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-624074.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-014928.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-3f1491.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-79265a.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-577377.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-2c64b0.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261001203114-19b6/tasks/t-d3aa47.md
+    - stage: accepting
+      status: in_progress
+      enabled: true
+      entered_at: 2026-10-01T13:01:32.416Z
+      artifacts:
+        - kind: verification
+          path: docs/requirements/REQ-261001203114-19b6/verification.md
+          confirmed_at: 2026-10-01T13:02:39.444Z
+    - stage: done
+      status: pending
+      enabled: true
+metadata:
+  stage: lifecycle
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:31:14.990Z
+  version: 11
+  generated_by: dsh-pmboard
+  rtm_version: "1.0"
+  file_path: /Users/mac/Documents/ai/dsh/dsh-notice-webhook/docs/requirements/REQ-261001203114-19b6/rtm-lifecycle.yml
+  last_updated: 2026-10-01T13:02:39.514Z

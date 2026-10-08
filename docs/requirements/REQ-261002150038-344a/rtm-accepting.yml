@@ -1,0 +1,220 @@
+metadata:
+  stage: accepting
+  requirement_id: REQ-261002150038-344a
+  generated_at: 2026-10-02T07:17:24.865Z
+  version: 3
+  generated_by: dsh-pmboard
+  last_updated: 2026-10-02T07:17:37.493Z
+inputs:
+  tasks:
+    - id: t-f48ac7
+      title: 口径契约：isHumanSource 纯函数与真值表
+      status: done
+    - id: t-1d9465
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮
+      status: done
+    - id: t-0f608f
+      title: 「任务」字段：注入正文不再冒充人的要求
+      status: done
+    - id: t-955eca
+      title: 飞书卡片：删掉与标题重复的「类型」行
+      status: done
+    - id: t-dc6479
+      title: 设置页预览：卡片区不再显示「类型」行
+      status: done
+    - id: t-cc2a0c
+      title: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）
+      status: done
+    - id: t-220981
+      title: 口径契约：isHumanSource 纯函数与真值表·研发
+      status: done
+    - id: t-d75046
+      title: 口径契约：isHumanSource 纯函数与真值表·联调
+      status: done
+    - id: t-6b15ab
+      title: 口径契约：isHumanSource 纯函数与真值表·复核
+      status: done
+    - id: t-06742a
+      title: 口径契约：isHumanSource 纯函数与真值表·测试
+      status: done
+    - id: t-2fa8d1
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮·研发
+      status: done
+    - id: t-448271
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮·联调
+      status: done
+    - id: t-002a22
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮·复核
+      status: done
+    - id: t-113155
+      title: 自动轮静默：GoalTracker 认入 dive / plugin 注入轮·测试
+      status: done
+    - id: t-f1e3ee
+      title: 「任务」字段：注入正文不再冒充人的要求·研发
+      status: done
+    - id: t-d126c0
+      title: 「任务」字段：注入正文不再冒充人的要求·联调
+      status: done
+    - id: t-c10757
+      title: 「任务」字段：注入正文不再冒充人的要求·复核
+      status: done
+    - id: t-b02ef3
+      title: 「任务」字段：注入正文不再冒充人的要求·测试
+      status: done
+    - id: t-1e5fa9
+      title: 飞书卡片：删掉与标题重复的「类型」行·研发
+      status: done
+    - id: t-1fb3eb
+      title: 飞书卡片：删掉与标题重复的「类型」行·联调
+      status: done
+    - id: t-7486b9
+      title: 飞书卡片：删掉与标题重复的「类型」行·复核
+      status: done
+    - id: t-01300e
+      title: 飞书卡片：删掉与标题重复的「类型」行·测试
+      status: done
+    - id: t-8ff324
+      title: 设置页预览：卡片区不再显示「类型」行·研发
+      status: done
+    - id: t-98eaa8
+      title: 设置页预览：卡片区不再显示「类型」行·联调
+      status: done
+    - id: t-aeb234
+      title: 设置页预览：卡片区不再显示「类型」行·复核
+      status: done
+    - id: t-723dce
+      title: 设置页预览：卡片区不再显示「类型」行·测试
+      status: done
+    - id: t-b715ff
+      title: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·研发
+      status: done
+    - id: t-e4a547
+      title: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·复核
+      status: done
+    - id: t-d3b450
+      title: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·测试
+      status: done
+outputs:
+  test_cases:
+    - id: TC-1
+      title: 父卡
+      covers:
+        - t-f48ac7
+        - t-1d9465
+        - t-0f608f
+        - t-955eca
+        - t-dc6479
+        - t-render
+        - t-cc2a0c
+      validates: []
+      source: tests/test-evidence.md
+    - id: TC-2
+      title: 子卡
+      covers:
+        - t-220981
+        - t-d75046
+        - t-6b15ab
+        - t-06742a
+        - t-2fa8d1
+        - t-448271
+        - t-002a22
+        - t-113155
+        - t-f1e3ee
+        - t-d126c0
+        - t-c10757
+        - t-b02ef3
+        - t-1e5fa9
+        - t-1fb3eb
+        - t-7486b9
+        - t-01300e
+        - t-8ff324
+        - t-98eaa8
+        - t-aeb234
+        - t-723dce
+        - t-b715ff
+        - t-e4a547
+        - t-d3b450
+      validates: []
+      source: tests/test-evidence.md
+traceability:
+  task_to_tests:
+    t-f48ac7:
+      - TC-1
+    t-1d9465:
+      - TC-1
+    t-0f608f:
+      - TC-1
+    t-955eca:
+      - TC-1
+    t-dc6479:
+      - TC-1
+    t-cc2a0c:
+      - TC-1
+    t-220981:
+      - TC-2
+    t-d75046:
+      - TC-2
+    t-6b15ab:
+      - TC-2
+    t-06742a:
+      - TC-2
+    t-2fa8d1:
+      - TC-2
+    t-448271:
+      - TC-2
+    t-002a22:
+      - TC-2
+    t-113155:
+      - TC-2
+    t-f1e3ee:
+      - TC-2
+    t-d126c0:
+      - TC-2
+    t-c10757:
+      - TC-2
+    t-b02ef3:
+      - TC-2
+    t-1e5fa9:
+      - TC-2
+    t-1fb3eb:
+      - TC-2
+    t-7486b9:
+      - TC-2
+    t-01300e:
+      - TC-2
+    t-8ff324:
+      - TC-2
+    t-98eaa8:
+      - TC-2
+    t-aeb234:
+      - TC-2
+    t-723dce:
+      - TC-2
+    t-b715ff:
+      - TC-2
+    t-e4a547:
+      - TC-2
+    t-d3b450:
+      - TC-2
+    t-render:
+      - TC-1
+  fr_to_tests:
+    FR-1:
+      - TC-1
+    FR-2:
+      - TC-1
+    FR-3:
+      - TC-1
+    FR-4:
+      - TC-1
+    FR-5:
+      - TC-1
+coverage:
+  testing:
+    total: 29
+    covered: 29
+    uncovered: []
+    rate: 100
+    total_tasks: 29
+    tested_tasks: 29
+    untested: []

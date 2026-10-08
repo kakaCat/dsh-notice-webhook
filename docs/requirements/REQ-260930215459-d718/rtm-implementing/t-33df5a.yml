@@ -1,0 +1,35 @@
+task:
+  id: t-33df5a
+  title: RPC 追加 channelMeta / help / key
+  status: done
+  implements: src/rpc.js：buildState 的 targets[] 增 key；新增 channelMeta 投影（由 src/channels/meta.js 取 label/input/keyLabel/secret/help）；POST /targets 接受 key 并优先于 url（不一致时 warn）；错误信息按渠道 keyLabel 定制。验证：扩展 test/rpc.read.test.js 与 test/rpc.write.test.js。
+  serves: []
+  depends_on:
+    - t-c47b93
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-33df5a
+    TASK_TITLE: RPC 追加 channelMeta / help / key
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:37:23.434Z
+    - phase: ui
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:33:06.846Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T14:37:23.435Z

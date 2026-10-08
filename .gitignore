@@ -1,0 +1,13 @@
+# 依赖
+node_modules/
+
+# 本地状态 / 日志
+.dsh/
+*.log
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

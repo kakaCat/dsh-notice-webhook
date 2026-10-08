@@ -1,0 +1,45 @@
+task:
+  id: t-93732c
+  title: 排障口径：drop 原因码 job-running 进运维文档·复核
+  status: done
+  implements: |-
+    docs/guides/operations.md 的 drop 原因码表新增一行 job-running →「本会话仍有本轮拉起、未结算的后台 job（完成通知延后到 job 结算）」；「通知没到：按这个顺序查」表补一条指向该原因码（先看是抑制还是真漏发）。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-ff3619
+  phase: doc
+  side: doc
+  workflow_params:
+    REQ_ID: REQ-261001202058-0fbe
+    TASK_ID: t-93732c
+    TASK_TITLE: 排障口径：drop 原因码 job-running 进运维文档·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: doc
+    PHASE: doc
+  workflow_total: 4
+  workflow_done: 4
+  workflow:
+    - phase: doc
+      status: done
+      completed_at: 2026-10-01T12:39:06.291Z
+    - phase: implement
+      status: done
+      completed_at: 2026-10-01T12:39:08.915Z
+    - phase: test
+      status: done
+      completed_at: 2026-10-01T12:39:08.915Z
+    - phase: commit
+      status: done
+      completed_at: 2026-10-01T12:39:08.915Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001202058-0fbe
+  generated_at: 2026-10-01T12:38:59.061Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 4
+  last_updated: 2026-10-01T12:39:08.915Z

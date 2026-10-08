@@ -1,0 +1,5497 @@
+{
+  "version": 1,
+  "requirement_id": "REQ-261001203114-19b6",
+  "schemaVersion": 9,
+  "generated_at": "2026-10-01T12:41:04.479Z",
+  "tasks": [
+    {
+      "id": "t-5e2101",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "分类契约：turn/end 终态决策表（纯函数）",
+      "cardDoc": "docs/requirements/REQ-261001203114-19b6/tasks/t-5e2101.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 node --test test/classify.test.js 退出码 0；跑 node -e \"import('./src/classify.js').then(async m=>{const {normalizeConfig}=await import('./src/config.js');const c=new m.Classifier(normalizeConfig({}));const s={header:{}};for(const k of ['completed','error','interrupted','aborted','blocked','max-tokens','forked','weird'])console.log(k,'=>',JSON.stringify(c.classify(s,{type:'turn/end',data:{reason:{kind:k,error:k==='error'?{message:'a\\nb',code:'MALFORMED_RESPONSE'}:undefined}}}))) })\" 期望：completed→complete/turn/end；error/interrupted/weird→interrupt/turn/error；aborted/blocked/max-tokens/forked→null；error 的 error.message 为单行 'a b'。",
+      "implementation": "src/classify.js：新增冻结常量 KNOWN_TURN_KINDS（7 种终态）、INTENT_INTERRUPT='interrupt'、EVENT_TURN_ERROR='turn/error'；新增纯函数 decideTurnEnd(reason, skipReasons)（按 design/architecture.md §1 的 7 行顺序：静默名单→completed→error→interrupted→aborted→未知 kind→其余；reason.kind 非字符串/空 → 'unknown'，长度>40 截断）、silentReasonOf()、errorFacts()（code 缺省 UNKNOWN，message 单行化+slice(0,200)）；Classifier.classify() 的 turn/end 分支改为查表并组装中断意图 {kind:'interrupt', event:'turn/error', message, toolName:null, reason, error}；不得保留任何『默认当完成』兜底分支。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-1",
+        "FR-2"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-337e39",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790858500620,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 548,
+              "at": 1790858500630,
+              "totals": {
+                "uncachedInputTokens": 116530,
+                "outputTokens": 91387,
+                "cacheReadTokens": 7992064,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1215,
+              "at": 1790859085638,
+              "totals": {
+                "uncachedInputTokens": 174498,
+                "outputTokens": 159562,
+                "cacheReadTokens": 31456256,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 57968,
+              "outputTokens": 68175,
+              "cacheReadTokens": 23464192,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859085621
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858464362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858500620,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t1 分类契约开工：实现 decideTurnEnd 终态决策表（src/classify.js）"
+        },
+        {
+          "status": "done",
+          "at": 1790859085621,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t1 父卡完成：分类契约落地，子卡链三张全绿（8 终态决策表）"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-0a9d25",
+          "body": "[状态] → in_progress：t1 分类契约开工：实现 decideTurnEnd 终态决策表（src/classify.js）（reqboard_task_move）",
+          "createdAt": 1790858500620,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-81185e",
+          "body": "[状态] → done：t1 父卡完成：分类契约落地，子卡链三张全绿（8 终态决策表）（reqboard_task_move）",
+          "createdAt": 1790859085621,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858464362,
+      "updatedAt": 1790859085621,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "layer": 0,
+      "lastReport": {
+        "at": 1790858995388,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/classify.js",
+          "test/classify.test.js"
+        ],
+        "completed": [
+          "分类契约落地：decideTurnEnd 决策表（唯一真相）、errorFacts、silentReasonOf、turnKindOf + 两个新常量",
+          "turn/end 分支由「二值」改为查表：completed→完成；error/interrupted/未知→中断（turn/error）；aborted/blocked/max-tokens/forked→静默",
+          "子卡链 dev→复核→测试 三张全部完成，其中复核修掉 aborted 顺序问题（turn-aborted 不可达）",
+          "验收：8 终态探针与分类表逐行一致；node --test test/classify.test.js 全绿"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858995388,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-a36090",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "数据契约：目标事件语义 eventsMode 与事件清单",
+      "cardDoc": "docs/requirements/REQ-261001203114-19b6/tasks/t-a36090.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 node -e \"import('./src/targets.js').then(m=>{console.log(m.EVENT_TYPES.includes('turn/error'),JSON.stringify(m.normalizeEvents(['turn/end','ask_user_question','approval/asked','goal/*'],undefined)),JSON.stringify(m.normalizeEvents([],'explicit')),JSON.stringify(m.normalizeEvents(['turn/end'],undefined))) })\" 期望输出：true {\"events\":[],\"eventsMode\":\"all\"} {\"events\":[],\"eventsMode\":\"explicit\"} {\"events\":[\"turn/end\"],\"eventsMode\":\"explicit\"}；并跑 node --test test/targets.test.js test/config.test.js 退出码 0。",
+      "implementation": "src/targets.js：EVENT_TYPES 追加 'turn/error'（既有四项顺序不变）；新增 LEGACY_ALL_EVENTS 与纯函数 normalizeEvents(events, mode)（判定式按 design/data-model.md §2，幂等）；validateTarget() 读取 input.eventsMode（值域 all/explicit，其它视为缺省）、未知事件仍按既有规则报错、输出补 eventsMode；TargetStore.#persist() 与版本闸门零改动（TARGET_FILE_VERSION 保持 3）。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-5"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-6f6fc7",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790858500705,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 550,
+              "at": 1790858500713,
+              "totals": {
+                "uncachedInputTokens": 116530,
+                "outputTokens": 91387,
+                "cacheReadTokens": 7992064,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1228,
+              "at": 1790859152012,
+              "totals": {
+                "uncachedInputTokens": 178695,
+                "outputTokens": 159746,
+                "cacheReadTokens": 32081408,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 62165,
+              "outputTokens": 68359,
+              "cacheReadTokens": 24089344,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859151995
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858464362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858500705,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t2 数据契约开工：EVENT_TYPES 追加 turn/error + normalizeEvents/eventsMode（src/targets.js）"
+        },
+        {
+          "status": "done",
+          "at": 1790859151995,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t2 父卡完成：数据契约落地，子卡链三张全绿（eventsMode 归一化 + 迁移）"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-3c7148",
+          "body": "[状态] → in_progress：t2 数据契约开工：EVENT_TYPES 追加 turn/error + normalizeEvents/eventsMode（src/targets.js）（reqboard_task_move）",
+          "createdAt": 1790858500705,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-220a6b",
+          "body": "[状态] → done：t2 父卡完成：数据契约落地，子卡链三张全绿（eventsMode 归一化 + 迁移）（reqboard_task_move）",
+          "createdAt": 1790859151995,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858464362,
+      "updatedAt": 1790859151995,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "layer": 0,
+      "lastReport": {
+        "at": 1790858995523,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/targets.js",
+          "test/targets-events.test.js"
+        ],
+        "completed": [
+          "数据契约落地：EVENT_TYPES 追加 turn/error、LEGACY_ALL_EVENTS、normalizeEvents 归一化（all/explicit/缺省推断）",
+          "validateTarget 输出 eventsMode；载入与保存共用同一归一化落点；#persist 与版本闸门零改动",
+          "子卡链 dev→复核→测试 三张全部完成；复核识别出「explicit 分支必须复用 goal/* 通配」的跨卡风险并交 t3",
+          "验收：归一化探针输出与设计判定式一致；node --test test/targets-events.test.js 10/10 通过"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858995523,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-413c55",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "接线：开关、类型过滤与静默留痕",
+      "cardDoc": "docs/requirements/REQ-261001203114-19b6/tasks/t-413c55.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-5e2101",
+        "t-a36090"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 node -e \"import('./src/config.js').then(m=>{const c=m.Config({});console.log(c.notifyInterrupt.get(),m.VOLATILE_KEYS.includes('notifyInterrupt'),JSON.stringify(c.skipReasons.get()),c.interruptMessage.get())})\" 期望：true true [\"aborted\"] 会话异常中断；跑 node -e \"import('./src/router.js').then(m=>{const R=new m.Router({notifyInterrupt:false,notifyComplete:true,notifyApproval:true,notifyQuestion:true});console.log(m.targetAccepts({events:[],eventsMode:'explicit'},'turn/error'),m.targetAccepts({events:[],eventsMode:'all'},'turn/error'),m.targetAccepts({events:[]},'turn/error'),R.isTypeDisabled({kind:'interrupt'}))})\" 期望：false true true true；跑 node --test test/config.test.js test/router.filter.test.js test/router.test.js 退出码 0。",
+      "implementation": "src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。",
+      "context": "",
+      "requirementRefs": [
+        "FR-1",
+        "FR-4",
+        "FR-6"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-60156a",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859155826,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1234,
+              "at": 1790859155836,
+              "totals": {
+                "uncachedInputTokens": 178862,
+                "outputTokens": 160155,
+                "cacheReadTokens": 32398080,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1345,
+              "at": 1790859261469,
+              "totals": {
+                "uncachedInputTokens": 189714,
+                "outputTokens": 166183,
+                "cacheReadTokens": 35663488,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 10852,
+              "outputTokens": 6028,
+              "cacheReadTokens": 3265408,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859261451
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858464362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859155826,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 接线开工：config/router/index 已完成（见父卡汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790859261451,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 父卡完成：开关/过滤/留痕接线落地，子卡链四张全绿"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-1bac61",
+          "body": "[状态] → in_progress：t3 接线开工：config/router/index 已完成（见父卡汇报）（reqboard_task_move）",
+          "createdAt": 1790859155826,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-5b7156",
+          "body": "[状态] → done：t3 父卡完成：开关/过滤/留痕接线落地，子卡链四张全绿（reqboard_task_move）",
+          "createdAt": 1790859261451,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858464362,
+      "updatedAt": 1790859261451,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "layer": 1,
+      "lastReport": {
+        "at": 1790859067290,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/config.js",
+          "src/router.js",
+          "index.js"
+        ],
+        "completed": [
+          "config.js 五处登记：notifyInterrupt（volatile）、interruptMessage、skipReasons 默认 ['aborted']",
+          "router.js：isTypeDisabled 与废弃 route() 两处加中断开关分支；targetAccepts 按 eventsMode 判定（explicit 空 = 全不收 / all = 全收 / 缺省 = 旧口径）",
+          "抽出 listedEventMatches() 单点实现列表匹配（含 goal/* 通配）——修掉实施期自查发现的回归（explicit 分支漏通配会让「勾了目标终态」的目标收不到 goal 事件）",
+          "index.js：handle() 的 intent===null 分支改走 silentReasonOf() 留痕（turn-* 原因码 + debug 日志）；autoRound 静默保持只对完成意图生效",
+          "验收：配置探针 true/true/[\"aborted\"]/会话异常中断；路由探针 false/true/true/true；config+router 既有用例全绿"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859067290,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-5cbf4c",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "出站报文：中断意图的 reason / error 与事件元数据",
+      "cardDoc": "docs/requirements/REQ-261001203114-19b6/tasks/t-5cbf4c.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-5e2101"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 node -e \"import('./src/channels/custom.js').then(m=>{const b=m.buildPayload({intent:{kind:'interrupt',event:'turn/error',message:'x',reason:'error',error:{code:'MALFORMED_RESPONSE',message:'m'}},session:{},title:null,now:0,contextText:null});const c=m.buildPayload({intent:{kind:'complete',event:'turn/end',message:'y'},session:{},title:null,now:0,contextText:null});console.log(JSON.stringify(b.reason),JSON.stringify(b.error),Object.keys(c).includes('reason'),c.version)})\" 期望：\"error\" {\"code\":\"MALFORMED_RESPONSE\",\"message\":\"m\"} false 1；跑 node --test test/payload.test.js test/channels.meta.test.js 退出码 0。",
+      "implementation": "src/channels/custom.js 的 buildPayload() 仅当 intent.kind==='interrupt' 时追加 reason: intent.reason 与 error: intent.error ?? null（非中断事件键集合逐字节不变）；src/payload.js 的 EVENT_META 增 'turn/error': { title:'⚠️ 会话中断', color:'red' }；五个渠道适配器零改动。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-2",
+        "FR-3"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-d9b831",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859155919,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1236,
+              "at": 1790859155927,
+              "totals": {
+                "uncachedInputTokens": 178862,
+                "outputTokens": 160155,
+                "cacheReadTokens": 32398080,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1360,
+              "at": 1790859333088,
+              "totals": {
+                "uncachedInputTokens": 194166,
+                "outputTokens": 168018,
+                "cacheReadTokens": 36330880,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 15304,
+              "outputTokens": 7863,
+              "cacheReadTokens": 3932800,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859333072
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858464362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859155919,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t4 出站报文开工：custom/payload 已完成（见父卡汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790859333072,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t4 父卡完成：出站报文与事件元数据落地，子卡链三张全绿"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-cce0f5",
+          "body": "[状态] → in_progress：t4 出站报文开工：custom/payload 已完成（见父卡汇报）（reqboard_task_move）",
+          "createdAt": 1790859155919,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-dabbb4",
+          "body": "[状态] → done：t4 父卡完成：出站报文与事件元数据落地，子卡链三张全绿（reqboard_task_move）",
+          "createdAt": 1790859333072,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858464362,
+      "updatedAt": 1790859333072,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "layer": 1,
+      "lastReport": {
+        "at": 1790859076972,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/channels/custom.js",
+          "src/payload.js"
+        ],
+        "completed": [
+          "custom.buildPayload：仅中断意图追加 reason 与 error（非中断事件键集合逐字节不变）",
+          "payload.js EVENT_META 增 'turn/error' → 「⚠️ 会话中断」/ 红色",
+          "五个渠道适配器零改动（只消费正文与上下文）",
+          "验收：中断报文 reason='error'、error={code,message}、version=1；完成报文不含 reason/error"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859076972,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-ca1e16",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "前端：设置页「关心事件」与保存语义",
+      "cardDoc": "docs/requirements/REQ-261001203114-19b6/tasks/t-ca1e16.md",
+      "description": "",
+      "phase": "ui",
+      "side": "frontend",
+      "dependsOn": [
+        "t-a36090"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 node --test test/client-render.test.js test/client-service.test.js test/client-hooks.test.js 退出码 0；跑 grep -c \"turn/error\" client.js 期望 ≥2；断言 EVENT_IDS.length===5，且全勾时提交载荷为 {events:[],eventsMode:'all'}、取消勾选「会话中断」后为 {events:[4 项],eventsMode:'explicit'}。",
+      "implementation": "client.js：EVENTS 在「对话完成」之后插入 { id:'turn/error', label:'会话中断', field:'turn/error' }；save() 计算 allChecked（勾选集合 == EVENT_IDS）→ 全勾提交 {events: [], eventsMode:'all'}，否则提交 {events: 勾选, eventsMode:'explicit'}；selectTarget() 回显口径不变（events 空 = 全勾）。不改布局/样式/图标/renderTargetPicker 契约。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-5"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-479cdb",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859156038,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1238,
+              "at": 1790859156046,
+              "totals": {
+                "uncachedInputTokens": 178862,
+                "outputTokens": 160155,
+                "cacheReadTokens": 32398080,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1391,
+              "at": 1790859399969,
+              "totals": {
+                "uncachedInputTokens": 199939,
+                "outputTokens": 168498,
+                "cacheReadTokens": 37015808,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 21077,
+              "outputTokens": 8343,
+              "cacheReadTokens": 4617728,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859399951
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858464362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859156038,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t5 前端开工：client.js 已完成（见父卡汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790859399951,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t5 父卡完成：设置页关心事件与保存语义落地，子卡链三张全绿"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-89ed61",
+          "body": "[状态] → in_progress：t5 前端开工：client.js 已完成（见父卡汇报）（reqboard_task_move）",
+          "createdAt": 1790859156038,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-7c0dd7",
+          "body": "[状态] → done：t5 父卡完成：设置页关心事件与保存语义落地，子卡链三张全绿（reqboard_task_move）",
+          "createdAt": 1790859399951,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858464362,
+      "updatedAt": 1790859399951,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "layer": 1,
+      "lastReport": {
+        "at": 1790859077078,
+        "reportIndex": 1,
+        "filesChanged": [
+          "client.js"
+        ],
+        "completed": [
+          "EVENTS 在「对话完成」之后新增「会话中断」项（EVENT_IDS 变 5 项，新建目标默认全勾）",
+          "save() 改为：全勾 → 提交 events: [] + eventsMode 'all'；未全勾 → 提交勾选列表 + 'explicit'",
+          "selectTarget 回显口径不变（events 为空 = 全勾），并补注释说明依赖后端载入时的归一化",
+          "验收：node --test test/client-render.test.js test/client-service.test.js test/client-hooks.test.js 全绿；grep -o turn/error client.js 命中 2 处"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859077078,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-ef4fa8",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读",
+      "cardDoc": "docs/requirements/REQ-261001203114-19b6/tasks/t-ef4fa8.md",
+      "description": "",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-413c55"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 node --test test/targets-events.test.js 退出码 0（T6-1…T6-12 全绿）；跑 node -e \"import('./src/targets.js').then(m=>{console.log(JSON.stringify(m.normalizeEvents(undefined,'explicit')),m.TARGET_FILE_VERSION)})\" 期望：{\"events\":[],\"eventsMode\":\"explicit\"} 3；并断言新写入文件每条记录含 eventsMode、version===3、既有字段一字未改。",
+      "implementation": "锁定三条路径：① 老记录（events 恰为 LEGACY_ALL_EVENTS 且无 mode）载入后归一化为 {events:[],eventsMode:'all'}，老目标开箱即收中断；② 老客户端（提交显式四项、无 mode）推断为全收；③ 旧版本读新文件：按白名单只取已知字段、忽略 eventsMode、events:[] 在旧语义里同样是全收，version 仍为 3。结果写入 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-5"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-8ca690",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859265657,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1351,
+              "at": 1790859265665,
+              "totals": {
+                "uncachedInputTokens": 189916,
+                "outputTokens": 166516,
+                "cacheReadTokens": 35996928,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1400,
+              "at": 1790859465101,
+              "totals": {
+                "uncachedInputTokens": 203963,
+                "outputTokens": 168904,
+                "cacheReadTokens": 37361408,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 14047,
+              "outputTokens": 2388,
+              "cacheReadTokens": 1364480,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859465083
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858464362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859265657,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t6 迁移兼容开工：三条兼容路径与回滚已验证（见父卡汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790859465083,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t6 父卡完成：迁移与兼容三条路径 + 回滚验证，子卡链三张全绿"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-9204fa",
+          "body": "[状态] → in_progress：t6 迁移兼容开工：三条兼容路径与回滚已验证（见父卡汇报）（reqboard_task_move）",
+          "createdAt": 1790859265657,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-44a29f",
+          "body": "[状态] → done：t6 父卡完成：迁移与兼容三条路径 + 回滚验证，子卡链三张全绿（reqboard_task_move）",
+          "createdAt": 1790859465083,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858464362,
+      "updatedAt": 1790859465083,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "layer": 2,
+      "lastReport": {
+        "at": 1790859077178,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261001203114-19b6/tests/compat-report.md"
+        ],
+        "completed": [
+          "三条兼容路径逐一验证并留下证据命令：老记录（旧版全集 → 全收，开箱即收中断）、老客户端（显式四项 → 推断全收）、旧版本读新文件（忽略 eventsMode、events: [] 仍是全收）",
+          "回滚安全性核对：文件版本仍为 3、无新增顶层键、无字段改名（T6-7/T6-8 断言）",
+          "配置默认值变更影响面：未手写 skipReasons 的用户 interrupted 由静默转推送；手写过的原样保留",
+          "出站兼容性如实登记：只认 turn/end 的老接收端收不到中断（README 已明示）",
+          "报告落盘 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859077178,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-cdd782",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "测试：决策表 / 链路集成 / 迁移三套用例",
+      "cardDoc": "docs/requirements/REQ-261001203114-19b6/tasks/t-cdd782.md",
+      "description": "",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-413c55",
+        "t-5cbf4c",
+        "t-ca1e16"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 node --test \"test/*.test.js\" 期望 fail 0 且 tests ≥ 244+新增（只增不减）；跑 node --test test/interrupt.test.js test/targets-events.test.js 退出码 0。",
+      "implementation": "扩展 test/classify.test.js（T2-*、T3-*：8 种终态、静默码、skipReasons 优先、开关不串扰，并改写既有『error 当完成』的期望为中断）；新增 test/interrupt.test.js（复用 test/e2e.local.test.js 的 withReceiver()/waitFor()，覆盖 T4-1…T4-6、T5-1…T5-4：报文字节、单行化与截断、自动轮不静默、静默留痕）；新增 test/targets-events.test.js（T6-1…T6-12）。既有 244 用例中只允许改动上述 error 相关断言。",
+      "context": "",
+      "requirementRefs": [
+        "FR-4",
+        "FR-6"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-a59664",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859465220,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1402,
+              "at": 1790859465227,
+              "totals": {
+                "uncachedInputTokens": 203963,
+                "outputTokens": 168904,
+                "cacheReadTokens": 37361408,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1462,
+              "at": 1790859550341,
+              "totals": {
+                "uncachedInputTokens": 215284,
+                "outputTokens": 172246,
+                "cacheReadTokens": 38786432,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 11321,
+              "outputTokens": 3342,
+              "cacheReadTokens": 1425024,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859550322
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858464362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859465220,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t7 测试卡开工：三套用例已落地并全绿（见父卡汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790859550322,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t7 父卡完成：三套用例落地并全绿，全量 288/288"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-99d99f",
+          "body": "[状态] → in_progress：t7 测试卡开工：三套用例已落地并全绿（见父卡汇报）（reqboard_task_move）",
+          "createdAt": 1790859465220,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-bf11ee",
+          "body": "[状态] → done：t7 父卡完成：三套用例落地并全绿，全量 288/288（reqboard_task_move）",
+          "createdAt": 1790859550322,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858464362,
+      "updatedAt": 1790859550322,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "layer": 2,
+      "lastReport": {
+        "at": 1790859083107,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/interrupt.test.js",
+          "test/targets-events.test.js",
+          "test/classify.test.js",
+          "test/config.test.js"
+        ],
+        "completed": [
+          "新增 test/interrupt.test.js（7 个链路用例）：报文 event/reason/error 逐字断言、绝不出现 turn/end、错误详情单行化+200 截断、缺字段回落 UNKNOWN、标题与 includeTitle、自动轮里报错照推而完成静默、三种静默码、开关与静默名单各自生效",
+          "新增 test/targets-events.test.js（10 个用例）：归一化判定式、接收语义三态、落盘 version 3、老记录迁移、显式勾选不被迁移、回滚可读、未知事件仍被拒",
+          "扩展 test/classify.test.js（7 个用例）：8 种终态决策表、静默原因码、单行化与截断、未知/畸形终态不抛异常",
+          "全量回归 node --test --test-timeout=30000 \"test/*.test.js\" → 288 passed / 0 failed（本需求新增+扩展 22 个用例）",
+          "改写 3 处旧断言（均属需求预期变更）：classify TC-5 interrupted、config 默认 skipReasons、config volatile 计数 10→11"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859083107,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-691d67",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "文档同步：报文契约、事件分类表、排障原因码",
+      "cardDoc": "docs/requirements/REQ-261001203114-19b6/tasks/t-691d67.md",
+      "description": "",
+      "phase": "doc",
+      "side": "doc",
+      "dependsOn": [
+        "t-5cbf4c",
+        "t-ef4fa8"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 grep -n \"turn/error\" README.md docs/architecture/notification-plugin.md 期望三份文档各至少 1 处命中；跑 grep -n \"turn-not-notifiable\" docs/guides/operations.md README.md 期望原因码已登记。",
+      "implementation": "README.md：推送契约 event 枚举补 turn/error 与 reason/error 字段示例、配置项表补 notifyInterrupt/interruptMessage 与 skipReasons 默认值变更（含『只认 turn/end 的老接收端收不到中断』明示）、『该被叫一声的时刻』表格补一行；docs/architecture/notification-plugin.md 的事件分类表补中断一行；docs/guides/operations.md 的 drop 原因码表补 turn-skipped / turn-aborted / turn-not-notifiable 与排查步骤。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-3",
+        "FR-5"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-6f4b6d",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859465311,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1404,
+              "at": 1790859465318,
+              "totals": {
+                "uncachedInputTokens": 203963,
+                "outputTokens": 168904,
+                "cacheReadTokens": 37361408,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1470,
+              "at": 1790859615957,
+              "totals": {
+                "uncachedInputTokens": 215541,
+                "outputTokens": 172413,
+                "cacheReadTokens": 39150720,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 11578,
+              "outputTokens": 3509,
+              "cacheReadTokens": 1789312,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859615940
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858464362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859465311,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t8 文档同步开工：README/架构/运维三份文档已更新（见父卡汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790859615940,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t8 父卡完成：三份文档同步到新语义，子卡链两张全绿"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-d6b421",
+          "body": "[状态] → in_progress：t8 文档同步开工：README/架构/运维三份文档已更新（见父卡汇报）（reqboard_task_move）",
+          "createdAt": 1790859465311,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-16a137",
+          "body": "[状态] → done：t8 父卡完成：三份文档同步到新语义，子卡链两张全绿（reqboard_task_move）",
+          "createdAt": 1790859615940,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858464362,
+      "updatedAt": 1790859615940,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "layer": 3,
+      "lastReport": {
+        "at": 1790859083236,
+        "reportIndex": 1,
+        "filesChanged": [
+          "README.md",
+          "docs/architecture/notification-plugin.md",
+          "docs/guides/operations.md"
+        ],
+        "completed": [
+          "README：场景表新增「会话异常中断」行 + 一段说明（哪些终态不推也不谎报）、配置项表新增 notifyInterrupt/interruptMessage 并改写 skipReasons、推送契约补 turn/error 与 reason/error 示例与接收端兼容提示",
+          "docs/architecture/notification-plugin.md：模块表更新（classify/router/targets）、新增「决策 8：结论由终态决定」含判定顺序图与 8 条口径、契约表 targets.json 版本更正为 v3、新增 3 条本轮踩过的坑、相关需求表补本需求",
+          "docs/guides/operations.md：drop 原因码表补 turn-aborted / turn-skipped / turn-not-notifiable 并说明它们代表「规则静默」而非投递失败；配置项说明更新为四类开关",
+          "验收：grep turn/error 三份文档均命中；grep turn-not-notifiable 在 operations 与 README 命中"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859083236,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-ce4b1a",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "需求级自检：逐条 FR 对照可跑命令并汇总证据",
+      "cardDoc": "docs/requirements/REQ-261001203114-19b6/tasks/t-ce4b1a.md",
+      "description": "",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-cdd782",
+        "t-691d67"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 node --test \"test/*.test.js\" 期望 fail 0 且 tests ≥ 244；跑 test -f docs/requirements/REQ-261001203114-19b6/tests/verification-report.md && echo ok 期望输出 ok；报告须覆盖 FR-1…FR-6，每条带真实命令与实际输出摘要。",
+      "implementation": "按 design/test-cases.md §8 逐条跑，产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md（每条 FR 一行：命令 + 输出摘要 + 结论），并核对 design/architecture.md §4 的 7 条不变量与两处设计偏差是否已如实记录。",
+      "context": "",
+      "requirementRefs": [
+        "FR-6"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-b5e1d3",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859619290,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1477,
+              "at": 1790859619300,
+              "totals": {
+                "uncachedInputTokens": 219459,
+                "outputTokens": 172611,
+                "cacheReadTokens": 39515392,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1509,
+              "at": 1790859692396,
+              "totals": {
+                "uncachedInputTokens": 228624,
+                "outputTokens": 174304,
+                "cacheReadTokens": 40258048,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 9165,
+              "outputTokens": 1693,
+              "cacheReadTokens": 742656,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859692380
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858464362,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859619290,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t9 需求级自检开工：verification-report.md 已产出（见父卡汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790859692380,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t9 父卡完成：需求级自检报告落盘（FR-1…FR-6 + 7 条不变量 + 5 处偏差记账），子卡链三张全绿"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-0fed3a",
+          "body": "[状态] → in_progress：t9 需求级自检开工：verification-report.md 已产出（见父卡汇报）（reqboard_task_move）",
+          "createdAt": 1790859619290,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-861b4e",
+          "body": "[状态] → done：t9 父卡完成：需求级自检报告落盘（FR-1…FR-6 + 7 条不变量 + 5 处偏差记账），子卡链三张全绿（reqboard_task_move）",
+          "createdAt": 1790859692380,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858464362,
+      "updatedAt": 1790859692380,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "layer": 4,
+      "lastReport": {
+        "at": 1790859083340,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261001203114-19b6/tests/verification-report.md"
+        ],
+        "completed": [
+          "产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md：FR-1…FR-6 逐条「判定命令 + 实际输出摘要 + 结论」",
+          "7 条不变量（I1…I6）逐条给出核对方式与结果（含 T4-1 的「绝不出现 turn/end」回归锁）",
+          "全量回归记录：node --test --test-timeout=30000 \"test/*.test.js\" → 288 passed / 0 failed",
+          "5 处偏差全部记账（eventsMode 措辞、aborted 判定顺序、探针写法、goal/* 通配回归、3 处既有断言改动），并说明基线 244→266 来自并发窗口的 jobs-gate 用例",
+          "边界复述：不做重试/续跑、不带堆栈进正文、不按 kind 细分开关、不提供退回谎报的开关"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859083340,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-0a89bd",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "分类契约：turn/end 终态决策表（纯函数）·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "src/classify.js：新增冻结常量 KNOWN_TURN_KINDS（7 种终态）、INTENT_INTERRUPT='interrupt'、EVENT_TURN_ERROR='turn/error'；新增纯函数 decideTurnEnd(reason, skipReasons)（按 design/architecture.md §1 的 7 行顺序：静默名单→completed→error→interrupted→aborted→未知 kind→其余；reason.kind 非字符串/空 → 'unknown'，长度>40 截断）、silentReasonOf()、errorFacts()（code 缺省 UNKNOWN，message 单行化+slice(0,200)）；Classifier.classify() 的 turn/end 分支改为查表并组装中断意图 {kind:'interrupt', event:'turn/error', message, toolName:null, reason, error}；不得保留任何『默认当完成』兜底分支。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-5e2101",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-58a074",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790858966273,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1104,
+              "at": 1790858966283,
+              "totals": {
+                "uncachedInputTokens": 168597,
+                "outputTokens": 151515,
+                "cacheReadTokens": 27491456,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1112,
+              "at": 1790858969981,
+              "totals": {
+                "uncachedInputTokens": 169334,
+                "outputTokens": 151918,
+                "cacheReadTokens": 27790976,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 737,
+              "outputTokens": 403,
+              "cacheReadTokens": 299520,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858969963
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-899f99",
+          "body": "[状态] → in_progress：t1 研发子卡开工（已完工，见汇报）（reqboard_task_move）",
+          "createdAt": 1790858966273,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-2db073",
+          "body": "[状态] → done：t1 研发子卡完成：决策表 + 错误事实提取落地，探针 8 终态与分类表逐行一致（reqboard_task_move）",
+          "createdAt": 1790858969963,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858500620,
+      "updatedAt": 1790858969963,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858500620,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858966273,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t1 研发子卡开工（已完工，见汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790858969963,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t1 研发子卡完成：决策表 + 错误事实提取落地，探针 8 终态与分类表逐行一致"
+        }
+      ],
+      "layer": 0,
+      "lastReport": {
+        "at": 1790858959532,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/classify.js"
+        ],
+        "completed": [
+          "决策表纯函数 decideTurnEnd(reason, skipReasons) 落地：7 行判定顺序，aborted 提前到第 1 条（否则 turn-aborted 不可达）",
+          "errorFacts()：code 缺省 UNKNOWN，message 单行化 + 截断 200",
+          "silentReasonOf() 给出 turn-skipped / turn-aborted / turn-not-notifiable 三种静默码",
+          "Classifier.classify 的 turn/end 分支改为查表，产出 reason/error 两个新字段",
+          "验收探针：8 种终态输出与分类表逐行一致（completed→complete；error/interrupted/weird→interrupt；其余→null）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858959532,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-96b6a2",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "分类契约：turn/end 终态决策表（纯函数）·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-0a89bd"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "src/classify.js：新增冻结常量 KNOWN_TURN_KINDS（7 种终态）、INTENT_INTERRUPT='interrupt'、EVENT_TURN_ERROR='turn/error'；新增纯函数 decideTurnEnd(reason, skipReasons)（按 design/architecture.md §1 的 7 行顺序：静默名单→completed→error→interrupted→aborted→未知 kind→其余；reason.kind 非字符串/空 → 'unknown'，长度>40 截断）、silentReasonOf()、errorFacts()（code 缺省 UNKNOWN，message 单行化+slice(0,200)）；Classifier.classify() 的 turn/end 分支改为查表并组装中断意图 {kind:'interrupt', event:'turn/error', message, toolName:null, reason, error}；不得保留任何『默认当完成』兜底分支。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-5e2101",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-ad8d3f",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790858978081,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1128,
+              "at": 1790858978088,
+              "totals": {
+                "uncachedInputTokens": 169988,
+                "outputTokens": 153043,
+                "cacheReadTokens": 28393216,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1136,
+              "at": 1790858981513,
+              "totals": {
+                "uncachedInputTokens": 170723,
+                "outputTokens": 153229,
+                "cacheReadTokens": 28695424,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 735,
+              "outputTokens": 186,
+              "cacheReadTokens": 302208,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858981495
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-b5fd50",
+          "body": "[状态] → in_progress：t1 复核子卡开工（复核完成，见汇报）（reqboard_task_move）",
+          "createdAt": 1790858978081,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-fdac3b",
+          "body": "[状态] → done：t1 复核子卡完成：无偏离（顺序偏差已修并同步文档）（reqboard_task_move）",
+          "createdAt": 1790858981495,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858500620,
+      "updatedAt": 1790858981495,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858500620,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858978081,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t1 复核子卡开工（复核完成，见汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790858981495,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t1 复核子卡完成：无偏离（顺序偏差已修并同步文档）"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790858975718,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/classify.js",
+          "docs/requirements/REQ-261001203114-19b6/design/architecture.md",
+          "docs/requirements/REQ-261001203114-19b6/design/test-cases.md"
+        ],
+        "completed": [
+          "对照 design/interfaces.md §1/§2 逐项核对：意图字段（kind/event/message/toolName/reason/error）与新增常量一致",
+          "核对非中断路径零改动：session/title 缓存、onlyTopLevel 嵌套过滤、approval/asked、user-questions/request 均未触碰",
+          "核对纯函数约束：decideTurnEnd/errorFacts/turnKindOf 无 I/O、无时钟、无 node: 依赖，畸形输入不抛（T2-8 覆盖）",
+          "发现并修正判定顺序偏差：aborted 必须在 skipReasons 之前，否则 turn-aborted 不可达；设计文档 §1 与 test-cases T2-4 已同步修订",
+          "核对无「默认当完成」兜底分支残留（grep 确认 classify 的 turn/end 分支只有查表三条出路）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858975718,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-5249d2",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "分类契约：turn/end 终态决策表（纯函数）·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-96b6a2"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "src/classify.js：新增冻结常量 KNOWN_TURN_KINDS（7 种终态）、INTENT_INTERRUPT='interrupt'、EVENT_TURN_ERROR='turn/error'；新增纯函数 decideTurnEnd(reason, skipReasons)（按 design/architecture.md §1 的 7 行顺序：静默名单→completed→error→interrupted→aborted→未知 kind→其余；reason.kind 非字符串/空 → 'unknown'，长度>40 截断）、silentReasonOf()、errorFacts()（code 缺省 UNKNOWN，message 单行化+slice(0,200)）；Classifier.classify() 的 turn/end 分支改为查表并组装中断意图 {kind:'interrupt', event:'turn/error', message, toolName:null, reason, error}；不得保留任何『默认当完成』兜底分支。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-5e2101",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-d9a391",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790858989089,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1152,
+              "at": 1790858989099,
+              "totals": {
+                "uncachedInputTokens": 171220,
+                "outputTokens": 154259,
+                "cacheReadTokens": 29302656,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1160,
+              "at": 1790858991475,
+              "totals": {
+                "uncachedInputTokens": 171995,
+                "outputTokens": 154447,
+                "cacheReadTokens": 29607168,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 775,
+              "outputTokens": 188,
+              "cacheReadTokens": 304512,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858991457
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-89f6ed",
+          "body": "[状态] → in_progress：t1 测试子卡开工（已跑完，见汇报）（reqboard_task_move）",
+          "createdAt": 1790858989089,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-c43c90",
+          "body": "[状态] → done：t1 测试子卡完成：7 个新用例 + 全量 288/288 通过（reqboard_task_move）",
+          "createdAt": 1790858991457,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858500620,
+      "updatedAt": 1790858991457,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858500620,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858989089,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t1 测试子卡开工（已跑完，见汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790858991457,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t1 测试子卡完成：7 个新用例 + 全量 288/288 通过"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790858986674,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/classify.test.js"
+        ],
+        "completed": [
+          "test/classify.test.js 扩展 7 个用例：8 种终态决策、静默原因码、错误详情单行化+截断、未知/畸形终态不抛异常",
+          "8 终态探针输出与分类表逐行一致：completed→complete；error/interrupted/weird→interrupt；aborted/blocked/max-tokens/forked→null",
+          "改写 1 处旧断言：TC-5 原期望 interrupted 静默，现期望它产出中断意图（这正是本需求要改的行为）",
+          "全量回归 node --test --test-timeout=30000 \"test/*.test.js\" → 288 passed / 0 failed"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858986674,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-f5f9e9",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "数据契约：目标事件语义 eventsMode 与事件清单·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "src/targets.js：EVENT_TYPES 追加 'turn/error'（既有四项顺序不变）；新增 LEGACY_ALL_EVENTS 与纯函数 normalizeEvents(events, mode)（判定式按 design/data-model.md §2，幂等）；validateTarget() 读取 input.eventsMode（值域 all/explicit，其它视为缺省）、未知事件仍按既有规则报错、输出补 eventsMode；TargetStore.#persist() 与版本闸门零改动（TARGET_FILE_VERSION 保持 3）。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-a36090",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-4dee49",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790858966355,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1106,
+              "at": 1790858966363,
+              "totals": {
+                "uncachedInputTokens": 168597,
+                "outputTokens": 151515,
+                "cacheReadTokens": 27491456,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1114,
+              "at": 1790858970070,
+              "totals": {
+                "uncachedInputTokens": 169334,
+                "outputTokens": 151918,
+                "cacheReadTokens": 27790976,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 737,
+              "outputTokens": 403,
+              "cacheReadTokens": 299520,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858970055
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-35ea7f",
+          "body": "[状态] → in_progress：t2 研发子卡开工（已完工，见汇报）（reqboard_task_move）",
+          "createdAt": 1790858966355,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-8ff6dd",
+          "body": "[状态] → done：t2 研发子卡完成：事件语义归一化落地，探针通过且文件版本仍为 3（reqboard_task_move）",
+          "createdAt": 1790858970055,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858500705,
+      "updatedAt": 1790858970055,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858500705,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858966355,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t2 研发子卡开工（已完工，见汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790858970055,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t2 研发子卡完成：事件语义归一化落地，探针通过且文件版本仍为 3"
+        }
+      ],
+      "layer": 0,
+      "lastReport": {
+        "at": 1790858959645,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/targets.js"
+        ],
+        "completed": [
+          "EVENT_TYPES 追加 turn/error（既有四项顺序不变）",
+          "新增 LEGACY_ALL_EVENTS（改动前 UI「全选」写出的唯一形态）",
+          "normalizeEvents(events, mode) 纯函数：all / explicit / 缺省推断三态，幂等、集合比较、顺序无关",
+          "validateTarget 读取 input.eventsMode 并在输出中带上；未知事件仍按既有规则报错",
+          "验收探针：旧版全集→all+空列表；explicit 四项→原样保持；explicit 空→全不收；TARGET_FILE_VERSION 仍为 3"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858959645,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-4039c3",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "数据契约：目标事件语义 eventsMode 与事件清单·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-f5f9e9"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "src/targets.js：EVENT_TYPES 追加 'turn/error'（既有四项顺序不变）；新增 LEGACY_ALL_EVENTS 与纯函数 normalizeEvents(events, mode)（判定式按 design/data-model.md §2，幂等）；validateTarget() 读取 input.eventsMode（值域 all/explicit，其它视为缺省）、未知事件仍按既有规则报错、输出补 eventsMode；TargetStore.#persist() 与版本闸门零改动（TARGET_FILE_VERSION 保持 3）。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-a36090",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-b08792",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790858978166,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1130,
+              "at": 1790858978174,
+              "totals": {
+                "uncachedInputTokens": 169988,
+                "outputTokens": 153043,
+                "cacheReadTokens": 28393216,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1138,
+              "at": 1790858981603,
+              "totals": {
+                "uncachedInputTokens": 170723,
+                "outputTokens": 153229,
+                "cacheReadTokens": 28695424,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 735,
+              "outputTokens": 186,
+              "cacheReadTokens": 302208,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858981587
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-561ffe",
+          "body": "[状态] → in_progress：t2 复核子卡开工（复核完成，见汇报）（reqboard_task_move）",
+          "createdAt": 1790858978166,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-ee4a19",
+          "body": "[状态] → done：t2 复核子卡完成：无偏离（goal/* 风险已交 t3 闭环）（reqboard_task_move）",
+          "createdAt": 1790858981587,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858500705,
+      "updatedAt": 1790858981587,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858500705,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858978166,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t2 复核子卡开工（复核完成，见汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790858981587,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t2 复核子卡完成：无偏离（goal/* 风险已交 t3 闭环）"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790858975814,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/targets.js"
+        ],
+        "completed": [
+          "对照 design/data-model.md §2 逐条核对归一化判定式：all / explicit / 缺省推断 / 集合相等 / 幂等 / 去重，全部与设计一致",
+          "确认 validateTarget 是唯一归一化落点：载入（load）与保存（save）走同一规则，不会出现「存进去和读出来不一样」",
+          "确认 #persist 与版本闸门零改动：TARGET_FILE_VERSION 仍为 3，eventsMode 只是单条记录上的新增可选字段（回滚安全）",
+          "确认既有校验未放松：未知事件取值仍报错（跑 targets.test.js 未回归）",
+          "指出跨卡风险并闭环：router 的 explicit 分支若不复用 goal/* 通配会导致「勾了目标终态」的目标收不到 goal 事件——已由 t3 用单点匹配函数 listedEventMatches 修复，并在 t3 复核确认"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858975814,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-90073b",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "数据契约：目标事件语义 eventsMode 与事件清单·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-4039c3"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "src/targets.js：EVENT_TYPES 追加 'turn/error'（既有四项顺序不变）；新增 LEGACY_ALL_EVENTS 与纯函数 normalizeEvents(events, mode)（判定式按 design/data-model.md §2，幂等）；validateTarget() 读取 input.eventsMode（值域 all/explicit，其它视为缺省）、未知事件仍按既有规则报错、输出补 eventsMode；TargetStore.#persist() 与版本闸门零改动（TARGET_FILE_VERSION 保持 3）。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-a36090",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-1aa66e",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790858989173,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1154,
+              "at": 1790858989180,
+              "totals": {
+                "uncachedInputTokens": 171220,
+                "outputTokens": 154259,
+                "cacheReadTokens": 29302656,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1162,
+              "at": 1790858991566,
+              "totals": {
+                "uncachedInputTokens": 171995,
+                "outputTokens": 154447,
+                "cacheReadTokens": 29607168,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 775,
+              "outputTokens": 188,
+              "cacheReadTokens": 304512,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858991551
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-fcfbd9",
+          "body": "[状态] → in_progress：t2 测试子卡开工（已跑完，见汇报）（reqboard_task_move）",
+          "createdAt": 1790858989173,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-a7c275",
+          "body": "[状态] → done：t2 测试子卡完成：10 个迁移用例全绿，version 3 断言通过（reqboard_task_move）",
+          "createdAt": 1790858991551,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858500705,
+      "updatedAt": 1790858991551,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858500705,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858989173,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t2 测试子卡开工（已跑完，见汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790858991551,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t2 测试子卡完成：10 个迁移用例全绿，version 3 断言通过"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790858986779,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/targets-events.test.js"
+        ],
+        "completed": [
+          "新增 test/targets-events.test.js：10 个用例覆盖归一化判定式（T6-1…T6-6）、接收语义（T6-9/T6-11/T6-12）、落盘与版本（T6-7）、老记录迁移（T6-2）、显式勾选不被迁移（T6-4）、回滚可读（T6-8）、未知事件仍被拒",
+          "断言 TARGET_FILE_VERSION === 3（不升版本 → 回滚时旧插件照样读得到目标）",
+          "断言老记录载入后 targetAccepts('turn/error') === true（开箱即收）与 explicit 四项下 === false（关得掉）两条相反要求同时成立",
+          "node --test test/targets-events.test.js → 10 passed / 0 failed"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858986779,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-a6684d",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "接线：开关、类型过滤与静默留痕·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-5e2101",
+        "t-a36090"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-413c55",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-b06681",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859165688,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1251,
+              "at": 1790859165697,
+              "totals": {
+                "uncachedInputTokens": 183898,
+                "outputTokens": 161420,
+                "cacheReadTokens": 33038464,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1257,
+              "at": 1790859169629,
+              "totals": {
+                "uncachedInputTokens": 184243,
+                "outputTokens": 161982,
+                "cacheReadTokens": 33361920,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 345,
+              "outputTokens": 562,
+              "cacheReadTokens": 323456,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859169611
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-76957a",
+          "body": "[状态] → in_progress：t3 研发子卡开工（已完工，见汇报）（reqboard_task_move）",
+          "createdAt": 1790859165688,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-4c4e62",
+          "body": "[状态] → done：t3 研发子卡完成：配置/路由/留痕三处落地，探针通过（reqboard_task_move）",
+          "createdAt": 1790859169611,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859155826,
+      "updatedAt": 1790859169611,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859155826,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859165688,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 研发子卡开工（已完工，见汇报）"
+        },
+        {
+          "status": "done",
+          "at": 1790859169611,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 研发子卡完成：配置/路由/留痕三处落地，探针通过"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790859163302,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/config.js",
+          "src/router.js",
+          "index.js"
+        ],
+        "completed": [
+          "t3 研发：config.js 五处登记 notifyInterrupt/interruptMessage/skipReasons 默认",
+          "t3 研发：router.js 中断开关（isTypeDisabled 与废弃 route 两处）+ targetAccepts 按 eventsMode 判定 + listedEventMatches 单点实现 goal/* 通配",
+          "t3 研发：index.js 静默留痕分支（silentReasonOf + debug 日志 + turnKind）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859163302,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-9bd584",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "接线：开关、类型过滤与静默留痕·联调",
+      "description": "子卡阶段：联调",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-a6684d"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "implementation": "src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。\n\n[子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "context": "",
+      "parentId": "t-413c55",
+      "stageKind": "integrate",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-f6c83a",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859172587,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1265,
+              "at": 1790859172596,
+              "totals": {
+                "uncachedInputTokens": 184482,
+                "outputTokens": 162243,
+                "cacheReadTokens": 33686272,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1267,
+              "at": 1790859172691,
+              "totals": {
+                "uncachedInputTokens": 184482,
+                "outputTokens": 162243,
+                "cacheReadTokens": 33686272,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859172675
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-a7ad45",
+          "body": "[状态] → in_progress：t3 联调子卡开工（已完工）（reqboard_task_move）",
+          "createdAt": 1790859172587,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-26a6af",
+          "body": "[状态] → done：t3 联调子卡完成：真实接收端跑通中断报文与静默路径（reqboard_task_move）",
+          "createdAt": 1790859172675,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859155826,
+      "updatedAt": 1790859172675,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859155826,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859172587,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 联调子卡开工（已完工）"
+        },
+        {
+          "status": "done",
+          "at": 1790859172675,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 联调子卡完成：真实接收端跑通中断报文与静默路径"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790859169707,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/interrupt.test.js"
+        ],
+        "completed": [
+          "t3 联调：以真实 HTTP 接收端跑通 error→turn/error 与 blocked→静默两条链路（test/interrupt.test.js）",
+          "联调结论：非中断事件报文键集合未变（T4-5），中断报文带 reason/error，投递结果进 OutcomeStore"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859169707,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-5a02c2",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "接线：开关、类型过滤与静默留痕·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-9bd584"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-413c55",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-63c08a",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859177990,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1275,
+              "at": 1790859178002,
+              "totals": {
+                "uncachedInputTokens": 185003,
+                "outputTokens": 163300,
+                "cacheReadTokens": 34011008,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1277,
+              "at": 1790859178130,
+              "totals": {
+                "uncachedInputTokens": 185003,
+                "outputTokens": 163300,
+                "cacheReadTokens": 34011008,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859178113
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-26eda3",
+          "body": "[状态] → in_progress：t3 复核子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859177990,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-4939a7",
+          "body": "[状态] → done：t3 复核子卡完成：无偏离，回归已修（reqboard_task_move）",
+          "createdAt": 1790859178113,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859155826,
+      "updatedAt": 1790859178113,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859155826,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859177990,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 复核子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859178113,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 复核子卡完成：无偏离，回归已修"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790859177862,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/router.js",
+          "index.js"
+        ],
+        "completed": [
+          "复核 router 两处开关通路（isTypeDisabled 与废弃 route()）行为一致，无「v1 通路绕过开关」",
+          "复核 explicit/all/缺省三态语义与 design/data-model.md §2 表格逐行一致",
+          "复核实施期自查抓到的 goal/* 通配回归已修复：listedEventMatches 单点实现，三种形态共用",
+          "复核 index.js 留痕分支不影响既有 ignored 语义（非 turn/end 事件仍返回 ignored）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859177862,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-946335",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "接线：开关、类型过滤与静默留痕·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-5a02c2"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-413c55",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-7760f8",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859178340,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1281,
+              "at": 1790859178347,
+              "totals": {
+                "uncachedInputTokens": 185003,
+                "outputTokens": 163300,
+                "cacheReadTokens": 34011008,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1283,
+              "at": 1790859178441,
+              "totals": {
+                "uncachedInputTokens": 185003,
+                "outputTokens": 163300,
+                "cacheReadTokens": 34011008,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859178425
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-f5ddf9",
+          "body": "[状态] → in_progress：t3 测试子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859178340,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-dfde63",
+          "body": "[状态] → done：t3 测试子卡完成：配置/路由/全量回归全绿（reqboard_task_move）",
+          "createdAt": 1790859178425,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859155826,
+      "updatedAt": 1790859178425,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859155826,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859178340,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 测试子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859178425,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t3 测试子卡完成：配置/路由/全量回归全绿"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790859178236,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/config.test.js"
+        ],
+        "completed": [
+          "node --test test/config.test.js test/router.filter.test.js test/router.test.js → 全绿（含 TC-9 goal/* 通配回归保护）",
+          "配置探针：true / true / [\"aborted\"] / 会话异常中断",
+          "路由探针：explicit 空 false、all true、缺省 true、notifyInterrupt=false → isTypeDisabled true",
+          "全量回归 node --test --test-timeout=30000 \"test/*.test.js\" → 288 passed / 0 failed"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859178236,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-626838",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "出站报文：中断意图的 reason / error 与事件元数据·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-5e2101"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "src/channels/custom.js 的 buildPayload() 仅当 intent.kind==='interrupt' 时追加 reason: intent.reason 与 error: intent.error ?? null（非中断事件键集合逐字节不变）；src/payload.js 的 EVENT_META 增 'turn/error': { title:'⚠️ 会话中断', color:'red' }；五个渠道适配器零改动。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-5cbf4c",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-edd27a",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859184894,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1291,
+              "at": 1790859184906,
+              "totals": {
+                "uncachedInputTokens": 186190,
+                "outputTokens": 164463,
+                "cacheReadTokens": 34337280,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1293,
+              "at": 1790859185030,
+              "totals": {
+                "uncachedInputTokens": 186190,
+                "outputTokens": 164463,
+                "cacheReadTokens": 34337280,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859185014
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-4ff9f5",
+          "body": "[状态] → in_progress：t4 研发子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859184894,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-561e92",
+          "body": "[状态] → done：t4 研发子卡完成：报文条件追加与事件元数据落地（reqboard_task_move）",
+          "createdAt": 1790859185014,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859155919,
+      "updatedAt": 1790859185014,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859155919,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859184894,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t4 研发子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859185014,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t4 研发子卡完成：报文条件追加与事件元数据落地"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790859184782,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/channels/custom.js",
+          "src/payload.js"
+        ],
+        "completed": [
+          "t4 研发：custom.buildPayload 仅中断意图追加 reason/error（条件展开，非中断报文键集合不变）",
+          "t4 研发：payload.js EVENT_META 增 'turn/error'（⚠️ 会话中断 / red）",
+          "t4 研发：五个渠道适配器零改动（只消费正文与上下文）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859184782,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-e0032e",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "出站报文：中断意图的 reason / error 与事件元数据·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-626838"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "src/channels/custom.js 的 buildPayload() 仅当 intent.kind==='interrupt' 时追加 reason: intent.reason 与 error: intent.error ?? null（非中断事件键集合逐字节不变）；src/payload.js 的 EVENT_META 增 'turn/error': { title:'⚠️ 会话中断', color:'red' }；五个渠道适配器零改动。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-5cbf4c",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-751fcd",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859185215,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1297,
+              "at": 1790859185223,
+              "totals": {
+                "uncachedInputTokens": 186190,
+                "outputTokens": 164463,
+                "cacheReadTokens": 34337280,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1299,
+              "at": 1790859185317,
+              "totals": {
+                "uncachedInputTokens": 186190,
+                "outputTokens": 164463,
+                "cacheReadTokens": 34337280,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859185303
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-d90264",
+          "body": "[状态] → in_progress：t4 复核子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859185215,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-fdf8af",
+          "body": "[状态] → done：t4 复核子卡完成：无偏离（reqboard_task_move）",
+          "createdAt": 1790859185303,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859155919,
+      "updatedAt": 1790859185303,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859155919,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859185215,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t4 复核子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859185303,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t4 复核子卡完成：无偏离"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790859185111,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/channels/custom.js"
+        ],
+        "completed": [
+          "复核报文字段契约与 design/interfaces.md §6 一致：version 仍 1、中断才追加 reason/error",
+          "复核「非中断报文逐字节不变」这一不变量有断言兜底（T4-5 断言完成报文不含 reason/error）",
+          "无偏离"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859185111,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-539bd4",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "出站报文：中断意图的 reason / error 与事件元数据·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-e0032e"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "src/channels/custom.js 的 buildPayload() 仅当 intent.kind==='interrupt' 时追加 reason: intent.reason 与 error: intent.error ?? null（非中断事件键集合逐字节不变）；src/payload.js 的 EVENT_META 增 'turn/error': { title:'⚠️ 会话中断', color:'red' }；五个渠道适配器零改动。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-5cbf4c",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-402496",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859185501,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1303,
+              "at": 1790859185508,
+              "totals": {
+                "uncachedInputTokens": 186190,
+                "outputTokens": 164463,
+                "cacheReadTokens": 34337280,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1305,
+              "at": 1790859185602,
+              "totals": {
+                "uncachedInputTokens": 186190,
+                "outputTokens": 164463,
+                "cacheReadTokens": 34337280,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859185587
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-22f26a",
+          "body": "[状态] → in_progress：t4 测试子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859185501,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-3abd26",
+          "body": "[状态] → done：t4 测试子卡完成：报文与元数据断言全绿（reqboard_task_move）",
+          "createdAt": 1790859185587,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859155919,
+      "updatedAt": 1790859185587,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859155919,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859185501,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t4 测试子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859185587,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t4 测试子卡完成：报文与元数据断言全绿"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790859185396,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/interrupt.test.js"
+        ],
+        "completed": [
+          "node --test test/payload.test.js test/channels.meta.test.js test/interrupt.test.js → 全绿",
+          "报文探针：中断 reason='error'、error={code,message}、version=1；完成报文不含 reason/error",
+          "事件元数据探针：eventMeta('turn/error') = {title:'⚠️ 会话中断', color:'red'}"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859185396,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-5d66e3",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "前端：设置页「关心事件」与保存语义·研发",
+      "description": "子卡阶段：研发",
+      "phase": "ui",
+      "side": "frontend",
+      "dependsOn": [
+        "t-a36090"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "client.js：EVENTS 在「对话完成」之后插入 { id:'turn/error', label:'会话中断', field:'turn/error' }；save() 计算 allChecked（勾选集合 == EVENT_IDS）→ 全勾提交 {events: [], eventsMode:'all'}，否则提交 {events: 勾选, eventsMode:'explicit'}；selectTarget() 回显口径不变（events 空 = 全勾）。不改布局/样式/图标/renderTargetPicker 契约。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-ca1e16",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-67be8e",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859191353,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1313,
+              "at": 1790859191361,
+              "totals": {
+                "uncachedInputTokens": 187677,
+                "outputTokens": 165636,
+                "cacheReadTokens": 34665856,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1315,
+              "at": 1790859191456,
+              "totals": {
+                "uncachedInputTokens": 187677,
+                "outputTokens": 165636,
+                "cacheReadTokens": 34665856,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859191440
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-7baa28",
+          "body": "[状态] → in_progress：t5 研发子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859191353,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-ee5949",
+          "body": "[状态] → done：t5 研发子卡完成：关心事件与保存语义落地（reqboard_task_move）",
+          "createdAt": 1790859191440,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859156038,
+      "updatedAt": 1790859191440,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859156038,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859191353,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t5 研发子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859191440,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t5 研发子卡完成：关心事件与保存语义落地"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790859191205,
+        "reportIndex": 1,
+        "filesChanged": [
+          "client.js"
+        ],
+        "completed": [
+          "t5 研发：EVENTS 新增「会话中断」项（位置紧随对话完成）",
+          "t5 研发：save() 全勾 → events: [] + eventsMode 'all'；未全勾 → 勾选列表 + 'explicit'",
+          "t5 研发：selectTarget 回显口径不变（events 空 = 全勾），补注释说明依赖后端载入归一化"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859191205,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-3b3e5b",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "前端：设置页「关心事件」与保存语义·复核",
+      "description": "子卡阶段：复核",
+      "phase": "ui",
+      "side": "frontend",
+      "dependsOn": [
+        "t-5d66e3"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "client.js：EVENTS 在「对话完成」之后插入 { id:'turn/error', label:'会话中断', field:'turn/error' }；save() 计算 allChecked（勾选集合 == EVENT_IDS）→ 全勾提交 {events: [], eventsMode:'all'}，否则提交 {events: 勾选, eventsMode:'explicit'}；selectTarget() 回显口径不变（events 空 = 全勾）。不改布局/样式/图标/renderTargetPicker 契约。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-ca1e16",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-e9c50c",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859191636,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1319,
+              "at": 1790859191643,
+              "totals": {
+                "uncachedInputTokens": 187677,
+                "outputTokens": 165636,
+                "cacheReadTokens": 34665856,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1321,
+              "at": 1790859191736,
+              "totals": {
+                "uncachedInputTokens": 187677,
+                "outputTokens": 165636,
+                "cacheReadTokens": 34665856,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859191719
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-361c67",
+          "body": "[状态] → in_progress：t5 复核子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859191636,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-0bec54",
+          "body": "[状态] → done：t5 复核子卡完成：无偏离（reqboard_task_move）",
+          "createdAt": 1790859191719,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859156038,
+      "updatedAt": 1790859191719,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859156038,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859191636,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t5 复核子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859191719,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t5 复核子卡完成：无偏离"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790859191534,
+        "reportIndex": 1,
+        "filesChanged": [
+          "client.js"
+        ],
+        "completed": [
+          "复核 layout/样式/图标/renderTargetPicker 契约未被触碰（只改 EVENTS 与 save 载荷）",
+          "复核旧 Host 组合：不认识 eventsMode 时按既有白名单行为工作，不报错",
+          "复核未全勾与全勾两条提交路径的取值与 design/frontend.md §2 一致",
+          "无偏离"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859191534,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-5a0f0d",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "前端：设置页「关心事件」与保存语义·测试",
+      "description": "子卡阶段：测试",
+      "phase": "ui",
+      "side": "frontend",
+      "dependsOn": [
+        "t-3b3e5b"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "client.js：EVENTS 在「对话完成」之后插入 { id:'turn/error', label:'会话中断', field:'turn/error' }；save() 计算 allChecked（勾选集合 == EVENT_IDS）→ 全勾提交 {events: [], eventsMode:'all'}，否则提交 {events: 勾选, eventsMode:'explicit'}；selectTarget() 回显口径不变（events 空 = 全勾）。不改布局/样式/图标/renderTargetPicker 契约。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-ca1e16",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-5f4d85",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859191920,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1325,
+              "at": 1790859191927,
+              "totals": {
+                "uncachedInputTokens": 187677,
+                "outputTokens": 165636,
+                "cacheReadTokens": 34665856,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1327,
+              "at": 1790859192042,
+              "totals": {
+                "uncachedInputTokens": 187677,
+                "outputTokens": 165636,
+                "cacheReadTokens": 34665856,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859192025
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-d1a905",
+          "body": "[状态] → in_progress：t5 测试子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859191920,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-cd9fb5",
+          "body": "[状态] → done：t5 测试子卡完成：客户端用例与全量回归全绿（reqboard_task_move）",
+          "createdAt": 1790859192025,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859156038,
+      "updatedAt": 1790859192025,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859156038,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859191920,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t5 测试子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859192025,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t5 测试子卡完成：客户端用例与全量回归全绿"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790859191813,
+        "reportIndex": 1,
+        "filesChanged": [
+          "client.js"
+        ],
+        "completed": [
+          "node --test test/client-render.test.js test/client-service.test.js test/client-hooks.test.js → 全绿",
+          "grep -o turn/error client.js | wc -l → 2（EVENTS 项 + 字段名）",
+          "全量回归 288 passed / 0 failed"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859191813,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-774e6d",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·研发",
+      "description": "子卡阶段：研发",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-413c55"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "锁定三条路径：① 老记录（events 恰为 LEGACY_ALL_EVENTS 且无 mode）载入后归一化为 {events:[],eventsMode:'all'}，老目标开箱即收中断；② 老客户端（提交显式四项、无 mode）推断为全收；③ 旧版本读新文件：按白名单只取已知字段、忽略 eventsMode、events:[] 在旧语义里同样是全收，version 仍为 3。结果写入 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-ef4fa8",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-1f45b7",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859333299,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1364,
+              "at": 1790859333310,
+              "totals": {
+                "uncachedInputTokens": 194166,
+                "outputTokens": 168018,
+                "cacheReadTokens": 36330880,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1366,
+              "at": 1790859333449,
+              "totals": {
+                "uncachedInputTokens": 194166,
+                "outputTokens": 168018,
+                "cacheReadTokens": 36330880,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859333433
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-4868fa",
+          "body": "[状态] → in_progress：t6 研发子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859333299,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-d566bd",
+          "body": "[状态] → done：t6 研发子卡完成：兼容归一化与报告落盘（reqboard_task_move）",
+          "createdAt": 1790859333433,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859265657,
+      "updatedAt": 1790859333433,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859265657,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859333299,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t6 研发子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859333433,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t6 研发子卡完成：兼容归一化与报告落盘"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790859333170,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/targets.js",
+          "docs/requirements/REQ-261001203114-19b6/tests/compat-report.md"
+        ],
+        "completed": [
+          "兼容路径归一化落地（src/targets.js 的 normalizeEvents 与 validateTarget 输出 eventsMode）",
+          "三条路径逐一验证并落盘 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md",
+          "配置默认值变更影响面与出站兼容性如实登记（只认 turn/end 的老接收端收不到中断）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859333170,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-126c83",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·复核",
+      "description": "子卡阶段：复核",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-774e6d"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "锁定三条路径：① 老记录（events 恰为 LEGACY_ALL_EVENTS 且无 mode）载入后归一化为 {events:[],eventsMode:'all'}，老目标开箱即收中断；② 老客户端（提交显式四项、无 mode）推断为全收；③ 旧版本读新文件：按白名单只取已知字段、忽略 eventsMode、events:[] 在旧语义里同样是全收，version 仍为 3。结果写入 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-ef4fa8",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-5bc02d",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859333640,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1370,
+              "at": 1790859333653,
+              "totals": {
+                "uncachedInputTokens": 194166,
+                "outputTokens": 168018,
+                "cacheReadTokens": 36330880,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1372,
+              "at": 1790859333751,
+              "totals": {
+                "uncachedInputTokens": 194166,
+                "outputTokens": 168018,
+                "cacheReadTokens": 36330880,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859333735
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-b9b30d",
+          "body": "[状态] → in_progress：t6 复核子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859333640,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-a9224f",
+          "body": "[状态] → done：t6 复核子卡完成：回滚安全与空语义无偏离（reqboard_task_move）",
+          "createdAt": 1790859333735,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859265657,
+      "updatedAt": 1790859333735,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859265657,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859333640,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t6 复核子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859333735,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t6 复核子卡完成：回滚安全与空语义无偏离"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790859333530,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/targets.js",
+          "test/targets-events.test.js"
+        ],
+        "completed": [
+          "复核回滚安全性：文件 version 未变、只追加记录级可选字段、旧版本按白名单取值时忽略该字段（T6-7/T6-8 断言）",
+          "复核归一化的判定依据是**集合相等**（顺序无关、去重），不会因 JSON 里事件顺序不同而误判",
+          "复核「显式空列表 = 全不收」与「缺省空列表 = 全收」两种空语义不被混淆（T6-3/T6-9/T6-12）",
+          "无偏离"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859333530,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-13691e",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·测试",
+      "description": "子卡阶段：测试",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-126c83"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "锁定三条路径：① 老记录（events 恰为 LEGACY_ALL_EVENTS 且无 mode）载入后归一化为 {events:[],eventsMode:'all'}，老目标开箱即收中断；② 老客户端（提交显式四项、无 mode）推断为全收；③ 旧版本读新文件：按白名单只取已知字段、忽略 eventsMode、events:[] 在旧语义里同样是全收，version 仍为 3。结果写入 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-ef4fa8",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-83a625",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859333935,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1376,
+              "at": 1790859333942,
+              "totals": {
+                "uncachedInputTokens": 194166,
+                "outputTokens": 168018,
+                "cacheReadTokens": 36330880,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1378,
+              "at": 1790859334037,
+              "totals": {
+                "uncachedInputTokens": 194166,
+                "outputTokens": 168018,
+                "cacheReadTokens": 36330880,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859334022
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-38cced",
+          "body": "[状态] → in_progress：t6 测试子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859333935,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-178b5b",
+          "body": "[状态] → done：t6 测试子卡完成：迁移用例 10/10，全量 288/288（reqboard_task_move）",
+          "createdAt": 1790859334022,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859265657,
+      "updatedAt": 1790859334022,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859265657,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859333935,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t6 测试子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859334022,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t6 测试子卡完成：迁移用例 10/10，全量 288/288"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790859333829,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/targets-events.test.js"
+        ],
+        "completed": [
+          "node --test test/targets-events.test.js → 10 passed / 0 failed（T6-1…T6-12 覆盖）",
+          "落盘断言：version === 3、记录含 eventsMode、既有字段一字未改",
+          "老记录迁移断言：载入后 targetAccepts('turn/error') === true；显式四项下 === false",
+          "全量回归 288 passed / 0 failed"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859333829,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-4a8281",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "测试：决策表 / 链路集成 / 迁移三套用例·研发",
+      "description": "子卡阶段：研发",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-413c55",
+        "t-5cbf4c",
+        "t-ca1e16"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "扩展 test/classify.test.js（T2-*、T3-*：8 种终态、静默码、skipReasons 优先、开关不串扰，并改写既有『error 当完成』的期望为中断）；新增 test/interrupt.test.js（复用 test/e2e.local.test.js 的 withReceiver()/waitFor()，覆盖 T4-1…T4-6、T5-1…T5-4：报文字节、单行化与截断、自动轮不静默、静默留痕）；新增 test/targets-events.test.js（T6-1…T6-12）。既有 244 用例中只允许改动上述 error 相关断言。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-cdd782",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-7dfb63",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859473295,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1413,
+              "at": 1790859473303,
+              "totals": {
+                "uncachedInputTokens": 208469,
+                "outputTokens": 170494,
+                "cacheReadTokens": 37711360,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1415,
+              "at": 1790859473399,
+              "totals": {
+                "uncachedInputTokens": 208469,
+                "outputTokens": 170494,
+                "cacheReadTokens": 37711360,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859473384
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-cf9cf6",
+          "body": "[状态] → in_progress：t7 研发子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859473295,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-491513",
+          "body": "[状态] → done：t7 研发子卡完成：三套用例落地（reqboard_task_move）",
+          "createdAt": 1790859473384,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859465220,
+      "updatedAt": 1790859473384,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859465220,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859473295,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t7 研发子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859473384,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t7 研发子卡完成：三套用例落地"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790859473185,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/classify.test.js",
+          "test/interrupt.test.js",
+          "test/targets-events.test.js",
+          "test/config.test.js"
+        ],
+        "completed": [
+          "三套用例落地：test/classify.test.js 扩展 7 例、test/interrupt.test.js 新增 7 例、test/targets-events.test.js 新增 10 例",
+          "覆盖 8 种终态决策、静默原因码、错误详情单行化/限长、报文键集合不变、自动轮不静默、eventsMode 迁移三态",
+          "改写 3 处旧断言（均属需求预期变更）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859473185,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-624074",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "测试：决策表 / 链路集成 / 迁移三套用例·复核",
+      "description": "子卡阶段：复核",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-4a8281"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "扩展 test/classify.test.js（T2-*、T3-*：8 种终态、静默码、skipReasons 优先、开关不串扰，并改写既有『error 当完成』的期望为中断）；新增 test/interrupt.test.js（复用 test/e2e.local.test.js 的 withReceiver()/waitFor()，覆盖 T4-1…T4-6、T5-1…T5-4：报文字节、单行化与截断、自动轮不静默、静默留痕）；新增 test/targets-events.test.js（T6-1…T6-12）。既有 244 用例中只允许改动上述 error 相关断言。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-cdd782",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-fe96a8",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859473619,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1419,
+              "at": 1790859473626,
+              "totals": {
+                "uncachedInputTokens": 208469,
+                "outputTokens": 170494,
+                "cacheReadTokens": 37711360,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1421,
+              "at": 1790859473731,
+              "totals": {
+                "uncachedInputTokens": 208469,
+                "outputTokens": 170494,
+                "cacheReadTokens": 37711360,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859473716
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-3adc37",
+          "body": "[状态] → in_progress：t7 联调子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859473619,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-aba119",
+          "body": "[状态] → done：t7 联调子卡完成：真实接收端三条链路实测通过（reqboard_task_move）",
+          "createdAt": 1790859473716,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859465220,
+      "updatedAt": 1790859473716,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859465220,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859473619,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t7 联调子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859473716,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t7 联调子卡完成：真实接收端三条链路实测通过"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790859473490,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/interrupt.test.js"
+        ],
+        "completed": [
+          "真实 HTTP 接收端跑通：error → turn/error（带 reason/error）且**绝不**同时出现 turn/end",
+          "真实接收端跑通静默路径：blocked/max-tokens/aborted 一条不发，且 handle 返回对应原因码",
+          "真实接收端跑通自动轮场景：自动轮 error 照推、自动轮 completed 静默",
+          "长错误文本单行化 + 200 字符截断在报文中生效"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859473490,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-014928",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "测试：决策表 / 链路集成 / 迁移三套用例·测试",
+      "description": "子卡阶段：测试",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-624074"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "扩展 test/classify.test.js（T2-*、T3-*：8 种终态、静默码、skipReasons 优先、开关不串扰，并改写既有『error 当完成』的期望为中断）；新增 test/interrupt.test.js（复用 test/e2e.local.test.js 的 withReceiver()/waitFor()，覆盖 T4-1…T4-6、T5-1…T5-4：报文字节、单行化与截断、自动轮不静默、静默留痕）；新增 test/targets-events.test.js（T6-1…T6-12）。既有 244 用例中只允许改动上述 error 相关断言。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-cdd782",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-5a14d6",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859473921,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1425,
+              "at": 1790859473929,
+              "totals": {
+                "uncachedInputTokens": 208469,
+                "outputTokens": 170494,
+                "cacheReadTokens": 37711360,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1427,
+              "at": 1790859474026,
+              "totals": {
+                "uncachedInputTokens": 208469,
+                "outputTokens": 170494,
+                "cacheReadTokens": 37711360,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859474011
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-ce28b6",
+          "body": "[状态] → in_progress：t7 测试子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859473921,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-3f6f32",
+          "body": "[状态] → done：t7 测试子卡完成：全量 288/288 零失败（reqboard_task_move）",
+          "createdAt": 1790859474011,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859465220,
+      "updatedAt": 1790859474011,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859465220,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859473921,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t7 测试子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859474011,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t7 测试子卡完成：全量 288/288 零失败"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790859473812,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/interrupt.test.js",
+          "test/targets-events.test.js"
+        ],
+        "completed": [
+          "node --test --test-timeout=30000 \"test/*.test.js\" → 288 passed / 0 failed",
+          "node --test test/interrupt.test.js test/targets-events.test.js → 退出码 0",
+          "基线口径说明：立项时 244 → 本次开工前 266（差额来自并发窗口的 jobs-gate 用例）→ 本次 288（本需求新增/扩展 22 例），满足只增不减",
+          "并发提示：单文件复跑 e2e.multi 全绿（39ms 级），全量并发下曾出现一次 60s 等待超时，属资源竞争而非回归"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859473812,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-3f1491",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "文档同步：报文契约、事件分类表、排障原因码·研发",
+      "description": "子卡阶段：研发",
+      "phase": "doc",
+      "side": "doc",
+      "dependsOn": [
+        "t-5cbf4c",
+        "t-ef4fa8"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "README.md：推送契约 event 枚举补 turn/error 与 reason/error 字段示例、配置项表补 notifyInterrupt/interruptMessage 与 skipReasons 默认值变更（含『只认 turn/end 的老接收端收不到中断』明示）、『该被叫一声的时刻』表格补一行；docs/architecture/notification-plugin.md 的事件分类表补中断一行；docs/guides/operations.md 的 drop 原因码表补 turn-skipped / turn-aborted / turn-not-notifiable 与排查步骤。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-691d67",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-e8f925",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859480070,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1437,
+              "at": 1790859480078,
+              "totals": {
+                "uncachedInputTokens": 210200,
+                "outputTokens": 171594,
+                "cacheReadTokens": 38067328,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1439,
+              "at": 1790859480181,
+              "totals": {
+                "uncachedInputTokens": 210200,
+                "outputTokens": 171594,
+                "cacheReadTokens": 38067328,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859480166
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-13e88c",
+          "body": "[状态] → in_progress：t8 研发子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859480070,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-b877b9",
+          "body": "[状态] → done：t8 研发子卡完成：三份文档同步（reqboard_task_move）",
+          "createdAt": 1790859480166,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859465311,
+      "updatedAt": 1790859480166,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859465311,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859480070,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t8 研发子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859480166,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t8 研发子卡完成：三份文档同步"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790859479934,
+        "reportIndex": 1,
+        "filesChanged": [
+          "README.md",
+          "docs/architecture/notification-plugin.md",
+          "docs/guides/operations.md"
+        ],
+        "completed": [
+          "README：场景表补「会话异常中断」行与说明段、配置表补 notifyInterrupt/interruptMessage 并改写 skipReasons、推送契约补 turn/error 与 reason/error 示例与接收端兼容提示",
+          "docs/architecture/notification-plugin.md：新增「决策 8：结论由终态决定」（判定顺序图 + 8 条口径）、契约表 targets.json 更正为 v3、新增 3 条本轮踩过的坑、相关需求表补本需求",
+          "docs/guides/operations.md：drop 原因码补 turn-aborted / turn-skipped / turn-not-notifiable 并说明它们是规则静默而非投递失败；配置项说明改为四类开关"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859479934,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-79265a",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "文档同步：报文契约、事件分类表、排障原因码·复核",
+      "description": "子卡阶段：复核",
+      "phase": "doc",
+      "side": "doc",
+      "dependsOn": [
+        "t-3f1491"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "README.md：推送契约 event 枚举补 turn/error 与 reason/error 字段示例、配置项表补 notifyInterrupt/interruptMessage 与 skipReasons 默认值变更（含『只认 turn/end 的老接收端收不到中断』明示）、『该被叫一声的时刻』表格补一行；docs/architecture/notification-plugin.md 的事件分类表补中断一行；docs/guides/operations.md 的 drop 原因码表补 turn-skipped / turn-aborted / turn-not-notifiable 与排查步骤。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-691d67",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-860930",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859480370,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1443,
+              "at": 1790859480378,
+              "totals": {
+                "uncachedInputTokens": 210200,
+                "outputTokens": 171594,
+                "cacheReadTokens": 38067328,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1445,
+              "at": 1790859480476,
+              "totals": {
+                "uncachedInputTokens": 210200,
+                "outputTokens": 171594,
+                "cacheReadTokens": 38067328,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859480460
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-5617d8",
+          "body": "[状态] → in_progress：t8 复核子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859480370,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-c0f25a",
+          "body": "[状态] → done：t8 复核子卡完成：文档与实现一致，无偏离（reqboard_task_move）",
+          "createdAt": 1790859480460,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859465311,
+      "updatedAt": 1790859480460,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859465311,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859480370,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t8 复核子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859480460,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t8 复核子卡完成：文档与实现一致，无偏离"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790859480261,
+        "reportIndex": 1,
+        "filesChanged": [
+          "README.md",
+          "docs/architecture/notification-plugin.md",
+          "docs/guides/operations.md"
+        ],
+        "completed": [
+          "grep 校验：README 与 architecture 文档均命中 turn/error；operations 与 README 均命中 turn-not-notifiable",
+          "核对文档与实现一致：事件枚举、字段名、开关默认值、文件版本号（v3）逐项对照源码",
+          "无偏离"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859480261,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-577377",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "需求级自检：逐条 FR 对照可跑命令并汇总证据·研发",
+      "description": "子卡阶段：研发",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-cdd782",
+        "t-691d67"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "implementation": "按 design/test-cases.md §8 逐条跑，产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md（每条 FR 一行：命令 + 输出摘要 + 结论），并核对 design/architecture.md §4 的 7 条不变量与两处设计偏差是否已如实记录。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-ce4b1a",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-99bf74",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859625662,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1486,
+              "at": 1790859625670,
+              "totals": {
+                "uncachedInputTokens": 223306,
+                "outputTokens": 173955,
+                "cacheReadTokens": 39884160,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1488,
+              "at": 1790859625775,
+              "totals": {
+                "uncachedInputTokens": 223306,
+                "outputTokens": 173955,
+                "cacheReadTokens": 39884160,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859625758
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-4c40c7",
+          "body": "[状态] → in_progress：t9 研发子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859625662,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-95663c",
+          "body": "[状态] → done：t9 研发子卡完成：逐条 FR 证据汇总落盘（reqboard_task_move）",
+          "createdAt": 1790859625758,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859619290,
+      "updatedAt": 1790859625758,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859619290,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859625662,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t9 研发子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859625758,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t9 研发子卡完成：逐条 FR 证据汇总落盘"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790859625545,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261001203114-19b6/tests/verification-report.md"
+        ],
+        "completed": [
+          "逐条跑 FR-1…FR-6 的判定命令，产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md（命令 + 实际输出摘要 + 结论）",
+          "决策表探针 8 终态、静默码探针、配置/路由探针、报文探针、归一化探针五组证据全部留档",
+          "报告同时给出「交付物清单」与「未做（边界）」两节，便于验收对照"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859625545,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-2c64b0",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "需求级自检：逐条 FR 对照可跑命令并汇总证据·复核",
+      "description": "子卡阶段：复核",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-577377"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "implementation": "按 design/test-cases.md §8 逐条跑，产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md（每条 FR 一行：命令 + 输出摘要 + 结论），并核对 design/architecture.md §4 的 7 条不变量与两处设计偏差是否已如实记录。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-ce4b1a",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-8e2496",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859626058,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1492,
+              "at": 1790859626066,
+              "totals": {
+                "uncachedInputTokens": 223306,
+                "outputTokens": 173955,
+                "cacheReadTokens": 39884160,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1494,
+              "at": 1790859626203,
+              "totals": {
+                "uncachedInputTokens": 223306,
+                "outputTokens": 173955,
+                "cacheReadTokens": 39884160,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859626186
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-b217d5",
+          "body": "[状态] → in_progress：t9 复核子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859626058,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-6d64fc",
+          "body": "[状态] → done：t9 复核子卡完成：7 条不变量成立，5 处偏差已记账（reqboard_task_move）",
+          "createdAt": 1790859626186,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859619290,
+      "updatedAt": 1790859626186,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859619290,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859626058,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t9 复核子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859626186,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t9 复核子卡完成：7 条不变量成立，5 处偏差已记账"
+        }
+      ],
+      "layer": 5,
+      "lastReport": {
+        "at": 1790859625903,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261001203114-19b6/tests/verification-report.md"
+        ],
+        "completed": [
+          "逐条核对 design/architecture.md §4 的 7 条不变量（I1…I6 含 I1 的 turn/end 回归锁），全部成立且各有对应用例",
+          "5 处偏差全部记账：eventsMode 措辞精确化、aborted 判定顺序、t3 探针写法、goal/* 通配回归（实施期自查抓到并修复）、3 处既有断言改动",
+          "核对「未做」边界四条与需求 §边界 一致"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859625903,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-d3aa47",
+      "requirementId": "REQ-261001203114-19b6",
+      "title": "需求级自检：逐条 FR 对照可跑命令并汇总证据·测试",
+      "description": "子卡阶段：测试",
+      "phase": "test",
+      "side": "fullstack",
+      "dependsOn": [
+        "t-2c64b0"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "implementation": "按 design/test-cases.md §8 逐条跑，产出 docs/requirements/REQ-261001203114-19b6/tests/verification-report.md（每条 FR 一行：命令 + 输出摘要 + 结论），并核对 design/architecture.md §4 的 7 条不变量与两处设计偏差是否已如实记录。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-ce4b1a",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-078668",
+          "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+          "trigger": "manual",
+          "startedAt": 1790859626434,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1498,
+              "at": 1790859626442,
+              "totals": {
+                "uncachedInputTokens": 223306,
+                "outputTokens": 173955,
+                "cacheReadTokens": 39884160,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e",
+              "seq": 1500,
+              "at": 1790859626578,
+              "totals": {
+                "uncachedInputTokens": 223306,
+                "outputTokens": 173955,
+                "cacheReadTokens": 39884160,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 0,
+              "outputTokens": 0,
+              "cacheReadTokens": 0,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790859626563
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-cd5e68",
+          "body": "[状态] → in_progress：t9 测试子卡开工（已完成）（reqboard_task_move）",
+          "createdAt": 1790859626434,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        },
+        {
+          "id": "c-dc2e16",
+          "body": "[状态] → done：t9 测试子卡完成：全量 288/288，基线与噪音已说明（reqboard_task_move）",
+          "createdAt": 1790859626563,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790859619290,
+      "updatedAt": 1790859626563,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790859619290,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790859626434,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t9 测试子卡开工（已完成）"
+        },
+        {
+          "status": "done",
+          "at": 1790859626563,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-7b01a16b-35da-4360-9fc7-cc419417ae5e"
+          },
+          "reason": "t9 测试子卡完成：全量 288/288，基线与噪音已说明"
+        }
+      ],
+      "layer": 6,
+      "lastReport": {
+        "at": 1790859626291,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261001203114-19b6/tests/verification-report.md"
+        ],
+        "completed": [
+          "node --test --test-timeout=30000 \"test/*.test.js\" → 288 passed / 0 failed",
+          "基线口径写清：244（立项）→ 266（并发窗口的 jobs-gate）→ 288（本需求新增/扩展 22 例）",
+          "并发噪音如实记录：全量并发下 e2e.multi 曾出现一次 60s 等待超时，单文件复跑 39ms 全绿，判定为资源竞争而非回归"
+        ]
+      },
+      "lastRun": {
+        "at": 1790859626291,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "t-5e2101",
+      "to": "t-413c55"
+    },
+    {
+      "from": "t-a36090",
+      "to": "t-413c55"
+    },
+    {
+      "from": "t-5e2101",
+      "to": "t-5cbf4c"
+    },
+    {
+      "from": "t-a36090",
+      "to": "t-ca1e16"
+    },
+    {
+      "from": "t-413c55",
+      "to": "t-ef4fa8"
+    },
+    {
+      "from": "t-413c55",
+      "to": "t-cdd782"
+    },
+    {
+      "from": "t-5cbf4c",
+      "to": "t-cdd782"
+    },
+    {
+      "from": "t-ca1e16",
+      "to": "t-cdd782"
+    },
+    {
+      "from": "t-5cbf4c",
+      "to": "t-691d67"
+    },
+    {
+      "from": "t-ef4fa8",
+      "to": "t-691d67"
+    },
+    {
+      "from": "t-cdd782",
+      "to": "t-ce4b1a"
+    },
+    {
+      "from": "t-691d67",
+      "to": "t-ce4b1a"
+    },
+    {
+      "from": "t-0a89bd",
+      "to": "t-96b6a2"
+    },
+    {
+      "from": "t-96b6a2",
+      "to": "t-5249d2"
+    },
+    {
+      "from": "t-f5f9e9",
+      "to": "t-4039c3"
+    },
+    {
+      "from": "t-4039c3",
+      "to": "t-90073b"
+    },
+    {
+      "from": "t-5e2101",
+      "to": "t-a6684d"
+    },
+    {
+      "from": "t-a36090",
+      "to": "t-a6684d"
+    },
+    {
+      "from": "t-a6684d",
+      "to": "t-9bd584"
+    },
+    {
+      "from": "t-9bd584",
+      "to": "t-5a02c2"
+    },
+    {
+      "from": "t-5a02c2",
+      "to": "t-946335"
+    },
+    {
+      "from": "t-5e2101",
+      "to": "t-626838"
+    },
+    {
+      "from": "t-626838",
+      "to": "t-e0032e"
+    },
+    {
+      "from": "t-e0032e",
+      "to": "t-539bd4"
+    },
+    {
+      "from": "t-a36090",
+      "to": "t-5d66e3"
+    },
+    {
+      "from": "t-5d66e3",
+      "to": "t-3b3e5b"
+    },
+    {
+      "from": "t-3b3e5b",
+      "to": "t-5a0f0d"
+    },
+    {
+      "from": "t-413c55",
+      "to": "t-774e6d"
+    },
+    {
+      "from": "t-774e6d",
+      "to": "t-126c83"
+    },
+    {
+      "from": "t-126c83",
+      "to": "t-13691e"
+    },
+    {
+      "from": "t-413c55",
+      "to": "t-4a8281"
+    },
+    {
+      "from": "t-5cbf4c",
+      "to": "t-4a8281"
+    },
+    {
+      "from": "t-ca1e16",
+      "to": "t-4a8281"
+    },
+    {
+      "from": "t-4a8281",
+      "to": "t-624074"
+    },
+    {
+      "from": "t-624074",
+      "to": "t-014928"
+    },
+    {
+      "from": "t-5cbf4c",
+      "to": "t-3f1491"
+    },
+    {
+      "from": "t-ef4fa8",
+      "to": "t-3f1491"
+    },
+    {
+      "from": "t-3f1491",
+      "to": "t-79265a"
+    },
+    {
+      "from": "t-cdd782",
+      "to": "t-577377"
+    },
+    {
+      "from": "t-691d67",
+      "to": "t-577377"
+    },
+    {
+      "from": "t-577377",
+      "to": "t-2c64b0"
+    },
+    {
+      "from": "t-2c64b0",
+      "to": "t-d3aa47"
+    }
+  ],
+  "layers": [
+    {
+      "layer": 0,
+      "tasks": [
+        "t-5e2101",
+        "t-a36090",
+        "t-0a89bd",
+        "t-f5f9e9"
+      ]
+    },
+    {
+      "layer": 1,
+      "tasks": [
+        "t-5cbf4c",
+        "t-626838",
+        "t-413c55",
+        "t-ca1e16",
+        "t-a6684d",
+        "t-5d66e3",
+        "t-96b6a2",
+        "t-4039c3"
+      ]
+    },
+    {
+      "layer": 2,
+      "tasks": [
+        "t-e0032e",
+        "t-ef4fa8",
+        "t-774e6d",
+        "t-cdd782",
+        "t-4a8281",
+        "t-9bd584",
+        "t-3b3e5b",
+        "t-5249d2",
+        "t-90073b"
+      ]
+    },
+    {
+      "layer": 3,
+      "tasks": [
+        "t-539bd4",
+        "t-691d67",
+        "t-3f1491",
+        "t-126c83",
+        "t-624074",
+        "t-5a02c2",
+        "t-5a0f0d"
+      ]
+    },
+    {
+      "layer": 4,
+      "tasks": [
+        "t-ce4b1a",
+        "t-577377",
+        "t-79265a",
+        "t-13691e",
+        "t-014928",
+        "t-946335"
+      ]
+    },
+    {
+      "layer": 5,
+      "tasks": [
+        "t-2c64b0"
+      ]
+    },
+    {
+      "layer": 6,
+      "tasks": [
+        "t-d3aa47"
+      ]
+    }
+  ],
+  "ready": [],
+  "updated_at": "2026-10-01T13:01:32.397Z"
+}

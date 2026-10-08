@@ -1,0 +1,39 @@
+task:
+  id: t-565295
+  title: 装载到 profile 并做真实 Host 验收·复核
+  status: done
+  implements: |-
+    用 plugin_manager install_bundle 安装本包；确认真实 Host 中服务与客户端半均生效（插槽占用者出现 dsh-notice-webhook）；用本地接收端验证多目标投递与解绑回落。验证：list_plugins + 设置页截图 + 接收端日志。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-be5e03
+  phase: test
+  side: fullstack
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-565295
+    TASK_TITLE: 装载到 profile 并做真实 Host 验收·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: fullstack
+    PHASE: test
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: test
+      status: done
+      started_at: 2026-09-30T12:04:59.791Z
+      completed_at: 2026-09-30T12:04:59.889Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T12:01:43.075Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T12:04:59.889Z

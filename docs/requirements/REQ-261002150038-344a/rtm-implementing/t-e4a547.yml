@@ -1,0 +1,36 @@
+task:
+  id: t-e4a547
+  title: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·复核
+  status: done
+  implements: |-
+    test/e2e.local.test.js 复用既有 withReceiver() + createNotifier()：TC-24 dive 注入 + turn/end(completed) → received.length === 0；TC-25 紧接着 user 消息 + completed → 1 条，msg_type==='interactive'、card.header.title.content==='✅ 对话完成'、JSON.stringify(card) 不含 `**类型**`；TC-26 dive + turn/end(error) → 1 条且标题为 '⚠️ 会话中断'。README.md「为什么需要它」补全为「goal / dive / plugin 注入轮一律静默，只有真人与中断才响」。写 docs/requirements/REQ-261002150038-344a/tests/verification-report.md：基线 288/0 与改动后数字、四条不变量核验（文本渠道用例未改动全绿、无配置键/落盘变更、PAYLOAD_VERSION 仍为 1）、回滚路径（删 src/source.js + 还原 4 处）。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-b715ff
+  phase: test
+  side: fullstack
+  workflow_params:
+    REQ_ID: REQ-261002150038-344a
+    TASK_ID: t-e4a547
+    TASK_TITLE: 端到端、兼容与回归收尾（无数据迁移，验证回滚路径）·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: fullstack
+    PHASE: test
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: test
+      status: done
+      completed_at: 2026-10-02T07:16:19.010Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261002150038-344a
+  generated_at: 2026-10-02T07:16:05.492Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-02T07:16:19.105Z

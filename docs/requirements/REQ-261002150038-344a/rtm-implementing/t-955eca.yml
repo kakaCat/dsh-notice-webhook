@@ -1,0 +1,42 @@
+task:
+  id: t-955eca
+  title: 飞书卡片：删掉与标题重复的「类型」行
+  status: done
+  implements: src/channels/feishu.js：buildCard() 里删掉 `if (typeof context?.title === 'string' && context.title.length > 0) fields.push(cardField('类型', context.title))` 及其注释；其余字段（会话 / 工作区 / 任务 / 详情 / 时间）顺序与 header（title、template）、按钮条件、idTag、无 context 的纯文本回落、buildRequest 加签一律不动。test/channels.feishu.test.js：把 `assert.ok(fields.includes('**类型**'), ...)` 翻转为 `assert.ok(!fields.includes('**类型**'), '卡片标题已给出事件，正文不再重复「类型」')`，并加强断言（fields 顺序为 会话→工作区→任务→时间、header 标题与配色、text_tag 短 id、dsh:// 无按钮、无 context 时仍是 msg_type:'text'）。
+  serves:
+    - FR-4
+  depends_on: []
+  phase: ui
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261002150038-344a
+    TASK_ID: t-955eca
+    TASK_TITLE: 飞书卡片：删掉与标题重复的「类型」行
+    DESIGN_FILES: design/architecture.md
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: ui
+  workflow_total: 4
+  workflow_done: 3
+  workflow:
+    - phase: ui
+      status: skipped
+      skip_reason: backend task, no UI needed
+    - phase: implement
+      status: done
+      completed_at: 2026-10-02T07:11:56.185Z
+    - phase: test
+      status: done
+      completed_at: 2026-10-02T07:11:56.278Z
+    - phase: commit
+      status: done
+      completed_at: 2026-10-02T07:11:56.278Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261002150038-344a
+  generated_at: 2026-10-02T07:10:14.040Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 4
+  last_updated: 2026-10-02T07:11:56.279Z

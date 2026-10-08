@@ -1,0 +1,3653 @@
+{
+  "version": 1,
+  "requirement_id": "REQ-261001202058-0fbe",
+  "schemaVersion": 9,
+  "generated_at": "2026-10-01T12:29:16.804Z",
+  "tasks": [
+    {
+      "id": "t-1c0dc2",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "配置契约：新增 volatile 开关 jobAwareComplete",
+      "cardDoc": "docs/requirements/REQ-261001202058-0fbe/tasks/t-1c0dc2.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 `node --test test/config.test.js` 退出码 0；跑 `node -e \"import('./src/config.js').then(m=>{const c=m.Config({});console.log(c.jobAwareComplete.get(), m.VOLATILE_KEYS.includes('jobAwareComplete'))})\"` 输出恰为 `true true`；normalizeConfig({jobAwareComplete:'yes'}) 返回 true 且 logger 收到 1 条 warn。",
+      "implementation": "src/config.js 四处同进同出：DEFAULTS.jobAwareComplete=true、BOOLEAN_KEYS 增键、Config schema 增 jobAwareComplete: z.boolean().default(true).volatile()、VOLATILE_KEYS 增键；test/config.test.js:35 只把测试标题文案「恰好这 9 个」改成「恰好这 10 个」（该用例断言 schema volatile 集合与 VOLATILE_KEYS 相等，两侧同时新增即通过，零断言改动）；在 test/jobs-gate.test.js 落配置断言（默认值 true、非法值回落 + warn、volatile 集合成员）。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-4"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-ea7dcd",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790857783430,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 524,
+              "at": 1790857783437,
+              "totals": {
+                "uncachedInputTokens": 113772,
+                "outputTokens": 83106,
+                "cacheReadTokens": 6775424,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 721,
+              "at": 1790857897936,
+              "totals": {
+                "uncachedInputTokens": 128332,
+                "outputTokens": 95441,
+                "cacheReadTokens": 12961280,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 14560,
+              "outputTokens": 12335,
+              "cacheReadTokens": 6185856,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790857897921
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857756697,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790857783430,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "开工 t1：新增完成后台 job 判定的总开关（配置契约先行），先改 src/config.js 四处登记，再补配置断言。"
+        },
+        {
+          "status": "done",
+          "at": 1790857897921,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "t1 收尾：3 张子卡（研发/复核/测试）全部 done，父卡验收（test/config.test.js 6/6 + 探针 true true + 新增 3 条用例）已达成。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-64a414",
+          "body": "[状态] → in_progress：开工 t1：新增完成后台 job 判定的总开关（配置契约先行），先改 src/config.js 四处登记，再补配置断言。（reqboard_task_move）",
+          "createdAt": 1790857783430,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-9468e6",
+          "body": "[状态] → done：t1 收尾：3 张子卡（研发/复核/测试）全部 done，父卡验收（test/config.test.js 6/6 + 探针 true true + 新增 3 条用例）已达成。（reqboard_task_move）",
+          "createdAt": 1790857897921,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857756697,
+      "updatedAt": 1790857897921,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "layer": 0,
+      "lastReport": {
+        "at": 1790857821710,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/config.js",
+          "test/config.test.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "src/config.js 四处同进同出登记 jobAwareComplete：DEFAULTS=true、BOOLEAN_KEYS、Config schema（.default(true).volatile()）、VOLATILE_KEYS；并同步了 volatile 字段清单的注释",
+          "test/config.test.js 仅改测试标题文案（恰好这 9 个 → 10 个），零断言改动：该用例比对 schema volatile 集合与 VOLATILE_KEYS 相等，两侧同时新增即通过",
+          "新增 test/jobs-gate.test.js 的配置契约段（TC-17 ×2 + TC-15）：默认 true、非法值回落 + 恰好一条 warn、关掉读得回来",
+          "验收命令实测：node --test test/config.test.js → 6 pass / 0 fail；node -e 探针输出 true true；node --test test/jobs-gate.test.js → 3 pass / 0 fail"
+        ]
+      },
+      "lastRun": {
+        "at": 1790857821710,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-30bbed",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "判定闸门模块 src/jobs.js（纯内存 + 判定层单测）",
+      "cardDoc": "docs/requirements/REQ-261001202058-0fbe/tasks/t-30bbed.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 `node --test test/jobs-gate.test.js` 退出码 0；判定层断言逐条通过：本轮 running job → suppressed:true 且 jobIds 含该 id；startedAt < since（常驻 job）→ suppressed:false；无 turn/start → reason:'no-turn-start'；settle 后推进计时器 → deliver 恰好 1 次；两个 job 需全部 settle 才触发；dispose() 后推进计时器 → 0 次且无未捕获异常。",
+      "implementation": "按 design/interfaces.md §2 实现 isJobRegistryLike() 与 createJobGate({logger, graceMs, clock, setTimer, clearTimer, deliver})，成员 attach/detach/noteTurnStart/gate/observe/pendingOf/dispose 与错误语义逐条对齐；判定式按 design/data-model.md §3（owner===sid、status∈{running,stopping}、startedAt>=最近 turn/start 三重过滤）；observe() 只认 settled/removed 且必须判 event?.job 存在（output 事件没有 job 字段）；所有异常吞掉 + warn。在 test/jobs-gate.test.js 建假 registry（list 返回副本 + 测试侧 settle/remove 助手）/假时钟/假计时器，并写判定层用例 TC-2、3、6、7、8、9、13、14。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-1",
+        "FR-2",
+        "FR-3"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-43dc52",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790857909428,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 727,
+              "at": 1790857909437,
+              "totals": {
+                "uncachedInputTokens": 128468,
+                "outputTokens": 98290,
+                "cacheReadTokens": 13170304,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 869,
+              "at": 1790858012858,
+              "totals": {
+                "uncachedInputTokens": 142556,
+                "outputTokens": 113521,
+                "cacheReadTokens": 18501632,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 14088,
+              "outputTokens": 15231,
+              "cacheReadTokens": 5331328,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858012842
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857756697,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790857909428,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "开工 t2：实现纯内存判定闸门 src/jobs.js（isJobRegistryLike + createJobGate）与判定层单测。"
+        },
+        {
+          "status": "done",
+          "at": 1790858012842,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "t2 收尾：子卡链全绿（16 条判定层用例 + 全量 257/257），父卡汇报已登记。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-7c2d90",
+          "body": "[状态] → in_progress：开工 t2：实现纯内存判定闸门 src/jobs.js（isJobRegistryLike + createJobGate）与判定层单测。（reqboard_task_move）",
+          "createdAt": 1790857909428,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-531d8b",
+          "body": "[状态] → done：t2 收尾：子卡链全绿（16 条判定层用例 + 全量 257/257），父卡汇报已登记。（reqboard_task_move）",
+          "createdAt": 1790858012842,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857756697,
+      "updatedAt": 1790858012842,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "layer": 0,
+      "lastReport": {
+        "at": 1790858010680,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/jobs.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "交付 src/jobs.js（222 行，纯内存判定闸门）+ test/jobs-gate.test.js 的 16 条判定层用例（文件共 282 行）",
+          "判定层验收逐条达成：本轮 running → suppressed:true 且 jobIds 含该 id；常驻 job（startedAt < since）→ suppressed:false；无 turn/start → reason 'no-turn-start'；settle + 推进计时器 → deliver 恰好 1 次；两个 job 需全部 settle；dispose 后推进计时器 → 0 次且无未捕获异常",
+          "三张子卡全部 done：研发（t-bf2be8）/ 复核（t-d4d793，结论无偏离）/ 测试（t-e5e744，全量 257/257 绿）",
+          "子卡模板验收口径按本包工具链修订过（模板抄的 npx vitest / tsc 在本包不存在，改判为 node --test + node --check）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858010680,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-acae58",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路",
+      "cardDoc": "docs/requirements/REQ-261001202058-0fbe/tasks/t-acae58.md",
+      "description": "",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-1c0dc2",
+        "t-30bbed"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 `node --test test/jobs-gate.test.js` 退出码 0；接线层断言逐条通过：注入假 registry 后 handle(turn/end) 返回 action:'dropped'/reason:'job-running' 且本地接收端 0 条；settle + 推进宽限 → 接收端恰好 1 条且与基线报文逐字段相等（忽略 at）；宽限内 turn/start → 0 条补发、随后该轮 turn/end → 1 条 sent；jobAwareComplete:false 与不注入 jobs 两种情形均 action:'sent'。",
+      "implementation": "index.js：createNotifier 接受可选 options.jobs/jobGraceMs/clock/timers 并建闸门，闸门的 deliver 接到 dispatch(session, intent, now, {prompt})；handle() 内 turn/start → gate.noteTurnStart(会话 id)，完成意图且非 goal 自动轮静默后再过闸门，抑制时返回 {action:'dropped', reason:'job-running', intent, jobIds}；deliverToTarget 改为 extra.prompt ?? prompts.take(session)（补发时该轮 prompt 已被 clear，必须用捕获值）；apply() 增 ctx.inject(['jobs'], jobCtx => jobCtx.effect(() => runtime.gate.attach(jobCtx.jobs)))，dispose 顺序为先注销监听与计时器再清状态；补接线层用例 TC-3/4/5/10/11/12/15/16/18/19。",
+      "context": "",
+      "requirementRefs": [
+        "FR-1",
+        "FR-3",
+        "FR-4",
+        "FR-5",
+        "FR-6"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-256789",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858023213,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 875,
+              "at": 1790858023222,
+              "totals": {
+                "uncachedInputTokens": 142741,
+                "outputTokens": 115610,
+                "cacheReadTokens": 18740736,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1153,
+              "at": 1790858215430,
+              "totals": {
+                "uncachedInputTokens": 166411,
+                "outputTokens": 139656,
+                "cacheReadTokens": 30598016,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 23670,
+              "outputTokens": 24046,
+              "cacheReadTokens": 11857280,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858215409
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857756697,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858023213,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "开工 t3：把闸门接进 index.js 主链路（turn/start 记录、完成意图过闸门、补发经 dispatch、ctx.inject(['jobs']) 接线与清理顺序）。"
+        },
+        {
+          "status": "done",
+          "at": 1790858215409,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "t3 收尾：接线完成，4 张子卡全 done，全量 266/266 绿。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-a8972f",
+          "body": "[状态] → in_progress：开工 t3：把闸门接进 index.js 主链路（turn/start 记录、完成意图过闸门、补发经 dispatch、ctx.inject(['jobs']) 接线与清理顺序）。（reqboard_task_move）",
+          "createdAt": 1790858023213,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-58e7b0",
+          "body": "[状态] → done：t3 收尾：接线完成，4 张子卡全 done，全量 266/266 绿。（reqboard_task_move）",
+          "createdAt": 1790858215409,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857756697,
+      "updatedAt": 1790858215409,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "layer": 1,
+      "lastReport": {
+        "at": 1790858212566,
+        "reportIndex": 1,
+        "filesChanged": [
+          "index.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "把判断接进主链路：turn/start 记轮次起点、turn/end 判完成意图后过闸门、被压住时返回 drop(job-running) 并留 pending",
+          "接通 DSH 后台任务信息源（ctx.inject(['jobs']) 可选依赖），服务不在/形状不符自动降级为旧行为",
+          "补发通路打通：job 全部结算 + 宽限到点且无新轮次 → 经**同一条** dispatch 补发，复用渠道打包与过滤；被抑制那一轮的「你说了什么」从捕获值回填",
+          "清理纪律：dispose 顺序为先摘接线与计时器再清状态；闸门幂等 dispose，无悬挂计时器（TC-14b 断言）",
+          "四张子卡全部 done：研发（t-f468d1）/ 联调（t-ce6b74，真 HTTP 接收端三条链路）/ 复核（t-1e395e，结论无偏离）/ 测试（t-cbf134，全量 266/266）",
+          "父卡验收（接线层 6 条断言）逐条达成：drop 时接收端 0 条、补发恰好 1 条且与基线逐字段相等、换轮次不重复、双 job 等最后一个、开关关闭与未接服务均照常发"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858212566,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-bdef4c",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）",
+      "cardDoc": "docs/requirements/REQ-261001202058-0fbe/tasks/t-bdef4c.md",
+      "description": "",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-acae58"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 `node --test \"test/*.test.js\"` 退出码 0、fail 0、tests 数 ≥ 基线 241（只增不减，基线已实测 241 passed / 0 failed）；报告文件存在且逐条列出降级路径与旧行为等价的证据（用例名 + 断言）。",
+      "implementation": "不改任何既有断言，跑全量并逐条核对两条降级路径（不注入 jobs、jobAwareComplete:false）与改动前行为一致；把结论、用例名与断言证据写入 docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md，含「既有 30 个测试文件唯一改动是 test/config.test.js 标题文案」的声明。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-4"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-9c2dd3",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858219419,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1159,
+              "at": 1790858219430,
+              "totals": {
+                "uncachedInputTokens": 166604,
+                "outputTokens": 140082,
+                "cacheReadTokens": 30883200,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1283,
+              "at": 1790858309455,
+              "totals": {
+                "uncachedInputTokens": 188764,
+                "outputTokens": 148302,
+                "cacheReadTokens": 36961920,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 22160,
+              "outputTokens": 8220,
+              "cacheReadTokens": 6078720,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858309438
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857756697,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858219419,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "开工 t4：迁移与兼容回归——证明「不接 job 服务 / 开关关闭」两条降级路径逐条等于改动前行为，并出兼容报告。"
+        },
+        {
+          "status": "done",
+          "at": 1790858309438,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "t4 收尾：兼容报告落盘 + 全量 266/266 绿，3 张子卡全 done。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-82b6e6",
+          "body": "[状态] → in_progress：开工 t4：迁移与兼容回归——证明「不接 job 服务 / 开关关闭」两条降级路径逐条等于改动前行为，并出兼容报告。（reqboard_task_move）",
+          "createdAt": 1790858219419,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-54595b",
+          "body": "[状态] → done：t4 收尾：兼容报告落盘 + 全量 266/266 绿，3 张子卡全 done。（reqboard_task_move）",
+          "createdAt": 1790858309438,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857756697,
+      "updatedAt": 1790858309438,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "layer": 2,
+      "lastReport": {
+        "at": 1790858307335,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md"
+        ],
+        "completed": [
+          "兼容报告落盘：docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md（作用范围图 / 两条降级路径逐条证据 / 既有测试改动声明 / 未触碰清单 / 回滚路径 / 复现命令）",
+          "路径一「无 job 服务」验证：既有 30 个测试文件 241 条基线用例均不注入 jobs → 原样通过；TC-16（照常发、无告警）、TC-16b（形状不符 → 照常发 + 1 条 warn）、TC-2（available=false、reason 'unavailable'）",
+          "路径二「开关关闭」验证：TC-15（有 running job 仍返回 action:'sent'）；热改读得回 false、不写即 true",
+          "对账复核（子卡 t-c3b5bc）通过：grep 证明只有 jobs-gate.test.js 传 jobs；mtime 证明本窗口代码面只写了 index.js / src/config.js / src/jobs.js / test/config.test.js / test/jobs-gate.test.js 五个文件",
+          "全量回归：node --test \"test/*.test.js\" → 266 passed / 0 failed（基线 241/0，只增不减）；5 个落地文件 node --check 通过",
+          "子卡链全绿：研发（t-830f85）/ 复核（t-c3b5bc）/ 测试（t-9905e8）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858307335,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-613fc4",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "排障口径：drop 原因码 job-running 进运维文档",
+      "cardDoc": "docs/requirements/REQ-261001202058-0fbe/tasks/t-613fc4.md",
+      "description": "",
+      "phase": "doc",
+      "side": "doc",
+      "dependsOn": [
+        "t-acae58"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 `grep -n 'job-running' docs/guides/operations.md` 命中原因码表行，且该行含义与 FR-6/design/interfaces.md §4 一致（不是只出现在正文散文里）。",
+      "implementation": "docs/guides/operations.md 的 drop 原因码表新增一行 job-running →「本会话仍有本轮拉起、未结算的后台 job（完成通知延后到 job 结算）」；「通知没到：按这个顺序查」表补一条指向该原因码（先看是抑制还是真漏发）。",
+      "context": "",
+      "skipIntegration": true,
+      "requirementRefs": [
+        "FR-6"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-3a424c",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858320314,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1296,
+              "at": 1790858320321,
+              "totals": {
+                "uncachedInputTokens": 192593,
+                "outputTokens": 149993,
+                "cacheReadTokens": 37592320,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1387,
+              "at": 1790858377945,
+              "totals": {
+                "uncachedInputTokens": 200423,
+                "outputTokens": 153960,
+                "cacheReadTokens": 42485504,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 7830,
+              "outputTokens": 3967,
+              "cacheReadTokens": 4893184,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858377927
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857756697,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858320314,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "开工 t5：把新的 drop 原因码 job-running 与对应排查步骤写进运维文档。"
+        },
+        {
+          "status": "done",
+          "at": 1790858377927,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "t5 收尾：文档三处更新 + 复核无偏离，2 张子卡全 done。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-cd2c35",
+          "body": "[状态] → in_progress：开工 t5：把新的 drop 原因码 job-running 与对应排查步骤写进运维文档。（reqboard_task_move）",
+          "createdAt": 1790858320314,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-da6cd3",
+          "body": "[状态] → done：t5 收尾：文档三处更新 + 复核无偏离，2 张子卡全 done。（reqboard_task_move）",
+          "createdAt": 1790858377927,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857756697,
+      "updatedAt": 1790858377927,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "layer": 2,
+      "lastReport": {
+        "at": 1790858359341,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/guides/operations.md"
+        ],
+        "completed": [
+          "运维文档三处更新：`drop` 原因码表新增 `job-running`（operations.md:52）、排查清单新增第 2 步（:35，原 2-7 顺延为 3-8）、配置表把 `jobAwareComplete` 列入 volatile 免重启一行（:58）",
+          "文档措辞面向值班者：明确写出「有 `job-running` = 不是漏发，结算后自动补发」，并给出关掉该判定的开关名",
+          "复核（子卡 t-93732c）结论无偏离：原因码释义对 design/interfaces.md §4、现象描述对 index.js:237、热改口径对 §5/`.volatile()` 三处逐条一致",
+          "验收：grep -n 'job-running' docs/guides/operations.md 命中两处且均为表格行（非散文）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858359341,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-fbe154",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」",
+      "cardDoc": "docs/requirements/REQ-261001202058-0fbe/tasks/t-fbe154.md",
+      "description": "",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-bdef4c"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "跑 `node --test test/jobs-gate.test.js` 退出码 0；两条链路的接收端条数与字段断言逐条通过（报文含 version:1、event:'turn/end' 与完成文案），且链路 ① 的报文与无 job 基线逐字段相等（忽略 at）。",
+      "implementation": "仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 内串两条完整链路：①turn/start → 假 registry 注册 running job → turn/end（断言 0 条）→ settle + 推进宽限（断言 1 条，字段与基线一致）；②settle 后宽限内开新轮次（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。结果写入 docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md。",
+      "context": "",
+      "requirementRefs": [
+        "FR-3",
+        "FR-5"
+      ],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-df5ac5",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858381417,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1393,
+              "at": 1790858381426,
+              "totals": {
+                "uncachedInputTokens": 200646,
+                "outputTokens": 154356,
+                "cacheReadTokens": 42816000,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1497,
+              "at": 1790858446958,
+              "totals": {
+                "uncachedInputTokens": 212837,
+                "outputTokens": 159966,
+                "cacheReadTokens": 48634496,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 12191,
+              "outputTokens": 5610,
+              "cacheReadTokens": 5818496,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858446942
+        }
+      ],
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857756697,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "拆分落库（reqboard_decompose）"
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858381417,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "开工 t6：真 HTTP 接收端跑「抑制 → 结算 → 补发」与「换轮次不重复」两条完整链路，并出 e2e 报告。"
+        },
+        {
+          "status": "done",
+          "at": 1790858446942,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "t6 收尾：三条链路 + 边界联调全绿，e2e 报告落盘，3 张子卡全 done。6 张卡至此全部完成。"
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-f27fa7",
+          "body": "[状态] → in_progress：开工 t6：真 HTTP 接收端跑「抑制 → 结算 → 补发」与「换轮次不重复」两条完整链路，并出 e2e 报告。（reqboard_task_move）",
+          "createdAt": 1790858381417,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-4af2eb",
+          "body": "[状态] → done：t6 收尾：三条链路 + 边界联调全绿，e2e 报告落盘，3 张子卡全 done。6 张卡至此全部完成。（reqboard_task_move）",
+          "createdAt": 1790858446942,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857756697,
+      "updatedAt": 1790858446942,
+      "createdBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "layer": 3,
+      "lastReport": {
+        "at": 1790858443330,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md"
+        ],
+        "completed": [
+          "在真 HTTP 接收端上跑通三条链路：①抑制（0 条）→ 结算 + 宽限（恰好 1 条且与基线逐字段相等）；②换轮次不重复（0 条补发 + 新轮次 1 条）；③多 job（只认最后一个，恰好 1 条）",
+          "边界联调 5 项：dispose 后无悬挂计时器、开关关闭照常发、未注入/形状不符降级、生产路径 ctx.inject 就绪接上且卸载摘掉",
+          "联调报告落盘：docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md",
+          "三张子卡全部 done：研发（t-f8c218）/ 复核（t-0d216c，对账一致）/ 测试（t-caa24b，全量 266/266）",
+          "验收：node --test test/jobs-gate.test.js → tests 25 / pass 25 / fail 0；全量 266/266 绿"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858443330,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-ae0636",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "配置契约：新增 volatile 开关 jobAwareComplete·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`node --test test/config.test.js test/jobs-gate.test.js` → 全绿（本包工具链是 node:test + 零 devDependencies，**无 vitest / 无 tsc**：package.json 的 scripts 只有 `node --test \"test/*.test.js\"`）；证据附 src/config.js 四处登记行号（34 DEFAULTS / 58 BOOLEAN_KEYS / 182 schema.volatile / 224 VOLATILE_KEYS）。",
+      "implementation": "src/config.js 四处同进同出：DEFAULTS.jobAwareComplete=true、BOOLEAN_KEYS 增键、Config schema 增 jobAwareComplete: z.boolean().default(true).volatile()、VOLATILE_KEYS 增键；test/config.test.js:35 只把测试标题文案「恰好这 9 个」改成「恰好这 10 个」（该用例断言 schema volatile 集合与 VOLATILE_KEYS 相等，两侧同时新增即通过，零断言改动）；在 test/jobs-gate.test.js 落配置断言（默认值 true、非法值回落 + warn、volatile 集合成员）。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-1c0dc2",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-bab262",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790857857419,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 641,
+              "at": 1790857857427,
+              "totals": {
+                "uncachedInputTokens": 124134,
+                "outputTokens": 91924,
+                "cacheReadTokens": 10285184,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 659,
+              "at": 1790857865353,
+              "totals": {
+                "uncachedInputTokens": 125230,
+                "outputTokens": 92546,
+                "cacheReadTokens": 10894592,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1096,
+              "outputTokens": 622,
+              "cacheReadTokens": 609408,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790857865335
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-f2cde5",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板抄的是 pmboard 的 npx vitest / tsc，本包不适用（无 vitest、无 TypeScript），换成仓库真实的 node --test 命令与行号锚点。（reqboard_task_move）",
+          "createdAt": 1790857857419,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-bfff15",
+          "body": "[状态] → done：研发阶段完成：四处登记 + 配置断言落地，node --test 两文件 9/9 绿。（reqboard_task_move）",
+          "createdAt": 1790857865335,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857783430,
+      "updatedAt": 1790857865335,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857783430,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790857857419,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板抄的是 pmboard 的 npx vitest / tsc，本包不适用（无 vitest、无 TypeScript），换成仓库真实的 node --test 命令与行号锚点。"
+        },
+        {
+          "status": "done",
+          "at": 1790857865335,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "研发阶段完成：四处登记 + 配置断言落地，node --test 两文件 9/9 绿。"
+        }
+      ],
+      "layer": 0,
+      "lastReport": {
+        "at": 1790857863472,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/config.js",
+          "test/config.test.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "src/config.js 四处登记：DEFAULTS(34) / BOOLEAN_KEYS(58) / Config schema .default(true).volatile()(182) / VOLATILE_KEYS(224)，并同步 volatile 字段清单注释(159)",
+          "test/config.test.js 仅标题文案 9→10（零断言改动）",
+          "新增 test/jobs-gate.test.js（39 行）配置契约段：默认 true、非法值回落 + 恰好一条 warn、关掉可读回 false",
+          "验收：node --test test/config.test.js test/jobs-gate.test.js → tests 9 / pass 9 / fail 0",
+          "注：本包 git 仓库尚无任何提交（git diff --stat 不可用），故证据改用文件行号锚点"
+        ]
+      },
+      "lastRun": {
+        "at": 1790857863472,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-1a2036",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "配置契约：新增 volatile 开关 jobAwareComplete·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-ae0636"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `docs/requirements/REQ-261001202058-0fbe/design/interfaces.md §5`（配置项契约四行表）与 `decomposition.md` t1 逐条核对四处登记同进同出；`node --test test/config.test.js test/jobs-gate.test.js` → 全绿；无偏离时显式写明「无偏离」及依据行号（本包无 vitest/tsc）。",
+      "implementation": "src/config.js 四处同进同出：DEFAULTS.jobAwareComplete=true、BOOLEAN_KEYS 增键、Config schema 增 jobAwareComplete: z.boolean().default(true).volatile()、VOLATILE_KEYS 增键；test/config.test.js:35 只把测试标题文案「恰好这 9 个」改成「恰好这 10 个」（该用例断言 schema volatile 集合与 VOLATILE_KEYS 相等，两侧同时新增即通过，零断言改动）；在 test/jobs-gate.test.js 落配置断言（默认值 true、非法值回落 + warn、volatile 集合成员）。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-1c0dc2",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-a73f17",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790857869345,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 665,
+              "at": 1790857869356,
+              "totals": {
+                "uncachedInputTokens": 125427,
+                "outputTokens": 93058,
+                "cacheReadTokens": 11098496,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 691,
+              "at": 1790857880750,
+              "totals": {
+                "uncachedInputTokens": 127005,
+                "outputTokens": 94279,
+                "cacheReadTokens": 11921280,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1578,
+              "outputTokens": 1221,
+              "cacheReadTokens": 822784,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790857880734
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-671c37",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 在本包不存在，换成 design/interfaces.md §5 逐条核对 + 仓库真实测试命令。（reqboard_task_move）",
+          "createdAt": 1790857869345,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-c0860c",
+          "body": "[状态] → done：复核通过：无偏离（四处登记同进同出、回落路径、volatile 集合一致性、范围未溢出）。（reqboard_task_move）",
+          "createdAt": 1790857880734,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857783430,
+      "updatedAt": 1790857880734,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857783430,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790857869345,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 在本包不存在，换成 design/interfaces.md §5 逐条核对 + 仓库真实测试命令。"
+        },
+        {
+          "status": "done",
+          "at": 1790857880734,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "复核通过：无偏离（四处登记同进同出、回落路径、volatile 集合一致性、范围未溢出）。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790857878578,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "对照 design/interfaces.md §5 四行契约逐条核对，**无偏离**：键名/类型 boolean/默认 true/volatile 四处同进同出（src/config.js:34 DEFAULTS、:58 BOOLEAN_KEYS、:182 schema .volatile()、:224 VOLATILE_KEYS）",
+          "回落路径核对：normalizeConfig 走 takeBoolean（src/config.js:72-78），非 boolean → warn 并保留 DEFAULTS 值（out 由 ...DEFAULTS 起手），与「配置写歪插件照样起、只回落默认」口径一致",
+          "volatile 集合一致性核对：test/config.test.js:35 的 deepEqual 比对的是 schema 实际 volatile 集合与 VOLATILE_KEYS，两侧同时新增故仍然成立；该文件仅这一行标题文案改动，断言零改动",
+          "范围核对：本卡只触及 src/config.js / test/config.test.js / test/jobs-gate.test.js，未碰 RPC、客户端半与任何落盘格式（符合 sides: [backend]）",
+          "已知事项（非偏离）：jobAwareComplete 目前是「已声明未消费」——真正读它的判定在 t3 接线卡，属计划内顺序",
+          "验收：node --test test/config.test.js test/jobs-gate.test.js → pass 9 / fail 0"
+        ]
+      },
+      "lastRun": {
+        "at": 1790857878578,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-5456ad",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "配置契约：新增 volatile 开关 jobAwareComplete·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-1a2036"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`pnpm test`（= 本包 scripts.test 的 `node --test \"test/*.test.js\"`）→ 退出码 0、fail 0、tests ≥ 基数 241（本包无 TypeScript，故无 `npx tsc` 步骤，改以 `node --check src/config.js test/jobs-gate.test.js` 语法自检替代）。",
+      "implementation": "src/config.js 四处同进同出：DEFAULTS.jobAwareComplete=true、BOOLEAN_KEYS 增键、Config schema 增 jobAwareComplete: z.boolean().default(true).volatile()、VOLATILE_KEYS 增键；test/config.test.js:35 只把测试标题文案「恰好这 9 个」改成「恰好这 10 个」（该用例断言 schema volatile 集合与 VOLATILE_KEYS 相等，两侧同时新增即通过，零断言改动）；在 test/jobs-gate.test.js 落配置断言（默认值 true、非法值回落 + warn、volatile 集合成员）。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-1c0dc2",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-0c3a3a",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790857885058,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 697,
+              "at": 1790857885065,
+              "totals": {
+                "uncachedInputTokens": 127227,
+                "outputTokens": 94754,
+                "cacheReadTokens": 12128256,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 715,
+              "at": 1790857896142,
+              "totals": {
+                "uncachedInputTokens": 128147,
+                "outputTokens": 95313,
+                "cacheReadTokens": 12752512,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 920,
+              "outputTokens": 559,
+              "cacheReadTokens": 624256,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790857896126
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-dba12f",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成 pnpm test + node --check 的两条真实命令。（reqboard_task_move）",
+          "createdAt": 1790857885058,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-30c0c7",
+          "body": "[状态] → done：测试阶段通过：全量 244/244 绿（基线 241/0），语法自检通过。（reqboard_task_move）",
+          "createdAt": 1790857896126,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857783430,
+      "updatedAt": 1790857896126,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857783430,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790857885058,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成 pnpm test + node --check 的两条真实命令。"
+        },
+        {
+          "status": "done",
+          "at": 1790857896126,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "测试阶段通过：全量 244/244 绿（基线 241/0），语法自检通过。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790857894387,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "语法自检：node --check src/config.js、test/jobs-gate.test.js → 均通过（syntax OK）",
+          "全量回归：node --test \"test/*.test.js\" → tests 244 / pass 244 / fail 0 / duration 3.40s",
+          "与开工前基线比对：基线 241 passed / 0 failed → 本次 244 passed / 0 failed，**新增 3 条全绿、零新增失败、零既有用例被改写断言**",
+          "既有用例健康度：唯一改动的 test/config.test.js 只有标题文案一行（断言原样），故 241 条基线用例逐条原样通过"
+        ]
+      },
+      "lastRun": {
+        "at": 1790857894387,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-bf2be8",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`node --test test/jobs-gate.test.js` → 全绿（本包无 vitest：package.json 的 scripts 只有 `node --test`）；证据附判定过滤实现行号（src/jobs.js 的 owner/status/startedAt 三重过滤）与 16 条判定层用例清单。",
+      "implementation": "按 design/interfaces.md §2 实现 isJobRegistryLike() 与 createJobGate({logger, graceMs, clock, setTimer, clearTimer, deliver})，成员 attach/detach/noteTurnStart/gate/observe/pendingOf/dispose 与错误语义逐条对齐；判定式按 design/data-model.md §3（owner===sid、status∈{running,stopping}、startedAt>=最近 turn/start 三重过滤）；observe() 只认 settled/removed 且必须判 event?.job 存在（output 事件没有 job 字段）；所有异常吞掉 + warn。在 test/jobs-gate.test.js 建假 registry（list 返回副本 + 测试侧 settle/remove 助手）/假时钟/假计时器，并写判定层用例 TC-2、3、6、7、8、9、13、14。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-30bbed",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-085273",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790857957276,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 771,
+              "at": 1790857957284,
+              "totals": {
+                "uncachedInputTokens": 137692,
+                "outputTokens": 108255,
+                "cacheReadTokens": 14739328,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 789,
+              "at": 1790857967161,
+              "totals": {
+                "uncachedInputTokens": 138579,
+                "outputTokens": 109155,
+                "cacheReadTokens": 15432576,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 887,
+              "outputTokens": 900,
+              "cacheReadTokens": 693248,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790857967146
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-231796",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 在本包不存在，换成仓库真实命令与实现行号锚点。（reqboard_task_move）",
+          "createdAt": 1790857957276,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-cc8117",
+          "body": "[状态] → done：研发阶段完成：src/jobs.js 判定模块 + 16 条判定层用例，node --test 全绿。（reqboard_task_move）",
+          "createdAt": 1790857967146,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857909428,
+      "updatedAt": 1790857967146,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857909428,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790857957276,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 在本包不存在，换成仓库真实命令与实现行号锚点。"
+        },
+        {
+          "status": "done",
+          "at": 1790857967146,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "研发阶段完成：src/jobs.js 判定模块 + 16 条判定层用例，node --test 全绿。"
+        }
+      ],
+      "layer": 0,
+      "lastReport": {
+        "at": 1790857964188,
+        "reportIndex": 1,
+        "filesChanged": [
+          "src/jobs.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "新增 src/jobs.js（222 行）：isJobRegistryLike() 形状校验 + createJobGate() 的 attach/detach/noteTurnStart/gate/observe/pendingOf/dispose，纯内存、零 I/O、零第三方依赖",
+          "判定式落地（src/jobs.js:181-184）：owner===sessionId、status 属于 {running,stopping}（模块级 LIVE_STATUS:19）、startedAt >= 最近 turn/start 三重过滤；LIVE_STATUS 用 Set 常量化",
+          "保守取向落地：形状不符 → reason 'unavailable' + 一次性 warn；无轮次起点 → 'no-turn-start'；list 抛错/未返回数组 → reason 'error' 且照旧发；observe 内的畸形事件（output 无 job 字段、无 owner）直接返回不抛异常（src/jobs.js:109）",
+          "计时器与时钟全部注入（graceMs/clock/setTimer/clearTimer/deliver），宽限窗口在单测里瞬时推进，不碰全局 setTimeout",
+          "test/jobs-gate.test.js 扩到 282 行 / 16 条用例：TC-2 降级只告警一次、TC-3 抑制 + pending + prompt、TC-4/5 别人的 job 与已结算不算、TC-6 stopping、TC-7 常驻 job 不静音、TC-8 无起点保守、TC-9 同毫秒边界、TC-13 killed/removed 等价、TC-14 多 job 全结算才补发 + dispose 无悬挂计时器、TC-2b/2c/8b 畸形事件与异常路径",
+          "验收：node --test test/jobs-gate.test.js → tests 16 / pass 16 / fail 0；node --check src/jobs.js 通过"
+        ]
+      },
+      "lastRun": {
+        "at": 1790857964188,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-d4d793",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-bf2be8"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `design/interfaces.md §2`（成员表 + reason 取值表）与 `design/data-model.md §3`（判定式）逐条核对 src/jobs.js；`node --test test/jobs-gate.test.js` → 全绿；无偏离时显式写明「无偏离」及依据行号（本包无 vitest/tsc）。",
+      "implementation": "按 design/interfaces.md §2 实现 isJobRegistryLike() 与 createJobGate({logger, graceMs, clock, setTimer, clearTimer, deliver})，成员 attach/detach/noteTurnStart/gate/observe/pendingOf/dispose 与错误语义逐条对齐；判定式按 design/data-model.md §3（owner===sid、status∈{running,stopping}、startedAt>=最近 turn/start 三重过滤）；observe() 只认 settled/removed 且必须判 event?.job 存在（output 事件没有 job 字段）；所有异常吞掉 + warn。在 test/jobs-gate.test.js 建假 registry（list 返回副本 + 测试侧 settle/remove 助手）/假时钟/假计时器，并写判定层用例 TC-2、3、6、7、8、9、13、14。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-30bbed",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-8c1d52",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790857973365,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 795,
+              "at": 1790857973372,
+              "totals": {
+                "uncachedInputTokens": 138822,
+                "outputTokens": 110164,
+                "cacheReadTokens": 15664512,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 821,
+              "at": 1790857987965,
+              "totals": {
+                "uncachedInputTokens": 140669,
+                "outputTokens": 111576,
+                "cacheReadTokens": 16602240,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1847,
+              "outputTokens": 1412,
+              "cacheReadTokens": 937728,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790857987943
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-c46f4c",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 不适用本包，换成设计文档逐条核对 + 仓库真实测试命令。（reqboard_task_move）",
+          "createdAt": 1790857973365,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-5bb9e5",
+          "body": "[状态] → done：复核通过：无偏离（成员/reason/判定式/错误语义逐条对上，一处纯内部扩展已说明）。（reqboard_task_move）",
+          "createdAt": 1790857987943,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857909428,
+      "updatedAt": 1790857987943,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857909428,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790857973365,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 不适用本包，换成设计文档逐条核对 + 仓库真实测试命令。"
+        },
+        {
+          "status": "done",
+          "at": 1790857987943,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "复核通过：无偏离（成员/reason/判定式/错误语义逐条对上，一处纯内部扩展已说明）。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790857985742,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "成员表逐条核对 design/interfaces.md §2，**无偏离**：available(213)、attach(134)、detach(121)、noteTurnStart(156)、gate(167)、observe(104)、pendingOf(200)、dispose(206) 全部到位，签名与返回形状一致",
+          "reason 取值表核对：no-jobs(185) / no-turn-start(171,173) / unavailable(168,169) / error(178,195) 四值齐备，且都落在「不抑制」分支——与「拿不准就照常发」的保守口径一致",
+          "判定式核对 design/data-model.md §3：三重过滤逐项对得上（owner===sessionId:181、status∈{running,stopping}:182+LIVE_STATUS:19、startedAt>=since:184），且 startedAt 用 Number.isFinite 兜住脏数据(183)",
+          "错误语义核对：形状不符只告警一次（warnedUnavailable:137，TC-2 断言恰好 1 条）；list 抛错/非数组 → error 且照旧发(176-179,193-195)；observe 内 output 事件无 job 字段的形态先判存在再读(109，TC-2b 断言不抛异常)",
+          "计时器与时钟全部注入、无全局 setTimeout、无 node: 依赖；dispose(206-210) 先逐条取消计时器与订阅再置位，TC-14 断言 dispose 后推进计时器补发 0 次",
+          "记录一处**实现内扩展（非行为偏离）**：pending 记录除 design/data-model.md §2 列出的 {session,intent,prompt,watched,timer} 外，另存了一份 jobIds 数组(186,189)，仅用于日志(191)与补发 meta 传给接线层；内容与 watched 等价，不改变任何判定或投递语义",
+          "复核发现的两条**已知边界**（已在 design/architecture.md §9 记账，本次不改）：① 常驻 job 所在那一轮的 pending 会一直挂着直到新轮次/dispose；② turnStarts 不做会话级回收（DSH 未给 Host 插件会话销毁事件），每条仅一个 number",
+          "验收：node --test test/jobs-gate.test.js → pass 16 / fail 0"
+        ]
+      },
+      "lastRun": {
+        "at": 1790857985742,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-e5e744",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-d4d793"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`node --test \"test/*.test.js\"` → 退出码 0、fail 0、tests ≥ 开工前基线 241（本包无 TypeScript，故无 `npx tsc` 步骤，改以 `node --check src/jobs.js` 语法自检替代）。",
+      "implementation": "按 design/interfaces.md §2 实现 isJobRegistryLike() 与 createJobGate({logger, graceMs, clock, setTimer, clearTimer, deliver})，成员 attach/detach/noteTurnStart/gate/observe/pendingOf/dispose 与错误语义逐条对齐；判定式按 design/data-model.md §3（owner===sid、status∈{running,stopping}、startedAt>=最近 turn/start 三重过滤）；observe() 只认 settled/removed 且必须判 event?.job 存在（output 事件没有 job 字段）；所有异常吞掉 + warn。在 test/jobs-gate.test.js 建假 registry（list 返回副本 + 测试侧 settle/remove 助手）/假时钟/假计时器，并写判定层用例 TC-2、3、6、7、8、9、13、14。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-30bbed",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-6cd633",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790857990330,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 827,
+              "at": 1790857990339,
+              "totals": {
+                "uncachedInputTokens": 140887,
+                "outputTokens": 111768,
+                "cacheReadTokens": 16838272,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 845,
+              "at": 1790858000654,
+              "totals": {
+                "uncachedInputTokens": 141696,
+                "outputTokens": 112265,
+                "cacheReadTokens": 17548928,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 809,
+              "outputTokens": 497,
+              "cacheReadTokens": 710656,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858000636
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-69350c",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成全量 node --test + node --check。（reqboard_task_move）",
+          "createdAt": 1790857990330,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-93dc95",
+          "body": "[状态] → done：测试阶段通过：全量 257/257 绿（基线 241/0 + 新增 16），语法自检通过。（reqboard_task_move）",
+          "createdAt": 1790858000636,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790857909428,
+      "updatedAt": 1790858000636,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790857909428,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790857990330,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成全量 node --test + node --check。"
+        },
+        {
+          "status": "done",
+          "at": 1790858000636,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "测试阶段通过：全量 257/257 绿（基线 241/0 + 新增 16），语法自检通过。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790857997405,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "语法自检：node --check src/jobs.js → 通过",
+          "全量回归：node --test \"test/*.test.js\" → tests 257 / pass 257 / fail 0 / duration 2.29s",
+          "与基线比对：开工前 241 passed / 0 failed → 本次 257 passed / 0 failed（本次新增 16 条判定层用例全绿），**零新增失败**"
+        ]
+      },
+      "lastRun": {
+        "at": 1790857997405,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-f468d1",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·研发",
+      "description": "子卡阶段：研发",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-1c0dc2",
+        "t-30bbed"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`node --test test/jobs-gate.test.js` → 全绿（本包无 vitest）；证据附 index.js 的接线行号（闸门构造 126 / turn-Start 记录 220 / 闸门判定与 drop 返回 235-237 / apply 注入 367-369 / 清理顺序 411-412）。",
+      "implementation": "index.js：createNotifier 接受可选 options.jobs/jobGraceMs/clock/timers 并建闸门，闸门的 deliver 接到 dispatch(session, intent, now, {prompt})；handle() 内 turn/start → gate.noteTurnStart(会话 id)，完成意图且非 goal 自动轮静默后再过闸门，抑制时返回 {action:'dropped', reason:'job-running', intent, jobIds}；deliverToTarget 改为 extra.prompt ?? prompts.take(session)（补发时该轮 prompt 已被 clear，必须用捕获值）；apply() 增 ctx.inject(['jobs'], jobCtx => jobCtx.effect(() => runtime.gate.attach(jobCtx.jobs)))，dispose 顺序为先注销监听与计时器再清状态；补接线层用例 TC-3/4/5/10/11/12/15/16/18/19。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-acae58",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-0b94c4",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858139013,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1033,
+              "at": 1790858139020,
+              "totals": {
+                "uncachedInputTokens": 158782,
+                "outputTokens": 132302,
+                "cacheReadTokens": 25026816,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1045,
+              "at": 1790858145460,
+              "totals": {
+                "uncachedInputTokens": 159568,
+                "outputTokens": 132922,
+                "cacheReadTokens": 25571584,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 786,
+              "outputTokens": 620,
+              "cacheReadTokens": 544768,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858145444
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-5710c4",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 不适用本包，换成仓库真实命令与接线行号锚点。（reqboard_task_move）",
+          "createdAt": 1790858139013,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-d91ceb",
+          "body": "[状态] → done：研发完成：接线六处落地 + 接线层 8 条与生产路径 1 条用例全绿。（reqboard_task_move）",
+          "createdAt": 1790858145444,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858023213,
+      "updatedAt": 1790858145444,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858023213,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858139013,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 不适用本包，换成仓库真实命令与接线行号锚点。"
+        },
+        {
+          "status": "done",
+          "at": 1790858145444,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "研发完成：接线六处落地 + 接线层 8 条与生产路径 1 条用例全绿。"
+        }
+      ],
+      "layer": 1,
+      "lastReport": {
+        "at": 1790858143472,
+        "reportIndex": 1,
+        "filesChanged": [
+          "index.js",
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "index.js 接线六处：① 引入 createJobGate + INTENT_COMPLETE（:18）；② createNotifier 内建闸门，deliver 经同一条 dispatch（:126-134）；③ deliverToTarget 用 extra.prompt ?? prompts.take(session)（:150，两处 buildContext 共用同一 prompt）；④ handle() 顶部记轮次起点（:220）；⑤ 完成意图且非自动轮静默后过闸门，抑制返回 {action:'dropped', reason:'job-running', intent, jobIds}（:235-237）；⑥ apply() 增 ctx.inject(['jobs']) 接线（:367-369）与 dispose 顺序（:411-412）",
+          "返回值新增 gate 与 dispose（幂等）；既有返回字段一个没动，dispatch/handleExternalQuestion 签名不变",
+          "参数注入面：options.jobs / jobGraceMs / clock / timers 全部可选——不传即旧行为，既有 30 个测试文件无需改动",
+          "接线层用例 8 条 + 生产路径用例 1 条（真 HTTP 接收端；含基线报文逐字段比对、双 job、dispose 无悬挂计时器、ctx.inject 就绪接上/卸载摘掉）",
+          "验收：node --test test/jobs-gate.test.js → tests 25 / pass 25 / fail 0；node --check index.js 通过"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858143472,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-ce6b74",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·联调",
+      "description": "子卡阶段：联调",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-f468d1"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`node --test test/jobs-gate.test.js` → 全绿（本包无 vitest；联调由测试内起的**真 HTTP 接收端**承担，非 mock）：TC-3 抑制期接收端 0 条、TC-10/18/19 补发 1 条且与基线报文逐字段相等、TC-11 换轮次不重复、TC-12 双 job 只在最后一个结算后补发。",
+      "implementation": "index.js：createNotifier 接受可选 options.jobs/jobGraceMs/clock/timers 并建闸门，闸门的 deliver 接到 dispatch(session, intent, now, {prompt})；handle() 内 turn/start → gate.noteTurnStart(会话 id)，完成意图且非 goal 自动轮静默后再过闸门，抑制时返回 {action:'dropped', reason:'job-running', intent, jobIds}；deliverToTarget 改为 extra.prompt ?? prompts.take(session)（补发时该轮 prompt 已被 clear，必须用捕获值）；apply() 增 ctx.inject(['jobs'], jobCtx => jobCtx.effect(() => runtime.gate.attach(jobCtx.jobs)))，dispose 顺序为先注销监听与计时器再清状态；补接线层用例 TC-3/4/5/10/11/12/15/16/18/19。\n\n[子卡阶段·联调] 只做本阶段；验收：`npx vitest run <本卡接口/契约对应的测试文件>` → 全绿（请求样例与期望响应一致）",
+      "context": "",
+      "parentId": "t-acae58",
+      "stageKind": "integrate",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-562423",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858153126,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1057,
+              "at": 1790858153133,
+              "totals": {
+                "uncachedInputTokens": 159902,
+                "outputTokens": 133554,
+                "cacheReadTokens": 26118400,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1075,
+              "at": 1790858164057,
+              "totals": {
+                "uncachedInputTokens": 161187,
+                "outputTokens": 134319,
+                "cacheReadTokens": 26942464,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1285,
+              "outputTokens": 765,
+              "cacheReadTokens": 824064,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858164041
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-cd3c7f",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 不适用本包，换成真 HTTP 接收端的联调命令与链路清单。（reqboard_task_move）",
+          "createdAt": 1790858153126,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-e67b09",
+          "body": "[状态] → done：联调通过：真 HTTP 接收端三条链路（抑制/补发/换轮次）+ 报文逐字段一致 + 两条降级路径全绿。（reqboard_task_move）",
+          "createdAt": 1790858164041,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858023213,
+      "updatedAt": 1790858164041,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858023213,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858153126,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 不适用本包，换成真 HTTP 接收端的联调命令与链路清单。"
+        },
+        {
+          "status": "done",
+          "at": 1790858164041,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "联调通过：真 HTTP 接收端三条链路（抑制/补发/换轮次）+ 报文逐字段一致 + 两条降级路径全绿。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790858161560,
+        "reportIndex": 1,
+        "filesChanged": [
+          "test/jobs-gate.test.js"
+        ],
+        "completed": [
+          "联调环境：测试内起**真 HTTP server**（127.0.0.1 随机端口）收真报文，目标走 custom 渠道原样 JSON；不给 job 服务打桩到投递层（只把 DSH 的 JobRegistry 换成假件，投递与报文全程真实）",
+          "链路 ①「抑制 → 结算 → 补发」通过：turn/start → turn/end 被压住（接收端 0 条）→ settle + 宽限到点 → 恰好 1 条",
+          "链路 ②「换轮次不重复」通过：settle 后宽限内新轮次 → 0 条补发，新轮次自己的 turn/end → 1 条",
+          "链路 ③「多 job」通过：两个 job 只结算一个 → 0 条；第二个结算 + 宽限到点 → 恰好 1 条",
+          "报文契约核验（TC-18/19）：补发报文与「无 job 同场景」的基线报文逐字段相等（忽略 at），证明被抑制那一轮的「你说了什么」确实从捕获值回填（此时实时 prompt 已被 clear）",
+          "降级联调：jobAwareComplete=false 与不注入/形状不符的 job 服务 → 均照常投递（旧行为），后者留一条 warn",
+          "验收：node --test test/jobs-gate.test.js → tests 25 / pass 25 / fail 0（接线相关 9 条全绿）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858161560,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-1e395e",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·复核",
+      "description": "子卡阶段：复核",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-ce6b74"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对照 `design/interfaces.md §3（选项与返回值）/§4（判定顺序与返回契约）/§6（出站不变）/§7（apply 接线与清理顺序）` 逐条核对 index.js；`node --test test/jobs-gate.test.js` → 全绿；无偏离时显式写明「无偏离」及依据行号（本包无 vitest/tsc）。",
+      "implementation": "index.js：createNotifier 接受可选 options.jobs/jobGraceMs/clock/timers 并建闸门，闸门的 deliver 接到 dispatch(session, intent, now, {prompt})；handle() 内 turn/start → gate.noteTurnStart(会话 id)，完成意图且非 goal 自动轮静默后再过闸门，抑制时返回 {action:'dropped', reason:'job-running', intent, jobIds}；deliverToTarget 改为 extra.prompt ?? prompts.take(session)（补发时该轮 prompt 已被 clear，必须用捕获值）；apply() 增 ctx.inject(['jobs'], jobCtx => jobCtx.effect(() => runtime.gate.attach(jobCtx.jobs)))，dispose 顺序为先注销监听与计时器再清状态；补接线层用例 TC-3/4/5/10/11/12/15/16/18/19。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-acae58",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-8aae92",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858172681,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1081,
+              "at": 1790858172689,
+              "totals": {
+                "uncachedInputTokens": 161398,
+                "outputTokens": 135799,
+                "cacheReadTokens": 27218176,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1105,
+              "at": 1790858188080,
+              "totals": {
+                "uncachedInputTokens": 163961,
+                "outputTokens": 137615,
+                "cacheReadTokens": 28333952,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 2563,
+              "outputTokens": 1816,
+              "cacheReadTokens": 1115776,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858188064
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-82a1f4",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 不适用本包，换成设计文档逐条核对 + 仓库真实测试命令。（reqboard_task_move）",
+          "createdAt": 1790858172681,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-09772f",
+          "body": "[状态] → done：复核通过：无偏离（判定顺序、静默轮时序、返回契约、清理顺序、出站不变逐条核对）。（reqboard_task_move）",
+          "createdAt": 1790858188064,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858023213,
+      "updatedAt": 1790858188064,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858023213,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858172681,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 不适用本包，换成设计文档逐条核对 + 仓库真实测试命令。"
+        },
+        {
+          "status": "done",
+          "at": 1790858188064,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "复核通过：无偏离（判定顺序、静默轮时序、返回契约、清理顺序、出站不变逐条核对）。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790858185882,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "§3 选项与返回值，**无偏离**：createNotifier 接受可选 jobs/jobGraceMs/clock/timers（index.js:126-134），既有返回字段未动，新增 gate 与幂等 dispose",
+          "§4 判定顺序，**无偏离**：prompts.observe(222) → goals.observe(223) → classify(224) → goal 终态(228) → intent null(229) → 自动轮静默(231) → **job 闸门(234-239)** → dispatch(242) → prompts.clear(244)；顺序与设计逐位一致",
+          "§4 静默轮不建 pending：自动轮静默在闸门**之前**返回(231)，因此 goal 自动轮不会留下待补发的 pending——与设计「静默轮本来就不该叫醒人」一致",
+          "§4 返回契约：抑制时返回 {action:'dropped', reason:'job-running', intent, jobIds}(237)，与设计 §4 表格逐字段一致",
+          "§6 出站契约不变：一个字符都没碰渠道/路由/投递层；且 TC-18 用真 HTTP 接收端证明了补发报文与正常投递报文逐字段相等",
+          "§7 接线与清理顺序，**无偏离**：ctx.inject(['jobs']) 用 effect 承载 detach(367-371)；dispose 顺序为 offJobs → runtime.dispose（含摘计时器与订阅）→ offEvent → offQuestions → disposeService(409-416)，符合「先摘接线与计时器，再清状态」",
+          "§8 日志契约：闸门日志统一走 '[dsh-notice-webhook] jobs: ' 前缀，只带 sessionId / job id 列表，不含 job 输出、URL query 与密钥",
+          "复核确认的**交互细节**（非偏离，供验收参考）：① 被抑制时不经过 dispatch，因此**不消耗冷却**；补发的冷却从补发时刻起算；② 闸门在 dispatch 之前构造、deliver 里延迟引用 dispatch，投递只可能发生在 createNotifier 返回之后（计时器/事件），无 TDZ 风险；③ 新增键 jobAwareComplete 与既有 9 个 volatile 键走同一条配置读取路径（本卡未改配置机制，热改语义继承既有口径）",
+          "验收：node --test test/jobs-gate.test.js → pass 25 / fail 0"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858185882,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-cbf134",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·测试",
+      "description": "子卡阶段：测试",
+      "phase": "implement",
+      "side": "backend",
+      "dependsOn": [
+        "t-1e395e"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`node --test \"test/*.test.js\"` → 退出码 0、fail 0、tests ≥ 开工前基线 241（本包无 TypeScript，故无 `npx tsc`，改以 `node --check index.js` 语法自检替代）。",
+      "implementation": "index.js：createNotifier 接受可选 options.jobs/jobGraceMs/clock/timers 并建闸门，闸门的 deliver 接到 dispatch(session, intent, now, {prompt})；handle() 内 turn/start → gate.noteTurnStart(会话 id)，完成意图且非 goal 自动轮静默后再过闸门，抑制时返回 {action:'dropped', reason:'job-running', intent, jobIds}；deliverToTarget 改为 extra.prompt ?? prompts.take(session)（补发时该轮 prompt 已被 clear，必须用捕获值）；apply() 增 ctx.inject(['jobs'], jobCtx => jobCtx.effect(() => runtime.gate.attach(jobCtx.jobs)))，dispose 顺序为先注销监听与计时器再清状态；补接线层用例 TC-3/4/5/10/11/12/15/16/18/19。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-acae58",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-3e67a9",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858192114,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1111,
+              "at": 1790858192122,
+              "totals": {
+                "uncachedInputTokens": 164209,
+                "outputTokens": 137802,
+                "cacheReadTokens": 28615424,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1129,
+              "at": 1790858202323,
+              "totals": {
+                "uncachedInputTokens": 165169,
+                "outputTokens": 138354,
+                "cacheReadTokens": 29462400,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 960,
+              "outputTokens": 552,
+              "cacheReadTokens": 846976,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858202305
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-1a40f5",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成全量 node --test + node --check。（reqboard_task_move）",
+          "createdAt": 1790858192114,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-6199c0",
+          "body": "[状态] → done：测试阶段通过：全量 266/266 绿（基线 241/0 + 新增 25），语法自检通过。（reqboard_task_move）",
+          "createdAt": 1790858202305,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858023213,
+      "updatedAt": 1790858202305,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858023213,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858192114,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成全量 node --test + node --check。"
+        },
+        {
+          "status": "done",
+          "at": 1790858202305,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "测试阶段通过：全量 266/266 绿（基线 241/0 + 新增 25），语法自检通过。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790858200146,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "语法自检：node --check index.js、src/jobs.js → 通过",
+          "全量回归：node --test \"test/*.test.js\" → tests 266 / pass 266 / fail 0 / duration 2.27s",
+          "与基线比对：开工前 241 passed / 0 failed → 本次 266 passed / 0 failed（t1 3 条 + t2 16 条 + t3 6 条 = 25 条新增全绿），**零新增失败**",
+          "既有 30 个测试文件未改任何断言（唯一改动是 test/config.test.js 的标题文案），说明接线对既有调用方零破坏"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858200146,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-830f85",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·研发",
+      "description": "子卡阶段：研发",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-acae58"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "兼容报告 `docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md` 存在，且逐条列出两条降级路径的证据（用例名 + 断言 + 结果）；本包无 vitest，自证命令为 `node --test test/jobs-gate.test.js`（TC-15 / TC-16 / TC-16b / TC-2 / TC-2b / TC-2c / TC-7 / TC-8 全绿）。",
+      "implementation": "不改任何既有断言，跑全量并逐条核对两条降级路径（不注入 jobs、jobAwareComplete:false）与改动前行为一致；把结论、用例名与断言证据写入 docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md，含「既有 30 个测试文件唯一改动是 test/config.test.js 标题文案」的声明。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-bdef4c",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-bc1739",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858242727,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1185,
+              "at": 1790858242734,
+              "totals": {
+                "uncachedInputTokens": 175452,
+                "outputTokens": 142794,
+                "cacheReadTokens": 32050816,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1203,
+              "at": 1790858252958,
+              "totals": {
+                "uncachedInputTokens": 176472,
+                "outputTokens": 143635,
+                "cacheReadTokens": 32943488,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 1020,
+              "outputTokens": 841,
+              "cacheReadTokens": 892672,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858252940
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-31bd8e",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 不适用本包，换成兼容报告 + 仓库真实命令。（reqboard_task_move）",
+          "createdAt": 1790858242727,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-50308c",
+          "body": "[状态] → done：兼容回归的研发段完成：报告落盘 + 两条降级路径证据齐备，jobs-gate 25/25 绿。（reqboard_task_move）",
+          "createdAt": 1790858252940,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858219419,
+      "updatedAt": 1790858252940,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858219419,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858242727,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 不适用本包，换成兼容报告 + 仓库真实命令。"
+        },
+        {
+          "status": "done",
+          "at": 1790858252940,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "兼容回归的研发段完成：报告落盘 + 两条降级路径证据齐备，jobs-gate 25/25 绿。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790858250522,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md"
+        ],
+        "completed": [
+          "兼容报告落盘：docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md（含作用范围图、两条降级路径逐条证据、既有测试改动声明、未触碰清单、回滚路径、复现命令）",
+          "路径一「组合里没有 job 服务」证据：既有 30 个测试文件的 241 条基线用例全部不传 options.jobs → 原样通过；TC-16（照常发、无端告警 0 条）、TC-16b（形状不符 → 照常发 + 恰好 1 条降级 warn）、TC-2（available=false + reason 'unavailable'，重复 attach 不重复告警）",
+          "路径二「开关关闭」证据：TC-15 接线（假 registry 里明明有 running job，handle 仍返回 action:'sent'、接收端 1 条）；TC-15 配置（false 读得回、不写即 true）",
+          "判定保守性证据：TC-7 常驻 job 不参与抑制、TC-8 无轮次起点 → 'no-turn-start'、TC-2c list 抛错 → reason 'error' 且照旧发、TC-2b 畸形事件不抛异常",
+          "改动声明核实：既有 31 个测试文件中唯一改动是 test/config.test.js:35 的标题文案（9→10），断言 assert.deepEqual(schema volatile 集合, VOLATILE_KEYS) 一字未改，该文件其余 5 条用例未动",
+          "验收：node --test test/jobs-gate.test.js → tests 25 / pass 25 / fail 0"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858250522,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-c3b5bc",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·复核",
+      "description": "子卡阶段：复核",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-830f85"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "把 compat-report.md 的每条声明与代码/用例/文件系统对账：`grep -ln \"jobs:\" test/*.js` 只应命中 test/jobs-gate.test.js；`find . -newermt \"2026-10-01 20:22\"`（排除 docs 与 node_modules）应只有 index.js、src/config.js、src/jobs.js、test/config.test.js、test/jobs-gate.test.js；`node --test test/jobs-gate.test.js` → 全绿；无偏离时写明「对账一致」及依据。",
+      "implementation": "不改任何既有断言，跑全量并逐条核对两条降级路径（不注入 jobs、jobAwareComplete:false）与改动前行为一致；把结论、用例名与断言证据写入 docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md，含「既有 30 个测试文件唯一改动是 test/config.test.js 标题文案」的声明。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-bdef4c",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-839a30",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858265561,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1222,
+              "at": 1790858265569,
+              "totals": {
+                "uncachedInputTokens": 182262,
+                "outputTokens": 145527,
+                "cacheReadTokens": 33844736,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1235,
+              "at": 1790858272463,
+              "totals": {
+                "uncachedInputTokens": 186704,
+                "outputTokens": 146368,
+                "cacheReadTokens": 34461824,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 4442,
+              "outputTokens": 841,
+              "cacheReadTokens": 617088,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858272449
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-30b294",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 不适用本包，换成对账式核对命令（grep + mtime + node --test）。（reqboard_task_move）",
+          "createdAt": 1790858265561,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-5031c1",
+          "body": "[状态] → done：兼容报告对账通过：四条声明均有文件系统/用例依据，无偏离。（reqboard_task_move）",
+          "createdAt": 1790858272449,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858219419,
+      "updatedAt": 1790858272449,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858219419,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858265561,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 不适用本包，换成对账式核对命令（grep + mtime + node --test）。"
+        },
+        {
+          "status": "done",
+          "at": 1790858272449,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "兼容报告对账通过：四条声明均有文件系统/用例依据，无偏离。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790858270226,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "声明①「既有测试都不传 options.jobs」→ 对账一致：`grep -ln \"jobs:\" test/*.js` 只命中 test/jobs-gate.test.js（其余 30 个既有文件均不注入，故天然走降级路径）",
+          "声明②「本窗口只改了 config.test.js 的标题，其余既有测试一行未改」→ 对账一致：`find . -newermt 2026-10-01 20:22`（本需求窗口起点）在代码面只列出 index.js、src/config.js、src/jobs.js（新）、test/config.test.js、test/jobs-gate.test.js（新）；test/ 下本需求之前最后一次改动是 14:41（questions-hook.test.js，早于本需求 20:22 立项）",
+          "声明③「基线 241/0 → 现状 266/0」→ 对账一致：基线是改动前本窗口实测，现状为全量实测（t1+t2+t3 新增 25 条）",
+          "声明④「未触碰清单」→ 对账一致：src/classify.js、router.js、goal.js、deliver.js、payload.js、bindings.js、targets.js、outcomes.js、rpc.js、channels/**、client.js、package.json 均不在本窗口写入列表内",
+          "报告与用例的口径一致性抽查：TC-16 断言「降级时不产生告警」与报告 §3.1 第 3 行一致；TC-16b 断言「形状不符恰好 1 条 warn」与 §3.1 第 4 行一致；TC-2 的 reason 'unavailable' 与 §3.1 第 5 行一致",
+          "发现的**报告表述可精确化之处（非错误）**：§4 的「其余 29 个既有测试文件一行未改」结论正确（31 个文件 = 30 既有 + 1 新增；30 中 config.test.js 改标题 → 剩 29 未改），但报告未写出该推导，已在本条汇报中补齐口径",
+          "验收：node --test test/jobs-gate.test.js → pass 25 / fail 0"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858270226,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-9905e8",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·测试",
+      "description": "子卡阶段：测试",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-c3b5bc"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`node --test \"test/*.test.js\"` → 退出码 0、fail 0、tests ≥ 基线 241（本包无 TypeScript，无 tsc 步骤，改以 node --check 语法自检替代）。",
+      "implementation": "不改任何既有断言，跑全量并逐条核对两条降级路径（不注入 jobs、jobAwareComplete:false）与改动前行为一致；把结论、用例名与断言证据写入 docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md，含「既有 30 个测试文件唯一改动是 test/config.test.js 标题文案」的声明。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-bdef4c",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-971039",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858275413,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1241,
+              "at": 1790858275421,
+              "totals": {
+                "uncachedInputTokens": 186926,
+                "outputTokens": 146548,
+                "cacheReadTokens": 34772992,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1259,
+              "at": 1790858297440,
+              "totals": {
+                "uncachedInputTokens": 187646,
+                "outputTokens": 147138,
+                "cacheReadTokens": 35708928,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 720,
+              "outputTokens": 590,
+              "cacheReadTokens": 935936,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858297424
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-a148db",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成全量 node --test + node --check。（reqboard_task_move）",
+          "createdAt": 1790858275413,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-5af464",
+          "body": "[状态] → done：测试阶段通过：全量 266/266 绿、5 个落地文件语法自检通过。（reqboard_task_move）",
+          "createdAt": 1790858297424,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858219419,
+      "updatedAt": 1790858297424,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858219419,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858275413,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成全量 node --test + node --check。"
+        },
+        {
+          "status": "done",
+          "at": 1790858297424,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "测试阶段通过：全量 266/266 绿、5 个落地文件语法自检通过。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790858293984,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "语法自检：node --check 覆盖本需求全部 5 个落地文件（index.js / src/config.js / src/jobs.js / test/config.test.js / test/jobs-gate.test.js）→ 全部通过",
+          "全量回归：node --test \"test/*.test.js\" → tests 266 / pass 266 / fail 0",
+          "与基线比对：开工前 241 passed / 0 failed → 本次 266 passed / 0 failed，**只增不减、零新增失败**",
+          "两条降级路径在全量层面复验：不注入 jobs（既有 30 个文件）与 jobAwareComplete:false（TC-15）均照常投递，无一条既有用例被改写以迁就新行为"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858293984,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-ff3619",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "排障口径：drop 原因码 job-running 进运维文档·研发",
+      "description": "子卡阶段：研发",
+      "phase": "doc",
+      "side": "doc",
+      "dependsOn": [
+        "t-acae58"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`grep -n 'job-running' docs/guides/operations.md` 至少命中两处：①「通知没到：按这个顺序查」表的新步骤；② `drop` 原因码表的 `job-running` 行；并确认配置表列出了 `jobAwareComplete` 属可热改字段（本包无 vitest，文档卡以 grep 命中为证）。",
+      "implementation": "docs/guides/operations.md 的 drop 原因码表新增一行 job-running →「本会话仍有本轮拉起、未结算的后台 job（完成通知延后到 job 结算）」；「通知没到：按这个顺序查」表补一条指向该原因码（先看是抑制还是真漏发）。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-613fc4",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-d4c2d5",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858330551,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1314,
+              "at": 1790858330558,
+              "totals": {
+                "uncachedInputTokens": 193691,
+                "outputTokens": 150831,
+                "cacheReadTokens": 38553472,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1327,
+              "at": 1790858336218,
+              "totals": {
+                "uncachedInputTokens": 198066,
+                "outputTokens": 151360,
+                "cacheReadTokens": 39201024,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 4375,
+              "outputTokens": 529,
+              "cacheReadTokens": 647552,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858336202
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-798c96",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 不适用于文档卡，换成 grep 命中锚点。（reqboard_task_move）",
+          "createdAt": 1790858330551,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-ffb588",
+          "body": "[状态] → done：文档段落完成：drop 原因码 + 排查步骤 + 配置表三处更新，grep 双命中。（reqboard_task_move）",
+          "createdAt": 1790858336202,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858320314,
+      "updatedAt": 1790858336202,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858320314,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858330551,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 不适用于文档卡，换成 grep 命中锚点。"
+        },
+        {
+          "status": "done",
+          "at": 1790858336202,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "文档段落完成：drop 原因码 + 排查步骤 + 配置表三处更新，grep 双命中。"
+        }
+      ],
+      "layer": 2,
+      "lastReport": {
+        "at": 1790858333794,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/guides/operations.md"
+        ],
+        "completed": [
+          "docs/guides/operations.md 的 `drop` 原因码表新增 `job-running` 行（第 52 行）：本会话仍有本轮拉起、尚未结算的后台 job → 完成通知被压住、job 结算后自动补发，并注明 `jobAwareComplete: false` 可关掉该判定",
+          "「通知没到：按这个顺序查」表新增第 2 步（第 35 行）：先看 Host 日志有没有 `job-running`，一眼分清「被压住」与「真漏发」；原第 2-7 步顺延为 3-8",
+          "配置表同步：把 `jobAwareComplete` 列入「标了 volatile、改了不用重启」的那一行（第 61 行），与需求 FR-4 的热改口径一致",
+          "验收：grep -n 'job-running' docs/guides/operations.md 命中第 35 行（排查步骤）与第 52 行（原因码表）两处，均为表格行而非散文"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858333794,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-93732c",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "排障口径：drop 原因码 job-running 进运维文档·复核",
+      "description": "子卡阶段：复核",
+      "phase": "doc",
+      "side": "doc",
+      "dependsOn": [
+        "t-ff3619"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "核对文档三处口径与设计一致：① `job-running` 的语义与 `design/interfaces.md §4`（drop 原因码必须进运维文档）一致；② 排查步骤描述的现象与 `index.js:237` 的返回一致；③ 配置表把 `jobAwareComplete` 标为可热改，与 `design/interfaces.md §5`（volatile）一致。用 `grep -n` 与 `sed -n` 贴出三处原文为证。",
+      "implementation": "docs/guides/operations.md 的 drop 原因码表新增一行 job-running →「本会话仍有本轮拉起、未结算的后台 job（完成通知延后到 job 结算）」；「通知没到：按这个顺序查」表补一条指向该原因码（先看是抑制还是真漏发）。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-613fc4",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-a731ac",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858339018,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1333,
+              "at": 1790858339026,
+              "totals": {
+                "uncachedInputTokens": 198226,
+                "outputTokens": 151592,
+                "cacheReadTokens": 39527296,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1351,
+              "at": 1790858348883,
+              "totals": {
+                "uncachedInputTokens": 199141,
+                "outputTokens": 152576,
+                "cacheReadTokens": 40509312,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 915,
+              "outputTokens": 984,
+              "cacheReadTokens": 982016,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858348867
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-bc1245",
+          "body": "[状态] → in_progress：修订子卡验收标准：文档复核改为「逐处口径对账 + 贴原文」，不用模板里的 npx vitest。（reqboard_task_move）",
+          "createdAt": 1790858339018,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-263da7",
+          "body": "[状态] → done：文档复核通过：三处口径与代码/设计逐条一致，无偏离。（reqboard_task_move）",
+          "createdAt": 1790858348867,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858320314,
+      "updatedAt": 1790858348867,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858320314,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858339018,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：文档复核改为「逐处口径对账 + 贴原文」，不用模板里的 npx vitest。"
+        },
+        {
+          "status": "done",
+          "at": 1790858348867,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "文档复核通过：三处口径与代码/设计逐条一致，无偏离。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790858346224,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "① 原因码语义对齐：docs/guides/operations.md:52 的 `job-running` 释义（本会话仍有本轮拉起、尚未结算的后台 job → 通知被压住、结算后补发、`jobAwareComplete: false` 可关）与 design/interfaces.md §4 的原因码表一致",
+          "② 现象描述与代码一致：operations.md:35 的排查步骤与 index.js:237 的 `return { action:'dropped', reason:'job-running', intent, jobIds }` 描述同一件事（被压住 ≠ 漏发）",
+          "③ 热改口径一致：operations.md:58 把 `jobAwareComplete` 列入「标了 volatile、改了不用重启」一行，与 design/interfaces.md §5 及 src/config.js 的 `.volatile()` 声明一致",
+          "文本一致性抽查：文档说「job 结算后会自动补发一条」——对人可见的结果正确（默认唤醒路径下由 agent 收尾那一轮发出、quiet 路径下由宽限计时器补发；两种情况用户都恰好收到一条），属运维文档层面的合理简化，**非偏离**",
+          "复核结论：**无偏离**（三处口径逐条对得上）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858346224,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-f8c218",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·研发",
+      "description": "子卡阶段：研发",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-bdef4c"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`node --test test/jobs-gate.test.js` → 全绿；报告 `docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md` 存在且写明两条链路（抑制→结算→补发、换轮次不重复）的逐步过程、断言与耗时（本包无 vitest）。",
+      "implementation": "仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 内串两条完整链路：①turn/start → 假 registry 注册 running job → turn/end（断言 0 条）→ settle + 推进宽限（断言 1 条，字段与基线一致）；②settle 后宽限内开新轮次（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。结果写入 docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md。\n\n[子卡阶段·研发] 只做本阶段；验收：`npx vitest run <本卡改动涉及的测试文件>` → 全绿；并附 `git diff --stat` 摘要",
+      "context": "",
+      "parentId": "t-fbe154",
+      "stageKind": "dev",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-303ac2",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858397207,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1412,
+              "at": 1790858397214,
+              "totals": {
+                "uncachedInputTokens": 205228,
+                "outputTokens": 156204,
+                "cacheReadTokens": 43818880,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1425,
+              "at": 1790858404088,
+              "totals": {
+                "uncachedInputTokens": 209702,
+                "outputTokens": 156896,
+                "cacheReadTokens": 44498048,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 4474,
+              "outputTokens": 692,
+              "cacheReadTokens": 679168,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858404070
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-304faf",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx vitest 不适用本包，换成真 HTTP 接收端联调命令 + 报告锚点。（reqboard_task_move）",
+          "createdAt": 1790858397207,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-9bf32b",
+          "body": "[状态] → done：联调研发段完成：三条链路 + 边界全绿，e2e 报告落盘。（reqboard_task_move）",
+          "createdAt": 1790858404070,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858381417,
+      "updatedAt": 1790858404070,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858381417,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858397207,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx vitest 不适用本包，换成真 HTTP 接收端联调命令 + 报告锚点。"
+        },
+        {
+          "status": "done",
+          "at": 1790858404070,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "联调研发段完成：三条链路 + 边界全绿，e2e 报告落盘。"
+        }
+      ],
+      "layer": 3,
+      "lastReport": {
+        "at": 1790858401211,
+        "reportIndex": 1,
+        "filesChanged": [
+          "docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md"
+        ],
+        "completed": [
+          "联调环境：测试内起真 node:http 接收端（127.0.0.1 随机端口）收真报文；唯一打桩处是 DSH 的 ctx.jobs，投递链路全真",
+          "链路 ①「抑制 → 结算 → 补发」跑通：turn/end 被压住（接收端 0 条，71.6ms）→ 结算 + 推进宽限 → 恰好 1 条（55.7ms），且与「无 job 同场景基线」逐字段相等（忽略 at，含 version:1 / event:'turn/end' / message / title / sessionId / workspace / source / context 里的「你说了什么」）",
+          "链路 ②「换轮次不重复」跑通：结算后宽限内开新轮次 → 0 条补发；新轮次自己的 turn/end → 1 条 sent（65.3ms）",
+          "链路 ③「多 job」跑通：先结算一个 → 0 条；第二个结算 + 宽限到点 → 恰好 1 条（63.7ms）",
+          "边界联调：dispose 后推进计时器 0 条（42.4ms）、开关关闭照常发（23.0ms）、未注入/形状不符均照常发（22.5/23.0ms）、生产路径 ctx.inject 就绪接上 + 卸载摘掉（2.4ms）",
+          "报告落盘：docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md（三步图 + 证据用例表 + 耗时 + 复现命令）",
+          "验收：node --test test/jobs-gate.test.js → tests 25 / pass 25 / fail 0"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858401211,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-0d216c",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·复核",
+      "description": "子卡阶段：复核",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-f8c218"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "对账 `docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md` 的每条链路声明与 `test/jobs-gate.test.js` 的实际断言：链路 ① 对应 TC-3 + TC-10/18/19、链路 ② 对应 TC-11、链路 ③ 对应 TC-12、边界表对应 TC-14b/15/16/16b/17b；`node --test test/jobs-gate.test.js` → 全绿；无偏离时写明「对账一致」及依据。",
+      "implementation": "仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 内串两条完整链路：①turn/start → 假 registry 注册 running job → turn/end（断言 0 条）→ settle + 推进宽限（断言 1 条，字段与基线一致）；②settle 后宽限内开新轮次（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。结果写入 docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md。\n\n[子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据",
+      "context": "",
+      "parentId": "t-fbe154",
+      "stageKind": "review",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-508b39",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858406555,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1431,
+              "at": 1790858406563,
+              "totals": {
+                "uncachedInputTokens": 209927,
+                "outputTokens": 157147,
+                "cacheReadTokens": 44840192,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1449,
+              "at": 1790858416775,
+              "totals": {
+                "uncachedInputTokens": 210924,
+                "outputTokens": 158086,
+                "cacheReadTokens": 45869952,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 997,
+              "outputTokens": 939,
+              "cacheReadTokens": 1029760,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858416756
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-5c6cba",
+          "body": "[状态] → in_progress：修订子卡验收标准：联调复核改为「报告声明 ↔ 用例断言」逐条对账，不用模板里的 npx vitest。（reqboard_task_move）",
+          "createdAt": 1790858406555,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-a3c81a",
+          "body": "[状态] → done：联调复核通过：报告 3 条链路 + 5 行边界表与 9 组用例断言逐条对账一致。（reqboard_task_move）",
+          "createdAt": 1790858416756,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858381417,
+      "updatedAt": 1790858416756,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858381417,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858406555,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：联调复核改为「报告声明 ↔ 用例断言」逐条对账，不用模板里的 npx vitest。"
+        },
+        {
+          "status": "done",
+          "at": 1790858416756,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "联调复核通过：报告 3 条链路 + 5 行边界表与 9 组用例断言逐条对账一致。"
+        }
+      ],
+      "layer": 4,
+      "lastReport": {
+        "at": 1790858414144,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "报告点名的用例逐一在位：TC-3（2 处：判定层注释 + 接线段用例）、TC-10/18/19、TC-11、TC-12、TC-14b、TC-15（2 处）、TC-16、TC-16b、TC-17b 均在 test/jobs-gate.test.js 中真实存在（grep 计数 ≥1）",
+          "链路 ① 声明 ↔ 断言对账：报告的「turn/end 被压住 → 接收端 0 条」对应 TC-3 的 `assert.equal(result.action,'dropped')` + `assert.equal(receiver.received.length, 0)`；「结算 + 宽限 → 恰好 1 条且与基线逐字段相等」对应 TC-10/18/19 的 `withoutAt(received[1]) deepEqual withoutAt(received[0])` —— 一致",
+          "链路 ② 声明 ↔ 断言对账：报告称「宽限内新轮次 → 0 条补发；新轮次 turn/end → 1 条」对应 TC-11 的 `assert.equal(receiver.received.length, 0)` 与随后 `waitFor(receiver.received, 1)` —— 一致",
+          "链路 ③ 与边界表对账：TC-12（双 job）、TC-14b（dispose 后 0 条）、TC-15（开关关闭 sent）、TC-16/16b（降级 + warn）、TC-17b（inject 就绪接上 / 卸载摘掉）断言与报告描述逐条一致",
+          "报告里的耗时数字取自本次实测输出（71.6/55.7/65.3/63.7/42.4/23.0/22.5/2.4ms），与 node --test 打印一致",
+          "复核结论：**对账一致**（9 组用例 ↔ 报告 3 条链路 + 5 行边界表全部对上，无孤立声明）"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858414144,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    },
+    {
+      "id": "t-caa24b",
+      "requirementId": "REQ-261001202058-0fbe",
+      "title": "端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·测试",
+      "description": "子卡阶段：测试",
+      "phase": "test",
+      "side": "backend",
+      "dependsOn": [
+        "t-0d216c"
+      ],
+      "scope": {
+        "apis": [],
+        "tables": [],
+        "files": []
+      },
+      "acceptance": "`node --test \"test/*.test.js\"` → 退出码 0、fail 0、tests ≥ 241；`node --check` 覆盖本需求全部落地 JS 文件（本包无 TypeScript，无 tsc 步骤）。",
+      "implementation": "仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 内串两条完整链路：①turn/start → 假 registry 注册 running job → turn/end（断言 0 条）→ settle + 推进宽限（断言 1 条，字段与基线一致）；②settle 后宽限内开新轮次（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。结果写入 docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md。\n\n[子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）",
+      "context": "",
+      "parentId": "t-fbe154",
+      "stageKind": "test",
+      "attempt": 0,
+      "revisions": [],
+      "status": "done",
+      "blocked": false,
+      "executions": [
+        {
+          "id": "e-518cc8",
+          "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+          "trigger": "manual",
+          "startedAt": 1790858419020,
+          "outcome": "succeeded",
+          "tokenUsage": {
+            "start": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1455,
+              "at": 1790858419028,
+              "totals": {
+                "uncachedInputTokens": 211136,
+                "outputTokens": 158267,
+                "cacheReadTokens": 46214144,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "end": {
+              "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8",
+              "seq": 1473,
+              "at": 1790858431754,
+              "totals": {
+                "uncachedInputTokens": 211912,
+                "outputTokens": 158808,
+                "cacheReadTokens": 47249152,
+                "cacheWriteTokens": 0
+              },
+              "source": "projection"
+            },
+            "delta": {
+              "uncachedInputTokens": 776,
+              "outputTokens": 541,
+              "cacheReadTokens": 1035008,
+              "cacheWriteTokens": 0
+            }
+          },
+          "endedAt": 1790858431736
+        }
+      ],
+      "comments": [
+        {
+          "id": "c-155650",
+          "body": "[状态] → in_progress：修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成全量 node --test + node --check。（reqboard_task_move）",
+          "createdAt": 1790858419020,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        },
+        {
+          "id": "c-d57330",
+          "body": "[状态] → done：联调测试段通过：全量 266/266 绿、5 文件语法自检通过。（reqboard_task_move）",
+          "createdAt": 1790858431736,
+          "createdBy": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          }
+        }
+      ],
+      "version": 4,
+      "createdAt": 1790858381417,
+      "updatedAt": 1790858431736,
+      "createdBy": {
+        "kind": "system"
+      },
+      "updatedBy": {
+        "kind": "agent",
+        "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+      },
+      "statusHistory": [
+        {
+          "status": "todo",
+          "at": 1790858381417,
+          "by": {
+            "kind": "system"
+          }
+        },
+        {
+          "status": "in_progress",
+          "at": 1790858419020,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "修订子卡验收标准：模板的 npx tsc 不适用（本包无 TypeScript），换成全量 node --test + node --check。"
+        },
+        {
+          "status": "done",
+          "at": 1790858431736,
+          "by": {
+            "kind": "agent",
+            "sessionId": "session-b04b5777-de03-4582-8e15-756f94d43cf8"
+          },
+          "reason": "联调测试段通过：全量 266/266 绿、5 文件语法自检通过。"
+        }
+      ],
+      "layer": 5,
+      "lastReport": {
+        "at": 1790858428487,
+        "reportIndex": 1,
+        "filesChanged": [],
+        "completed": [
+          "语法自检：node --check 覆盖 5 个落地文件（index.js / src/config.js / src/jobs.js / test/config.test.js / test/jobs-gate.test.js）→ 全部通过",
+          "全量回归：node --test \"test/*.test.js\" → tests 266 / pass 266 / fail 0 / duration 2.48s",
+          "与基线比对：开工前 241 passed / 0 failed → 本次 266 passed / 0 failed（新增 25 条全绿），零新增失败"
+        ]
+      },
+      "lastRun": {
+        "at": 1790858428487,
+        "ok": true,
+        "stopReason": "reported",
+        "valueNonEmpty": true
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "t-1c0dc2",
+      "to": "t-acae58"
+    },
+    {
+      "from": "t-30bbed",
+      "to": "t-acae58"
+    },
+    {
+      "from": "t-acae58",
+      "to": "t-bdef4c"
+    },
+    {
+      "from": "t-acae58",
+      "to": "t-613fc4"
+    },
+    {
+      "from": "t-bdef4c",
+      "to": "t-fbe154"
+    },
+    {
+      "from": "t-ae0636",
+      "to": "t-1a2036"
+    },
+    {
+      "from": "t-1a2036",
+      "to": "t-5456ad"
+    },
+    {
+      "from": "t-bf2be8",
+      "to": "t-d4d793"
+    },
+    {
+      "from": "t-d4d793",
+      "to": "t-e5e744"
+    },
+    {
+      "from": "t-1c0dc2",
+      "to": "t-f468d1"
+    },
+    {
+      "from": "t-30bbed",
+      "to": "t-f468d1"
+    },
+    {
+      "from": "t-f468d1",
+      "to": "t-ce6b74"
+    },
+    {
+      "from": "t-ce6b74",
+      "to": "t-1e395e"
+    },
+    {
+      "from": "t-1e395e",
+      "to": "t-cbf134"
+    },
+    {
+      "from": "t-acae58",
+      "to": "t-830f85"
+    },
+    {
+      "from": "t-830f85",
+      "to": "t-c3b5bc"
+    },
+    {
+      "from": "t-c3b5bc",
+      "to": "t-9905e8"
+    },
+    {
+      "from": "t-acae58",
+      "to": "t-ff3619"
+    },
+    {
+      "from": "t-ff3619",
+      "to": "t-93732c"
+    },
+    {
+      "from": "t-bdef4c",
+      "to": "t-f8c218"
+    },
+    {
+      "from": "t-f8c218",
+      "to": "t-0d216c"
+    },
+    {
+      "from": "t-0d216c",
+      "to": "t-caa24b"
+    }
+  ],
+  "layers": [
+    {
+      "layer": 0,
+      "tasks": [
+        "t-1c0dc2",
+        "t-30bbed",
+        "t-ae0636",
+        "t-bf2be8"
+      ]
+    },
+    {
+      "layer": 1,
+      "tasks": [
+        "t-acae58",
+        "t-f468d1",
+        "t-1a2036",
+        "t-d4d793"
+      ]
+    },
+    {
+      "layer": 2,
+      "tasks": [
+        "t-bdef4c",
+        "t-613fc4",
+        "t-830f85",
+        "t-ff3619",
+        "t-ce6b74",
+        "t-5456ad",
+        "t-e5e744"
+      ]
+    },
+    {
+      "layer": 3,
+      "tasks": [
+        "t-fbe154",
+        "t-f8c218",
+        "t-c3b5bc",
+        "t-93732c",
+        "t-1e395e"
+      ]
+    },
+    {
+      "layer": 4,
+      "tasks": [
+        "t-0d216c",
+        "t-9905e8",
+        "t-cbf134"
+      ]
+    },
+    {
+      "layer": 5,
+      "tasks": [
+        "t-caa24b"
+      ]
+    }
+  ],
+  "ready": [],
+  "updated_at": "2026-10-01T12:40:46.958Z"
+}

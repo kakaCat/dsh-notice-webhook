@@ -1,0 +1,74 @@
+requirement:
+  id: REQ-260930183951-eb6c
+  title: 修复验收单自证失败：parentId 投影 + 验收锚点校准 + 系统项编号连续
+  category: feature
+  created_at: 2026-09-30T10:39:51.866Z
+  source_session: session-3643cb19-3ef8-4687-9636-586f8826d1a9
+  dir: /Users/mac/Documents/ai/dsh/dsh-notice-webhook/docs/requirements/REQ-260930183951-eb6c
+lifecycle:
+  current_stage: design
+  stage_count: 7
+  stage_list:
+    - draft
+    - brainstorming
+    - design
+    - decomposing
+    - implementing
+    - accepting
+    - done
+  stages:
+    - stage: draft
+      status: completed
+      enabled: true
+      entered_at: 2026-09-30T10:39:51.866Z
+      completed_at: 2026-09-30T10:39:51.885Z
+    - stage: brainstorming
+      status: completed
+      enabled: true
+      entered_at: 2026-09-30T10:39:51.885Z
+      completed_at: 2026-09-30T10:47:15.117Z
+      artifacts:
+        - kind: requirement
+          path: docs/requirements/REQ-260930183951-eb6c/requirement.md
+          confirmed_at: 2026-09-30T10:47:15.117Z
+    - stage: design
+      status: in_progress
+      enabled: true
+      entered_at: 2026-09-30T10:47:15.117Z
+      artifacts:
+        - kind: design
+          path: docs/requirements/REQ-260930183951-eb6c/design/architecture.md
+          confirmed_at: 2026-09-30T10:53:03.137Z
+        - kind: design
+          path: docs/requirements/REQ-260930183951-eb6c/design/data-model.md
+          confirmed_at: 2026-09-30T10:53:03.137Z
+        - kind: design
+          path: docs/requirements/REQ-260930183951-eb6c/design/interfaces.md
+          confirmed_at: 2026-09-30T10:53:03.137Z
+        - kind: design
+          path: docs/requirements/REQ-260930183951-eb6c/design/test-cases.md
+          confirmed_at: 2026-09-30T10:53:03.137Z
+        - kind: design
+          path: docs/requirements/REQ-260930183951-eb6c/design/use-cases.md
+          confirmed_at: 2026-09-30T10:53:03.137Z
+    - stage: decomposing
+      status: pending
+      enabled: true
+    - stage: implementing
+      status: pending
+      enabled: true
+    - stage: accepting
+      status: pending
+      enabled: true
+    - stage: done
+      status: pending
+      enabled: true
+metadata:
+  stage: lifecycle
+  requirement_id: REQ-260930183951-eb6c
+  generated_at: 2026-09-30T10:53:03.163Z
+  version: 1
+  generated_by: dsh-pmboard
+  rtm_version: "1.0"
+  file_path: /Users/mac/Documents/ai/dsh/dsh-notice-webhook/docs/requirements/REQ-260930183951-eb6c/rtm-lifecycle.yml
+  last_updated: 2026-09-30T10:53:03.163Z

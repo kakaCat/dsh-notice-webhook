@@ -1,0 +1,38 @@
+task:
+  id: t-168823
+  title: 详情卡骨架：content-head / card-head / 动作区·复核
+  status: done
+  implements: |-
+    client.js：新增 content-head（面包屑 + [全局设置] [打开配置文件]）；card-head 改为 图标22 + 名称 + id: <targetId> + 启用文字 + 开关；动作区改为 [删除目标]（danger，左）… [保存]（primary，右）。验证：界面人工核对（对应 frontend.md 第 7 节差距表前 4 行）。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-2429c8
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-168823
+    TASK_TITLE: 详情卡骨架：content-head / card-head / 动作区·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:47:21.163Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:47:20.969Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T14:47:21.164Z

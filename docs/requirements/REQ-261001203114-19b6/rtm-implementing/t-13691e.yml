@@ -1,0 +1,36 @@
+task:
+  id: t-13691e
+  title: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·测试
+  status: done
+  implements: |-
+    锁定三条路径：① 老记录（events 恰为 LEGACY_ALL_EVENTS 且无 mode）载入后归一化为 {events:[],eventsMode:'all'}，老目标开箱即收中断；② 老客户端（提交显式四项、无 mode）推断为全收；③ 旧版本读新文件：按白名单只取已知字段、忽略 eventsMode、events:[] 在旧语义里同样是全收，version 仍为 3。结果写入 docs/requirements/REQ-261001203114-19b6/tests/compat-report.md。
+
+    [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+  serves: []
+  depends_on:
+    - t-126c83
+  phase: test
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001203114-19b6
+    TASK_ID: t-13691e
+    TASK_TITLE: 迁移与兼容（单列）：老记录归一化 + 版本不变 + 回滚可读·测试
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: test
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: test
+      status: done
+      completed_at: 2026-10-01T12:55:33.898Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:55:33.897Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-01T12:55:34.067Z

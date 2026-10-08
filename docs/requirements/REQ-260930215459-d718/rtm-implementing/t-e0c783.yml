@@ -1,0 +1,38 @@
+task:
+  id: t-e0c783
+  title: TargetRecord 加 key 与派生 url·测试
+  status: done
+  implements: |-
+    src/targets.js：validateTarget 增 key 校验（按渠道 keyPattern，input:'url' 渠道不要求 key）；save/load 时对 input:'key' 的渠道用 composeUrl 算出派生 url 一并存；TargetRecord 增 key 字段。验证：更新 test/targets.test.js 并补派生断言。
+
+    [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+  serves: []
+  depends_on:
+    - t-bf0bf8
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-e0c783
+    TASK_TITLE: TargetRecord 加 key 与派生 url·测试
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:25:25.378Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:25:25.232Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T14:25:25.378Z

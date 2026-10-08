@@ -1,0 +1,33 @@
+task:
+  id: t-1146e7
+  title: 实现逐目标过滤与去重
+  status: done
+  implements: 在 src/router.js 增加逐目标 events 过滤（空数组=全收）与去重（同 channel+url 只保留一条）；与类开关的叠加顺序固定为：类开关→目标解析→总开关→目标过滤→去重。验证：新增 test/router.filter.test.js。
+  serves: []
+  depends_on:
+    - t-5a7d2f
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-1146e7
+    TASK_TITLE: 实现逐目标过滤与去重
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T10:20:05.068Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T10:12:51.791Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T10:24:14.082Z

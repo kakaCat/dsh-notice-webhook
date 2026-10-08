@@ -1,0 +1,38 @@
+task:
+  id: t-33e6a5
+  title: 实现投递结果存储（内存）·复核
+  status: done
+  implements: |-
+    新增 src/outcomes.js：Map<targetId, Outcome[]>，append 时裁剪到 5 条；reason 只允许业务码/网络错误文本；提供 list(targetId) 与 snapshot()。验证：新增 test/outcomes.test.js。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-fab413
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-33e6a5
+    TASK_TITLE: 实现投递结果存储（内存）·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T09:46:20.385Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T09:46:20.254Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T09:46:20.385Z

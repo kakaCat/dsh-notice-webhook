@@ -1,0 +1,33 @@
+task:
+  id: t-792424
+  title: 实现 RPC 只读端点与状态投影
+  status: done
+  implements: 新增 src/rpc.js 并注册 GET /api/dsh-notice-webhook/state（沿用 Host 既有认证/信任域）；返回 targets（TargetView，secretRef 只给存在标记）、bindings（含展开的 targets）、defaults、outcomes、secrets、revision。验证：新增 test/rpc.read.test.js。
+  serves: []
+  depends_on:
+    - t-3188ad
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-792424
+    TASK_TITLE: 实现 RPC 只读端点与状态投影
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T10:00:58.423Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T09:40:34.542Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T10:02:00.531Z

@@ -1,0 +1,38 @@
+task:
+  id: t-5e6463
+  title: 「怎么拿 key」说明浮层·测试
+  status: done
+  implements: |-
+    client.js：新增 HelpPopover({help})，挂在 key 字段（或字段 label）旁的 ? 按钮；就地展开（popover）显示标题+有序步骤+「官方文档 ↗」链接（href=docUrl，新窗口）；再次点击或点空白/Esc 收起；help 缺失则整个入口不渲染；带 aria-expanded。验证：test/client-service.test.js 增浮层用例。
+
+    [子卡阶段·测试] 只做本阶段；验收：目标命令输出全绿（贴命令与结果摘要）
+  serves: []
+  depends_on:
+    - t-15ce3f
+  phase: implement
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-260930215459-d718
+    TASK_ID: t-5e6463
+    TASK_TITLE: 「怎么拿 key」说明浮层·测试
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T14:57:05.036Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930215459-d718
+  generated_at: 2026-09-30T14:57:04.366Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T14:57:05.037Z

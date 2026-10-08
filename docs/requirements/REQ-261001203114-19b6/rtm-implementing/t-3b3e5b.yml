@@ -1,0 +1,48 @@
+task:
+  id: t-3b3e5b
+  title: 前端：设置页「关心事件」与保存语义·复核
+  status: done
+  implements: |-
+    client.js：EVENTS 在「对话完成」之后插入 { id:'turn/error', label:'会话中断', field:'turn/error' }；save() 计算 allChecked（勾选集合 == EVENT_IDS）→ 全勾提交 {events: [], eventsMode:'all'}，否则提交 {events: 勾选, eventsMode:'explicit'}；selectTarget() 回显口径不变（events 空 = 全勾）。不改布局/样式/图标/renderTargetPicker 契约。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-5d66e3
+  phase: ui
+  side: frontend
+  workflow_params:
+    REQ_ID: REQ-261001203114-19b6
+    TASK_ID: t-3b3e5b
+    TASK_TITLE: 前端：设置页「关心事件」与保存语义·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: frontend
+    PHASE: ui
+  workflow_total: 5
+  workflow_done: 5
+  workflow:
+    - phase: ui
+      status: done
+      started_at: 2026-10-01T12:53:11.673Z
+      completed_at: 2026-10-01T12:53:11.765Z
+    - phase: implement
+      status: done
+      completed_at: 2026-10-01T12:53:11.765Z
+    - phase: test
+      status: done
+      completed_at: 2026-10-01T12:53:11.765Z
+    - phase: commit
+      status: done
+      completed_at: 2026-10-01T12:53:11.765Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:53:11.599Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 5
+  last_updated: 2026-10-01T12:53:11.766Z

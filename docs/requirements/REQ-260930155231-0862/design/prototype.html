@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Webhook 通知 · 设置页原型（REQ-260930155231-0862）</title>
+<!--
+  原型页面（按 templates/design/prototype.html 骨架生成）。
+  用途：design/frontend.md 的可视化配套——每个功能点一个锚点区块（#FR-2 / #FR-4 / #FR-5）。
+
+  布局口径（优化 v0.2）：**左侧渠道 rail（带 app 图标 + 数量徽标）+ 右侧目标详情卡**，
+  沿用 dsh-im 设置页的成熟交互模式（左栏按渠道分组、右栏是所选对象的完整配置卡）。
+
+  纪律：**原型不是交付物**——样式从简、假数据里的地址一律用 example 域名占位、不含真实凭据。
+  图标说明：**内联 SVG 近似标记，非官方素材**，仅用于原型表达"靠图标+颜色秒认渠道"；
+  正式版可替换为合规素材或纯色占位。
+-->
+<style>
+  :root {
+    --bg: #f5f6f8; --panel: #fff; --panel-2: #fbfcfd; --line: #d0d7de; --text: #24292f;
+    --muted: #57606a; --accent: #0969da; --accent-soft: #ddf4ff; --ok: #1a7f37; --bad: #cf222e;
+    --mock: #8c959f; --chip: #eaeef2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1117; --panel: #161b22; --panel-2: #1c2128; --line: #30363d; --text: #e6edf3;
+      --muted: #8b949e; --accent: #4493f8; --accent-soft: #12283f; --ok: #3fb950; --bad: #f85149;
+      --mock: #6e7681; --chip: #21262d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "PingFang SC", sans-serif; margin: 0; background: var(--bg); color: var(--text); }
+  .page-header { background: #1f2328; color: #fff; padding: 12px 20px; font-size: 14px; }
+  .page-header .req { opacity: .7; margin-left: 8px; }
+  .fr { background: var(--panel); margin: 16px auto; max-width: 980px; border: 1px solid var(--line);
+        border-radius: 8px; padding: 20px; }
+  .fr > h2 { margin: 0 0 4px; font-size: 16px; }
+  .fr > .meta { color: var(--muted); font-size: 12px; margin-bottom: 14px; }
+  .frame { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 14px 0; background: var(--bg); }
+  .frame > .cap { font-size: 12px; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--line); }
+  .flow { font-size: 13px; color: var(--muted); margin-top: 12px; line-height: 1.75; }
+
+  .shell { display: flex; min-height: 420px; }
+  .content { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .content-head { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  .content-head .title { font-weight: 600; font-size: 14px; }
+  .content-head .sp { flex: 1; }
+  .btn { font: inherit; font-size: 12px; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--line);
+         background: var(--panel); color: var(--text); cursor: default; white-space: nowrap; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.danger { color: var(--bad); }
+
+  .rail { width: 236px; flex: none; border-right: 1px solid var(--line); background: var(--panel-2); padding: 8px; }
+  .rail-item { display: flex; align-items: center; gap: 9px; padding: 8px 9px; border-radius: 7px; font-size: 13px; }
+  .rail-item.sel { background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+  .rail-item .nm { flex: 1; }
+  .badge { font-size: 11px; color: var(--muted); background: var(--chip); border-radius: 999px; padding: 0 7px; }
+  .rail-sep { margin: 10px 9px 6px; font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+  .ico { width: 20px; height: 20px; flex: none; display: block; }
+
+  .card { padding: 14px 16px; }
+  .card-head { display: flex; align-items: center; gap: 10px; }
+  .card-head .nm { font-size: 14px; font-weight: 600; }
+  .card-head .id { font-size: 11px; color: var(--muted); }
+  .card-head .sp { flex: 1; }
+  .sec { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 12px; }
+  .sec > .sec-title { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .field { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .field > .lbl { font-size: 12px; color: var(--muted); width: 62px; flex: none; }
+  input[type=text], select { font: inherit; font-size: 13px; padding: 6px 8px; border: 1px solid var(--line);
+        border-radius: 6px; background: var(--panel); color: var(--text); }
+  input[type=text] { min-width: 250px; }
+  input[type=text].sm { min-width: 150px; }
+  .hint { font-size: 11px; color: var(--muted); }
+  .chip { display: inline-block; padding: 1px 7px; border-radius: 999px; background: var(--chip); font-size: 11px; color: var(--muted); }
+  .chip.ok { color: var(--ok); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 18px; }
+  .check { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; }
+  .box { width: 15px; height: 15px; border: 1.5px solid var(--mock); border-radius: 3px; flex: none; margin-top: 2px; }
+  .box.on { background: var(--accent); border-color: var(--accent); position: relative; }
+  .box.on::after { content: "✓"; color: #fff; font-size: 11px; line-height: 13px; display: block; text-align: center; }
+  .check .sub { font-size: 11px; color: var(--muted); }
+  .sw { width: 34px; height: 18px; border-radius: 999px; background: var(--accent); position: relative; flex: none; }
+  .sw::after { content: ""; position: absolute; top: 2px; right: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; }
+  .sw.off { background: var(--mock); }
+  .sw.off::after { right: auto; left: 2px; }
+  .outcome { display: flex; gap: 10px; font-size: 12px; color: var(--muted); padding: 3px 0; }
+  .outcome .ok { color: var(--ok); } .outcome .bad { color: var(--bad); }
+  .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 14px; }
+  .err { color: var(--bad); font-size: 12px; }
+  .banner-err { border: 1px solid var(--bad); color: var(--bad); border-radius: 6px;
+                padding: 7px 10px; font-size: 12px; margin-bottom: 10px; }
+  .empty { border: 1px dashed var(--mock); border-radius: 8px; padding: 34px; text-align: center; color: var(--muted); font-size: 13px; }
+  code { background: var(--chip); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+  .legend { font-size: 11px; color: var(--muted); margin-top: 8px; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="page-header"><strong>Webhook 通知</strong><span class="req">REQ-260930155231-0862 · 原型 v0.2 · 2026-09-30</span></div>
+
+<!-- ═══════════════════════════ FR-2 ═══════════════════════════ -->
+<section class="fr" id="FR-2">
+  <h2>FR-2 界面管理目标清单</h2>
+  <div class="meta">P0 · 入口：设置 → 侧栏「Webhook 通知」（settings.section，order 21）· 布局：左渠道 rail + 右目标详情卡</div>
+
+  <div class="frame">
+    <div class="cap">帧 1／默认态：左栏按渠道分组（带图标与数量徽标），右栏是所选目标的完整配置</div>
+    <div class="shell">
+      <div class="rail">
+        <div class="rail-item"><span class="nm">全部目标</span><span class="badge">3</span></div>
+        <div class="rail-sep">按渠道</div>
+        <div class="rail-item">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2F7EF7"/><path d="M6.4 8.2h11.2c.8 0 1.4.6 1.4 1.4v5c0 .8-.6 1.4-1.4 1.4h-6.1l-3 2.2v-2.2H6.4c-.8 0-1.4-.6-1.4-1.4v-5c0-.8.6-1.4 1.4-1.4z" fill="#fff"/></svg>
+          <span class="nm">企业微信</span><span class="badge">1</span>
+        </div>
+        <div class="rail-item sel">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1677FF"/><path d="M13.6 5 7 13.2h3.4L10 19l6.6-8.2h-3.4L13.6 5z" fill="#fff"/></svg>
+          <span class="nm">钉钉</span><span class="badge">1</span>
+        </div>
+        <div class="rail-item">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#3370FF"/><path d="M6 15.5c2.6 1.4 5.3.6 7.1-1.2L17.8 9c-2.9-1-6 .1-8 2.4L6 15.5z" fill="#fff"/><path d="M6 9.6c1.9 1.4 4.2.9 5.6-.5l.9-.9C10.6 7.5 8 8.1 6 9.6z" fill="#fff" opacity=".85"/></svg>
+          <span class="nm">飞书</span><span class="badge">0</span>
+        </div>
+        <div class="rail-item">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff" stroke="#d0d7de"/><rect x="9" y="3" width="3" height="10" rx="1.5" fill="#36C5F0"/><rect x="11" y="12" width="10" height="3" rx="1.5" fill="#2EB67D"/><rect x="12" y="11" width="3" height="10" rx="1.5" fill="#ECB22E"/><rect x="3" y="9" width="10" height="3" rx="1.5" fill="#E01E5A"/></svg>
+          <span class="nm">Slack</span><span class="badge">1</span>
+        </div>
+        <div class="rail-item">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#5865F2"/><path d="M6.5 8.6c2.9-1.3 8.1-1.3 11 0 1.3 2.1 2 4.4 2.2 7-1.4 1.2-2.9 1.9-4 2.2l-.8-1.3c-1.9.5-3.9.5-5.8 0l-.8 1.3c-1.1-.3-2.6-1-4-2.2.2-2.6.9-4.9 2.2-7z" fill="#fff"/><circle cx="9.6" cy="13" r="1.1" fill="#5865F2"/><circle cx="14.4" cy="13" r="1.1" fill="#5865F2"/></svg>
+          <span class="nm">Discord</span><span class="badge">0</span>
+        </div>
+        <div class="rail-item">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#6E7681"/><path d="M10 7c-2 0-2 1.4-2 5s0 5 2 5M14 7c2 0 2 1.4 2 5s0 5-2 5" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <span class="nm">通用自定义</span><span class="badge">0</span>
+        </div>
+        <div class="rail-item"><span class="nm" style="color:var(--accent)">+ 新增目标</span></div>
+
+        <div class="rail-sep">默认组 · 未绑定目标的会话发这里</div>
+        <div class="rail-item">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#2F7EF7"/><path d="M6.4 8.2h11.2c.8 0 1.4.6 1.4 1.4v5c0 .8-.6 1.4-1.4 1.4h-6.1l-3 2.2v-2.2H6.4c-.8 0-1.4-.6-1.4-1.4v-5c0-.8.6-1.4 1.4-1.4z" fill="#fff"/></svg>
+          <span class="nm">项目群-企微</span><span class="badge">默认</span>
+        </div>
+        <div class="rail-item">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1677FF"/><path d="M13.6 5 7 13.2h3.4L10 19l6.6-8.2h-3.4L13.6 5z" fill="#fff"/></svg>
+          <span class="nm">值守群-钉钉</span><span class="badge">默认</span>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="content-head">
+          <span class="title">设置 › Webhook 通知</span><span class="sp"></span>
+          <button class="btn">全局设置</button><button class="btn">打开配置文件</button>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px"><rect width="24" height="24" rx="6" fill="#1677FF"/><path d="M13.6 5 7 13.2h3.4L10 19l6.6-8.2h-3.4L13.6 5z" fill="#fff"/></svg>
+            <span class="nm">值守群-钉钉</span><span class="id">id: dingtalk-oncall</span><span class="sp"></span>
+            <span class="hint">启用</span><span class="sw"></span>
+          </div>
+
+          <div class="sec">
+            <div class="field"><span class="lbl">名称</span><input type="text" value="值守群-钉钉"><span class="hint">给人看，60 字内</span></div>
+            <div class="field"><span class="lbl">渠道</span>
+              <select><option selected>▣ 钉钉机器人</option><option>▣ 企业微信机器人</option><option>▣ 飞书自定义机器人</option><option>▣ Slack Incoming Webhook</option><option>▣ Discord Webhook</option><option>▣ 通用自定义（原样 JSON）</option></select>
+              <span class="hint">决定报文格式与成功判定</span>
+            </div>
+            <div class="field"><span class="lbl">地址</span><input type="text" value="https://oapi.dingtalk.com/robot/send?access_token=***">
+              <button class="btn">发送测试</button>
+            </div>
+            <div class="field"><span class="lbl">加签密钥</span><input type="text" class="sm" value="DINGTALK_SECRET">
+              <span class="chip ok">已配置</span><span class="hint">只存凭据引用名，界面不回显密钥值</span>
+            </div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title">关心事件 ℹ <span class="hint">一个都不勾 = 全收</span></div>
+            <div class="grid">
+              <label class="check"><span class="box on"></span><span>对话完成<br><span class="sub">turn/end</span></span></label>
+              <label class="check"><span class="box"></span><span>等待回答<br><span class="sub">ask_user_question</span></span></label>
+              <label class="check"><span class="box on"></span><span>等待授权<br><span class="sub">approval/asked</span></span></label>
+              <label class="check"><span class="box"></span><span>目标终态<br><span class="sub">goal/*</span></span></label>
+            </div>
+          </div>
+
+          <div class="sec">
+            <div class="field"><span class="lbl">默认组</span><span class="sw"></span>
+              <span class="hint">未绑定任何目标的会话会发给默认组里的目标</span>
+            </div>
+            <div class="field"><span class="lbl">谁在用</span>
+              <span class="chip">默认组</span><span class="chip">会话 X（绑定）</span>
+              <span class="hint">只读展示，便于排查"某个会话为什么没收到"</span>
+            </div>
+          </div>
+
+          <div class="sec">
+            <div class="sec-title">最近投递 <span class="hint">每目标保留最近 5 条（重启清空）</span></div>
+            <div class="outcome"><span>03:36:46</span><span class="ok">✓ 200</span><span>ok</span></div>
+            <div class="outcome"><span>03:31:02</span><span class="bad">✗ 200 errcode 310000</span><span>keywords not in content</span></div>
+          </div>
+
+          <div class="actions">
+            <button class="btn danger">删除目标</button><button class="btn primary">保存</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="cap">帧 2／新增目标：rail 保持可见，右栏换成空表单（渠道切换时字段与图标同步变化）</div>
+    <div class="shell">
+      <div class="rail">
+        <div class="rail-item"><span class="nm">全部目标</span><span class="badge">3</span></div>
+        <div class="rail-item sel"><span class="nm">+ 新增目标（未保存）</span></div>
+        <div class="rail-sep">按渠道</div>
+        <div class="rail-item"><svg class="ico" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#2F7EF7"/><path d="M6.4 8.2h11.2c.8 0 1.4.6 1.4 1.4v5c0 .8-.6 1.4-1.4 1.4h-6.1l-3 2.2v-2.2H6.4c-.8 0-1.4-.6-1.4-1.4v-5c0-.8.6-1.4 1.4-1.4z" fill="#fff"/></svg><span class="nm">企业微信</span><span class="badge">1</span></div>
+        <div class="rail-item"><svg class="ico" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#1677FF"/><path d="M13.6 5 7 13.2h3.4L10 19l6.6-8.2h-3.4L13.6 5z" fill="#fff"/></svg><span class="nm">钉钉</span><span class="badge">1</span></div>
+        <div class="rail-item"><svg class="ico" viewBox="0 0 24 24"><rect width="24" height="24" rx="6" fill="#fff" stroke="#d0d7de"/><rect x="9" y="3" width="3" height="10" rx="1.5" fill="#36C5F0"/><rect x="11" y="12" width="10" height="3" rx="1.5" fill="#2EB67D"/><rect x="12" y="11" width="3" height="10" rx="1.5" fill="#ECB22E"/><rect x="3" y="9" width="10" height="3" rx="1.5" fill="#E01E5A"/></svg><span class="nm">Slack</span><span class="badge">1</span></div>
+      </div>
+      <div class="content">
+        <div class="card">
+          <div class="card-head"><span class="nm">新增目标</span><span class="id">保存后生成 id</span><span class="sp"></span><span class="hint">启用</span><span class="sw"></span></div>
+          <div class="sec">
+            <div class="field"><span class="lbl">名称</span><input type="text" value="" placeholder="如：项目群-企微"><span class="hint">必填</span></div>
+            <div class="field"><span class="lbl">渠道</span>
+              <select><option selected>▣ 企业微信机器人</option><option>▣ 钉钉机器人</option><option>▣ 飞书自定义机器人</option><option>▣ Slack Incoming Webhook</option><option>▣ Discord Webhook</option><option>▣ 通用自定义（原样 JSON）</option></select>
+            </div>
+            <div class="field"><span class="lbl">地址</span><input type="text" value="" placeholder="https://…（http/https 绝对地址）"></div>
+            <div class="field"><span class="lbl">加签密钥</span><input type="text" class="sm" value="" placeholder="凭据引用名（选填）"><span class="hint">仅飞书 / 钉钉出现此字段</span></div>
+          </div>
+          <div class="sec">
+            <div class="sec-title">关心事件 <span class="hint">不勾 = 全收</span></div>
+            <div class="grid">
+              <label class="check"><span class="box"></span><span>对话完成<br><span class="sub">turn/end</span></span></label>
+              <label class="check"><span class="box"></span><span>等待回答<br><span class="sub">ask_user_question</span></span></label>
+              <label class="check"><span class="box"></span><span>等待授权<br><span class="sub">approval/asked</span></span></label>
+              <label class="check"><span class="box"></span><span>目标终态<br><span class="sub">goal/*</span></span></label>
+            </div>
+          </div>
+          <div class="actions"><button class="btn">取消</button><button class="btn primary">保存</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="cap">帧 3／空态 与 两类可见失败（校验失败 / 落盘失败）</div>
+    <div class="shell">
+      <div class="rail">
+        <div class="rail-item"><span class="nm">全部目标</span><span class="badge">0</span></div>
+        <div class="rail-item sel"><span class="nm">+ 新增目标</span></div>
+      </div>
+      <div class="content">
+        <div class="card">
+          <div class="empty">还没有目标。<br>点左侧「+ 新增目标」开始，或直接在 profile 配 <code>webhookUrl</code> 用兜底通道。</div>
+        </div>
+        <div class="card">
+          <div class="banner-err">配置未写入（文件不可写）——列表未改变</div>
+          <div class="field"><span class="lbl">地址</span><input type="text" value="ftp://example.com/hook"></div>
+          <div class="field"><span class="lbl"></span><span class="err">✗ 地址必须是 http/https 绝对地址</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">图标为内联 SVG 近似标记（非官方素材），仅用于原型表达"靠图标+颜色秒认渠道"。</div>
+
+  <div class="flow">交互路径：<br>
+    1. 打开设置 → <code>GET /state</code> → 渲染 rail + 卡片（加载中显示骨架，**不显示空态**）<br>
+    2. 新增 / 编辑 → 校验 → <code>POST /targets</code> → 用返回列表替换本地（rail 徽标同步变化）<br>
+    3. 启停 → 卡片右上开关（乐观更新，失败回滚）；删除 → 二次确认（提示"引用该目标的会话绑定会失效"）<br>
+    4. 并发冲突：409 → 顶部提示"已被其他页面修改，已刷新到最新"，用户已改字段保留
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FR-4 ═══════════════════════════ -->
+<section class="fr" id="FR-4">
+  <h2>FR-4 逐目标事件过滤</h2>
+  <div class="meta">P0 · 位置：详情卡「关心事件」段（复选网格，标题 + 字段名小字两行）</div>
+
+  <div class="frame">
+    <div class="cap">事件网格：默认全不勾 = 全收；勾选即白名单</div>
+    <div class="card">
+      <div class="sec-title">关心事件 ℹ</div>
+      <div class="grid">
+        <label class="check"><span class="box on"></span><span>等待授权<br><span class="sub">approval/asked</span></span></label>
+        <label class="check"><span class="box on"></span><span>对话完成<br><span class="sub">turn/end</span></span></label>
+        <label class="check"><span class="box"></span><span>等待回答<br><span class="sub">ask_user_question</span></span></label>
+        <label class="check"><span class="box"></span><span>目标终态<br><span class="sub">goal/*</span></span></label>
+      </div>
+      <div class="field" style="margin-top:10px">
+        <span class="chip">已选 2 类</span>
+        <span class="hint">另一种状态显示 <span class="chip">全收（未限制）</span>，避免被误读成"都不收"</span>
+      </div>
+      <div class="field">
+        <span class="hint">层次提醒：这里是<b>目标级</b>过滤；配置里的三类通知开关是<b>内容级</b>——内容级关掉的类，目标级勾了也收不到。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow">交互路径：<br>
+    1. 目标 A 只勾「等待授权」→ 完成事件不到 A，授权事件到 A<br>
+    2. 全不勾 → 全收；保存后详情卡显示 <span class="chip">全收</span><br>
+    3. 与总开关互不影响：总开关管"默认组发不发"，本网格管"这个目标收哪几类"
+  </div>
+</section>
+
+<!-- ═══════════════════════════ FR-5 ═══════════════════════════ -->
+<section class="fr" id="FR-5">
+  <h2>FR-5 会话窗口绑定多个目标</h2>
+  <div class="meta">P0 · 位置：左栏「默认组」段 + 详情卡「谁在用」只读标记</div>
+
+  <div class="frame">
+    <div class="cap">绑定关系的两处体现（左：哪些在默认组；右：这个目标被谁用）</div>
+    <div class="shell">
+      <div class="rail">
+        <div class="rail-sep">默认组 · 未绑定目标的会话发这里</div>
+        <div class="rail-item"><span class="nm">项目群-企微</span><span class="badge">默认</span></div>
+        <div class="rail-item sel"><span class="nm">值守群-钉钉</span><span class="badge">默认</span></div>
+        <div class="rail-sep">不在默认组</div>
+        <div class="rail-item"><span class="nm">我的手机（Slack）</span><span class="badge">绑定</span></div>
+      </div>
+      <div class="content">
+        <div class="card">
+          <div class="card-head"><span class="nm">我的手机</span><span class="id">id: slack-phone</span><span class="sp"></span><span class="hint">不在默认组</span></div>
+          <div class="sec">
+            <div class="field"><span class="lbl">谁在用</span>
+              <span class="chip">会话 X（绑定）</span>
+              <span class="hint">会话 X 还绑了「项目群-企微」→ X 的事件只发这两个</span>
+            </div>
+            <div class="field"><span class="lbl">默认组</span><span class="sw off"></span>
+              <span class="hint">关：未绑定目标的会话不会发到这里</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="frame">
+    <div class="cap">帧 2／宿主弹框里嵌入的选择器（弹框外壳是宿主的；列表与勾选语义是我们的）</div>
+    <div class="card" style="max-width:560px;margin:0 auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)">
+      <div class="content-head" style="border-bottom:1px solid var(--line)">
+        <span class="title">绑定会话到 Webhook</span><span class="sp"></span><span class="hint">PM 看板 · 会话 X</span>
+      </div>
+      <div class="card">
+        <div class="sec-title">选择目标（可多选；一个都不选 = 回落默认组）</div>
+        <div class="check"><span class="box on"></span><span>项目群-企微<br><span class="sub">企业微信 · 默认组</span></span></div>
+        <div class="check"><span class="box"></span><span>值守群-钉钉<br><span class="sub">钉钉 · 默认组</span></span></div>
+        <div class="check"><span class="box on"></span><span>我的手机<br><span class="sub">Slack · 不在默认组</span></span></div>
+        <div class="field" style="margin-top:10px">
+          <span class="chip">已选 2 个</span>
+          <span class="hint">确定后由宿主调 <code>bindTargets(sessionId, ids)</code></span>
+        </div>
+      </div>
+      <div class="actions" style="padding:0 16px 14px"><button class="btn">取消</button><button class="btn primary">确定</button></div>
+    </div>
+    <div class="hint" style="padding:10px 12px">↑ 这个弹框是<b>宿主</b>画的（标题栏、取消/确定）；里面的目标列表是我们的 <code>TargetPicker</code>。没有目标时它显示引导而不是空白。</div>
+  </div>
+
+  <div class="frame">
+    <div class="cap">帧 3／会话绑定页（第二个标签）：按<b>会话</b>看它绑了哪些 webhook，并可解绑</div>
+    <div class="content">
+      <div class="content-head">
+        <span class="title">设置 › Webhook 通知</span>
+        <span class="chip">目标</span>
+        <span class="chip" style="box-shadow:inset 0 0 0 1px var(--accent)">会话绑定</span>
+        <span class="sp"></span>
+        <button class="btn">打开配置文件</button>
+      </div>
+      <div class="card">
+        <div class="sec-title">会话（3 条绑定）<span class="hint">绑定是<b>替代</b>默认组——绑了就不再发默认组；解绑后立刻回落默认组</span></div>
+        <table>
+          <thead><tr><th style="width:36%">会话</th><th>绑定的 webhook</th><th style="width:14%">操作</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>修复登录 bug<br><span class="hint">session-b7c5…</span></td>
+              <td><span class="chip">▣ 项目群-企微</span> <span class="chip">▣ 我的手机(Slack)</span></td>
+              <td><button class="btn">解绑</button></td>
+            </tr>
+            <tr>
+              <td>打包发布<br><span class="hint">session-3a91…</span></td>
+              <td><span class="chip">▣ 值守群-钉钉</span></td>
+              <td><button class="btn">解绑</button></td>
+            </tr>
+            <tr>
+              <td>数据迁移<br><span class="hint">session-77cc…</span></td>
+              <td><span class="chip">⚠ 目标已删除（回落默认组）</span></td>
+              <td><button class="btn">清理</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="hint" style="margin-top:10px">解绑前二次确认：<code>解绑后该会话改为发默认组，确认？</code></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow">交互路径：<br>
+    1. 目标页只读展示"谁在用"，用于排查"这个目标被谁用"<br>
+    2. **「选哪个 webhook」的界面由我们提供**：客户端服务 <code>dshNoticeWebhookClient.renderTargetPicker(...)</code> 返回可嵌入控件（宿主不得缓存首次返回值、不另打包 React）<br>
+    3. 分工：弹框外壳归宿主；目标列表与勾选语义（默认组、凭据脱敏、空态引导）归我们；确定后宿主调 Host Service <code>bindTargets(sessionId, ids)</code>（空数组 = 解绑全部）<br>
+    4. **会话绑定页（帧 3）**：按会话看绑了哪些 webhook，可一键解绑；绑定是**替代**默认组（不叠加）<br>
+    5. 三方解绑能力：Host Service <code>unbindTargets(sessionId)</code>（等价 <code>bindTargets(sid, [])</code>），解绑后回落默认组<br>
+    6. 目标被删除 → 引用它的绑定失效（视为未绑定该目标），不报错，回落默认组
+  </div>
+</section>
+
+</body>
+</html>

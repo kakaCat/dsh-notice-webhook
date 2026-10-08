@@ -1,0 +1,36 @@
+task:
+  id: t-0d216c
+  title: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·复核
+  status: done
+  implements: |-
+    仿 test/e2e.local.test.js 起真实 HTTP 接收端，在 test/jobs-gate.test.js 内串两条完整链路：①turn/start → 假 registry 注册 running job → turn/end（断言 0 条）→ settle + 推进宽限（断言 1 条，字段与基线一致）；②settle 后宽限内开新轮次（断言 0 条补发）→ 新轮次 turn/end（断言 1 条）。结果写入 docs/requirements/REQ-261001202058-0fbe/tests/e2e-report.md。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-f8c218
+  phase: test
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001202058-0fbe
+    TASK_ID: t-0d216c
+    TASK_TITLE: 端到端联调：真 HTTP 接收端跑「抑制 → 结算 → 补发」·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: test
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: test
+      status: done
+      completed_at: 2026-10-01T12:40:14.214Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001202058-0fbe
+  generated_at: 2026-10-01T12:40:06.599Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-01T12:40:16.808Z

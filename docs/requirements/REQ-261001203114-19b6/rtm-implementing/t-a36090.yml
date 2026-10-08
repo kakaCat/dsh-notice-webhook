@@ -1,0 +1,33 @@
+task:
+  id: t-a36090
+  title: 数据契约：目标事件语义 eventsMode 与事件清单
+  status: done
+  implements: src/targets.js：EVENT_TYPES 追加 'turn/error'（既有四项顺序不变）；新增 LEGACY_ALL_EVENTS 与纯函数 normalizeEvents(events, mode)（判定式按 design/data-model.md §2，幂等）；validateTarget() 读取 input.eventsMode（值域 all/explicit，其它视为缺省）、未知事件仍按既有规则报错、输出补 eventsMode；TargetStore.#persist() 与版本闸门零改动（TARGET_FILE_VERSION 保持 3）。
+  serves:
+    - FR-5
+  depends_on: []
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001203114-19b6
+    TASK_ID: t-a36090
+    TASK_TITLE: 数据契约：目标事件语义 eventsMode 与事件清单
+    DESIGN_FILES: design/architecture.md
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-01T12:49:55.588Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:41:40.743Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-01T12:52:32.046Z

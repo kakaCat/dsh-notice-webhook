@@ -1,0 +1,36 @@
+task:
+  id: t-9905e8
+  title: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·测试
+  status: done
+  implements: |-
+    不改任何既有断言，跑全量并逐条核对两条降级路径（不注入 jobs、jobAwareComplete:false）与改动前行为一致；把结论、用例名与断言证据写入 docs/requirements/REQ-261001202058-0fbe/tests/compat-report.md，含「既有 30 个测试文件唯一改动是 test/config.test.js 标题文案」的声明。
+
+    [子卡阶段·测试] 只做本阶段；验收：`pnpm test` → 失败数 ≤ 开工前基线；`npx tsc --noEmit` → 错误数 ≤ 基线（贴汇总输出）
+  serves: []
+  depends_on:
+    - t-c3b5bc
+  phase: test
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001202058-0fbe
+    TASK_ID: t-9905e8
+    TASK_TITLE: 迁移与兼容回归（无 job 服务 / 开关关闭 / 既有调用方）·测试
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: test
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: test
+      status: done
+      completed_at: 2026-10-01T12:38:14.061Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001202058-0fbe
+  generated_at: 2026-10-01T12:37:55.452Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-10-01T12:38:17.469Z

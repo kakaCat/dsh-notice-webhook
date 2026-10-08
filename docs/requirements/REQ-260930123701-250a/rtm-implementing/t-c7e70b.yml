@@ -1,0 +1,39 @@
+task:
+  id: t-c7e70b
+  title: 装载到 profile 并做真实 Host 验收·研发
+  status: done
+  implements: |-
+    用 plugin_manager install_bundle 把插件包装进当前 profile 并确认生效；在真实 dsh 会话中触发一轮对话、一次需要授权的操作与一次 ask_user_question，用本地接收端日志逐条核对 payload 字段；再对某会话执行 bind() 到接收端 B 并设 enabled:false，验证只有 B 收到。
+
+    [子卡阶段·研发] 只做本阶段；验收：改动已落盘，相关测试或命令跑通并附输出摘要
+  serves: []
+  depends_on:
+    - t-f25d34
+  phase: test
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-c7e70b
+    TASK_TITLE: 装载到 profile 并做真实 Host 验收·研发
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: test
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: test
+      status: done
+      completed_at: 2026-09-30T06:31:56.064Z
+    - phase: review
+      status: done
+      completed_at: 2026-09-30T06:31:56.004Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T06:26:36.982Z
+  version: 5
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T06:31:56.064Z

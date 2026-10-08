@@ -1,0 +1,38 @@
+task:
+  id: t-5e3c2c
+  title: 实现 goal 终态识别与去重·复核
+  status: done
+  implements: |-
+    在 src/goal.js 增加终态部分：监听 goal/change 更新当前 goal 的 {id, revision, phase, maxGoalRounds}；phase 变为 complete 时产出 goal/complete 意图；变为 blocked 时产出 goal/blocked 意图——blockedReason.code === 'round-limit' 时正文用「目标轮次耗尽（N/N）」且 N = maxGoalRounds，其他 code 用「目标阻塞（code）」；paused 与清除不产出；用 Set 按 goalId:revision:phase 做进程内去重。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-9600c2
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-5e3c2c
+    TASK_TITLE: 实现 goal 终态识别与去重·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T06:10:28.237Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T06:10:28.122Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T06:10:28.237Z

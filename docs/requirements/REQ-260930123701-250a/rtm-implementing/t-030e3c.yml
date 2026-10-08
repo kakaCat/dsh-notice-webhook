@@ -1,0 +1,38 @@
+task:
+  id: t-030e3c
+  title: 接线整合与本地端到端联调·复核
+  status: done
+  implements: |-
+    在 index.js 组装主链路 classify → goal → router → deliver，用 ctx.on('session/event') 订阅会话事件，完成 service 注册与 bindings.load() 的调用顺序；新增 test/e2e.local.test.js：起本地 HTTP 接收端并按序灌入 turn/end、approval/asked、ask_user_question、goal/complete、goal/blocked，断言收到的 event 取值与正文；再把地址指向 http://127.0.0.1:1/ 重跑，断言无未捕获异常与未处理拒绝。
+
+    [子卡阶段·复核] 只做本阶段；验收：对设计与实现的偏离逐条给出结论；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-a0aed4
+  phase: implement
+  side: fullstack
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-030e3c
+    TASK_TITLE: 接线整合与本地端到端联调·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: fullstack
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T06:22:16.193Z
+    - phase: doc
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T06:22:16.069Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-09-30T06:22:16.193Z

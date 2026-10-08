@@ -1,0 +1,33 @@
+task:
+  id: t-f01c88
+  title: 处理迁移与兼容（旧数据 / 共存 / 回滚）
+  status: done
+  implements: 固化 src/bindings.js 的读取降级路径（文件缺失、非法 JSON、未知 version、单条字段非法）；确认 payload 为追加式演进且 version 保持 1；验证与 dsh-notice 共存（不读写其配置与触发目录）；验证卸载回滚后除 bindings.json 外无残留；新增 test/compat.test.js 覆盖上述路径。
+  serves: []
+  depends_on:
+    - t-20c962
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930123701-250a
+    TASK_ID: t-f01c88
+    TASK_TITLE: 处理迁移与兼容（旧数据 / 共存 / 回滚）
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T06:17:57.388Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930123701-250a
+  generated_at: 2026-09-30T05:52:53.217Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T06:17:57.445Z

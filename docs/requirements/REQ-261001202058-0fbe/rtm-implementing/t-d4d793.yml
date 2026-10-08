@@ -1,0 +1,38 @@
+task:
+  id: t-d4d793
+  title: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·复核
+  status: done
+  implements: |-
+    按 design/interfaces.md §2 实现 isJobRegistryLike() 与 createJobGate({logger, graceMs, clock, setTimer, clearTimer, deliver})，成员 attach/detach/noteTurnStart/gate/observe/pendingOf/dispose 与错误语义逐条对齐；判定式按 design/data-model.md §3（owner===sid、status∈{running,stopping}、startedAt>=最近 turn/start 三重过滤）；observe() 只认 settled/removed 且必须判 event?.job 存在（output 事件没有 job 字段）；所有异常吞掉 + warn。在 test/jobs-gate.test.js 建假 registry（list 返回副本 + 测试侧 settle/remove 助手）/假时钟/假计时器，并写判定层用例 TC-2、3、6、7、8、9、13、14。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-bf2be8
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001202058-0fbe
+    TASK_ID: t-d4d793
+    TASK_TITLE: 判定闸门模块 src/jobs.js（纯内存 + 判定层单测）·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-01T12:33:08.006Z
+    - phase: doc
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001202058-0fbe
+  generated_at: 2026-10-01T12:32:53.403Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-10-01T12:33:08.007Z

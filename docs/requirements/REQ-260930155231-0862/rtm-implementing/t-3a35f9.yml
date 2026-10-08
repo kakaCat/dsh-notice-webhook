@@ -1,0 +1,32 @@
+task:
+  id: t-3a35f9
+  title: 声明插件 Config schema 与双半包清单
+  status: done
+  implements: 在 package.json 增加依赖 @deepseek-ai/schemastery@3.18.4，并加 exports["./client"]=./client.js 与 dsh.client={platform:web,immediately:true,inject:[...]}；在 src/config.js 用 schemastery 声明 Config（enabled/timeoutMs/retry/cooldownMs/notifyComplete/notifyApproval/notifyQuestion/onlyTopLevel/includeTitle 标 .volatile()；webhookUrl 与文案/skipReasons 保持普通字段），保留 normalizeConfig 作为无 schema 时的兑底。验证：新增 test/config.test.js 并跑绿。
+  serves: []
+  depends_on: []
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-260930155231-0862
+    TASK_ID: t-3a35f9
+    TASK_TITLE: 声明插件 Config schema 与双半包清单
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 1
+  workflow_done: 1
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-09-30T08:49:35.120Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-260930155231-0862
+  generated_at: 2026-09-30T08:37:51.645Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 1
+  last_updated: 2026-09-30T08:54:10.631Z

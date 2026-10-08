@@ -1,0 +1,39 @@
+task:
+  id: t-5a02c2
+  title: 接线：开关、类型过滤与静默留痕·复核
+  status: done
+  implements: |-
+    src/config.js 五处登记（DEFAULTS.notifyInterrupt=true / interruptMessage='会话异常中断' / skipReasons=['aborted']、BOOLEAN_KEYS、STRING_KEYS、schema、VOLATILE_KEYS）；src/router.js 的 isTypeDisabled() 与废弃 route() 两处加 notifyInterrupt===false 分支，targetAccepts() 按 eventsMode 判定（explicit 严格白名单、all 全收、缺省逐字保持旧口径）；index.js 的 handle() 在 intent===null 时改走 silentReasonOf() + debug 日志 + 返回 {action:'dropped', reason, turnKind}，autoRound 静默分支逐字不动（只对完成意图生效）。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-9bd584
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001203114-19b6
+    TASK_ID: t-5a02c2
+    TASK_TITLE: 接线：开关、类型过滤与静默留痕·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      started_at: 2026-10-01T12:52:58.045Z
+      completed_at: 2026-10-01T12:52:58.160Z
+    - phase: test
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:52:57.942Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-10-01T12:52:58.161Z

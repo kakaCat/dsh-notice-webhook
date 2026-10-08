@@ -1,0 +1,38 @@
+task:
+  id: t-1e395e
+  title: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·复核
+  status: done
+  implements: |-
+    index.js：createNotifier 接受可选 options.jobs/jobGraceMs/clock/timers 并建闸门，闸门的 deliver 接到 dispatch(session, intent, now, {prompt})；handle() 内 turn/start → gate.noteTurnStart(会话 id)，完成意图且非 goal 自动轮静默后再过闸门，抑制时返回 {action:'dropped', reason:'job-running', intent, jobIds}；deliverToTarget 改为 extra.prompt ?? prompts.take(session)（补发时该轮 prompt 已被 clear，必须用捕获值）；apply() 增 ctx.inject(['jobs'], jobCtx => jobCtx.effect(() => runtime.gate.attach(jobCtx.jobs)))，dispose 顺序为先注销监听与计时器再清状态；补接线层用例 TC-3/4/5/10/11/12/15/16/18/19。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-ce6b74
+  phase: implement
+  side: backend
+  workflow_params:
+    REQ_ID: REQ-261001202058-0fbe
+    TASK_ID: t-1e395e
+    TASK_TITLE: 接线：主链路插入闸门 + ctx.inject(['jobs']) + 补发通路·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: backend
+    PHASE: implement
+  workflow_total: 2
+  workflow_done: 2
+  workflow:
+    - phase: implement
+      status: done
+      completed_at: 2026-10-01T12:36:28.110Z
+    - phase: review
+      status: done
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001202058-0fbe
+  generated_at: 2026-10-01T12:36:12.721Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 2
+  last_updated: 2026-10-01T12:36:28.110Z

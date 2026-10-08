@@ -1,0 +1,173 @@
+requirement:
+  id: REQ-261002150038-344a
+  title: 通知去噪：Dive 自动轮不推送 + 卡片删除重复的「类型」行
+  category: feature
+  created_at: 2026-10-02T07:00:38.068Z
+  source_session: session-eda4a33c-31bc-4d31-901d-5a9c640287bf
+  dir: /Users/mac/Documents/ai/dsh/dsh-notice-webhook/docs/requirements/REQ-261002150038-344a
+lifecycle:
+  current_stage: accepting
+  stage_count: 7
+  stage_list:
+    - draft
+    - brainstorming
+    - design
+    - decomposing
+    - implementing
+    - accepting
+    - done
+  stages:
+    - stage: draft
+      status: completed
+      enabled: true
+      entered_at: 2026-10-02T07:00:38.068Z
+      completed_at: 2026-10-02T07:00:38.128Z
+    - stage: brainstorming
+      status: completed
+      enabled: true
+      entered_at: 2026-10-02T07:00:38.128Z
+      completed_at: 2026-10-02T07:01:41.179Z
+      artifacts:
+        - kind: requirement
+          path: docs/requirements/REQ-261002150038-344a/requirement.md
+          confirmed_at: 2026-10-02T07:01:41.179Z
+    - stage: design
+      status: completed
+      enabled: true
+      entered_at: 2026-10-02T07:01:41.179Z
+      completed_at: 2026-10-02T07:03:26.395Z
+      artifacts:
+        - kind: design
+          path: docs/requirements/REQ-261002150038-344a/design/architecture.md
+          confirmed_at: 2026-10-02T07:03:26.395Z
+        - kind: design
+          path: docs/requirements/REQ-261002150038-344a/design/data-model.md
+          confirmed_at: 2026-10-02T07:03:26.395Z
+        - kind: design
+          path: docs/requirements/REQ-261002150038-344a/design/interfaces.md
+          confirmed_at: 2026-10-02T07:03:26.395Z
+        - kind: design
+          path: docs/requirements/REQ-261002150038-344a/design/test-cases.md
+          confirmed_at: 2026-10-02T07:03:26.395Z
+        - kind: design
+          path: docs/requirements/REQ-261002150038-344a/design/use-cases.md
+          confirmed_at: 2026-10-02T07:03:26.395Z
+    - stage: decomposing
+      status: completed
+      enabled: true
+      entered_at: 2026-10-02T07:03:26.395Z
+      completed_at: 2026-10-02T07:04:16.190Z
+      artifacts:
+        - kind: decomposition
+          path: docs/requirements/REQ-261002150038-344a/decomposition.md
+          confirmed_at: 2026-10-02T07:04:16.190Z
+    - stage: implementing
+      status: completed
+      enabled: true
+      entered_at: 2026-10-02T07:04:16.190Z
+      completed_at: 2026-10-02T07:17:07.003Z
+      artifacts:
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-f48ac7.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-1d9465.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-0f608f.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-955eca.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-dc6479.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-cc2a0c.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-220981.md
+        - kind: task_output
+          path: src/source.js
+        - kind: task_output
+          path: test/source.test.js
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-d75046.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-6b15ab.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-06742a.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-2fa8d1.md
+        - kind: task_output
+          path: src/goal.js
+        - kind: task_output
+          path: test/goal.auto.test.js
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-f1e3ee.md
+        - kind: task_output
+          path: src/payload.js
+        - kind: task_output
+          path: test/payload.test.js
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-448271.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-d126c0.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-002a22.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-c10757.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-113155.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-b02ef3.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-1e5fa9.md
+        - kind: task_output
+          path: src/channels/feishu.js
+        - kind: task_output
+          path: test/channels.feishu.test.js
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-1fb3eb.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-7486b9.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-01300e.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-8ff324.md
+        - kind: task_output
+          path: client.js
+        - kind: task_output
+          path: test/client-render.test.js
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-98eaa8.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-aeb234.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-723dce.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-b715ff.md
+        - kind: task_output
+          path: test/e2e.local.test.js
+        - kind: task_output
+          path: README.md
+        - kind: task_output
+          path: docs/requirements/REQ-261002150038-344a/tests/verification-report.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-e4a547.md
+        - kind: task_detail
+          path: docs/requirements/REQ-261002150038-344a/tasks/t-d3b450.md
+    - stage: accepting
+      status: in_progress
+      enabled: true
+      entered_at: 2026-10-02T07:17:07.003Z
+      artifacts:
+        - kind: verification
+          path: docs/requirements/REQ-261002150038-344a/verification.md
+          confirmed_at: 2026-10-02T07:17:59.285Z
+    - stage: done
+      status: pending
+      enabled: true
+metadata:
+  stage: lifecycle
+  requirement_id: REQ-261002150038-344a
+  generated_at: 2026-10-02T07:00:38.188Z
+  version: 13
+  generated_by: dsh-pmboard
+  rtm_version: "1.0"
+  file_path: /Users/mac/Documents/ai/dsh/dsh-notice-webhook/docs/requirements/REQ-261002150038-344a/rtm-lifecycle.yml
+  last_updated: 2026-10-02T07:17:59.364Z

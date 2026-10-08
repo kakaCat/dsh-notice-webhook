@@ -1,0 +1,46 @@
+task:
+  id: t-79265a
+  title: 文档同步：报文契约、事件分类表、排障原因码·复核
+  status: done
+  implements: |-
+    README.md：推送契约 event 枚举补 turn/error 与 reason/error 字段示例、配置项表补 notifyInterrupt/interruptMessage 与 skipReasons 默认值变更（含『只认 turn/end 的老接收端收不到中断』明示）、『该被叫一声的时刻』表格补一行；docs/architecture/notification-plugin.md 的事件分类表补中断一行；docs/guides/operations.md 的 drop 原因码表补 turn-skipped / turn-aborted / turn-not-notifiable 与排查步骤。
+
+    [子卡阶段·复核] 只做本阶段；验收：对照 `docs/requirements/<REQ>/design/` 逐条核对；`npx vitest run <相关测试文件>` → 全绿；无偏离时显式写明「无偏离」及依据
+  serves: []
+  depends_on:
+    - t-3f1491
+  phase: doc
+  side: doc
+  workflow_params:
+    REQ_ID: REQ-261001203114-19b6
+    TASK_ID: t-79265a
+    TASK_TITLE: 文档同步：报文契约、事件分类表、排障原因码·复核
+    DESIGN_FILES: ""
+    TEST_PATTERN: rtm
+    SIDE: doc
+    PHASE: doc
+  workflow_total: 4
+  workflow_done: 4
+  workflow:
+    - phase: doc
+      status: done
+      completed_at: 2026-10-01T12:58:00.335Z
+    - phase: implement
+      status: done
+      started_at: 2026-10-01T12:58:00.410Z
+      completed_at: 2026-10-01T12:58:00.510Z
+    - phase: test
+      status: done
+      completed_at: 2026-10-01T12:58:00.510Z
+    - phase: commit
+      status: done
+      completed_at: 2026-10-01T12:58:00.510Z
+metadata:
+  stage: implementing
+  requirement_id: REQ-261001203114-19b6
+  generated_at: 2026-10-01T12:58:00.334Z
+  version: 4
+  generated_by: dsh-pmboard
+  detail_dir: rtm-implementing/
+  detail_count: 4
+  last_updated: 2026-10-01T12:58:00.510Z

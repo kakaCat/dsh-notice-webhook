@@ -1,0 +1,60 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>dsh-notice-webhook 复现台</title></head>
+<body><div id="root"></div>
+<style>
+  /* 近似 DSH 主题：浅色为默认，?dark=1 切深色 */
+  :root { --dnw-surface: #ffffff; }
+  html, body { margin: 0; }
+  body { padding: 10px; font: 13px/1.55 -apple-system, "Helvetica Neue", "PingFang SC", sans-serif;
+         background: #f5f6f8; color: #111827; }
+  body.dark { --dnw-surface: #1e232e; background: #14171f; color: #e6e8ec; }
+</style>
+<script>
+  // 用 color-scheme 表达主题（与 App 一致），而不是只改颜色——这样 Canvas/CanvasText/light-dark() 才会跟着变
+  const dark = location.search.includes('dark=1')
+  document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+  document.body.classList.toggle('dark', dark)
+</script>
+<script src="/react.js"></script>
+<script src="/react-dom.js"></script>
+<script>
+  // 1) 先备好 loader：client.js 会调用它注册工厂
+  window.__captured = null
+  window.__ModuleLoader__ = { load: entry => { window.__captured = entry } }
+  // 2) 模拟 Host 状态：默认「Host 未升级」（无 channelMeta），可用 ?upgraded=1 切到已升级
+  const upgraded = location.search.includes('upgraded=1')
+  window.__STATE = {
+    revision: 0,
+    channelMeta: upgraded ? {
+      wecom: { label: '企业微信', input: 'key', keyLabel: '机器人 key', secret: false,
+               urlPrefix: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=',
+               help: { title: '怎么拿企业微信机器人 key', steps: ['群聊右上角 → 群机器人', '添加机器人', '复制 Webhook 地址里的 key'], docUrl: 'https://developer.work.weixin.qq.com/document/path/91770' } },
+      custom: { label: '通用自定义', input: 'url', secret: false, help: null },
+    } : {},
+    targets: upgraded ? [{ id: 't-1', name: '项目群-企微', channel: 'wecom', key: 'abc-123', url: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=abc-123', events: [], enabled: true, isDefault: true }] : [],
+    bindings: [], defaults: { enabled: true, timeoutMs: 5000, retry: 0, cooldownMs: 0 }, outcomes: {}, secrets: {},
+  }
+  window.fetch = async () => ({ ok: true, status: 200, json: async () => window.__STATE })
+  window.confirm = () => true
+</script>
+<script src="/client.js"></script>
+<script>
+  try {
+    const entry = window.__captured
+    if (!entry) throw new Error('client.js 没调用 __ModuleLoader__.load')
+    const ctx = {
+      slots: { inject: (name, cb) => cb(), register: (def, Component) => { window.__section = Component; return () => {} } },
+      inject: (names, cb) => cb({}),
+      effect: fn => (typeof fn === 'function' ? fn() : undefined),
+    }
+    const api = entry.factory(name => { if (name === 'react') return React; throw new Error('只允许 require(react)，实际: ' + name) })
+    api.apply(ctx)
+    window.__api = api
+    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(window.__section))
+    window.__mounted = true
+  } catch (e) {
+    document.getElementById('root').textContent = '装载失败: ' + e.message
+    console.error('HARNESS', e)
+  }
+</script>
+</body></html>

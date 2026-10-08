@@ -1,0 +1,56 @@
+requirement:
+  id: REQ-260930230225-71be
+  title: 会话头部需求流程图改为响应式并移到模式标签后
+  category: feature
+  created_at: 2026-09-30T15:02:25.773Z
+  source_session: session-a989385b-6ee0-4cbc-9b68-eeeca9a7b86c
+  dir: /Users/mac/Documents/ai/dsh/dsh-notice-webhook/docs/requirements/REQ-260930230225-71be
+lifecycle:
+  current_stage: brainstorming
+  stage_count: 7
+  stage_list:
+    - draft
+    - brainstorming
+    - design
+    - decomposing
+    - implementing
+    - accepting
+    - done
+  stages:
+    - stage: draft
+      status: completed
+      enabled: true
+      entered_at: 2026-09-30T15:02:25.773Z
+      completed_at: 2026-09-30T15:02:25.801Z
+    - stage: brainstorming
+      status: in_progress
+      enabled: true
+      entered_at: 2026-09-30T15:02:25.801Z
+      artifacts:
+        - kind: requirement
+          path: docs/requirements/REQ-260930230225-71be/requirement.md
+          confirmed_at: 2026-09-30T15:05:28.956Z
+    - stage: design
+      status: pending
+      enabled: true
+    - stage: decomposing
+      status: pending
+      enabled: true
+    - stage: implementing
+      status: pending
+      enabled: true
+    - stage: accepting
+      status: pending
+      enabled: true
+    - stage: done
+      status: pending
+      enabled: true
+metadata:
+  stage: lifecycle
+  requirement_id: REQ-260930230225-71be
+  generated_at: 2026-09-30T15:05:28.994Z
+  version: 1
+  generated_by: dsh-pmboard
+  rtm_version: "1.0"
+  file_path: /Users/mac/Documents/ai/dsh/dsh-notice-webhook/docs/requirements/REQ-260930230225-71be/rtm-lifecycle.yml
+  last_updated: 2026-09-30T15:05:28.994Z
